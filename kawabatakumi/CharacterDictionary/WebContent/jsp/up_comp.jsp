@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Complete!</title>
+<title>Update!</title>
 <link href="../css/result.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -14,12 +14,11 @@
 			<p>Complete.</p>
 		</div>
 	<div class="font_nol">
-			<p>登録が完了しました。</p>
+			<p>更新が完了しました。</p>
 
 	<div class="space"></div>
 
 	<input type="button" name="list" value="一覧へ" class="form1"/>
-	<input type="button" name="new" value="新規登録" class="form2"/>
 
 	<div class="space"></div>
 

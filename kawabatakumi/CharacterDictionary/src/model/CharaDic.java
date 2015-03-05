@@ -16,17 +16,21 @@ public class CharaDic extends HttpServlet {
 
 	private int id;
 	private String name;
+	private int age;
+	private String hand;
 	private String sex;
 	private String height;
 	private String weight;
 
 
-    public CharaDic(int id,String name,String sex,String height,String weight) {
+    public CharaDic(int id,String name,int age,String hand, String sex,String height,String weight) {
         super();
         // TODO Auto-generated constructor stub
 
         this.id = id;
         this.name = name;
+        this.age = age;
+        this.hand = hand;
         this.sex = sex;
         this.height = height;
         this.weight = weight;
@@ -35,6 +39,8 @@ public class CharaDic extends HttpServlet {
 
     public int getId() { return id; }
     public String getName() { return name; }
+    public int getAge() { return age; }
+    public String getHand() { return hand; }
     public String getSex() { return sex; }
     public String getHeight() { return height; }
     public String getWeight() { return weight; }

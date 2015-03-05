@@ -4,23 +4,61 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Entry Form.</title>
-<script type="text/javascript" src="../js/base.js"></script>
-<link href="../css/base.css" rel="stylesheet" type="text/css">
+<title>Characters List.</title>
+<link href="../css/list_view.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<div class="form_area">
+<div class="form_area">
+<div class="font_nol">
+<table>
+<tr>
+<td>
+<!-- 情報の詳細テーブル -->
+	<table border="1" class="text">
+	<tr>
+		<td rowspan="6">
+		ここに画像が入る
+		</td>
+		<td>
+		名前:
+		</td>
+	<tr>
+		<td>
+		性別:
+		</td>
+	</tr>
+	<tr>
+		<td>
+		年齢:
+		</td>
+	<tr>
+		<td>
+		身長:
+		</td>
+	</tr>
+	<tr>
+		<td>
+		体重:
+		</td>
+	</tr>
+	<tr>
+		<td>
+		利き手:
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+		備考<br />
+		</td>
+	</tr>
 
-	<form name="form" action="" method="POST">
-	<div class="font_big">
-	<p>Entry your character.</p>
-	</div>
-	<div class="font_nol">
-	<p>キャラクターの名前・性別・年齢・・利き手・身長・体重を入力してください。<br>
-	年齢・身長・体重は数字のみ入力してください。</p>
+	</table>
+</td>
 
-<table class="tbl">
-	 <tr>
+<!-- 情報の編集テーブル -->
+<td>
+	<table border="1">
+	<tr>
 		<td class="text">
 			Name
 		</td>
@@ -38,8 +76,8 @@
 				<option value="その他">その他</option>
 			</select>
 		</td>
-		</tr>
-		<tr>
+	</tr>
+	<tr>
 		<td class="text">
 		Age
 		</td>
@@ -58,8 +96,8 @@
 				<option value="不明">不明</option>
 			</select>
 		</td>
-		</tr>
-		<tr>
+	</tr>
+	<tr>
 		<td class="text">
 		Height
 		</td>
@@ -72,20 +110,14 @@
 		<td class="edit">
 		<input type="text" id="weight" name="weight" class="form" placeholder="Weight"/><br/>
 		</td>
-		</tr>
-		</table>
+	</tr>
+	</table>
+</td>
 
-	<div class="space"></div>
+</tr>
+</table>
 
-	<h2>この情報で登録しますか？</h2>
-
-	<input type="submit" name="submit" value="登録" class="form1" onClick="return check_form(this.form);"/>
-	<input type="reset" name="reset" class="form2"/>
-	</div>
-	</form>
-
-	<jsp:include page="footer.jsp"></jsp:include>
-
-	</div>
+</div>
+</div>
 </body>
 </html>

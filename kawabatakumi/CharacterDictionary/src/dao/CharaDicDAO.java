@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 
 import model.CharaDic;
+import dao.dbLoad;
 
 import java.util.List;
 
@@ -32,17 +33,20 @@ public class CharaDicDAO extends HttpServlet {
 		List<CharaDic> charaList = new ArrayList<CharaDic>();
 
         try{
-        	/* 検索 */
+        	/* DBを検索し表示 */
 
         	// JDBCドライバを読み込み
-			Class.forName("com.mysql.jdbc.Driver");
+			//Class.forName("com.mysql.jdbc.Driver");
+			Class.forName(dbLoad.DriverNAME);
 
 			// データベースへ接続
 			conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost/charadic","root","asdQWE123");
+					dbLoad.Url,dbLoad.User,dbLoad.Pass);
 
 			// SELECT文を準備
-			String sql = "SELECT Id, Name, Height, Weight, Sex FROM book01";
+			String sql = "SELECT Id, Name, Age, Hand, Height, Weight, Sex FROM book01";
+
+			// プリペアドステートメントの用意
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SELECTを実行し、結果表を取得
@@ -53,10 +57,12 @@ public class CharaDicDAO extends HttpServlet {
 			while (rs.next()) {
 				int id = rs.getInt("Id");
 				String name = rs.getString("Name");
+				int age = rs.getInt("Age");
+				String hand = rs.getString("Hand");
 				String height = rs.getString("Height");
 				String weight = rs.getString("Weight");
 				String sex = rs.getString("Sex");
-				CharaDic charadic = new CharaDic(id, name,height , weight, sex);
+				CharaDic charadic = new CharaDic(id, name, age, hand, height, weight, sex);
 				charaList.add(charadic);
 			}
 
@@ -81,81 +87,91 @@ public class CharaDicDAO extends HttpServlet {
         	return charaList;
 }
 
-public boolean model(String name, String height, String weight, String sex){
+	public boolean model(String name,int age, String hand, String height, String weight, String sex){
 
-	try{
-		/* レコードの挿入 */
+		try{
+			/* レコードの挿入 */
 
-		// JDBCドライバを読み込み
-			Class.forName("com.mysql.jdbc.Driver");
+			// JDBCドライバを読み込み
+			Class.forName(dbLoad.DriverNAME);
 
-		// データベースへ接続
+			// データベースへ接続
 			Connection conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost/charadic","root","asdQWE123");
-			Statement st = conn.createStatement();
-		// INSERT文の準備
-			String sql = "INSERT INTO book01 (Name, Height, Weight, Sex) VALUES('"+ name +"', '"+ height +"', '"+ weight +"', '"+ sex +"')";
-			PreparedStatement pStmt = conn.prepareStatement(sql);
+						dbLoad.Url,dbLoad.User,dbLoad.Pass);
 
+			// ステートメントの用意
+			Statement st = conn.createStatement();
+
+			// INSERT文の準備
+			String sql = "INSERT INTO book01 (Name, Age, Hand, Height, Weight, Sex) VALUES('"+ name +"', '"+ age +"', '"+ hand +"', '"+ height +"', '"+ weight +"', '"+ sex +"')";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			int result = pStmt.executeUpdate();
 
-		// 切断
+			// データベース切断
 			st.close();
 			conn.close();
 			pStmt.close();
+
 		if(result != 1) {
 			return false;
 		}
 
 
-	}catch(ClassNotFoundException e){
-		e.printStackTrace();
-		return false;
-	}catch (SQLException e) {
-		e.printStackTrace();
-	}
-	return true;
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+			return false;
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+			return true;
 
 
 }
 
 
-public CharaDic model2(int Id) {
+	public CharaDic model2(int Id) {
 
-	try{
-		/* データの格納 */
+		try{
+			/* データの格納 */
 
-		// JDBCドライバを読み込み
-			Class.forName("com.mysql.jdbc.Driver");
+			// JDBCドライバを読み込み
+			Class.forName(dbLoad.DriverNAME);
 
-		// データベースへ接続
+			// データベースへ接続
 			Connection conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost/charadic","root","asdQWE123");
+					dbLoad.Url,dbLoad.User,dbLoad.Pass);
+
+			// ステートメントの用意
 			Statement st = conn.createStatement();
 
-		// SELECT文を準備
-			String sql = "SELECT Id, Name, Height, Weight, Sex FROM book01 where Id = "+ Id;
+			// SELECT文を準備
+			String sql = "SELECT Id, Name, Age, Hand, Height, Weight, Sex FROM book01 where Id = "+ Id;
+
+			// プリペアドステートメントの用意
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-		// SELECTを実行し、結果表を取得
+			// SELECTを実行し、結果表を取得
 			ResultSet rs = pStmt.executeQuery();
 
-		// Idに一致する一行文をDTOモデルに入れる
+			// Idに一致する一行文をDTOモデルに入れる
 			rs.next();
 				int id = rs.getInt("Id");
 				String name = rs.getString("Name");
+				int age = rs.getInt("Age");
+				String hand = rs.getString("Hand");
 				String height = rs.getString("Height");
 				String weight = rs.getString("Weight");
 				String sex = rs.getString("Sex");
-				CharaDic charadic = new CharaDic(id, name, sex ,height , weight);
+				CharaDic charadic = new CharaDic(id, name, age, hand, sex ,height , weight);
 
-		// 切断
+			// データベースを切断
 			rs.close();
 			st.close();
 			conn.close();
 
 			return charadic;
+
 		}catch(ClassNotFoundException e){
 			return null;
 		}catch(SQLException e){
@@ -163,28 +179,31 @@ public CharaDic model2(int Id) {
 		}
 	}
 
-public int update(String Name, String Height, String Weight, String Sex, int charaids) {
+	public int update(String Name,int Age, String Hand, String Height, String Weight, String Sex, int charaids) {
 
-	try{
-		/* 更新 */
+		try{
+			/* データの更新 */
 
-		// JDBCドライバを読み込み
-			Class.forName("com.mysql.jdbc.Driver");
+			// JDBCドライバを読み込み
+			Class.forName(dbLoad.DriverNAME);
 
-		// データベースへ接続
+			// データベースへ接続
 			Connection conn = DriverManager.getConnection(
-				"jdbc:mysql://localhost/charadic","root","asdQWE123");
+					dbLoad.Url,dbLoad.User,dbLoad.Pass);
+
+			// ステートメントの用意
 			Statement st = conn.createStatement();
 
-		// UPDATE文の準備
-			String sql = "UPDATE book01 set name ='"+ Name +"', height ='"+ Height +"', weight ='"+ Weight +"', sex ='"+ Sex +"' where id = "+charaids;
+			// UPDATE文の準備
+			String sql = "UPDATE book01 set name ='"+ Name +"', age ='"+ Age +"', hand ='"+ Hand +"', height ='"+ Height +"', weight ='"+ Weight +"', sex ='"+ Sex +"' where id = "+charaids;
 			int upd =st.executeUpdate(sql);
 
-		// 切断
+			// データベース切断
 			st.close();
 			conn.close();
 
 			return upd;
+
 		}catch(ClassNotFoundException e){
 			return 0;
 		}catch (SQLException e) {
@@ -192,33 +211,37 @@ public int update(String Name, String Height, String Weight, String Sex, int cha
 		}
 	}
 
-public int end(int charaids) {
+	public int end(int charaids) {
 
-	try{
-		/* 削除 */
+		try{
+			/* DBにあるデータの削除処理 */
 
-		// JDBCドライバを読み込み
-			Class.forName("com.mysql.jdbc.Driver");
+			// JDBCドライバを読み込み
+			Class.forName(dbLoad.DriverNAME);
 
-		// データベースへ接続
+			// データベースへ接続
 			Connection conn = DriverManager.getConnection(
-				"jdbc:mysql://localhost/charadic","root","asdQWE123");
+					dbLoad.Url,dbLoad.User,dbLoad.Pass);
+
+			// ステートメントの用意
 			Statement st = conn.createStatement();
 
-		// DELETE文の準備
+			// DELETE文の準備
 			String sql = "DELETE from book01 where id = " +charaids;
 			int upd =st.executeUpdate(sql);
 
-		// 切断
+			// データベース切断
 			st.close();
 			conn.close();
+
 			return upd;
-	}catch(ClassNotFoundException e){
-		return 0;
-	}catch(SQLException e){
-		return 0;
+
+		}catch(ClassNotFoundException e){
+			return 0;
+		}catch(SQLException e){
+			return 0;
+		}
 	}
-}
 }
 
 

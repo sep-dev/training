@@ -25,7 +25,6 @@
     font-size:10pt;
     font-family:Arial, sans-serif;
     color:#EEEEEE;
-    text-align:center;
   }
 
   /* リンクを使用する際の設定 */
@@ -183,11 +182,11 @@
     width:900px;
     height:550px;
     margin: 120px auto;
-    padding: 40px;
+    padding:30px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
-    position: center;
+    vertical-align:middle;
   }
 
   /* 情報エリアの空きスペースを埋める */
@@ -199,104 +198,155 @@
 /* ▲ここまで */
 
 /* ▼テーブル */
-.DataTable {
-width:200px;
-margin: 0 auto;
-border:solid 1px #0080ff;
-}
-
-/* trの指定 */
-.img_tr {
-display:table-row;
-}
-
-.data_tr {
-display:table-row;
-}
-
-.title_tr {
-display:table-row;
-}
-
-/* 情報セルの設定 */
-.item_cell {
-display:table-cell;
-width:200px;
-text-align:left;
-vertical-align:middle;
-border:solid 1px #0080ff;
-}
-
-/* イメージセルの設定 */
-.img_cell {
-display:table-cell;
-width:160px;
-height:220px;
-vertical-align:middle;
-border:solid 1px #0080ff;
-}
-
-/* 備考セルの設定 */
-.text_cell {
-display:table-cell;
-width:385px;
-height:75px;
-text-align:left;
-vertical-align:middle;
-border:solid 1px #0080ff;
-}
-
-/*  table.left {
-    width:450x;
-    height:350px;
-    float:left;
-    text-align:left;
+  /* ボックス全体 */
+  .tbl_area{
+    width:820px;
+    margin: 0 auto;
   }
 
-  table.right {
-    width:450px;
-    height:350px;
-    float:right;
-    text-align:left;
-  }
-  td#pict {
-    width:160px;
-  }
-
- ボタンとフッターの位置調整
-  .parts_position {
-    clear:both;
-    width:300px;
-    height:100px;
+  /* 左右のボックス内に配置してある子ボックスの内容をセンタリングする */
+  .tbl{
+    display:table;
     margin:0 auto;
-    padding:30px;
   }
 
-   フォームの配置
-  td.menu {
-    font-size:14pt;
-    font-family:Arial, sans-serif;
-    color:#EEEEEE;
+  /* 左ボックス */
+  .left{
+    float:left;
+    width:380px;
+    height:420px;
+  }
+
+  /* 左ボックスの内容の配置 */
+  .L_position{
+    margin: 0 auto;
+    width:340px;
+  }
+
+  /* 左ボックスのタイトル */
+  .L_title{
+    width:340px;
+    height:60px;
     text-align:center;
-    height:40px;
     vertical-align:baseline;
   }
-  td.data {
-    text-align:left;
-    width:200px;
-  }
 
-  td.edit {
-    text-align:left;
-    width:170px;
-    height:40px
-  }
-
-   フォーム名の配置
-  td.text {
-    text-align:left;
+  /* 登録したイメージ画像 */
+  .img{
+    float:left;
+    width:160px;
+    height:220px;
     vertical-align:middle;
-    width:40px;
   }
-*/
+
+  /* キャラの入力された情報 */
+  .data{
+    float:left;
+    width:180px;
+    height:220px;
+    text-algn:left;
+  }
+
+  /* 情報セルのTR要素 */
+  .L_tr{
+    display:table-row;
+  }
+
+  /* 情報セルのTD要素 */
+  .L_td{
+    display:table-cell;
+    width:160px;
+    height:37px;
+    text-algn:left;
+    vertical-align:middle;
+  }
+
+  /* キャラの備考欄 */
+  .d_note{
+    clear:left;
+    width:340px;
+    height:140px;
+  }
+
+  /* 右ボックス */
+  .right{
+    float:left;
+    width:440px;
+    height:420px;
+  }
+
+  /* 右ボックスの内容の配置 */
+  .R_position{
+    margin: 0 auto;
+    width:400px;
+  }
+
+  /* 右ボックスのタイトル */
+  .R_title{
+    width:400px;
+    height:60px;
+    text-align:center;
+    vertical-align:baseline;
+  }
+
+  /* 更新フォーム */
+  .R_data{
+    float:left;
+
+    width:400px;
+    height:160px;
+  }
+
+  /* テキストセルのTR要素 */
+  .R_tr{
+    display:table-row;
+  }
+
+  /* テキストセルのTD要素 */
+  .R_td{
+    display:table-cell;
+    width:50px;
+    text-algn:left;
+    vertical-align:middle;
+  }
+
+  /* フォームセルのTD要素 */
+  .R_tdForm{
+    display:table-cell;
+    width:140px;
+    height:40px;
+    text-algn:left;
+    vertical-align:middle;
+  }
+
+  /* キャラの備考入力ボックス */
+  .R_note{
+    clear:left;
+    width:400px;
+    height:150px;
+  }
+
+  /* 文字数カウントの配置 */
+  #itextlength{
+    display:table-cell;
+    width:50px;
+    text-algn:left;
+    vertical-align:middle;
+  }
+
+  /* 備考セルのTD要素 */
+  .R_textarea{
+    display:table-cell;
+    width:385px;
+    height:75px;
+  }
+
+  /* 下ボックス */
+  .bottom{
+    clear:both;
+    width:780px;
+    height:100px;
+    vertical-align:middle;
+    text-align:center;
+  }
 /* ▲ここまで */

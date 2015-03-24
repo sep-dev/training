@@ -3,8 +3,11 @@
   function check_form(){
     var error_message = "";
 
-    // 名前への入力が空欄、指定外の記号を含んだ場合
-    if (document.form.name.value.match(/[^ぁ-んァ-ヶー･・亜-龠a-zA-Z \s]$|^.{0}$/)) {
+
+    if (document.form.name.value.match (/[ぁ-んァ-ヶー･・亜-龠a-zA-Z \s]$/)) {
+
+    }
+    else {
       error_message += "名前は平仮名・カタカナ・漢字・半角英字で入力してください。\n";
     }
 
@@ -14,7 +17,10 @@
     }
 
     // 年齢への入力が空欄、3桁以上、数字以外だった場合
-    if (document.form.age.value.match(/[^{3}]$|[^0-9]$|^.{0}$/)) {
+    if (document.form.age.value.match (/[0-9]{3}$/)) {
+
+    }
+    else {
       error_message += "年齢は3桁以内の数値で入力してください。\n";
     }
 
@@ -24,17 +30,23 @@
     }
 
     // 身長への入力が空欄、3桁.1桁以上、数字以外だった場合
-    if (document.form.height.value.match(/[^{3}]$|[^\.]$|[^{5}]$|[^0-9]$|^.{0}$/)) {
+    if (document.form.height.value.match (/[0-9]{3}(\.[0-9]{1})?$/)){
+
+    }else {
       error_message += "身長は3桁.1桁以内の数値で入力してください。\n";
     }
 
     // 体重への入力が空欄、3桁.1桁以上、数字以外だった場合
-    if (document.form.weight.value.match(/[^{3}]$|[^\.]$|[^{5}]$|[^0-9]$|^.{0}$/)) {
+    if (document.form.weight.value.match (/[0-9]{3}(\.[0-9]{1})?$/)) {
+
+    }else {
       error_message += "体重は3桁.1桁以内の数値で入力してください。\n";
     }
 
     // 備考に指定外の記号が使われた場合
-    if (document.form.note.value.match(/[^ぁ-んァ-ヶー･・亜-龠a-zA-Z、-！…-↓ \s \n]$/)) {
+    if (document.form.note.value.match (/[ぁ-んァ-ヶー･・亜-龠a-zA-Zａ-ｚ、-】 \s \n]$|^.{0}$/)) {
+
+    }else {
       error_message += "備考は平仮名・カタカナ・漢字・半角英字で入力してください。\n";
     }
 

@@ -1,5 +1,0 @@
-<<<<<<< HEAD
-ƒeƒXƒg
-=======
-Github-push-test
->>>>>>> origin/feature/itoryuki-first-commit-training

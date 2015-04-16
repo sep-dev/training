@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+
+section p{
+  text-align: center;
+}
+
+section table{
+	margin: 0 auto;
+	padding: 0;
+}
+
+section table td:first-child{
+	text-align: center;
+	text-shadow: 1px 1px 1px #000000;
+	padding-right: 10px;
+}

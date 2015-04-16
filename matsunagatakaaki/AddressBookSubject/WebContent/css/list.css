@@ -1,0 +1,47 @@
+@CHARSET "UTF-8";
+
+section p{
+  text-align: center;
+}
+
+section form{
+	margin: 0 auto;
+	padding: 0;
+}
+
+section table{
+  display: inline-block; /* sectionのwidthは 800px */
+  overflow-y: scroll;
+  margin: 0;
+  padding: 0;
+  max-height: 250px;
+}
+
+section table .column{
+	width: 12%;
+	text-align: right;
+	white-space: nowrap;
+	/* 項目は「氏名」「住所」「電番号」の3つなので、 12 * 3 = 36% 使用*/
+}
+
+section table .name_td,section table .tel_td{
+	width: 12%;
+	max-width: 96px; /* 800px * 0.12 = 96px */
+    overflow: hidden;
+    text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+section table .address_td{
+	width: 40%; /* 320pxでもOK*/
+	max-width: 320px; /* 800px の40%なので、320px*/
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap; /*１行で表示*/
+}
+
+section table td:first-child{
+	padding: 0 10px;
+	text-align: center;
+	text-shadow: 1px 1px 1px #000000;
+}

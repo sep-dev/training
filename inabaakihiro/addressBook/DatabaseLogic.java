@@ -25,13 +25,28 @@ public class DatabaseLogic {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost/training","root","asdfgh");
 
 		} catch(SQLException e) {
+			System.err.println("データベース接続の際に、エラーが起こりました");
 			e.printStackTrace();
-		}catch(ClassNotFoundException e) {
+		} catch(ClassNotFoundException e) {
+			System.err.println("ドライバが見つかりませんでした");
 			e.printStackTrace();
 		}
 	}
 
-	/* --作成中-- */
+	public void disconnect() {
+
+		// データベースに接続されていたら
+		if(conn != null) {
+			try {
+				// データベース切断
+				conn.close();
+
+			} catch(SQLException e) {
+				System.err.println("データベース切断の際に、エラーが起こりました");
+				e.printStackTrace();
+			}
+		}
+	}
 
 	public String[][] executeSQL(String sql) {
 
@@ -45,11 +60,7 @@ public class DatabaseLogic {
 				ResultSetMetaData rsmt = rs.getMetaData();
 
 				// 結果表と同じ形の２次元配列を作成
-				int records = 0;
-				while(rs.next())
-				{
-					records++;
-				}
+				int records = this.getRecords(rs);
 				int columns = rsmt.getColumnCount();
 				String[][] result = new String[records + 1][columns + 1];	// nullを付加する分も確保する
 
@@ -68,27 +79,48 @@ public class DatabaseLogic {
 
 				// 更新, 挿入, 削除
 				pStmt.executeUpdate();
-				return(null);
+				return(null);			// 参照ではないので、結果は返さない
 
 			}
 
 		} catch(SQLException e) {
+			System.err.println("SQL文実行の際に、エラーが起こりました");
 			e.printStackTrace();
 			return(null);
 		}
 	}
 
-	public void disconnect() {
+	public int getRecords(String tableName) {
 
-		// データベースに接続されていたら
-		if(conn != null) {
-			try {
-				// データベース切断
-				conn.close();
+		try {
+			PreparedStatement pStmt = conn.prepareStatement("SELECT ID FROM " + tableName);
+			ResultSet rs = pStmt.executeQuery();
 
-			} catch(SQLException e) {
-				e.printStackTrace();
+			return(this.getRecords(rs));	// レコードの数を呼び出し元に返す
+
+		} catch(SQLException e) {
+			System.err.println("データ件数取得の際に、エラーが起こりました");
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
+	private int getRecords(ResultSet rs) {
+
+		try {
+			// リザルトセットを走査し、レコードの件数をカウント
+			int cnt = 0;
+			while(rs.next())
+			{
+				cnt++;
 			}
+
+			return(cnt);
+
+		}catch(SQLException e) {
+				System.err.println("データ件数カウントの際に、エラーが起こりました");
+				e.printStackTrace();
+				return 0;
 		}
 	}
 }

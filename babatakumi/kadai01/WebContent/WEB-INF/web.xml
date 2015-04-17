@@ -69,4 +69,24 @@
     <servlet-name>kousinn</servlet-name>
     <url-pattern>/kousinn</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>sakujo</display-name>
+    <servlet-name>sakujo</servlet-name>
+    <servlet-class>kadai.sakujo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>sakujo</servlet-name>
+    <url-pattern>/sakujo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>delete</display-name>
+    <servlet-name>delete</servlet-name>
+    <servlet-class>kadai.delete</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>delete</servlet-name>
+    <url-pattern>/delete</url-pattern>
+  </servlet-mapping>
 </web-app>

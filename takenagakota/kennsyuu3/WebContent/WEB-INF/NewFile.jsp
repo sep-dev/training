@@ -4,14 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>登録失敗画面</title>
+<title>一覧画面</title>
 </head>
 <body>
-<div align="center">
-<h1>登録失敗！！！！！<br>空欄を埋めてください</h1>
-<form action="touroku.jsp" method="post">
-<input type="submit" value="新規登録">
-</form>
-</div>
+
 </body>
 </html>

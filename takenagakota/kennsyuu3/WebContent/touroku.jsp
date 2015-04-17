@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
    <head>
+   	  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <title>“o˜^‰æ–Ê</title>
    </head>
    <body>
@@ -14,6 +15,6 @@
           <input type="submit" value="“o˜^">
           <input type="reset" value="ƒŠƒZƒbƒg">
          </form>
-          <input type="button" value="ˆê——•\Ž¦" onclick="hyou">
+          <input type="submit" value="ˆê——•\Ž¦" onclick="hyou">
    </body>
 </html>

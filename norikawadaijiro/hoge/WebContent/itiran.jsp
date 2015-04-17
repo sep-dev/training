@@ -29,7 +29,7 @@ public void jspInit(){
 	            // データベースに接続するConnectionオブジェクトの取得
 	            con = DriverManager.getConnection(
 	                "jdbc:mysql://localhost/kadai1",
-	                "root", "385464dai");
+	                "root", "pass");
 	            // データベース操作を行うためのStatementオブジェクトの取得
 	            stmt = con.createStatement();
 	            // SQL()を実行して、結果を得る
@@ -38,20 +38,28 @@ public void jspInit(){
 
 	            // 得られた結果をレコードごとに表示
 	            while (rs.next()) {
+	            	//String id = rs.getString("id");
+	            	String id =rs.getString("id");
 		%>
 				<FORM name="radio" method="POST"ACTION="Update.jsp">
-				<input type="radio" name="addressbook" value=1>
+				<%if(i!=1){ %>
+					<input type="radio" name="addressbook" value=<%=id%>>
+				<% }else{ %>
+					<input type="radio" name="addressbook" value=<%=id%> checked="checked">
+					<% } %>
+				
+				
                 <%-- レコードのnameフィールドを表示 --%>
-                <%= "氏名:"+rs.getString("name")%>
+                <%= "氏名："+rs.getString("name")%>
                 <%-- レコードのaddressフィールドを表示 --%>
-                <%= "住所:"+rs.getString("address")%>
+                <%= "　住所："+rs.getString("address")%>
                 <%-- レコードのtelフィールドを表示 --%>
-                <%= "電話番号:"+rs.getString("tel")%>
+                <%= "　電話番号："+rs.getString("tel")%>
 
                 <br>
 		<%
-				i++;
-	            }
+	            i++;
+				}
 	    %>
 
 	            	<input type="submit" value="更新or削除">

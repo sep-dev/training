@@ -13,14 +13,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Insert
+ * Servlet implementation class Update
  */
-public class Insert extends HttpServlet {
+public class Update extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
+    public Update() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -36,12 +40,15 @@ public class Insert extends HttpServlet {
 		String user = "root";
 		String password = "pass";
 
+
+		String ss = request.getParameter("id");
+        int id =Integer.parseInt(ss);
 		String name = request.getParameter("name");
 	    String address = request.getParameter("address");
 	    String tel = request.getParameter("tel");
-
-	    if(name=="" || address=="" || tel=="" ){
-	    	String disp = "/Addressbook_failure";
+	    
+	    if(name=="" && address=="" && tel=="" ){
+	    	String disp = "/Update_failure";
             RequestDispatcher dispatch = request.getRequestDispatcher(disp);
             dispatch.forward(request, response);
 
@@ -56,12 +63,12 @@ public class Insert extends HttpServlet {
 	            //ステートメントの作成
 	            Statement smt = con.createStatement();
 	            // id,name,address,telのデータを追加するSQL文を作成
-	            String sql = "insert into tbAddress(name,address,tel) values ('"+name+"','"+address+"','"+tel+"');";
+	            String sql = "update tbAddress set name=('"+name+"'),address=('"+address+"'),tel=('"+tel+"') where id=("+id+");";
 	            // クエリーを実行して結果セットを取得
 	            int num = smt.executeUpdate(sql);
 
 	            //登録成功画面のアドレス登録
-	            String disp = "/Addressbook_success";
+	            String disp = "/Update_success";
 	            RequestDispatcher dispatch = request.getRequestDispatcher(disp);
 	            dispatch.forward(request, response);
 	            // 検索された行数分ループ
@@ -91,6 +98,7 @@ public class Insert extends HttpServlet {
 
 		}
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

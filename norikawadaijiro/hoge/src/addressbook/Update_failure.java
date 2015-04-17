@@ -9,15 +9,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Addressbook_failure
+ * Servlet implementation class Update_failure
  */
-public class Addressbook_failure extends HttpServlet {
+public class Update_failure extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Addressbook_failure() {
+    public Update_failure() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,17 +26,18 @@ public class Addressbook_failure extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-
-	    PrintWriter out = response.getWriter();
+		PrintWriter out = response.getWriter();
 	    //StringBuffer sb = new StringBuffer();
+
 
 	    out.println("<html>");
 	    out.println("  <body>");
-	    out.println("  <h1><center>登録失敗！！！！！！</center></h1>");
-	    out.println("  <h1><center>空欄を埋めてください！</center></h1>");
-	    out.println("  <a href = \"Addressbook.jsp\">");
-	    out.println("  <center><button>新規登録</button></center> ");
+	    out.println("  <h1><center>空欄です！入力してください！！！！</center></h1>");
+	    out.println("  <a href = \"itiran.jsp\">");
+	    out.println("  <center><button>一覧表示</button></center> ");
 	    out.println("  </a>");
 	    out.println("  </body>");
 	    out.println("</html>");

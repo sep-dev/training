@@ -29,23 +29,45 @@ public void jspInit(){
 	            // データベースに接続するConnectionオブジェクトの取得
 	            con = DriverManager.getConnection(
 	                "jdbc:mysql://localhost/kadai1",
-	                "root", "385464dai");
+	                "root", "pass");
 	            // データベース操作を行うためのStatementオブジェクトの取得
 	            stmt = con.createStatement();
 
 	            String ss = request.getParameter("addressbook");
+	            int id =Integer.parseInt(ss);
 
 	            // SQL()を実行して、結果を得る
-	            rs = stmt.executeQuery(
-	              "select * from tbAddress where id=ss");
-
+	            rs = stmt.executeQuery("select * from tbAddress where id = ("+id+");");
+	            rs.next();
 	%>
                 <%-- レコードのnameフィールドを表示 --%>
-                <%= "氏名:"+rs.getString("name")%>
+                <%= "氏名："+rs.getString("name")%>
                 <%-- レコードのaddressフィールドを表示 --%>
-                <%= "住所:"+rs.getString("address")%>
+                <%= "　住所："+rs.getString("address")%>
                 <%-- レコードのtelフィールドを表示 --%>
-                <%= "電話番号:"+rs.getString("tel")%>
+                <%= "　電話番号："+rs.getString("tel")%>
+
+                <FORM ACTION="Update"method="get">
+                	<p>
+                		<input type="hidden" name="id" value=<%=id%>>
+                	</p>
+					<p>
+						　氏名　：<input type="text" name="name" size="50" maxlength="20" value=<%=rs.getString("name")%>>
+					</p>
+					<p>
+						　住所　：<input type="text" name="address" size="50" maxlength="50" value=<%=rs.getString("address") %>>
+					</p>
+					<p>
+						電話番号：<input type="text" name="tel" size="48" maxlength="20" value=<%=rs.getString("tel") %>>
+					</p>
+					<input type="submit" value="更新">
+					<br>
+					<input type="reset" value="リセット">
+				</FORM>
+				<FORM ACTION="itiran.jsp">
+					<input type="submit" value="一覧表示">
+				</FORM>
+
     <%
                  } catch (Exception e) {
             		e.printStackTrace();

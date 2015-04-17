@@ -16,12 +16,17 @@ Connection conn = DriverManager.getConnection(
         "root", "onrain14");
     Statement st=conn.createStatement();
     ResultSet res = st.executeQuery("select * from tbaddress");
-
+    request.setCharacterEncoding("utf-8");
+    String id=null;
     while(res.next()){
-    	%>
-    	<input type="radio" name="example" value="id">
-    	
-    	<% 
+    	id = res.getString("id");
+    
+
+%>
+<form action="/kadai1/Update.jsp" method="post">
+    	<input type="radio" value=<%=id%> name="radioid"  >
+
+    	<%
         out.println("<tr>");
         out.println("<td>" + "氏名:"+ res.getString("name") + "</td>");
         out.println("<td>" + "住所:" + res.getString("address") + "</td>");
@@ -32,7 +37,9 @@ Connection conn = DriverManager.getConnection(
     st.close();
     conn.close();
 
-%>
+		%>
+
 <INPUT type="submit" value="更新or削除">
+</form>
 </body>
 </html>

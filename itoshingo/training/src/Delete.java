@@ -38,10 +38,11 @@ public class Delete extends HttpServlet {
 
 		out.println("<html>");
 		out.println("<head>");
-		out.println("<title>更新/削除</title>");
+		out.println("<link rel=\"stylesheet\" href=\"${pageContext.request.contextPath}/../style.css\" />");
+		out.println("<title>削除確認</title>");
 		out.println("</head>");
 		out.println("<body>");
-		out.println("<h1>本当に削除してもいいですか？</h1>");
+		out.println("<h3>本当に削除してもいいですか？</h3>");
 
 		Connection con = null;
 		PreparedStatement  ps;
@@ -64,6 +65,7 @@ public class Delete extends HttpServlet {
 			String address = rs.getString("address");
 			String tel = rs.getString("tel");
 
+			//選択されたデータの表示
 			out.println(" 氏名: "+ name);
 			out.println(" 住所: "+ address);
 			out.println(" 電話番号: "+ tel);

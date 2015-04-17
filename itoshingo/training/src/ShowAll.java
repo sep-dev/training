@@ -40,6 +40,7 @@ public class ShowAll extends HttpServlet {
 
 		out.println("<html>");
 		out.println("<head>");
+		out.println("<link rel=\"stylesheet\" href=\"${pageContext.request.contextPath}/../style.css\" />");
 		out.println("<title>一覧表示</title>");
 		out.println("</head>");
 		out.println("<body>");
@@ -59,8 +60,9 @@ public class ShowAll extends HttpServlet {
 
 			ResultSet rs = ps.executeQuery();
 
-			out.println("<table border=\"1\">");
+			out.println("<table border=\"1\" align=\"center\">");
 			out.println("<tr><th></th><td>氏名</td><td>住所</td><td>電話番号</td></tr>");
+
 			int num=1;
 			out.println("<form action=\"Select\" method=\"get\">");
 			while(rs.next()){
@@ -91,12 +93,12 @@ public class ShowAll extends HttpServlet {
 				num++;
 			}
 			out.println("</table>");
+			out.println("<br>");
 			out.println("<input type=\"submit\" value=\"更新/削除\">");
 
 			out.println("</form>");
 
-			out.println("<br><br>");
-
+			out.println("<br><br><br>");
 			out.println("<a href=\"addressbook.jsp\">");
 			out.println("<input type=\"button\" value=\"新規登録\">");
 

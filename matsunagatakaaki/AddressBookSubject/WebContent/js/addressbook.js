@@ -4,10 +4,10 @@
 
 //f5を無効化
 window.document.onkeydown = function(){
-	if(event.keyCode == 116){
-	    event.keyCode = null;
-	    return false;
-	}
+    if(event.keyCode == 116){
+        event.keyCode = null;
+        return false;
+    }
 }
 
 /*

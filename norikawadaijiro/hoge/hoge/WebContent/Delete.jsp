@@ -15,10 +15,10 @@ public void jspInit(){
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>更新画面</title>
+<title>削除</title>
 </head>
 <body>
-	<h1>会員情報の更新</h1>
+	<h1>本当に削除してもいいですか？</h1>
 	<%
 			Connection con = null;
 	        Statement stmt = null;
@@ -33,48 +33,32 @@ public void jspInit(){
 	            // データベース操作を行うためのStatementオブジェクトの取得
 	            stmt = con.createStatement();
 
-	            String ss = request.getParameter("addressbook");
+	            String ss = request.getParameter("id");
 	            int id =Integer.parseInt(ss);
 
 	            // SQL()を実行して、結果を得る
 	            rs = stmt.executeQuery("select * from tbAddress where id = ("+id+");");
 	            rs.next();
 	%>
-                <%-- レコードのnameフィールドを表示 --%>
+				<%-- レコードのnameフィールドを表示 --%>
                 <%= "氏名："+rs.getString("name")%>
                 <%-- レコードのaddressフィールドを表示 --%>
                 <%= "　住所："+rs.getString("address")%>
                 <%-- レコードのtelフィールドを表示 --%>
                 <%= "　電話番号："+rs.getString("tel")%>
 
-                <FORM ACTION="Update"method="get">
-                	<p>
-                		<input type="hidden" name="id" value=<%=id%>>
-                	</p>
-					<p>
-						　氏名　：<input type="text" name="name" size="50" maxlength="20" value=<%=rs.getString("name")%>>
-					</p>
-					<p>
-						　住所　：<input type="text" name="address" size="50" maxlength="50" value=<%=rs.getString("address") %>>
-					</p>
-					<p>
-						電話番号：<input type="text" name="tel" size="48" maxlength="20" value=<%=rs.getString("tel") %>>
-					</p>
-					<input type="submit" value="更新">
-					<br>
-					<input type="reset" value="リセット">
-				</FORM>
-				<FORM ACTION="itiran.jsp">
+                <br>
+                <br>
+                <FORM ACTION="Delete" method="get">
+                	<input type="hidden" name="id" value=<%=id%>>
+                	<input type="submit" value="削除">
+                </FORM>
+                <br>
+                <FORM ACTION="itiran.jsp">
 					<input type="submit" value="一覧表示">
 				</FORM>
-				<FORM ACTION="Delete.jsp"method="get">
-					<p>
-                		<input type="hidden" name="id" value=<%=id%>>
-                	</p>
-					<input type="submit" value="削除">
-				</FORM>
 
-    <%
+				<%
                  } catch (Exception e) {
             		e.printStackTrace();
         		 } finally {

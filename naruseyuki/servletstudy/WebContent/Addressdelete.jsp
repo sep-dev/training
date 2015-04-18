@@ -15,9 +15,9 @@
 
 	Connection conn = null;
 
-	String id = request.getParameter("selection");
+	String sqlselectid=request.getParameter("selectedid");
 
-	System.out.println("id="+id);
+	System.out.println("selectedid="+sqlselectid);
 
 		try{
 			//JDBCドライバの読み込み
@@ -29,7 +29,7 @@
 			//ID数発行用SQL文準備
 			String sqlselect = "SELECT * FROM tbaddress WHERE id =?";
 			PreparedStatement pStmtS = conn.prepareStatement(sqlselect);
-			pStmtS.setString(1,id);
+			pStmtS.setString(1,sqlselectid);
 
 			//SQLを実行、ID総数を取得
 			ResultSet rsS = pStmtS.executeQuery();
@@ -74,15 +74,15 @@
 	<br>
 	<br>
 
-	<FORM method="POST" action="Addresslist.jsp" name="scriptform">
-		氏名 <INPUT type="text" name="shimei" size="100" maxlength="100"value=""><br>
-		住所 <INPUT type="text"name="address" size="100" maxlength="100" value=""><br>
-		電話番号 <INPUT type="text" name="tel" size="100" maxlength="100"value=""><br>
+	<FORM method="POST" action="http://localhost:8080/servletstudy/Addressdelete" name="scriptform">
+		<INPUT type="submit" value="削除">
+		<input type=hidden name=selectedid value="<%=sqlselectid%>">
 		<br>
-		<INPUT type="submit" value="削除" onclick="location.href='Addressdelete.jsp'">
+		<br>
 		<INPUT type="button" value="一覧表示へ" onclick="location.href='Addresslist'">
 		<br>
 		<br>
+		
 		<br>
 
 	</FORM>

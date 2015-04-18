@@ -53,12 +53,13 @@ public class AddressGet extends HttpServlet {
 				msg = errorMsg;
 			}
 
-			//データベース接続準備
-			Connection conn = null;
-
+			if(flag==0){
 
 			//受け取ったデータの表示
 			System.out.println(shimei+address+tel);
+
+			//データベース接続準備
+			Connection conn = null;
 
 			try{
 				//JDBCドライバの読み込み
@@ -126,6 +127,7 @@ public class AddressGet extends HttpServlet {
 					}
 				}
 			}
+		}
 
 
 

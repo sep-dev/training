@@ -16,7 +16,7 @@
 	Connection conn = null;
 
 	//Addresslist.javaから選択したデータのid番号を取得
-	String id = request.getParameter("selection");
+	String sqlid = request.getParameter("selection");
 
 		try{
 			//JDBCドライバの読み込み
@@ -28,12 +28,11 @@
 			//ID数発行用SQL文準備
 			String sqlselect = "SELECT * FROM tbaddress WHERE id =?";
 			PreparedStatement pStmtS = conn.prepareStatement(sqlselect);
-			pStmtS.setString(1,id);
+			pStmtS.setString(1,sqlid);
 
 			//SQLを実行、ID総数を取得
 			ResultSet rsS = pStmtS.executeQuery();
 			while(rsS.next()){
-
 				String name =rsS.getString("name");
 				String address =rsS.getString("address");
 				String tel =rsS.getString("tel");
@@ -41,9 +40,8 @@
 				out.println("氏名："+name);
 				out.println(" 住所："+address);
 				out.println(" 電話番号 "+tel);
-
 			}
-			session.setAttribute("sqlid","id");
+
 		}
 
 
@@ -67,20 +65,17 @@
 			}
 		}
 
-
-
-
-
-
+	System.out.println("uxooooo"+sqlid);
 %>
 	<font color=#c0c0c0>←選択されたデータ</font>
 	<br>
 	<br>
 
-	<FORM method="POST" action="Addresslist.jsp" name="scriptform">
+	<FORM method="POST" action="http://localhost:8080/servletstudy/Addressup" name="upform">
 		氏名 <INPUT type="text" name="shimei" size="100" maxlength="100"value=""><br>
 		住所 <INPUT type="text"name="address" size="100" maxlength="100" value=""><br>
 		電話番号 <INPUT type="text" name="tel" size="100" maxlength="100"value=""><br>
+		<input type=hidden name=selectedid value="<%=sqlid%>">
 		<br>
 		<INPUT type="submit" value="更新">
 		<INPUT type="reset" value="リセット">
@@ -88,8 +83,17 @@
 		<br>
 		<br>
 		<br>
-		<INPUT type="submit" value="削除" onclick="location.href='Addressdelete.jsp'">
 	</FORM>
+
+	<FORM method="POST" action="Addressdelete.jsp" name="delform">
+		<fieldset>
+
+			<input type=hidden name=selectedid value="<%=sqlid%>">
+
+			<INPUT type="submit" value="削除">
+		</fieldset>
+	</FORM>
+
 	<br>
 
 </body>

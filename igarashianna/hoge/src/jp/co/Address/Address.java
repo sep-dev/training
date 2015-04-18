@@ -48,6 +48,8 @@ public class Address extends HttpServlet {
 					if(flag == 1){
 						msg = errorMsg;
 					}
+				if(flag == 0){
+
 
 				Connection conn = null;
 
@@ -111,6 +113,8 @@ public class Address extends HttpServlet {
 					}
 
 				}
+				}
+
 
 				//HTMLを入力
 				response.setContentType("text/html; charset=UTF-8");

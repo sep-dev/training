@@ -69,7 +69,8 @@ try{
 			%>
 
 
-<form action="post" action="Addresslist.jsp" name="from1" onsubmit="return check()">
+<form method="post" action="http://localhost:8080/hoge/Addressdelete" name="from1">
+<input type=hidden name=question value="<%=id%>">
 <input type="submit" value="削除" /><br><br>
 <input type="button" value="一覧表示" onclick="location.href='http://localhost:8080/hoge/Addresslist'" />
 </form>

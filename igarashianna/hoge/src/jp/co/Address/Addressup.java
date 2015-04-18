@@ -45,7 +45,7 @@ public class Addressup extends HttpServlet {
 			out.println("</head>");
 			out.println("<body>");
 			out.println("会員情報の更新");
-			out.println("<form method=POST action='http://localhost:8080/hoge/Addressbook' name=from1>");
+			out.println("<form method=POST action='http://localhost:8080/hoge/Addressupdate' name=from1>");
 
 
 
@@ -70,17 +70,31 @@ public class Addressup extends HttpServlet {
 
 			}
 			out.println("←選択されたデータ");
+
+
+
+
+
+
+
 			out.println("<br>");
 			out.println("氏名<input type=text name=name size=50 value='' /><br>");
 			out.println("住所<input type=text name=address size=50 value='' /><br>");
 			out.println("電話番号<input type=text name=tel size=50 value='' /><br>");
+			out.println("<input type=hidden name=question value="+id+">");
 			out.println("<input type=submit value='更新' />");
 			out.println("<input type=reset value='リセット' />");
 			out.println("<input type=button value=一覧表示 onclick=location.href='http://localhost:8080/hoge/Addresslist' />");
 			out.println("<br>");
-			out.println("<input type=button value=削除 onclick=location.href='/Addressdelete.jsp' />");
-			
-			
+			out.println("</form>");
+			out.println("<form method=POST action='http://localhost:8080/hoge/Addressdelete.jsp' name=from1>");
+			out.println("<input type=hidden name=question value="+id+">");
+			out.println("<input type=submit value=削除  />");
+			out.println("</from>");
+			out.println("</body>");
+			out.println("</html>");
+
+
 
 
 

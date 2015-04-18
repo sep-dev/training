@@ -10,7 +10,7 @@
 
 <h1>削除しました</h1>
 
-<form action="/kadai01/jsp/itirann" method="post">
+<form action="/kadai01/itirann" method="post">
 <input type="submit" value="一覧">
 </form>
 

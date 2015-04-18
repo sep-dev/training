@@ -69,6 +69,7 @@ public class sakujo extends HttpServlet {
 				out.println("<head>");
 
 				out.println("<title>" +  "削除</title>");
+				out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"${pageContext.request.contextPath}/../servlet_css.css\">");
 
 				out.println("</head>");
 				out.println("<body>");
@@ -80,7 +81,7 @@ public class sakujo extends HttpServlet {
 			String address = rs.getString("address");
 		    String tell = rs.getString("tel");
 
-			    out.println("名前：" + name + "住所：" + address + "電話：" + tell );
+		    	out.println("<p>"+"名前：" + name + "住所：" + address + "電話：" + tell+"</p>" );
 
 		  System.out.println(id2);
 		  System.out.println(name);
@@ -90,6 +91,10 @@ public class sakujo extends HttpServlet {
 				out.println("<form action=\""+ "/kadai01/delete \" method=\"post\">");
 				out.println("<input type=\"hidden\" name=\"id\" value= " +id2+">");
 				out.println("<input type=\"submit\" value=\"削除\">");
+				out.println("</form>");
+
+				out.println("<form action=\""+ "/kadai01/itirann \" method=\"post\">");
+				out.println("<input type=\"submit\" value=\"一覧\">");
 				out.println("</form>");
 
 				out.println("</body>");

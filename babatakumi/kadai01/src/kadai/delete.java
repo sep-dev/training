@@ -52,11 +52,6 @@ public class delete extends HttpServlet {
 	      String user = "root";
 	      String pass = "sazi6675";
 
-	      System.out.println(name);
-	      System.out.println(address);
-	      System.out.println(tell);
-	      System.out.println(id);
-
 	    //ページ遷移の判定
 
 	  	    		try {

@@ -30,6 +30,7 @@ public class SQLEscape {
 	    input = substitute(input, "'", "''");
 	    input = substitute(input, ";", ";");
 	    input = substitute(input, "\\", "\\\\");
+
 	    return input;
 	}
 }

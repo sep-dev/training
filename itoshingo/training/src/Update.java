@@ -1,13 +1,12 @@
-
 import java.io.IOException;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+
 
 /**
  * Servlet implementation class Update
@@ -47,63 +46,35 @@ public class Update extends HttpServlet {
         String num = request.getParameter("id");
 
 
-		boolean flag;
+		boolean flag1,flag2;
+		CheckStr check = new CheckStr();
 
 		//入力値のチェック
-		flag = check(name);
-		if(flag==true){
-			flag = check(address);
-			if(flag==true){
-				flag = check(tel);
+		flag1 = check.check(name);
+		if(flag1==true){
+			flag1 = check.check(address);
+			if(flag1==true){
+				flag1 = check.check(tel);
 			}
 		}
 
-		if(flag != false){
+		if(flag1 != false){
+			java.sql.Connection con = null;
+			SQL sql = new SQL();
+			con = sql.connect();
+			flag2 = sql.update(con,num,name, address, tel);
 
-		java.sql.Connection con = null;
-        PreparedStatement ps = null;
-
-        try{
-        	Class.forName("com.mysql.jdbc.Driver");
-        	con = DriverManager.getConnection("jdbc:mysql://localhost/address","root","zxcASDqwe");
-
-
-
-        	String sql = "update tbaddress set name = ?,address = ?,tel = ? where id = ?";
-
-        	ps = con.prepareStatement(sql);
-
-        	ps.setString(1,name);
-        	ps.setString(2,address);
-        	ps.setString(3,tel);
-        	ps.setString(4,num);
-
-        	int z = ps.executeUpdate();
-
-        	ps.close();
-        	con.close();
-
-    		RequestDispatcher disp = request.getRequestDispatcher("success2.jsp");
-    		disp.forward(request, response);
-
-        }catch(Exception e){
-			RequestDispatcher disp = request.getRequestDispatcher("errordb.jsp");
-			disp.forward(request, response);
-        }
-		}else{
-			RequestDispatcher disp = request.getRequestDispatcher("error2.jsp");
-			disp.forward(request, response);
-		}
-
-	}
-
-	public boolean check(String x){
-		if(!x.matches(".*\".*")&&!x.matches(".*;.*")&&!x.matches(".*<.*")&&!x.matches(".*>.*")&&!x.matches(".*\'.*")&&!x.equals("")){
-			return true;
-		}
-		else{
-			return false;
-		}
+			if(flag2 == true){
+				RequestDispatcher disp = request.getRequestDispatcher("success2.jsp");
+				disp.forward(request, response);
+			}else{
+				RequestDispatcher disp = request.getRequestDispatcher("errordb.jsp");
+				disp.forward(request, response);
+				}
+			}else{
+				RequestDispatcher disp = request.getRequestDispatcher("error1.jsp");
+				disp.forward(request, response);
+			}
 	}
 
 }

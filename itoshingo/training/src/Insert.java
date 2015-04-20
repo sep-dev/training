@@ -1,14 +1,11 @@
-
-
 import java.io.IOException;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 /**
  * Servlet implementation class Insert
@@ -49,18 +46,24 @@ public class Insert extends HttpServlet {
 
 		boolean flag1,flag2;
 
+		CheckStr check = new CheckStr();
+
 		//入力値のチェック
-		flag1 = check(name);
+		flag1 = check.check(name);
 		if(flag1==true){
-			flag1 = check(address);
+			flag1 = check.check(address);
 			if(flag1==true){
-				flag1 = check(tel);
+				flag1 = check.check(tel);
 			}
 		}
 
 		if(flag1 == true){
 
-			flag2 = insert(name,address,tel);
+			java.sql.Connection con = null;
+
+			SQL sql = new SQL();
+			con = sql.connect();
+			flag2 = sql.insert(con, name, address, tel);
 
 			if(flag2 == true){
 				RequestDispatcher disp = request.getRequestDispatcher("success1.jsp");
@@ -76,46 +79,4 @@ public class Insert extends HttpServlet {
 
 	}
 
-	protected boolean check(String x){
-		if(!x.matches(".*\".*")&&!x.matches(".*;.*")&&!x.matches(".*<.*")&&!x.matches(".*>.*")&&!x.matches(".*\'.*")&&!x.equals("")){
-			return true;
-		}
-		else{
-			return false;
-		}
-	}
-
-	protected boolean insert(String name,String address, String tel){
-
-		java.sql.Connection con = null;
-		PreparedStatement ps = null;
-
-        try {
-
-            // ドライバクラスをロード
-           Class.forName("com.mysql.jdbc.Driver");
-
-            // データベースへ接続
-           con = DriverManager.getConnection("jdbc:mysql://localhost/address","root","zxcASDqwe");
-
-           String sql = "insert into tbaddress(name,address,tel) value(?,?,?)";
-          // ステートメントオブジェクトを生成
-
-          ps = con.prepareStatement(sql);
-
-          ps.setString(1, name);
-          ps.setString(2,address);
-          ps.setString(3,tel);
-
-          int num = ps.executeUpdate();
-
-          ps.close();
-          con.close();
-
-          return true;
-
-        }catch(Exception e){
-        	return false;
-        }
-	}
 }

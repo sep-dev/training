@@ -33,18 +33,18 @@ public class AddressList extends HttpServlet {
         super();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect(Urls.TOP);
-	}
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.sendRedirect(Urls.TOP);
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    response.setCharacterEncoding(HtmlHelper.ENCORDING);
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setCharacterEncoding(HtmlHelper.ENCORDING);
         response.setContentType("text/html; charset=" + HtmlHelper.ENCORDING);
 
         PrintWriter out = response.getWriter();
@@ -87,5 +87,5 @@ public class AddressList extends HttpServlet {
             DatabaseHelper.commonClose(conn, stmt);
             HtmlHelper.endHttp(out);
         }
-	}
+    }
 }

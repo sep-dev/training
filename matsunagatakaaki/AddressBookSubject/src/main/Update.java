@@ -6,10 +6,8 @@ import helper.ResultIds;
 import helper.Urls;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,8 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/Update")
 public class Update extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private Connection conn = null;
-    private PreparedStatement stmt = null;
+    private DatabaseHelper db = null;
 
     private String title,h1_text; //結果画面での表示文字列格納
     private boolean error = false; //更新処理途中での、例外発生&失敗フラグ
@@ -51,8 +48,8 @@ public class Update extends HttpServlet {
 
         if(!HtmlHelper.searchParameter("update", request)){
             //パラメータ名に "update" が存在しなければ、アップデートする内容を入力するページへ遷移させる
-            request.setAttribute("id", request.getParameter(DatabaseHelper.ColumnNames.ID));
-            request.setAttribute("addressData",getDispAddressData(Integer.parseInt(request.getParameter(DatabaseHelper.ColumnNames.ID))));
+            request.setAttribute("id", request.getParameter(DatabaseHelper.Column.ID));
+            request.setAttribute("addressData",getDispAddressData(Integer.parseInt(request.getParameter(DatabaseHelper.Column.ID))));
             request.getRequestDispatcher("./jsp/" + Urls.UPDATE_INPUT).forward(request, response);
         }else{
             if(updateProcess(request)){
@@ -72,41 +69,16 @@ public class Update extends HttpServlet {
 
     //Update処理
     private boolean updateProcess(HttpServletRequest request){
-        String name = HtmlHelper.encording(request.getParameter(DatabaseHelper.ColumnNames.NAME));
-        String address = HtmlHelper.encording(request.getParameter(DatabaseHelper.ColumnNames.ADDRESS));
-        String tel = HtmlHelper.encording(request.getParameter(DatabaseHelper.ColumnNames.TEL));
+        Integer id = new Integer(request.getParameter(DatabaseHelper.Column.ID));
+        String name = HtmlHelper.encording(request.getParameter(DatabaseHelper.Column.NAME));
+        String address = HtmlHelper.encording(request.getParameter(DatabaseHelper.Column.ADDRESS));
+        String tel = HtmlHelper.encording(request.getParameter(DatabaseHelper.Column.TEL));
 
         if(name.equals("") && address.equals("") && tel.equals("")) return false;
         if(!tel.equals("") && (tel.length() <= 9 || tel.length() >= 12)) return false;
 
-        conn = DatabaseHelper.getConnectionInstance();
-        StringBuffer query = new StringBuffer("UPDATE " + DatabaseHelper.TABLE_NAME + " SET ");
-
-        if(!name.equals("")) query.append(DatabaseHelper.ColumnNames.NAME).append("='" + name + "'").append(",");
-        if(!address.equals("")) query.append(DatabaseHelper.ColumnNames.ADDRESS).append("='" + address + "'").append(",");
-        if(!tel.equals("")) query.append(DatabaseHelper.ColumnNames.TEL).append("='" + tel + "'").append(",");
-
-        query = query.deleteCharAt(query.lastIndexOf(",")); //末尾の "," を削除する(必ず付加されているため）
-        query.append(" WHERE id=?");
-
-        try {
-            stmt = conn.prepareStatement(new String(query));
-            stmt.setInt(1, Integer.parseInt(request.getParameter(DatabaseHelper.ColumnNames.ID)));
-            stmt.executeUpdate();
-            conn.commit();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            try {
-                conn.rollback();
-            } catch (SQLException e1) {
-                e1.printStackTrace();
-            }
-            error = true;
-            return false;
-        }finally{
-            DatabaseHelper.commonClose(conn, stmt);
-        }
-        return true;
+        db = new DatabaseHelper();
+        return db.excuteSQL(DatabaseHelper.Query.UPDATE, id, name, address, tel);
     }
 
 
@@ -115,21 +87,17 @@ public class Update extends HttpServlet {
      *  return "氏名：○○○ 住所：△△△ 電話番号：□□□"
      */
     private String getDispAddressData(int id){
-        conn = DatabaseHelper.getConnectionInstance();
-        StringBuffer returnStr = new StringBuffer(); //生成文字列格納StringBuffer
-        try {
-            stmt = conn.prepareStatement("SELECT name,address,tel FROM " + DatabaseHelper.TABLE_NAME + " WHERE id=?");
-            stmt.setInt(1,id);
-            ResultSet result = stmt.executeQuery();
-            result.first(); //最初に移動
-            returnStr.append("氏名 : ").append(result.getString(DatabaseHelper.ColumnNames.NAME));
-            returnStr.append("  住所 : ").append(result.getString(DatabaseHelper.ColumnNames.ADDRESS));
-            returnStr.append("  電話番号 : ").append(result.getString(DatabaseHelper.ColumnNames.TEL));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }finally{
-            DatabaseHelper.commonClose(conn, stmt);
+        StringBuffer resultStr = new StringBuffer();
+        db = new DatabaseHelper();
+        if(db.excuteSQL(DatabaseHelper.Query.SELECT, id, null, null, null)){
+            ArrayList<HashMap<String,String>> map = db.getResultHashMap();
+            for(HashMap<String,String> row : map){
+                resultStr.append("氏名: ").append(row.get(DatabaseHelper.Column.NAME));
+                resultStr.append("   住所 : ").append(row.get(DatabaseHelper.Column.ADDRESS));
+                resultStr.append("   電話番号 : ").append(row.get(DatabaseHelper.Column.TEL));
+            }
         }
-        return returnStr.toString();
+        return resultStr.toString();
+
     }
 }

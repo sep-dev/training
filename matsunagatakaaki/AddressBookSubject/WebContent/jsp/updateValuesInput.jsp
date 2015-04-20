@@ -35,7 +35,7 @@
           </tr>
           <tr>
             <td>住所</td>
-            <td><input type="text" name="address" id="address" size="25" /></td>
+            <td><input type="text" name="address" id="address" size="25"/></td>
           </tr>
           <tr>
             <td>電話番号</td>

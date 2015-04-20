@@ -6,9 +6,6 @@ import helper.ResultIds;
 import helper.Urls;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,8 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/Delete")
 public class Delete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private Connection conn = null;
-	private PreparedStatement stmt = null;
+	private DatabaseHelper db = null;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -44,7 +40,10 @@ public class Delete extends HttpServlet {
         response.setCharacterEncoding(HtmlHelper.ENCORDING);
         response.setContentType("text/html; charset=" + HtmlHelper.ENCORDING);
 
-        boolean result = deleteProcess(request); //削除処理
+        db = new DatabaseHelper();
+        int id = Integer.parseInt(request.getParameter(DatabaseHelper.Column.ID)); //id取得
+
+        boolean result = db.excuteSQL(DatabaseHelper.Query.DELETE, id, null, null, null); //削除処理
 
         request.setAttribute(ResultIds.TITLE, result ? "削除完了" : "削除失敗");
         request.setAttribute(ResultIds.H1＿TEXT, result ?  "削除しました！！" : "削除に失敗しました");
@@ -57,25 +56,4 @@ public class Delete extends HttpServlet {
         response.sendRedirect(Urls.TOP); //ダイレクトに入った場合、トップページへ強制遷移
     }
 
-    //削除処理
-    protected boolean deleteProcess(HttpServletRequest request){
-        conn = DatabaseHelper.getConnectionInstance();
-        try {
-            stmt = conn.prepareStatement("DELETE FROM " + DatabaseHelper.TABLE_NAME + " WHERE id=?");
-            stmt.setInt(1, Integer.parseInt(request.getParameter(DatabaseHelper.ColumnNames.ID)));
-            stmt.execute();
-            conn.commit();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            try {
-                conn.rollback();
-            } catch (SQLException e1) {
-                e1.printStackTrace();
-            }
-            return false;
-        }finally{
-            DatabaseHelper.commonClose(conn, stmt);
-        }
-        return true;
-    }
 }

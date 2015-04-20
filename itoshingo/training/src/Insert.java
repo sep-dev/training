@@ -3,7 +3,6 @@
 import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -99,17 +98,8 @@ public class Insert extends HttpServlet {
             // データベースへ接続
            con = DriverManager.getConnection("jdbc:mysql://localhost/address","root","zxcASDqwe");
 
-           String sql = "select count(*) cnt from tbaddress";
-
-           // ステートメントオブジェクトを生成
-          ps = con.prepareStatement(sql);
-
-           // クエリーを実行して結果セットを取得
-          ResultSet rs = ps.executeQuery();
-          rs.next();
-          int id = rs.getInt("cnt");
-
-          sql = "insert into tbaddress(name,address,tel) value(?,?,?)";
+           String sql = "insert into tbaddress(name,address,tel) value(?,?,?)";
+          // ステートメントオブジェクトを生成
 
           ps = con.prepareStatement(sql);
 
@@ -120,7 +110,6 @@ public class Insert extends HttpServlet {
           int num = ps.executeUpdate();
 
           ps.close();
-          rs.close();
           con.close();
 
           return true;

@@ -40,6 +40,7 @@ public class Select extends HttpServlet {
 
 		out.println("<html>");
 		out.println("<head>");
+		out.println("<link rel=\"stylesheet\" href=\"${pageContext.request.contextPath}/../style.css\" />");
 		out.println("<title>更新/削除</title>");
 		out.println("</head>");
 		out.println("<body>");
@@ -84,23 +85,29 @@ public class Select extends HttpServlet {
 
 		out.println("<form action=\"Update\"method=\"post\">");
 		out.println("<input type=\"hidden\" name=\"id\" value="+ num +">");
+		out.println("<table aling = \"center\">");
+		out.println("<tr><th>");
 		out.println("氏名 ");
-		out.println("<input type=\"text\" name=\"name\">");
-		out.println("<br>");
+		out.println("</th><td>");
+		out.println("<input type=\"text\" name=\"name\" style=\"width:200px;\">");
+		out.println("</td></tr><tr><th>");
 		out.println("住所 ");
-		out.println("<input type=\"text\" name=\"address\">");
-		out.println("<br>");
+		out.println("</th><td>");
+		out.println("<input type=\"text\" name=\"address\" style=\"width:200px;\">");
+		out.println("</td></tr><tr><th>");
 		out.println("電話番号 ");
-		out.println("<input type=\"text\" name=\"tel\" maxlength=\"10\">");
+		out.println("</th><td>");
+		out.println("<input type=\"text\" name=\"tel\" maxlength=\"11\" style=\"width:200px;\">");
+		out.println("</td></tr></table>");
 		out.println("<br>");
-
 		out.println("<input type=\"submit\"value=\"更新\">");
 		out.println("<input type=\"reset\" value=\"リセット\">");
 		out.println("</form>");
+		out.println("<br><br>");
 		out.println("<form action=\"ShowAll\" method=\"get\">");
 		out.println("<input type=\"submit\" value=\"一覧表示\">");
 		out.println("</form>");
-
+		out.println("<br><br>");
 		out.println("<form action=\"Delete\" method=\"get\">");
 		out.println("<input type=\"hidden\" name=\"id\" value="+ num +">");
 		out.println("<input type=\"submit\" value=\"削除\">");

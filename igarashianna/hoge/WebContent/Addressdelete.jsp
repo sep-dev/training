@@ -4,11 +4,13 @@
 <%@ page import="java.sql.*" %>
 <html>
 <head>
+<link rel="stylesheet" href="style.css" type="text/css"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>削除画面</title>
 </head>
 <body>
-<h1>本当に削除してもいいですか？</h1>
+<center>
+<h1>本当に削除してもいいですか？</h1><br><br><br><br><br>
 
 <%
 
@@ -43,9 +45,12 @@ try{
 				String address=rs.getString("address");
 				String tel=rs.getString("tel");
 
+				out.println("<p class=hako>");
+
 			out.println("氏名:"+name);
 			out.println("住所:"+address);
 			out.println("電話番号"+tel);
+			out.println("</p>");
 			out.println("←選択されたデータ");
 
 			}
@@ -67,12 +72,12 @@ try{
 				}
 			}
 			%>
-
-
 <form method="post" action="http://localhost:8080/hoge/Addressdelete" name="from1">
 <input type=hidden name=question value="<%=id%>">
+<br><br><br><br><br><br><br>
 <input type="submit" value="削除" /><br><br>
 <input type="button" value="一覧表示" onclick="location.href='http://localhost:8080/hoge/Addresslist'" />
 </form>
+</center>
 </body>
 </html>

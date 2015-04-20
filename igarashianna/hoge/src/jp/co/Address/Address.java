@@ -27,8 +27,9 @@ public class Address extends HttpServlet {
 				int maxID = 0;
 
 				//リクエストパラメータをチェック
+
 				String msg ="登録成功！！！！！！！";
-				String errorMsg ="登録失敗！！！！！！！<br>空欄を埋めてください！";
+				String errorMsg ="登録失敗！！！！！！！<br><br>空欄を埋めてください！";
 
 
 				int flag =0;
@@ -62,7 +63,7 @@ public class Address extends HttpServlet {
 
 
 					//ID数発行用のSELECT文を準備
-					String sqlselect = "select count(*) cnt from tbAddress";
+					String sqlselect = "select max(id) cnt from tbAddress";
 					PreparedStatement pStmt = conn.prepareStatement(sqlselect);
 
 					//SELECTを実行し、結果表(ResultSet)を取得
@@ -122,15 +123,22 @@ public class Address extends HttpServlet {
 				out.println("<!DOCTYPE html>");
 				out.println("<html>");
 				out.println("<head>");
+				out.println("<link rel='stylesheet' href='style.css' type='text/css'/>");
 				out.println("<meta charset=\"UTF-8\">");
 				out.println("<title>登録画面</title>");
 				out.println("</head>");
 				out.println("<body>");
-				out.println("<p>" + msg +"</p>");
+				out.println("<center>");
+				out.println("<p class=neko>");
+				out.println("<br><br><br><br>");
+				out.println(msg);
+				out.println("</p>");
+				out.println("<br><br><br<br><br>");
 				if(flag == 0)
 					out.println("<input type=button value=一覧表示 onclick=location.href='http://localhost:8080/hoge/Addresslist'>");
 				if(flag == 1)
 					out.println("<input type=button value=新規登録 onclick=location.href='Addressbook.jsp'>");
+				out.println("</center>");
 				out.println("</body>");
 				out.println("</html>");
 

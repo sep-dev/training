@@ -65,7 +65,7 @@ public class Addressupdate extends HttpServlet {
 
 
 			//ID数発行用のUPDATE文を準備
-			String sqlupdate = "update from tbAddress set name=?,address=?,tel=? where id=?";
+			String sqlupdate = "update tbAddress set name=?, address=?, tel=? where id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sqlupdate);
 			pStmt.setString(1,name);
 			pStmt.setString(2,address);
@@ -110,12 +110,19 @@ public class Addressupdate extends HttpServlet {
 		out.println("<!DOCTYPE html>");
 		out.println("<html>");
 		out.println("<head>");
+		out.println("<link rel='stylesheet' href='style.css' type='text/css'/>");
 		out.println("<meta charset=\"UTF-8\">");
 		out.println("<title>更新画面</title>");
 		out.println("</head>");
 		out.println("<body>");
-		out.println("<p>" + msg +"</p>");
+		out.println("<center>");
+		out.println("<br><br><br><br><br><br><br><br><br><br><br><br><br><br>");
+		out.println("<p class=neko>");
+		out.println(msg);
+		out.println("</p>");
+		out.println("<br><br><br><br><br><br><br><br><br><br><br><br><br>");
 		out.println("<input type=button value=一覧表示 onclick=location.href='http://localhost:8080/hoge/Addresslist'>");
+		out.println("</center>");
 		out.println("</body>");
 		out.println("</html>");
 

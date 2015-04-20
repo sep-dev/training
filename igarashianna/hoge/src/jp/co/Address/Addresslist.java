@@ -46,11 +46,15 @@ public class Addresslist extends HttpServlet {
 			out.println("<!DOCTYPE html>");
 			out.println("<html>");
 			out.println("<head>");
+			out.println("<link rel='stylesheet' href='style.css' type='text/css'/>");
 			out.println("</head>");
 			out.println("<body>");
-			out.println("会員一覧");
+			out.println("<center>");
+			out.println("<h1>会員一覧</h1>");
+			out.println("</center>");
 			out.println("<br>");
-			out.println("↓一つだけ選択可能");
+			out.println("<p class=neko>");
+			out.println("　　　↓一つだけ選択可能");
 			out.println("<br>");
 			out.println("<form method=POST action='http://localhost:8080/hoge/Addressup' name=from1>");
 
@@ -72,8 +76,9 @@ public class Addresslist extends HttpServlet {
 
 				out.println("氏名:"+name);
 				out.println("住所:"+address);
-				out.println("電話番号"+tel);
+				out.println("電話番号 "+tel);
 				out.println("<br>");
+				out.println("</p>");
 
 			}
 
@@ -85,6 +90,7 @@ public class Addresslist extends HttpServlet {
 
 
 			out.println("</form>");
+			out.println("</center>");
 			out.println("</body>");
 			out.println("</html>");
 

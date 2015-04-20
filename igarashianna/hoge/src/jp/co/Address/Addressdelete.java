@@ -71,12 +71,19 @@ public class Addressdelete extends HttpServlet {
 	out.println("<!DOCTYPE html>");
 	out.println("<html>");
 	out.println("<head>");
+	out.println("<link rel='stylesheet' href='style.css' type='text/css'/>");
 	out.println("<meta charset=\"UTF-8\">");
 	out.println("<title>削除完了画面</title>");
 	out.println("</head>");
 	out.println("<body>");
+	out.println("<center>");
+	out.println("<br><br><br><br><br><br><br><br><br><br><br><br><br>");
+	out.println("<p class=neko>");
 	out.println("削除しました！！");
+	out.println("</p>");
+	out.println("<br><br><br><br><br><br><br><br><br><br>");
 	out.println("<input type=button value=一覧表示 onclick=location.href='http://localhost:8080/hoge/Addresslist'>");
+	out.println("</center>");
 	out.println("</body>");
 	out.println("</html>");
 

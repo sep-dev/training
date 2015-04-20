@@ -10,6 +10,7 @@
 <body>
 <h1>会員一覧</h1>
 <p>↓一つだけ選択可能</p>
+
 	<%
 	Connection conn=null;
 
@@ -23,7 +24,7 @@
 		out.println("<form method=\"post\" action=\"kousinn.jsp\">");
 
 		while(rs.next()){
-			out.println(" <INPUT type=\"radio\" name=\"id\" value=\" " + rs.getString("id")  + "\">");
+			out.println(" <INPUT type=\"radio\" name=\"id\" value=\" " + rs.getString("id")+"\">");
 			out.println(rs.getString("name"));
 			out.println(rs.getString("zyuusyo"));
 			out.println(rs.getString("bangou"));

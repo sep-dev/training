@@ -69,4 +69,14 @@
     <servlet-name>botan3</servlet-name>
     <url-pattern>/botan3</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>botan4</display-name>
+    <servlet-name>botan4</servlet-name>
+    <servlet-class>pacege.botan4</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>botan4</servlet-name>
+    <url-pattern>/botan4</url-pattern>
+  </servlet-mapping>
 </web-app>

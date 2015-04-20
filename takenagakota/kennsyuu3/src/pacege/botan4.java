@@ -14,15 +14,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class botan3
+ * Servlet implementation class botan4
  */
-public class botan3 extends HttpServlet {
+public class botan4 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public botan3() {
+    public botan4() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -47,28 +47,13 @@ public class botan3 extends HttpServlet {
 		String name=request.getParameter("simei");
 		String pass=request.getParameter("ie");
 		String dennwa=request.getParameter("tell");
-		if(name.trim() =="" || pass.trim() =="" || dennwa.trim() == ""){
-			out.println(name);
-			out.println(pass);
-			out.println(dennwa);
-			RequestDispatcher disp =getServletContext().getRequestDispatcher("/dame.jsp");
-			disp.forward(request, response);
-			return;
-		}
-
-		//if(name !=" " && pass!=" " && dennwa!=" "){
-		//	out.println(name);
-		//	out.println(pass);
-		//	out.println(dennwa);
-		//	//return;
-		//}
 		Connection conn = null;
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
 			conn=DriverManager.getConnection("jdbc:mysql://localhost/zyuusyoroku","root","BACK-ON7");
 			conn.setAutoCommit(false);
 			Statement smt= conn.createStatement();
-			int count=smt.executeUpdate("Update tbaddress set name='"+(name)+"',zyuusyo='"+(pass)+"',bangou='"+(dennwa)+"' where id="+(id));
+			int count=smt.executeUpdate("delete from tbaddress where id="+(id));
 			conn.commit();
 			out.println("通りました");
 		}catch(SQLException e){
@@ -98,7 +83,10 @@ public class botan3 extends HttpServlet {
 				out.println("error3");
 			}
 		}
-		RequestDispatcher disp =getServletContext().getRequestDispatcher("/ii.jsp");
+		RequestDispatcher disp =getServletContext().getRequestDispatcher("/sakuzyo.jsp");
 		disp.forward(request, response);
-	}}
+		}
+
+	}
+
 

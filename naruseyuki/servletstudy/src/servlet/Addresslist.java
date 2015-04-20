@@ -46,16 +46,16 @@ public class Addresslist extends HttpServlet {
 			out.println("<!DOCTYPE html>");
 			out.println("<html>");
 			out.println("<head>");
+			out.println("<link rel=stylesheet href=hyakushiki.css type=text/css />");
 			out.println("<meta charset=\"UTF-8\">");
 			out.println("<title>一覧画面</title>");
 			out.println("</head>");
 			out.println("<body>");
-			out.println("<p>"+"・会員一覧" +"<p>");
+			out.println("<h1>会員一覧</h1>");
 			out.println("↓一つだけ選択可能");
 			out.println("<br>");
 
 			out.println("<FORM method=GET action=http://localhost:8080/servletstudy/Addressup.jsp name=insertform>");
-
 			while(rsS.next()){
 
 				int id =rsS.getInt("id");

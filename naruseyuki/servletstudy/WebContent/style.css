@@ -1,0 +1,24 @@
+*{
+	font-size:1em;
+	/*text-align:left;*/
+}
+html, body {
+  background-color: #2f334b;
+  /*color: #000000;*/
+}
+h1 {
+  text-align: center;
+  background-color: #889094;
+  /*color: #000080;*/
+  font-family:"alba super";
+}
+input[type=text]{
+width:200px;
+height:50px;
+font-size:2em;
+}
+p.hekomi{
+	text-align: center;
+	font-size:2em;
+	border:inset 5px #475175;
+}

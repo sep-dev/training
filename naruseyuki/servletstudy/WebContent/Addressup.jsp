@@ -5,15 +5,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="style.css" type="text/css" />
 <title>会員情報の更新</title>
 </head>
 <body>
+	<fieldset>
 	<h1>会員情報の更新</h1>
+	</fieldset>
 	<br>
+
 <%
 	request.setCharacterEncoding("UTF-8");
 
 	Connection conn = null;
+
+	String boxname = null;
+	String boxaddress = null;
+	String boxtel = null;
 
 	//Addresslist.javaから選択したデータのid番号を取得
 	String sqlid = request.getParameter("selection");
@@ -37,10 +45,19 @@
 				String address =rsS.getString("address");
 				String tel =rsS.getString("tel");
 
+
+				out.println("<p class=hekomi>");
 				out.println("氏名："+name);
 				out.println(" 住所："+address);
 				out.println(" 電話番号 "+tel);
+				out.println("</p>");
+
+				boxname = name;
+				boxaddress = address;
+				boxtel = tel;
 			}
+
+
 
 		}
 
@@ -67,14 +84,14 @@
 
 	System.out.println("uxooooo"+sqlid);
 %>
-	<font color=#c0c0c0>←選択されたデータ</font>
+	　　　　　　　　　　　　　↑選択されたデータ↑
 	<br>
 	<br>
 
 	<FORM method="POST" action="http://localhost:8080/servletstudy/Addressup" name="upform">
-		氏名 <INPUT type="text" name="shimei" size="100" maxlength="100"value=""><br>
-		住所 <INPUT type="text"name="address" size="100" maxlength="100" value=""><br>
-		電話番号 <INPUT type="text" name="tel" size="100" maxlength="100"value=""><br>
+		氏名 <INPUT type="text" name="shimei" size="100" maxlength="8"value="<%=boxname%>"><br>
+		住所 <INPUT type="text"name="address" size="100" maxlength="4" value="<%=boxaddress%>"><br>
+		電話番号 <INPUT type="text" name="tel" size="100" maxlength="11"value="<%=boxtel%>"><br>
 		<input type=hidden name=selectedid value="<%=sqlid%>">
 		<br>
 		<INPUT type="submit" value="更新">
@@ -86,12 +103,8 @@
 	</FORM>
 
 	<FORM method="POST" action="Addressdelete.jsp" name="delform">
-		<fieldset>
-
 			<input type=hidden name=selectedid value="<%=sqlid%>">
-
 			<INPUT type="submit" value="削除">
-		</fieldset>
 	</FORM>
 
 	<br>

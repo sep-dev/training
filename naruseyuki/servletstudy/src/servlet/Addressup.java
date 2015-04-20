@@ -104,13 +104,16 @@ public class Addressup extends HttpServlet {
 					out.println("<!DOCTYPE html>");
 					out.println("<html>");
 					out.println("<head>");
+					out.println("<link rel=stylesheet href=style.css type=text/css />");
 					out.println("<meta charset=\"UTF-8\">");
 					out.println("<title>登録画面</title>");
 					out.println("</head>");
 					out.println("<body>");
+					out.println("<center>");
 					out.println("<p>" + msg + "<p>");
 					out.println("<br>");
 					out.println("<INPUT type=button value=一覧表示 onclick=location.href='http://localhost:8080/servletstudy/Addresslist'>");
+					out.println("</center>");
 					out.println("</body>");
 					out.println("</html>");
 

@@ -38,8 +38,8 @@ public class Addressdelete extends HttpServlet {
 				//データベースへ接続
 				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/kaiinlist","naruse","123a");
 
-				//DB登録用SQL文準備
-				String sqldelete = "DELETE FROM tbaddress WHERE id ='?'";
+				//要素削除用SQL文準備
+				String sqldelete = "DELETE FROM tbaddress WHERE id =?";
 				PreparedStatement pStmtI = conn.prepareStatement(sqldelete);
 
 				pStmtI.setString(1, id);
@@ -75,12 +75,15 @@ public class Addressdelete extends HttpServlet {
 		out.println("<html>");
 		out.println("<head>");
 		out.println("<meta charset=\"UTF-8\">");
+		out.println("<link rel=stylesheet href=style.css type=text/css />");
 		out.println("<title>削除完了</title>");
 		out.println("</head>");
+		out.println("<center>");
 		out.println("<h1>削除しました！</h1>");
 		out.println("<body>");
 		out.println("<br>");
 		out.println("<INPUT type=button value=一覧表示 onclick=location.href='http://localhost:8080/servletstudy/Addresslist'>");
+		out.println("</center>");
 		out.println("</body>");
 		out.println("</html>");
 	}

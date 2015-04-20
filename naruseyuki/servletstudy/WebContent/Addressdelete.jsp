@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="style.css" type="text/css" />
 <title>削除ページ</title>
 </head>
 <body>
@@ -26,12 +27,12 @@
 			//データベースへ接続
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/kaiinlist","naruse","123a");
 
-			//ID数発行用SQL文準備
+			//削除用SQL文準備
 			String sqlselect = "SELECT * FROM tbaddress WHERE id =?";
 			PreparedStatement pStmtS = conn.prepareStatement(sqlselect);
 			pStmtS.setString(1,sqlselectid);
 
-			//SQLを実行、ID総数を取得
+			//SQLを実行、削除する要素を表示
 			ResultSet rsS = pStmtS.executeQuery();
 			while(rsS.next()){
 
@@ -48,7 +49,7 @@
 
 
 		catch(SQLException e){
-			System.out.println("データベースが読み込めません！"+e);
+			System.out.println(".jspデータベースが読み込めません！"+e);
 			e.printStackTrace();
 		}
 		catch(ClassNotFoundException e){
@@ -82,7 +83,7 @@
 		<INPUT type="button" value="一覧表示へ" onclick="location.href='Addresslist'">
 		<br>
 		<br>
-		
+
 		<br>
 
 	</FORM>

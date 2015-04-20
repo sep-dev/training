@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/Addressbook")
-public class AddressGet extends HttpServlet {
+public class Addressget extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -72,7 +72,8 @@ public class AddressGet extends HttpServlet {
 
 
 				//ID数発行用SQL文準備
-				String sqlselect = "SELECT COUNT(*) cnt FROM tbaddress";
+				//String sqlselect = "SELECT COUNT(*) cnt FROM tbaddress";
+				String sqlselect = "SELECT Max(id) cnt FROM tbaddress";
 				PreparedStatement pStmtS = conn.prepareStatement(sqlselect);
 
 				//SQLを実行、ID総数を取得
@@ -137,16 +138,19 @@ public class AddressGet extends HttpServlet {
 			out.println("<!DOCTYPE html>");
 			out.println("<html>");
 			out.println("<head>");
+			out.println("<link rel=stylesheet href=style.css type=text/css />");
 			out.println("<meta charset=\"UTF-8\">");
 			out.println("<title>登録画面</title>");
 			out.println("</head>");
 			out.println("<body>");
+			out.println("<center>");
 			out.println("<p>" + msg + "<p>");
 			out.println("<br>");
 			if(flag==0)
 				out.println("<INPUT type=button value=一覧表示 onclick=location.href='http://localhost:8080/servletstudy/Addresslist'>");
 			else
 				out.println("<INPUT type=button value=新規登録 onclick=location.href='Addressbook.jsp'>");
+			out.println("</center>");
 			out.println("</body>");
 			out.println("</html>");
 

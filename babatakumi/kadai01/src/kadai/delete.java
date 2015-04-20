@@ -52,6 +52,8 @@ public class delete extends HttpServlet {
 	      String user = "root";
 	      String pass = "sazi6675";
 
+	      int flag = 3;
+
 	    //ページ遷移の判定
 
 	  	    		try {
@@ -68,7 +70,11 @@ public class delete extends HttpServlet {
 		    				stmt.close();
 		    				conn.close();
 
-		    				RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/d_seikou.jsp");
+		    				flag = 3;
+		    				String sflag = String.valueOf(flag);
+
+		    				request.setAttribute("flag", sflag);
+		    				RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/seikou.jsp");
 		    				dispatcher.forward(request, response);
 
 		    		    } catch (SQLException e) {

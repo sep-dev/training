@@ -1,10 +1,13 @@
 @CHARSET "UTF-8";
+
 body{
-	background-color : #006699;
+	background-color : #ff7f50;
+	margin: 0;
+	padding: 0;
 }
 
 h1,h2{
-	color :#00FFFF;
+	color :#eee8aa;
 	text-align: center;
 }
 
@@ -14,19 +17,18 @@ form {
 
 p{
 	text-align: center;
-	color : #00FFFF;
+	color : #eee8aa;
 }
 
 .i_tb{
 	width : 50%;
-	margin : auto;
 	border-collapse: separate;
 	border-spacing: 0px;
 }
 
 .i_tb td{
 	text-align: left;
-	vertical-align: top;
-	color : #00FFFF;
+	vertical-align: middle;
+	color : #eee8aa;
 }
 

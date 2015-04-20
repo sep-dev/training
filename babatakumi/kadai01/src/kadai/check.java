@@ -57,10 +57,7 @@ public class check extends HttpServlet {
 	      String user = "root";
 	      String pass = "sazi6675";
 
-	      System.out.println(name);
-	      System.out.println(address);
-	      System.out.println(tell);
-
+	      int flag = 0;
 //ページ遷移の判定
 	//フォームの中がからじゃない
       if(name != "" && address != "" && tell != ""){
@@ -84,7 +81,11 @@ public class check extends HttpServlet {
 	    				stmt.close();
 	    				conn.close();
 
-	    				RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/t_seikou.jsp");
+	    				flag = 1;
+	    				String sflag = String.valueOf(flag);
+
+	    				request.setAttribute("flag", sflag);
+	    				RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/seikou.jsp");
 	    				dispatcher.forward(request, response);
 
 	    		    } catch (SQLException e) {
@@ -96,15 +97,27 @@ public class check extends HttpServlet {
 	    		    }
 //以下失敗
 			  }else{
-					RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/t_sippai_tell.jsp");
+				  flag = 2;
+  					String sflag = String.valueOf(flag);
+
+  					request.setAttribute("flag", sflag);
+					RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/sippai.jsp");
 					dispatcher.forward(request, response);
 			  }
 	      }else{
-				RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/t_sippai.jsp");
+	    	  flag = 1;
+				String sflag = String.valueOf(flag);
+
+				request.setAttribute("flag", sflag);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/sippai.jsp");
 				dispatcher.forward(request, response);
 	      }
       }else{
-			RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/t_sippai.jsp");
+    	  flag = 1;
+			String sflag = String.valueOf(flag);
+
+			request.setAttribute("flag", sflag);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/sippai.jsp");
 			dispatcher.forward(request, response);
       }
 	}

@@ -63,7 +63,7 @@ public class itirann extends HttpServlet {
 			 String  query = "SELECT * from tbaddress";
 			 ResultSet rs = stmt.executeQuery(query) ;
 
-
+			 out.println("<!DOCTYPE html>");
 			 out.println("<html>");
 			 out.println("<head>");
 			 out.println("<title>" +  "一覧画面</title>");
@@ -71,15 +71,16 @@ public class itirann extends HttpServlet {
 			 out.println("</head>");
 			 out.println("<body>");
 
-			 out.println("<h1>"+ "会員一覧</h1><br>");
+			 out.println("<h1>"+ "会員一覧</h1>");
 
-			 out.println("<form action=\""+ "/kadai01/kousinn\" method=\"post\">");
+			 out.println("<form action=\"/kadai01/kousinn\" method=\"post\">");
 
 			 int num = 1;
 
-			 out.println("<table class=\"i_tb\">");
+			 out.println("<table class=\"i_tb\" align =\"center\">");
 
 			 out.println("<tr><td></td><td>名前</td><td>住所</td><td>電話</td></tr>");
+
 			 while(rs.next()){
 				    int id = rs.getInt("id");
 				    String name = rs.getString("name");
@@ -105,9 +106,8 @@ public class itirann extends HttpServlet {
 					    out.println("</td>");
 
 					    out.println("<td>");
-					    	out.println(tell );
+					    	out.println(tell);
 					    out.println("</td>");
-					    out.println("<br>");
 				    out.println("</tr>");
 				    num++;
 				    }

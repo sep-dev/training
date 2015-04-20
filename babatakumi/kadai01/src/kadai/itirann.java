@@ -53,7 +53,7 @@ public class itirann extends HttpServlet {
 			  conn = DriverManager.getConnection(url, user, pass);
 
 			  //表示
-		      response.setContentType("text/html; charset=Shift_JIS");
+		      response.setContentType("text/html; charset=UTF-8");
 		      PrintWriter out = response.getWriter();
 
 		      //SQL ステートメント・オブジェクトの作成
@@ -67,12 +67,14 @@ public class itirann extends HttpServlet {
 			 out.println("<html>");
 			 out.println("<head>");
 			 out.println("<title>" +  "一覧画面</title>");
+			 out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"${pageContext.request.contextPath}/../servlet_css.css\">");
 			 out.println("</head>");
 			 out.println("<body>");
 
-			 out.println("<h>"+ "会員一覧</h><br>");
+			 out.println("<h1>"+ "会員一覧</h1><br>");
 
 			 out.println("<form action=\""+ "/kadai01/kousinn\" method=\"post\">");
+
 			 int num = 1;
 			 while(rs.next()){
 				    int id = rs.getInt("id");
@@ -80,13 +82,17 @@ public class itirann extends HttpServlet {
 				    String address = rs.getString("address");
 				    String tell = rs.getString("tel");
 
-				    out.println("<INPUT TYPE=\"radio\" name=\"list\" value="+id+">");
-				    out.println("ID：" + id + "名前：" + name + "住所：" + address + "電話：" + tell );
+				    out.println("<p>");
+				    if(num == 1){
+				    	out.println("<INPUT TYPE=\"radio\" name=\"list\" value="+id+" checked>");
+				    }else{
+				    	out.println("<INPUT TYPE=\"radio\" name=\"list\" value="+id+">");
+				    }
+				    out.println("名前：" + name + "住所：" + address + "電話：" + tell );
 				    out.println("<br>");
+				    out.println("</p>");
 				    num++;
 				  }
-			//out.println("</form>");
-
 
 			 out.println("<input type=\"submit\" value=\"更新or削除\">");
 			 out.println("</form>");
@@ -106,7 +112,7 @@ public class itirann extends HttpServlet {
 
 		    } catch (SQLException e) {
 		    	//表示
-		    	 response.setContentType("text/html; charset=Shift_JIS");
+		    	 response.setContentType("text/html; charset=UTF-8");
 		    	    PrintWriter out = response.getWriter();
 
 		    	    out.println("例外発生：" + e );

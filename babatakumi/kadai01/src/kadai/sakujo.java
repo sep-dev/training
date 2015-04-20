@@ -14,15 +14,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class kousinn
+ * Servlet implementation class sakujo
  */
-public class kousinn extends HttpServlet {
+public class sakujo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public kousinn() {
+    public sakujo() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,7 +43,7 @@ public class kousinn extends HttpServlet {
 		  response.setContentType("text/html; charset=UTF-8");
 		  request.setCharacterEncoding("UTF-8");
 
-	      String id = request.getParameter("list");
+	      String id = request.getParameter("id");
 
 	      Connection conn = null;
 	      String url = "jdbc:mysql://localhost/sample";
@@ -67,20 +67,13 @@ public class kousinn extends HttpServlet {
 
 				out.println("<html>");
 				out.println("<head>");
-				out.println("<title>" +  "会員情報の更新/削除</title>");
 
-				out.print("<SCRIPT language=\"JavaScript\">");
-				out.println("function numOnly() {");
-				out.println("var str =\"document.iform.AgeText.value;\"");
-				out.println("if(str.match( /[^0-9]+/ ) return false;");
-				out.println("return true;");
-				out.println("}");
-				out.println("</SCRIPT>");
+				out.println("<title>" +  "削除</title>");
 
 				out.println("</head>");
 				out.println("<body>");
 
-				out.println("<h1>"+ "更新</h1><br>");
+				out.println("<h1>"+ "削除しますか？</h1><br>");
 
 			int id2 = rs.getInt("id");
 			String name = rs.getString("name");
@@ -89,34 +82,12 @@ public class kousinn extends HttpServlet {
 
 			    out.println("名前：" + name + "住所：" + address + "電話：" + tell );
 
-			    out.println("<form action=\""+"/kadai01/change\" method=\"post\">");
-			    out.println("<p>");
-			    out.println("<label for=name> 氏名:</label>");
-			    out.println("<input type=\"text\" name=\"name\">");
-			    out.println("</p>");
-			    out.println("<p>");
-			    out.println("<label for=name> 住所:</label>");
-			    out.println("<input type=\"text\" name=\"address\">");
-			    out.println("</p>");
-			    out.println("<p>");
-			    out.println("<label for=name> 電話:</label>");
-			    out.println("<input type=\"text\" name=\"tell\" maxlength=\"10\" onkeyDown=\"return numOnly()\">");
-			    out.println("</p>");
-
-	      System.out.println(name);
+		  System.out.println(id2);
+		  System.out.println(name);
 	      System.out.println(address);
 	      System.out.println(tell);
 
-	      		out.println("<input type=\"hidden\" name=\"id\" value= " +id2+">");
-				out.println("<input type=\"submit\" value=\"更新\">");
-				out.println("<input type=\"reset\" value=\"リセット\">");
-				out.println("</form>");
-
-				out.println("<form action=\""+ "/kadai01/itirann\" method=\"post\">");
-				out.println("<input type=\"submit\" value=\"一覧表示\">");
-				out.println("</form>");
-
-				out.println("<form action=\""+ "/kadai01/sakujo \" method=\"post\">");
+				out.println("<form action=\""+ "/kadai01/delete \" method=\"post\">");
 				out.println("<input type=\"hidden\" name=\"id\" value= " +id2+">");
 				out.println("<input type=\"submit\" value=\"削除\">");
 				out.println("</form>");
@@ -138,4 +109,4 @@ public class kousinn extends HttpServlet {
 		    	    System.out.println("例外発生：" + e);
 		    }
 		}
-}
+	}

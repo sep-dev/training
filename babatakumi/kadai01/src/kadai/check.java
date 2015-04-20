@@ -84,12 +84,11 @@ public class check extends HttpServlet {
 	    				stmt.close();
 	    				conn.close();
 
-	    				RequestDispatcher dispatcher = request.getRequestDispatcher("t_seikou.jsp");
+	    				RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/t_seikou.jsp");
 	    				dispatcher.forward(request, response);
 
 	    		    } catch (SQLException e) {
 	    		    	//表示
-	    		    	 response.setContentType("text/html; charset=Shift_JIS");
 	    		    	    PrintWriter out = response.getWriter();
 
 	    		    	    out.println("例外発生：" + e );
@@ -97,15 +96,15 @@ public class check extends HttpServlet {
 	    		    }
 //以下失敗
 			  }else{
-					RequestDispatcher dispatcher = request.getRequestDispatcher("t_sippai_tell.jsp");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/t_sippai_tell.jsp");
 					dispatcher.forward(request, response);
 			  }
 	      }else{
-				RequestDispatcher dispatcher = request.getRequestDispatcher("t_sippai.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/t_sippai.jsp");
 				dispatcher.forward(request, response);
 	      }
       }else{
-			RequestDispatcher dispatcher = request.getRequestDispatcher("t_sippai.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/t_sippai.jsp");
 			dispatcher.forward(request, response);
       }
 	}

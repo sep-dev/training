@@ -16,9 +16,15 @@
 <!--
 // 数値のみを入力可能にする
 function numOnly() {
-  m = String.fromCharCode(event.keyCode);
-  if("0123456789\b\r".indexOf(m, 0) < 0) return false;
-  return true;
+	m = String.fromCharCode(event.keyCode);
+	if("0123456789\b\r".indexOf(m, 0) < 0) return false;
+	return true;
+}
+//スペースは不可
+function spaceNo() {
+	m = String.fromCharCode(event.keyCode);
+	if(m==" "||m=="　") return false;
+	return true;
 }
 //-->
 </SCRIPT>
@@ -32,10 +38,10 @@ function numOnly() {
 
 		<tr>
 		<td>氏名：</td>
-		<td><input type="text" name="name" value="" placeholder="名前を入力してください" size="50" maxlength="50" required></td>
+		<td><input type="text" name="name" value="" placeholder="名前を入力してください" size="50" maxlength="50" onkeyDown="return spaceNo()" required></td>
 		</tr><br>
 		<tr>
-		<td>住所：</td><td><input type="text" name="address" value="" placeholder="住所を入力してください" size="50" maxlength="50" required></td>
+		<td>住所：</td><td><input type="text" name="address" value="" placeholder="住所を入力してください" size="50" maxlength="50" onkeyDown="return spaceNo()" required></td>
 		</tr><br>
 		<tr>
 		<td>電話番号：</td><td><input type="tel" name="tel" value="" placeholder="電話番号を入力してください" maxlength="11" size="50" onkeyDown="return numOnly()" required></td>

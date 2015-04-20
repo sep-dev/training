@@ -20,6 +20,12 @@ function numOnly() {
   if("0123456789\b\r".indexOf(m, 0) < 0) return false;
   return true;
 }
+//スペースは不可
+function spaceNo() {
+	m = String.fromCharCode(event.keyCode);
+	if(m==" "||m=="　") return false;
+	return true;
+}
 //-->
 </SCRIPT>
 </head>
@@ -59,8 +65,8 @@ function numOnly() {
 
 	<%-- 更新入力フォーム --%>
 	<form action=".././DataUpdate" method="post">
-		氏名：<input type="text" name="name" value="<%= rs.getString("name")%>" placeholder="名前を入力してください" size="50" maxlength="50" required><br>
-		住所：<input type="text" name="address" value="<%= rs.getString("address")%>" placeholder="住所を入力してください" size="50" maxlength="50" required><br>
+		氏名：<input type="text" name="name" value="<%= rs.getString("name")%>" placeholder="名前を入力してください" size="50" maxlength="50" onkeyDown="return spaceNo()" required><br>
+		住所：<input type="text" name="address" value="<%= rs.getString("address")%>" placeholder="住所を入力してください" size="50" maxlength="50" onkeyDown="return spaceNo()" required><br>
 		電話番号：<input type="tel" name="tel" value="<%= rs.getString("tel")%>" placeholder="電話番号を入力してください" size="50" maxlength="11" onkeyDown="return numOnly()" required><br>
 		<button type="submit" name="upd" value=<%=id%>>更新</button>
 		<button type="reset" name="reset" value="リセット">リセット</button>

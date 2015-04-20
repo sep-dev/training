@@ -99,4 +99,44 @@
     <servlet-name>Update_n</servlet-name>
     <url-pattern>/Update_n</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Not_apdate</display-name>
+    <servlet-name>Not_apdate</servlet-name>
+    <servlet-class>servlet.Not_apdate</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Not_apdate</servlet-name>
+    <url-pattern>/Not_apdate</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Delete_com</display-name>
+    <servlet-name>Delete_com</servlet-name>
+    <servlet-class>servlet.Delete_com</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Delete_com</servlet-name>
+    <url-pattern>/Delete_com</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Update_success</display-name>
+    <servlet-name>Update_success</servlet-name>
+    <servlet-class>servlet.Update_success</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Update_success</servlet-name>
+    <url-pattern>/Update_success</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Not_update</display-name>
+    <servlet-name>Not_update</servlet-name>
+    <servlet-class>servlet.Not_update</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Not_update</servlet-name>
+    <url-pattern>/Not_update</url-pattern>
+  </servlet-mapping>
 </web-app>

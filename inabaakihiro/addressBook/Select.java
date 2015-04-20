@@ -39,7 +39,7 @@ public class Select extends HttpServlet {
 
 		// 会員が選択されていなければ
 		else {
-			// 「一覧表示」のJSPファイルを設定
+			// 「一覧表示」にリダイレクト
 			response.sendRedirect("/addressBook/list.jsp");		// 選択し直し
 		}
 	}

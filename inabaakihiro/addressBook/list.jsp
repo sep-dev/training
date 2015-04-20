@@ -11,7 +11,7 @@
 	<body>
 		<p>会員一覧</p>
 
-		<form action="/addressBook/Update" method="get">
+		<form action="/addressBook/Select" method="get">
 			<%
 			DatabaseLogic dbLogic = new DatabaseLogic();
 			dbLogic.connect();
@@ -24,7 +24,7 @@
 				String address = members[i][2];
 				String tel = members[i][3];
 			%>
-				<input type="radio" name="member" value="<%= id %>">
+				<input type="radio" name="id" value="<%= id %>">
 				氏名:<%= name %> 住所:<%= address %> 電話番号:<%= tel %><br>
 			<%
 			}

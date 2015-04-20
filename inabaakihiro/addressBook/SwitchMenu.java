@@ -2,7 +2,6 @@ package servlet;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,23 +15,21 @@ public class SwitchMenu extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		// フォワード先
-		String forwardPath = null;
+		String redirectPath = null;
 
 		String action = request.getParameter("action");
 
 		if(action == null) {
-			// フォワード先に, 「新規登録」のJSPファイルを設定
-			forwardPath = "/index.jsp";
+			// リダイレクト先に, 「新規登録」のJSPファイルを設定
+			redirectPath = "/addressBook/";
 		}
 
 		else if(action.equals("list")) {
-			// フォワード先に, 「一覧表示」のJSPファイルを設定
-			forwardPath = "/WEB-INF/jsp/list.jsp";
+			// リダイレクト先に, 「一覧表示」のJSPファイルを設定
+			redirectPath = "/addressBook/list.jsp";
 		}
 
-		// 設定されたフォワード先にフォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
-		dispatcher.forward(request, response);
-
+		// 設定されたリダイレクト先にリダイレクト
+		response.sendRedirect(redirectPath);
 	}
 }

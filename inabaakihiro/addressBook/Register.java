@@ -44,7 +44,9 @@ public class Register extends HttpServlet {
 
 			// 新規会員をデータベースに登録
 			dbLogic.executeSQL("INSERT INTO ADDRESS_TBL(ID,NAME,ADDRESS,TEL) VALUES("
-					+ id + ",\"" + name + "\",\"" + address + "\",\"" + tel + "\")");
+					+ id + ",\'" + name + "\',\'" + address + "\',\'" + tel + "\')");
+
+			dbLogic.disconnect();
 
 			// フォワード先に, 「登録成功」のJSPファイルを設定
 			forwardPath = "/WEB-INF/jsp/registerSuccess.jsp";

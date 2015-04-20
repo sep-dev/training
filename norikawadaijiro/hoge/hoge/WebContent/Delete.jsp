@@ -16,6 +16,7 @@ public void jspInit(){
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>削除</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/hoge/css/style.css">
 </head>
 <body>
 	<h1>本当に削除してもいいですか？</h1>

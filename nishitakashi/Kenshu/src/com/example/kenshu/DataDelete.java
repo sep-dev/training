@@ -65,11 +65,17 @@ public class DataDelete extends HttpServlet {
 
 	      stmt.close();
 	    // 読み込み成功　JSPに遷移
-	      RequestDispatcher disp = request.getRequestDispatcher("SuccessDel.jsp");
+	      RequestDispatcher disp = request.getRequestDispatcher("jsp/SuccessDel.jsp");
 	      disp.forward(request, response);
 		} catch(Exception e) {
 			// 読み込み失敗　JSPに遷移
-		      RequestDispatcher disp = request.getRequestDispatcher("FalseDel.jsp");
+			  try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				// TODO 自動生成された catch ブロック
+				e1.printStackTrace();
+			}
+		      RequestDispatcher disp = request.getRequestDispatcher("jsp/FalseDel.jsp");
 		      disp.forward(request, response);
 		      e.printStackTrace();
 

@@ -24,13 +24,15 @@ import javax.servlet.http.HttpServletResponse;
 
 public class DataUpdate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private String [] col;
+	private DatabaseManager dm;
     /**
      * @see HttpServlet#HttpServlet()
      */
     public DataUpdate() {
         super();
-        // TODO Auto-generated constructor stub
+        col=new String[DatabaseHelper.COL_NUM];
+        dm=new DatabaseManager();
     }
 
 	/**
@@ -44,24 +46,21 @@ public class DataUpdate extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		//DatabaseManagementへ移動予定
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		request.setCharacterEncoding("utf-8");
+
 		String url = "jdbc:mysql://localhost:3306/db_customer";
 	    String user = "root";
 	    String password = "takashi3541";
-	    String name=request.getParameter("name");
-	    String adress=request.getParameter("adr");
-	    String tel=request.getParameter("tel");
-	    //SQLインジェクション対策として特殊文字をエスケープ
-	    name=SQLEscape.sqlEscape(name);
-	    adress=SQLEscape.sqlEscape(adress);
-	    tel=SQLEscape.sqlEscape(tel);
-	    String sql1="update  tbAddress set name= \""+name+"\" where id="+Integer.parseInt(request.getParameter("upd"));
-	    String sql2="update  tbAddress set address=\""+ adress+"\" where id="+Integer.parseInt(request.getParameter("upd"));
-	    String sql3="update  tbAddress set tel=\""+ tel+"\" where id="+Integer.parseInt(request.getParameter("upd"));
-	    response.setContentType("text/html; charset=utf-8");
+
+	    String sql1="update  tbAddress set name= \""+col[DatabaseHelper.NAME]+"\" where id="+Integer.parseInt(request.getParameter("upd"));
+	    String sql2="update  tbAddress set address=\""+ col[DatabaseHelper.ADDRESS]+"\" where id="+Integer.parseInt(request.getParameter("upd"));
+	    String sql3="update  tbAddress set tel=\""+col[DatabaseHelper.TEL]+"\" where id="+Integer.parseInt(request.getParameter("upd"));
+
 
 	    PrintWriter out = response.getWriter();
 		try {
@@ -75,11 +74,11 @@ public class DataUpdate extends HttpServlet {
 
 	      stmt.close();
 	    // 読み込み成功　JSPに遷移
-	      RequestDispatcher disp = request.getRequestDispatcher("SuccessUpdate.jsp");
+	      RequestDispatcher disp = request.getRequestDispatcher("jsp/SuccessUpdate.jsp");
 	      disp.forward(request, response);
 		} catch(Exception e) {
 			// 読み込み失敗　JSPに遷移
-		      RequestDispatcher disp = request.getRequestDispatcher("FalseUpdate.jsp");
+		      RequestDispatcher disp = request.getRequestDispatcher("jsp/FalseUpdate.jsp");
 		      disp.forward(request, response);
 		      e.printStackTrace();
 		}finally{

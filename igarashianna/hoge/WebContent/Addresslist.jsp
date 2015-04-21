@@ -1,0 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=Windows-31J"
+    pageEncoding="Windows-31J"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-31J">
+<title>一覧画面</title>
+</head>
+<body>
+<h1>会員一覧</h1>
+<h1>↓一つだけ選択可能</h1>
+<form method="post" action="Addresslist.jsp" name="from1" onsubmit="return check()">
+<input type="button" value="更新or削除"onclick="location.href='Addressup.jsp'"><br><br>
+<input type="button" value="新規登録"onclick="location.href='Addressbook.jsp'">
+
+</form>
+
+</body>
+</html>

@@ -15,10 +15,11 @@ import model.DatabaseLogic;
 public class Register extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+
+	// 「新規登録画面(トップページ)」で登録ボタンが押された場合
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// フォワード先
-		String forwardPath = null;
+		String forwardPath = null;		// フォワード先
 
 		// フォームに入力された情報を取得
 		request.setCharacterEncoding("UTF-8");
@@ -29,16 +30,18 @@ public class Register extends HttpServlet {
 		// 入力エラーのチェック
 		boolean error = false;
 		if(name == "" || address == "" || tel == "") {
-			// 何も入力されてない入力欄があればエラー
-			error = true;
+
+			error = true;	// 何も入力されてない入力欄があればエラー
 		}
 
-		// 入力エラーがなければ
+		// ↓ 入力エラーがなければ ↓
 		if(error == false) {
+
+			// データベース接続
 			DatabaseLogic dbLogic = new DatabaseLogic();
 			dbLogic.connect();
 
-			// 既存IDの最大値に, +1した値を新規会員のIDにする
+			// 既存IDの最大値に+１した値を、新規会員のIDにする
 			String[][] maxId = dbLogic.executeSQL("SELECT MAX(ID) FROM ADDRESS_TBL");
 			int id = Integer.parseInt(maxId[0][0]) + 1;
 
@@ -46,15 +49,17 @@ public class Register extends HttpServlet {
 			dbLogic.executeSQL("INSERT INTO ADDRESS_TBL(ID,NAME,ADDRESS,TEL) VALUES("
 					+ id + ",\'" + name + "\',\'" + address + "\',\'" + tel + "\')");
 
+			// データベース切断
 			dbLogic.disconnect();
 
-			// フォワード先に, 「登録成功」のJSPファイルを設定
+			// フォワード先に、「登録成功」のJSPファイルを設定
 			forwardPath = "/WEB-INF/jsp/registerSuccess.jsp";
 		}
 
-		// 入力エラーがあれば
+		// ↓ 入力エラーがあれば ↓
 		else {
-			// フォワード先に, 「登録失敗」のJSPファイルを設定
+
+			// フォワード先に、「登録失敗」のJSPファイルを設定
 			forwardPath = "/WEB-INF/jsp/registerFailure.jsp";
 		}
 
@@ -62,4 +67,5 @@ public class Register extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
 		dispatcher.forward(request, response);
 	}
+
 }

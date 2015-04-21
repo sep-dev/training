@@ -4,14 +4,16 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<link rel="stylesheet" href="common.css" type="text/css">
 		<title>住所録システム</title>
 	</head>
 
 	<body>
 		<h2>更新する情報が入力されていません</h2>
 
-		<a href="/addressBook/SwitchMenu?action=list">
+		<p><a href="/addressBook/SwitchMenu?action=list">
 			<input type="button" value="一覧表示">
-		</a>
+		</a></p>
+
 	</body>
 </html>

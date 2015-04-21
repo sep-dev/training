@@ -5,6 +5,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<link rel="stylesheet" href="common.css" type="text/css">
 		<title>住所録システム</title>
 	</head>
 
@@ -30,7 +31,7 @@
 			}
 			dbLogic.disconnect();
 			%>
-			<input type="submit" value="更新or削除">
+			<p><input type="submit" value="更新or削除"></p>
 		</form>
 
 		<p><a href="/addressBook/SwitchMenu">

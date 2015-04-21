@@ -5,6 +5,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<link rel="stylesheet" href="common.css" type="text/css">
 		<title>住所録システム</title>
 	</head>
 
@@ -31,20 +32,20 @@
 		%>
 
 		<form action="/addressBook/Update" method="post">
-			  氏名  <input type="text" name="name">
-			  住所  <input type="text" name="address">
-			電話番号<input type="text" name="tel">
+			<p>・氏名<br><input type="text" name="name"><br></p>
+			<p>・住所<br><input type="text" name="address"></p>
+			<p>・電話番号<br><input type="text" name="tel"><br></p>
 			<input type="submit" value="更新">
 			<input type="reset" value="リセット">
 		</form>
 
-		<a href="/addressBook/SwitchMenu?action=list">
+		<p><a href="/addressBook/SwitchMenu?action=list">
 			<input type="button" value="一覧表示">
-		</a>
+		</a></p>
 
-		<a href="/addressBook/Delete">
+		<p><a href="/addressBook/Delete">
 			<input type="button" value="削除">
-		</a>
+		</a></p>
 
 	</body>
 </html>

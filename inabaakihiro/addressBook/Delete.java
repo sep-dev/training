@@ -17,15 +17,19 @@ public class Delete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 
+	// 「更新フォーム」で削除ボタンが押された場合
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// 「削除確認画面」にフォワード
+		// 「削除確認画面」へ進む
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/deleteConfirm.jsp");
 		dispatcher.forward(request, response);
 	}
 
+
+	// 「削除確認画面」で削除ボタンが押された場合
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		// データベース接続
 		DatabaseLogic dbLogic = new DatabaseLogic();
 		dbLogic.connect();
 
@@ -33,12 +37,15 @@ public class Delete extends HttpServlet {
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 
-		// 選択されていた会員の、更新対象のデータを更新
+		// 会員情報を、データベースから削除
 		dbLogic.executeSQL("DELETE FROM ADDRESS_TBL WHERE ID = " + id);
 
+		// データベース切断
 		dbLogic.disconnect();
 
+		// 「削除完了画面」へ進む
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/deleteComplete.jsp");
 		dispatcher.forward(request, response);
 	}
+
 }

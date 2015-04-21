@@ -32,7 +32,7 @@ public class SwitchMenu extends HttpServlet {
 		// 「新規登録」ボタンが押されたとき
 		else if(action.equals("list")) {
 
-			// リダイレクト先に, 「一覧表示」のJSPファイルを設定
+			// リダイレクト先に、「一覧表示」のJSPファイルを設定
 			redirectPath = "/addressBook/list.jsp";
 		}
 

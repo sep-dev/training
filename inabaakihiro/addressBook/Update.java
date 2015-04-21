@@ -16,10 +16,11 @@ import model.DatabaseLogic;
 public class Update extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+
+	// 「更新画面」で更新ボタンが押された場合
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// フォワード先
-		String forwardPath = null;
+		String forwardPath = null;		// フォワード先
 
 		// フォームに入力された情報を取得
 		request.setCharacterEncoding("UTF-8");
@@ -30,19 +31,18 @@ public class Update extends HttpServlet {
 		// 入力エラーのチェック
 		boolean error = false;
 		if(name == "" && address == "" && tel == "") {
-			// 更新情報が, 1つも入力されていなければエラー
-			error = true;
+
+			error = true;	// 更新情報が, 1つも入力されていなければエラー
 		}
 
-		// 入力エラーがなければ
+		// ↓ 入力エラーがなければ ↓
 		if(error == false) {
-			DatabaseLogic dbLogic = new DatabaseLogic();
-			dbLogic.connect();
 
+			// 選択中の会員のIDを取得
 			HttpSession session = request.getSession();
 			String id = (String) session.getAttribute("id");
 
-			// 入力があった項目を、更新対象に追加していく処理
+			// ↓ 入力があった項目を、更新対象に追加していく処理 ↓
 			String updateColumn = "";
 
 			if(name != "") {
@@ -56,22 +56,28 @@ public class Update extends HttpServlet {
 			}
 
 			if(tel != "") {
-				if(updateColumn != "") { updateColumn += ", "; }
+				if(updateColumn != "") { updateColumn += ", "; }	// ↑に同じく
 
 				updateColumn += "TEL = \'" + tel + "\'";
 			}
 
+			// データベース接続
+			DatabaseLogic dbLogic = new DatabaseLogic();
+			dbLogic.connect();
+
 			// 選択されていた会員の、更新対象のデータを更新
 			dbLogic.executeSQL("UPDATE ADDRESS_TBL SET " + updateColumn + " WHERE ID = " + id);
 
+			// データベース切断
 			dbLogic.disconnect();
 
 			// フォワード先に, 「更新成功」のJSPファイルを設定
 			forwardPath = "/WEB-INF/jsp/updateSuccess.jsp";
 		}
 
-		// 入力エラーがあれば
+		// ↓ 入力エラーがあれば ↓
 		else {
+
 			// フォワード先に, 「更新失敗」のJSPファイルを設定
 			forwardPath = "/WEB-INF/jsp/updateFailure.jsp";
 		}
@@ -80,4 +86,5 @@ public class Update extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
 		dispatcher.forward(request, response);
 	}
+
 }

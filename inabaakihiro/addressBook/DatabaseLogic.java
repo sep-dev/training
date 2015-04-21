@@ -101,7 +101,7 @@ public class DatabaseLogic {
 			PreparedStatement pStmt = conn.prepareStatement("SELECT ID FROM " + tableName);
 			ResultSet rs = pStmt.executeQuery();
 
-			// 同クラス内の「レコード件数取得メソッド」の戻り値を、そのまま呼び出し元に返す
+			// 同クラス内の「レコード件数取得メソッド」に結果表を渡し、その戻り値(結果表のレコード件数)をそのまま呼び出し元に返す
 			return(this.getRecords(rs));
 
 		} catch(SQLException e) {

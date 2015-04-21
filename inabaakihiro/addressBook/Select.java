@@ -14,33 +14,39 @@ import javax.servlet.http.HttpSession;
 public class Select extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+
+	// 「一覧表示画面」で更新or削除ボタンが押された場合
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// フォームに入力された情報を取得
+		// 選択された会員のIDを取得
 		request.setCharacterEncoding("UTF-8");
-		String id = request.getParameter("id");		// 会員のID
+		String id = request.getParameter("id");
 
-		// 入力エラーのチェック
+		// エラーチェック
 		boolean error = false;
 		if(id == null) {
-			// 会員が選択されていなければエラー
-			error = true;
+
+			error = true;	// 会員が選択されていなければエラー
 		}
 
-		// 会員が選択されていれば
+		// ↓ エラーがなければ ↓
 		if(error == false) {
+
+			// 選択した会員のIDをセッションスコープに保存
 			HttpSession session = request.getSession();
-			session.setAttribute("id", id);		// 選択した会員のIDをセッションスコープに保存
+			session.setAttribute("id", id);
 
 			// 「更新フォーム」にフォワード
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/updateForm.jsp");
 			dispatcher.forward(request, response);
 		}
 
-		// 会員が選択されていなければ
+		// ↓ エラーがあれば ↓
 		else {
+
 			// 「一覧表示」にリダイレクト
 			response.sendRedirect("/addressBook/list.jsp");		// 選択し直し
 		}
 	}
+
 }

@@ -20,7 +20,7 @@ public class Address extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		        //リクエストパラメーラを取得
-				request.setCharacterEncoding("Windows-31J");
+				request.setCharacterEncoding("UTF-8");
 				String name = request.getParameter("name");
 				String address = request.getParameter("address");
 				String tel = request.getParameter("tel");
@@ -48,6 +48,8 @@ public class Address extends HttpServlet {
 					if(flag == 1){
 						msg = errorMsg;
 					}
+				if(flag == 0){
+
 
 				Connection conn = null;
 
@@ -69,7 +71,28 @@ public class Address extends HttpServlet {
 						maxID = rs.getInt("cnt");
 					}
 
+
+					maxID = maxID+1;
+
+
+					String sql = "insert into tbAddress(id,name,address,tel) values(?,?,?,?)";
+					PreparedStatement pStmt1 = conn.prepareStatement(sql);
+
+					pStmt1.setInt(1,maxID);
+					pStmt1.setString(2,name);
+					pStmt1.setString(3,address);
+					pStmt1.setString(4,tel);
+
+					int rs1 =pStmt1.executeUpdate();
+
+
+
+
 					System.out.println("maxID="+maxID);
+					System.out.println("name"+name);
+					System.out.println("address"+address);
+					System.out.println("tel"+tel);
+
 
 
 				} catch (ClassNotFoundException e) {
@@ -90,20 +113,22 @@ public class Address extends HttpServlet {
 					}
 
 				}
+				}
+
 
 				//HTMLを入力
-				response.setContentType("text/html; charset=Windows-31J");
+				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out =response.getWriter();
 				out.println("<!DOCTYPE html>");
 				out.println("<html>");
 				out.println("<head>");
-				out.println("<meta charset=\"Windows-31J\">");
+				out.println("<meta charset=\"UTF-8\">");
 				out.println("<title>登録画面</title>");
 				out.println("</head>");
 				out.println("<body>");
 				out.println("<p>" + msg +"</p>");
 				if(flag == 0)
-					out.println("<input type=button value=一覧表示 onclick=location.href='Addresslist.jsp'>");
+					out.println("<input type=button value=一覧表示 onclick=location.href='http://localhost:8080/hoge/Addresslist'>");
 				if(flag == 1)
 					out.println("<input type=button value=新規登録 onclick=location.href='Addressbook.jsp'>");
 				out.println("</body>");

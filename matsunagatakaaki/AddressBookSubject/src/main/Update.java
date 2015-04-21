@@ -48,8 +48,8 @@ public class Update extends HttpServlet {
 
         if(!HtmlHelper.searchParameter("update", request)){
             //パラメータ名に "update" が存在しなければ、アップデートする内容を入力するページへ遷移させる
-            request.setAttribute("id", request.getParameter(DatabaseHelper.Column.ID));
-            request.setAttribute("addressData",getDispAddressData(Integer.parseInt(request.getParameter(DatabaseHelper.Column.ID))));
+            request.setAttribute("id", request.getParameter(DatabaseHelper.Columns.ID));
+            request.setAttribute("addressData",getDispAddressData(Integer.parseInt(request.getParameter(DatabaseHelper.Columns.ID))));
             request.getRequestDispatcher("./jsp/" + Urls.UPDATE_INPUT).forward(request, response);
         }else{
             if(updateProcess(request)){
@@ -69,10 +69,10 @@ public class Update extends HttpServlet {
 
     //Update処理
     private boolean updateProcess(HttpServletRequest request){
-        Integer id = new Integer(request.getParameter(DatabaseHelper.Column.ID));
-        String name = HtmlHelper.encording(request.getParameter(DatabaseHelper.Column.NAME));
-        String address = HtmlHelper.encording(request.getParameter(DatabaseHelper.Column.ADDRESS));
-        String tel = HtmlHelper.encording(request.getParameter(DatabaseHelper.Column.TEL));
+        Integer id = new Integer(request.getParameter(DatabaseHelper.Columns.ID));
+        String name = HtmlHelper.encording(request.getParameter(DatabaseHelper.Columns.NAME));
+        String address = HtmlHelper.encording(request.getParameter(DatabaseHelper.Columns.ADDRESS));
+        String tel = HtmlHelper.encording(request.getParameter(DatabaseHelper.Columns.TEL));
 
         if(name.equals("") && address.equals("") && tel.equals("")) return false;
         if(!tel.equals("") && (tel.length() <= 9 || tel.length() >= 12)) return false;
@@ -92,9 +92,9 @@ public class Update extends HttpServlet {
         if(db.excuteSQL(DatabaseHelper.Query.SELECT, id, null, null, null)){
             ArrayList<HashMap<String,String>> map = db.getResultHashMap();
             for(HashMap<String,String> row : map){
-                resultStr.append("氏名: ").append(row.get(DatabaseHelper.Column.NAME));
-                resultStr.append("   住所 : ").append(row.get(DatabaseHelper.Column.ADDRESS));
-                resultStr.append("   電話番号 : ").append(row.get(DatabaseHelper.Column.TEL));
+                resultStr.append("氏名: ").append(row.get(DatabaseHelper.Columns.NAME));
+                resultStr.append("   住所 : ").append(row.get(DatabaseHelper.Columns.ADDRESS));
+                resultStr.append("   電話番号 : ").append(row.get(DatabaseHelper.Columns.TEL));
             }
         }
         return resultStr.toString();

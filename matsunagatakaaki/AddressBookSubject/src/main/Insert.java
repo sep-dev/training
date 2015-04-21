@@ -47,9 +47,9 @@ public class Insert extends HttpServlet {
             request.setAttribute(ResultIds.URL, Urls.TOP);
             request.setAttribute(ResultIds.BUTTON_TEXT, "新規登録");
         }else{
-            String name = HtmlHelper.encording(request.getParameter(DatabaseHelper.Column.NAME));
-            String address = HtmlHelper.encording(request.getParameter(DatabaseHelper.Column.ADDRESS));
-            String tel = HtmlHelper.encording(request.getParameter(DatabaseHelper.Column.TEL));
+            String name = HtmlHelper.encording(request.getParameter(DatabaseHelper.Columns.NAME));
+            String address = HtmlHelper.encording(request.getParameter(DatabaseHelper.Columns.ADDRESS));
+            String tel = HtmlHelper.encording(request.getParameter(DatabaseHelper.Columns.TEL));
 
             db = new DatabaseHelper();
             boolean insertResult = db.excuteSQL(DatabaseHelper.Query.INSERT, null, name, address, tel);
@@ -68,11 +68,11 @@ public class Insert extends HttpServlet {
      * ・電話番号が入力された場合、番号は10桁 or 11桁であるか
      */
     private boolean checkValues(HttpServletRequest request){
-        if(request.getParameter(DatabaseHelper.Column.NAME).equals("")) return false;
-        if(request.getParameter(DatabaseHelper.Column.ADDRESS).equals("")) return false;
-        if(request.getParameter(DatabaseHelper.Column.TEL).equals("") ||
-                (request.getParameter(DatabaseHelper.Column.TEL).length() < 10 &&
-                 request.getParameter(DatabaseHelper.Column.TEL).length() > 11)) return false;
+        if(request.getParameter(DatabaseHelper.Columns.NAME).equals("")) return false;
+        if(request.getParameter(DatabaseHelper.Columns.ADDRESS).equals("")) return false;
+        if(request.getParameter(DatabaseHelper.Columns.TEL).equals("") ||
+                (request.getParameter(DatabaseHelper.Columns.TEL).length() < 10 &&
+                 request.getParameter(DatabaseHelper.Columns.TEL).length() > 11)) return false;
         return true;
     }
 

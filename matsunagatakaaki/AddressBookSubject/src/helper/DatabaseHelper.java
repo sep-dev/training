@@ -20,7 +20,7 @@ public class DatabaseHelper {
     private final String PASSWORD = "T@kao521";
 
     //作業するテーブルの項目名を格納
-    public class Column{
+    public class Columns{
         public static final String ID = "id";
         public static final String NAME = "name";
         public static final String ADDRESS = "address";
@@ -103,10 +103,10 @@ public class DatabaseHelper {
             try{
                 while(resultSet.next()){
                     workerMap = new HashMap<String,String>();
-                    workerMap.put(Column.ID, resultSet.getString(Column.ID));
-                    workerMap.put(Column.NAME, resultSet.getString(Column.NAME));
-                    workerMap.put(Column.ADDRESS,resultSet.getString(Column.ADDRESS));
-                    workerMap.put(Column.TEL, resultSet.getString(Column.TEL));
+                    workerMap.put(Columns.ID, resultSet.getString(Columns.ID));
+                    workerMap.put(Columns.NAME, resultSet.getString(Columns.NAME));
+                    workerMap.put(Columns.ADDRESS,resultSet.getString(Columns.ADDRESS));
+                    workerMap.put(Columns.TEL, resultSet.getString(Columns.TEL));
                     list.add(workerMap);
                 }
             }catch(SQLException e){
@@ -152,9 +152,9 @@ public class DatabaseHelper {
     //Insert処理
     private boolean insert(String name,String address,String tel){
         query.append("INSERT INTO ").append(TABLE_NAME).append(" (");
-        query.append(Column.NAME).append(",");
-        query.append(Column.ADDRESS).append(",");
-        query.append(Column.TEL).append(") ");
+        query.append(Columns.NAME).append(",");
+        query.append(Columns.ADDRESS).append(",");
+        query.append(Columns.TEL).append(") ");
         query.append("VALUES (?,?,?)");
         try {
             preStmt = conn.prepareStatement(query.toString());
@@ -174,13 +174,13 @@ public class DatabaseHelper {
         query.append("UPDATE ").append(TABLE_NAME).append(" SET ");
 
         if(name != null && !name.equals(""))
-            query.append(Column.NAME).append("='" + name + "'").append(",");
+            query.append(Columns.NAME).append("='" + name + "'").append(",");
 
         if(address != null && !address.equals(""))
-            query.append(Column.ADDRESS).append("='" + address + "'").append(",");
+            query.append(Columns.ADDRESS).append("='" + address + "'").append(",");
 
         if(tel != null && !tel.equals(""))
-            query.append(Column.TEL).append("='" + tel + "'").append(",");
+            query.append(Columns.TEL).append("='" + tel + "'").append(",");
 
         query = query.deleteCharAt(query.lastIndexOf(",")); //末尾の "," を削除する(必ず付加されているため）
         query.append(" WHERE id=?");

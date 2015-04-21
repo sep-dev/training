@@ -41,7 +41,7 @@ public class Delete extends HttpServlet {
         response.setContentType("text/html; charset=" + HtmlHelper.ENCORDING);
 
         db = new DatabaseHelper();
-        int id = Integer.parseInt(request.getParameter(DatabaseHelper.Column.ID)); //id取得
+        int id = Integer.parseInt(request.getParameter(DatabaseHelper.Columns.ID)); //id取得
 
         boolean result = db.excuteSQL(DatabaseHelper.Query.DELETE, id, null, null, null); //削除処理
 

@@ -62,13 +62,13 @@ public class AddressList extends HttpServlet {
 
                 for(HashMap<String,String> row : list){
                     out.println("<tr>");
-                    out.println("<td><input type=\"radio\" name=\"id\" value=\"" + row.get(DatabaseHelper.Column.ID) + "\" required /></td>");
+                    out.println("<td><input type=\"radio\" name=\"id\" value=\"" + row.get(DatabaseHelper.Columns.ID) + "\" required /></td>");
                     out.println("<td class=\"column\">氏名  ： </td>");
-                    out.println("<td class=\"name_td\">" + row.get(DatabaseHelper.Column.NAME) + "</td>");
+                    out.println("<td class=\"name_td\">" + row.get(DatabaseHelper.Columns.NAME) + "</td>");
                     out.println("<td class=\"column\">住所  : </td>");
-                    out.println("<td class=\"address_td\">" + row.get(DatabaseHelper.Column.ADDRESS) + "</td>");
+                    out.println("<td class=\"address_td\">" + row.get(DatabaseHelper.Columns.ADDRESS) + "</td>");
                     out.println("<td class=\"column\">電話番号  : </td>");
-                    out.println("<td class=\"tel_td\">" + row.get(DatabaseHelper.Column.TEL) + "</td>");
+                    out.println("<td class=\"tel_td\">" + row.get(DatabaseHelper.Columns.TEL) + "</td>");
                     out.println("</tr>");
                 }
 

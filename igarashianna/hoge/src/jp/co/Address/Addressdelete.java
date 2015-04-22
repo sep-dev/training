@@ -17,35 +17,30 @@ import javax.servlet.http.HttpServletResponse;
 public class Addressdelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	protected void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 //リクエストパラメーラを取得
+		// リクエストパラメーラを取得
 		request.setCharacterEncoding("UTF-8");
 		String id = request.getParameter("question");
 
-		System.out.println("test"+id);
-
+		System.out.println("test" + id);
 
 		Connection conn = null;
 
-		try{
-			//JDBCドライバを読み込み
+		try {
+			// JDBCドライバを読み込み
 			Class.forName("com.mysql.jdbc.Driver");
 
-			//データベースへ接続
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Addresslist","root","03294163aA");
+			// データベースへ接続
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Addresslist", "root","03294163aA");
 
-
-			//ID数発行用のDELETE文を準備
+			// ID数発行用のDELETE文を準備
 			String sqldelete = "delete from tbAddress where id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sqldelete);
-			pStmt.setString(1,id);
+			pStmt.setString(1, id);
 
-			//DELETEを実行し、結果表(ResultSet)を取得
-			int rs1 =pStmt.executeUpdate();
-
-
-
+			// DELETEを実行し、結果表(ResultSet)を取得
+			int rs1 = pStmt.executeUpdate();
 
 		} catch (ClassNotFoundException e) {
 			System.out.println("ドライバーのロードに失敗しました" + e);
@@ -53,42 +48,40 @@ public class Addressdelete extends HttpServlet {
 		} catch (SQLException e) {
 			System.out.println("データベースに接続できません" + e);
 			e.printStackTrace();
-		}finally{
-			//データベース切断
-			if(conn != null){
-				try{
+		} finally {
+			// データベース切断
+			if (conn != null) {
+				try {
 					conn.close();
-				} catch(SQLException e) {
+				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 			}
 		}
 
-
-	//HTMLを入力
-	response.setContentType("text/html; charset=UTF-8");
-	PrintWriter out =response.getWriter();
-	out.println("<!DOCTYPE html>");
-	out.println("<html>");
-	out.println("<head>");
-	out.println("<link rel='stylesheet' href='style.css' type='text/css'/>");
-	out.println("<meta charset=\"UTF-8\">");
-	out.println("<title>削除完了画面</title>");
-	out.println("</head>");
-	out.println("<body>");
-	out.println("<center>");
-	out.println("<br><br><br><br><br><br><br><br><br><br><br><br><br>");
-	out.println("<p class=neko>");
-	out.println("削除しました！！");
-	out.println("</p>");
-	out.println("<br><br><br><br><br><br><br><br><br><br>");
-	out.println("<input type=button value=一覧表示 onclick=location.href='http://localhost:8080/hoge/Addresslist'>");
-	out.println("</center>");
-	out.println("</body>");
-	out.println("</html>");
-
-
+		// HTMLを入力
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+				out.println("<!DOCTYPE html>");
+				out.println("<html>");
+				out.println("<head>");
+				out.println("<link rel='stylesheet' href='style.css' type='text/css'/>");
+				out.println("<meta charset=\"UTF-8\">");
+				out.println("<title>削除完了画面</title>");
+				out.println("</head>");
+				out.println("<body>");
+				out.println("<center>");
+				out.println("<br>");
+				out.println("<p class=neko>");
+				out.println("削除しました！！");
+				out.println("<br />");
+				out.println("</p>");
+				out.println("<br>");
+				out.println("<input type=button value=一覧表示 onclick=location.href='http://localhost:8080/hoge/Addresslist'>");
+				out.println("<br />");
+				out.println("</center>");
+				out.println("</body>");
+				out.println("</html>");
 
 	}
-	}
-
+}

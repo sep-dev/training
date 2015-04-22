@@ -1,39 +1,30 @@
 @CHARSET "UTF-8";
 
-html{
-background: radial-gradient(#F2B9A1, #EA6264);
-
+html {
+	background: radial-gradient(#F2B9A1, #EA6264);
 }
 
-
-h1{
-	font-size:50pt;
-	color:White;
-	font-family:"ＭＳ 明朝";
+h1 {
+	font-size: 50pt;
+	color: White;
+	font-family: "ＭＳ 明朝";
 	text-decoration: underline;
-
-
 }
 
-input{
+input {
 	margin-left: 30px;
 	margin-bottom: 40px;
 	border-collapse: separate;
 	border-spacling: 5px;
 	windth: 50px;
 	padding: 20px;
-
-
-
 }
 
-p.hako{
-	border:inset 5px #F2B9A1;
-	font-size:30px;
-
+p.hako {
+	border: inset 5px #F2B9A1;
+	font-size: 30px;
 }
 
-p.neko{
-	font-size:50px;
-
+p.neko {
+	font-size: 50px;
 }

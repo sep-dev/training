@@ -17,116 +17,106 @@ import javax.servlet.http.HttpServletResponse;
 public class Addressupdate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		   //リクエストパラメーラを取得
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		// リクエストパラメーラを取得
 		request.setCharacterEncoding("UTF-8");
 		String name = request.getParameter("name");
 		String address = request.getParameter("address");
 		String tel = request.getParameter("tel");
 		String id = request.getParameter("question");
 
-		System.out.println("test"+id+name+address+tel);
+		System.out.println("test" + id + name + address + tel);
 
+		// リクエストパラメータをチェック
+		String msg = "更新成功！！！！！！！";
+		String errorMsg = "空欄です！入力してください！！！！！！！！";
 
-		//リクエストパラメータをチェック
-		String msg ="更新成功！！！！！！！";
-		String errorMsg ="空欄です！入力してください！！！！！！！！";
+		int errorCount = 0;
 
-
-		int flag =0;
-
-		if(name== null || name.length() == 0) {
-			flag = +1;
-
+		if (name == null || name.length() == 0) {
+			errorCount = +1;
 		}
-		if (address== null || address.length() == 0) {
-			flag = +1;
-
+		if (address == null || address.length() == 0) {
+			errorCount = +1;
 		}
-		if (tel== null || tel.length() == 0) {
-			flag =+ 1;
+		if (tel == null || tel.length() == 0) {
+			errorCount = +1;
 		}
-			//表示するメッセージを設定
-			if(flag == 3){
-				msg = errorMsg;
-			}
 
-			if(flag !=3){
+		// 表示するメッセージを設定
+		if (errorCount == 3) {
+			msg = errorMsg;
+		}
 
-		Connection conn = null;
+		if (errorCount != 3) {
 
-		try{
-			//JDBCドライバを読み込み
-			Class.forName("com.mysql.jdbc.Driver");
+			Connection conn = null;
 
-			//データベースへ接続
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Addresslist","root","03294163aA");
+			try {
+				// JDBCドライバを読み込み
+				Class.forName("com.mysql.jdbc.Driver");
 
+				// データベースへ接続
+				conn = DriverManager.getConnection(
+						"jdbc:mysql://localhost:3306/Addresslist", "root",
+						"03294163aA");
 
-			//ID数発行用のUPDATE文を準備
-			String sqlupdate = "update tbAddress set name=?, address=?, tel=? where id=?";
-			PreparedStatement pStmt = conn.prepareStatement(sqlupdate);
-			pStmt.setString(1,name);
-			pStmt.setString(2,address);
-			pStmt.setString(3,tel);
-			pStmt.setString(4,id);
+				// ID数発行用のUPDATE文を準備
+				String sqlupdate = "update tbAddress set name=?, address=?, tel=? where id=?";
+				PreparedStatement pStmt = conn.prepareStatement(sqlupdate);
+				pStmt.setString(1, name);
+				pStmt.setString(2, address);
+				pStmt.setString(3, tel);
+				pStmt.setString(4, id);
 
+				// UPDATEを実行し、結果表(ResultSet)を取得
+				int rs = pStmt.executeUpdate();
 
-			//UPDATEを実行し、結果表(ResultSet)を取得
-			int rs = pStmt.executeUpdate();
+				System.out.println("id=" + id);
+				System.out.println("name" + name);
+				System.out.println("address" + address);
+				System.out.println("tel" + tel);
 
-			System.out.println("id="+id);
-			System.out.println("name"+name);
-			System.out.println("address"+address);
-			System.out.println("tel"+tel);
-
-
-
-		} catch (ClassNotFoundException e) {
-			System.out.println("ドライバーのロードに失敗しました" + e);
-			e.printStackTrace();
-		} catch (SQLException e) {
-			System.out.println("データベースに接続できません" + e);
-			e.printStackTrace();
-		}finally{
-			//データベース切断
-			if(conn != null){
-				try{
-					conn.close();
-				} catch(SQLException e) {
-					e.printStackTrace();
-
+			} catch (ClassNotFoundException e) {
+				System.out.println("ドライバーのロードに失敗しました" + e);
+				e.printStackTrace();
+			} catch (SQLException e) {
+				System.out.println("データベースに接続できません" + e);
+				e.printStackTrace();
+			} finally {
+				// データベース切断
+				if (conn != null) {
+					try {
+						conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
 				}
 			}
-
 		}
-			}
 
-
-		//HTMLを入力
+		// HTMLを入力
 		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out =response.getWriter();
-		out.println("<!DOCTYPE html>");
-		out.println("<html>");
-		out.println("<head>");
-		out.println("<link rel='stylesheet' href='style.css' type='text/css'/>");
-		out.println("<meta charset=\"UTF-8\">");
-		out.println("<title>更新画面</title>");
-		out.println("</head>");
-		out.println("<body>");
-		out.println("<center>");
-		out.println("<br><br><br><br><br><br><br><br><br><br><br><br><br><br>");
-		out.println("<p class=neko>");
-		out.println(msg);
-		out.println("</p>");
-		out.println("<br><br><br><br><br><br><br><br><br><br><br><br><br>");
-		out.println("<input type=button value=一覧表示 onclick=location.href='http://localhost:8080/hoge/Addresslist'>");
-		out.println("</center>");
-		out.println("</body>");
-		out.println("</html>");
-
+		PrintWriter out = response.getWriter();
+				out.println("<!DOCTYPE html>");
+				out.println("<html>");
+				out.println("<head>");
+				out.println("<link rel='stylesheet' href='style.css' type='text/css'/>");
+				out.println("<meta charset=\"UTF-8\">");
+				out.println("<title>更新画面</title>");
+				out.println("</head>");
+				out.println("<body>");
+				out.println("<center>");
+				out.println("<br>");
+				out.println("<p class=neko>");
+				out.println(msg);
+				out.println("</p>");
+				out.println("<br /><br>");
+				out.println("<input type=button value=一覧表示 onclick=location.href='http://localhost:8080/hoge/Addresslist'>");
+				out.println("<br />");
+				out.println("</center>");
+				out.println("</body>");
+				out.println("</html>");
 	}
-
-
-	}
+}

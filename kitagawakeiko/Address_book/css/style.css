@@ -1,0 +1,151 @@
+﻿/*body*/
+body {
+    font-family: 'HelveticaRegular',Helvetica,Arial;
+    font-size: 12px;
+    line-height: 18px;
+    min-width: 740px;
+    -webkit-user-select: none;
+    -moz-user-select: -moz-none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+html:lang(ru) body {
+    min-width: 915px;
+}
+
+html:lang(ja) body,
+html:lang(pl) body {
+    min-width: 800px;
+}
+
+/*リンク*/
+
+a{/*リンクされた文字*/
+    color:#FFFFFF;
+    font-style:normal;
+    text-decoration:none;
+    font-size: 20px;
+}
+
+a:hover {/*マウスをのせたとき*/
+    color:#deb887;
+    font-style:normal;
+    text-decoration:none;
+}
+
+
+/*文字コード*/
+@charset "utf-8";
+
+h1{
+color: #330000;
+font-size:50px;
+margin:5px;
+padding:5px;
+font-family:"メイリオ", sans-serif;
+
+}
+
+h2{
+color: #330000;
+font-size:30px;
+margin:0px;
+padding:5px;
+font-family: "メイリオ", sans-serif;
+}
+
+h3{
+color: #330000;
+font-size:20px;
+margin:0px;
+padding:5px;
+font-family: "メイリオ", sans-serif;
+}
+
+/*文字*/
+
+p {
+  font-family: "メイリオ", sans-serif;
+  font-size : 9pt;
+  color : #400000;
+
+}
+
+div#right {  
+text-align: right;  
+}  
+
+
+/*枠組み*/
+
+#wrap{
+width: 70%;
+height: auto;
+text-align:left; 
+margin: 0 auto;
+padding:20px;
+}
+.wrap-p {
+        text-align: left;
+        font-size: 100%; 
+        margin-bottom: -15pt;
+        margin-top: 10pt;
+        font-family: "メイリオ", sans-serif;
+          
+    }
+.wrap-p2 {
+        text-align: center;
+        font-size: 100%; 
+        margin-bottom: 0pt;
+        margin-top: 0pt;
+        font-family: "メイリオ", sans-serif;
+    }
+
+/*BOX*/
+
+.box0{
+	text-align:left;
+	width: auto;
+	height:30Pt;
+	margin-bottom: 8pt;	
+	background-color: #452920;
+	color: #ffffff;
+}
+
+.box1{
+	float: left;
+	width: 50%;
+	height:auto;	
+}
+
+.box2{
+	float: left;
+	width: 50%;
+	height:110pt;
+	margin-top: 14pt;
+}
+
+.space{
+	clear: left;
+}
+
+.box3{
+	text-align:left;
+	width: auto;
+	height:auto;
+	margin-top: 30pt;	
+}
+.box4{
+	text-align:left;
+	width:auto;
+	height:200pt;
+}
+
+.box5{
+	text-align:left;
+	width:auto;
+	height:100pt;
+}
+

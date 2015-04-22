@@ -11,10 +11,10 @@
 <title>更新失敗画面</title>
 </head>
 <body>
-	<h1>更新できませんでした</h1>
-	<div id="body">特殊な文字が使用されています</div>
-	<form action="jsp/DataShow.jsp">
-	<button type="submit" name="list_show" value="">一覧表示</button>
-	</form>
+    <h1>更新できませんでした</h1>
+    <div id="body">特殊な文字が使用されています</div>
+    <form action="jsp/DataShow.jsp">
+    <button type="submit" name="list_show" value="">一覧表示</button>
+    </form>
 </body>
 </html>

@@ -12,13 +12,12 @@
 <link rel="stylesheet" href="css/c_list.css" type="text/css" />
 </head>
 <body>
-
-	<div id="head">更新成功！！</div>
-	<br>
-	<div id="body">
-	<form action="jsp/DataShow.jsp">
-	<button type="submit" name="return" value="">一覧表示</button>
-	</form>
-	</div>
+    <div id="head">更新成功！！</div>
+    <br/>
+    <div id="body">
+    <form action="jsp/DataShow.jsp">
+    <button type="submit" name="return" value="">一覧表示</button>
+    </form>
+    </div>
 </body>
 </html>

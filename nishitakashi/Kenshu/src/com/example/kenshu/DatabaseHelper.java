@@ -1,9 +1,10 @@
 package com.example.kenshu;
 
+//データベースで使用するクラスの補助クラス
 public class DatabaseHelper {
-	//データベース情報
-	public static final String DB_NAME="db_customer";
-	public static final String URL = "jdbc:mysql://localhost:3306/"+DB_NAME;
+    //データベース情報
+    public static final String DB_NAME="db_customer";
+    public static final String URL = "jdbc:mysql://localhost:3306/"+DB_NAME;
     public static final String USER = "root";
     public static final String PASSWORD = "takashi3541";
 
@@ -24,8 +25,8 @@ public class DatabaseHelper {
 
     //SQLコマンド
     public static final int INSERT=0;
-	public static final int UPDATE=1;
-	public static final int DELETE=2;
-	public static final int SELECT=3;
+    public static final int UPDATE=1;
+    public static final int DELETE=2;
+    public static final int SELECT=3;
 
 }

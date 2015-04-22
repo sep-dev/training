@@ -11,9 +11,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>削除できませんでした</h1>
-	<form action="jsp/DataShow.jsp">
-	<button type="submit" name="list_show" value="">一覧表示</button>
-	</form>
+    <h1>削除できませんでした</h1>
+    <form action="jsp/DataShow.jsp">
+    <button type="submit" name="list_show" value="">一覧表示</button>
+    </form>
 </body>
 </html>

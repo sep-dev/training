@@ -11,10 +11,10 @@
 <title>読み込み失敗</title>
 </head>
 <body>
-	<h1>登録できませんでした</h1>
-	<div id="body">特殊な文字が使用されています</div>
-	<form action="jsp/MainScreen.jsp">
-	<button type="submit" name="list_show" value="">新規登録</button>
-	</form>
+    <h1>登録できませんでした</h1>
+    <div id="body">特殊な文字が使用されています</div>
+    <form action="jsp/MainScreen.jsp">
+    <button type="submit" name="list_show" value="">新規登録</button>
+    </form>
 </body>
 </html>

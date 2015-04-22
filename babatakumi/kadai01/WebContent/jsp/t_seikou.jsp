@@ -5,13 +5,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/jsp_css.css">
-<title>登録成功</title>
+<title>成功</title>
 </head>
 <body>
 
 <h1>登録成功！！！！</h1>
 
-<form action="/kadai01/jsp/itirann" method=post>
+<form action="/kadai01/itirann" method=post>
 	<input type="submit" value="一覧表示">
 </form>
 

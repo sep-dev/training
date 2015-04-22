@@ -68,6 +68,7 @@ public class kousinn extends HttpServlet {
 				out.println("<html>");
 				out.println("<head>");
 				out.println("<title>" +  "会員情報の更新/削除</title>");
+				out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"${pageContext.request.contextPath}/../servlet_css.css\">");
 
 				out.print("<SCRIPT language=\"JavaScript\">");
 				out.println("function numOnly() {");
@@ -87,7 +88,7 @@ public class kousinn extends HttpServlet {
 			String address = rs.getString("address");
 		    String tell = rs.getString("tel");
 
-			    out.println("名前：" + name + "住所：" + address + "電話：" + tell );
+			    out.println("<p>"+"名前：" + name + "住所：" + address + "電話：" + tell+"</p>" );
 
 			    out.println("<form action=\""+"/kadai01/change\" method=\"post\">");
 			    out.println("<p>");
@@ -102,10 +103,6 @@ public class kousinn extends HttpServlet {
 			    out.println("<label for=name> 電話:</label>");
 			    out.println("<input type=\"text\" name=\"tell\" maxlength=\"10\" onkeyDown=\"return numOnly()\">");
 			    out.println("</p>");
-
-	      System.out.println(name);
-	      System.out.println(address);
-	      System.out.println(tell);
 
 	      		out.println("<input type=\"hidden\" name=\"id\" value= " +id2+">");
 				out.println("<input type=\"submit\" value=\"更新\">");

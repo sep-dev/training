@@ -12,8 +12,8 @@
 
 <h2>空欄を埋めてください</h2>
 
-<form action=/kadai01/jsp/touroku.jsp method=post>
-<input type="submit" value="新規登録">
+<form action=/kadai01/itirann method=post>
+<input type="submit" value="一覧">
 </form>
 
 </body>

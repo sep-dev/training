@@ -54,11 +54,6 @@ public class change extends HttpServlet {
 	      String user = "root";
 	      String pass = "sazi6675";
 
-	      System.out.println(name);
-	      System.out.println(address);
-	      System.out.println(tell);
-	      System.out.println(id);
-
 	    //ページ遷移の判定
 	  	//フォームの中がからじゃない
 	        if(name != "" && address != "" && tell != ""){

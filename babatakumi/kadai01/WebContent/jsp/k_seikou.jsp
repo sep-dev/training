@@ -11,7 +11,7 @@
 
 <h1>更新成功！！！！</h1>
 
-<form action="/kadai01/jsp/itirann" method=post>
+<form action="/kadai01/itirann" method=post>
 	<input type="submit" value="一覧表示">
 </form>
 

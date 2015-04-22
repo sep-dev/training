@@ -76,28 +76,47 @@ public class itirann extends HttpServlet {
 			 out.println("<form action=\""+ "/kadai01/kousinn\" method=\"post\">");
 
 			 int num = 1;
+
+			 out.println("<table class=\"i_tb\">");
+
+			 out.println("<tr><td></td><td>名前</td><td>住所</td><td>電話</td></tr>");
 			 while(rs.next()){
 				    int id = rs.getInt("id");
 				    String name = rs.getString("name");
 				    String address = rs.getString("address");
 				    String tell = rs.getString("tel");
 
-				    out.println("<p>");
+
+				    out.println("<tr>");
+			    	out.println("<td>");
 				    if(num == 1){
+
 				    	out.println("<INPUT TYPE=\"radio\" name=\"list\" value="+id+" checked>");
 				    }else{
 				    	out.println("<INPUT TYPE=\"radio\" name=\"list\" value="+id+">");
 				    }
-				    out.println("名前：" + name + "住所：" + address + "電話：" + tell );
-				    out.println("<br>");
-				    out.println("</p>");
+				    out.println("</td>");
+					    out.println("<td>");
+					    	out.println(name);
+					    out.println("</td>");
+
+					    out.println("<td>");
+					    	out.println(address);
+					    out.println("</td>");
+
+					    out.println("<td>");
+					    	out.println(tell );
+					    out.println("</td>");
+					    out.println("<br>");
+				    out.println("</tr>");
 				    num++;
-				  }
+				    }
+			 		out.println("</table>");
 
 			 out.println("<input type=\"submit\" value=\"更新or削除\">");
 			 out.println("</form>");
 
-			 out.println("<form action=\""+ "/kadai01/touroku.jsp\" method=\"post\">");
+			 out.println("<form action=\""+ "/kadai01/jsp/touroku.jsp\" method=\"post\">");
 			 out.println("<input type=\"submit\" value=\"新規作成\">");
 			 out.println("</form>");
 

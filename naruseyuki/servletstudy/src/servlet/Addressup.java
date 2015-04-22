@@ -35,25 +35,25 @@ public class Addressup extends HttpServlet {
 		String msg ="<h1>更新成功！！！！！！！</h1>";
 		String errorMsg = "<h1>空欄です！入力してください！！！！！！！</h1>";
 
-		int flag  = 0;
+		int errorcCount  = 0;
 			if(shimei==null || shimei.length() == 0){
-				flag=+1;
+				errorcCount=+1;
 			}
 			if(address==null || address.length() == 0){
-				flag=+1;
+				errorcCount=+1;
 			}
 			if(tel==null || tel.length() == 0){
-				flag=+1;
+				errorcCount=+1;
 			}
 			//表示するメッセージを設定
-			if(flag==3){
+			if(errorcCount==3){
 				msg=errorMsg;
 			}
 
 			//データベース接続準備
 			Connection conn = null;
 
-		if(flag!=3){
+		if(errorcCount!=3){
 
 			try{
 				//JDBCドライバの読み込み
@@ -110,8 +110,8 @@ public class Addressup extends HttpServlet {
 					out.println("</head>");
 					out.println("<body>");
 					out.println("<center>");
-					out.println("<p>" + msg + "<p>");
-					out.println("<br>");
+					out.println("<p>" + msg + "</p>");
+					out.println("<br><br />");
 					out.println("<INPUT type=button value=一覧表示 onclick=location.href='http://localhost:8080/servletstudy/Addresslist'>");
 					out.println("</center>");
 					out.println("</body>");

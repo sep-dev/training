@@ -85,21 +85,19 @@
 	System.out.println("uxooooo"+sqlid);
 %>
 	　　　　　　　　　　　　　↑選択されたデータ↑
-	<br>
-	<br>
+	<br><br />
 
 	<FORM method="POST" action="http://localhost:8080/servletstudy/Addressup" name="upform">
 		氏名 <INPUT type="text" name="shimei" size="100" maxlength="8"value="<%=boxname%>"><br>
 		住所 <INPUT type="text"name="address" size="100" maxlength="4" value="<%=boxaddress%>"><br>
 		電話番号 <INPUT type="text" name="tel" size="100" maxlength="11"value="<%=boxtel%>"><br>
 		<input type=hidden name=selectedid value="<%=sqlid%>">
-		<br>
+		<br><br />
 		<INPUT type="submit" value="更新">
 		<INPUT type="reset" value="リセット">
 		<INPUT type="button" value="一覧表示" onclick="location.href='Addresslist'">
-		<br>
-		<br>
-		<br>
+		<br><br />
+		<br><br />
 	</FORM>
 
 	<FORM method="POST" action="Addressdelete.jsp" name="delform">
@@ -107,7 +105,7 @@
 			<INPUT type="submit" value="削除">
 	</FORM>
 
-	<br>
+	<br><br />
 
 </body>
 </html>

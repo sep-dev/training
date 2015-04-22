@@ -81,7 +81,7 @@ public class Addressdelete extends HttpServlet {
 		out.println("<center>");
 		out.println("<h1>削除しました！</h1>");
 		out.println("<body>");
-		out.println("<br>");
+		out.println("<br><br />");
 		out.println("<INPUT type=button value=一覧表示 onclick=location.href='http://localhost:8080/servletstudy/Addresslist'>");
 		out.println("</center>");
 		out.println("</body>");

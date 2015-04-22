@@ -11,7 +11,7 @@
 <body>
 
 	<h1>会員情報の登録</h1>
-	<br>
+	<br><br />
 	<FORM method="POST" action="http://localhost:8080/servletstudy/Addressbook" name="insertform">
 		<p>氏名</p> <INPUT type="text" name="shimei" size="100" maxlength="8"value="入力して"><br>
 		<p>住所</p> <INPUT type="text"name="address" size="100" maxlength="4" value="入力して"><br>
@@ -21,7 +21,7 @@
 		<INPUT type="reset" value="リセット">
 		<INPUT type="button"value="一覧表示" onclick="location.href='http://localhost:8080/servletstudy/Addresslist'">
 	</FORM>
-	<br>
+	<br><br />
 </body>
 </html>
 

@@ -53,7 +53,7 @@ public class Addresslist extends HttpServlet {
 			out.println("<body>");
 			out.println("<h1>会員一覧</h1>");
 			out.println("↓一つだけ選択可能");
-			out.println("<br>");
+			out.println("<br><br />");
 
 			out.println("<FORM method=GET action=http://localhost:8080/servletstudy/Addressup.jsp name=insertform>");
 			while(rsS.next()){
@@ -69,15 +69,14 @@ public class Addresslist extends HttpServlet {
 				out.println("氏名："+name);
 				out.println(" 住所："+address);
 				out.println(" 電話番号 "+tel);
-				out.println("<br>");
+				out.println("<br><br />");
 
 			}
 			out.println("<INPUT type=submit value=更新or削除>");
-			out.println("<br>");
-			out.println("<br>");
+			out.println("<br><br />");
 			out.println("<INPUT type=button value=新規登録 onclick=location.href='Addressbook.jsp'>");
 			out.println("</FORM>");
-			out.println("<br>");
+			out.println("<br><br />");
 			out.println("</body>");
 			out.println("</html>");
 		}

@@ -72,22 +72,17 @@
 
 
 <font color=#c0c0c0>←選択されたデータ</font>
-	<br>
-	<br>
+	<br><br />
 
 	<FORM method="POST" action="http://localhost:8080/servletstudy/Addressdelete" name="scriptform">
 		<INPUT type="submit" value="削除">
 		<input type=hidden name=selectedid value="<%=sqlselectid%>">
-		<br>
-		<br>
+		<br><br />
 		<INPUT type="button" value="一覧表示へ" onclick="location.href='Addresslist'">
-		<br>
-		<br>
-
-		<br>
+		<br><br />
 
 	</FORM>
-	<br>
+	<br><br />
 
 </body>
 </html>

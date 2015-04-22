@@ -38,22 +38,22 @@ public class Addressget extends HttpServlet {
 		String msg ="<h1>登録成功！！！！！！！</h1>";
 		String errorMsg = "<h1>登録失敗！！！！！！！<br>空欄を埋めてください！</h1>";
 
-		int flag  = 0;
+		int errorcCount  = 0;
 			if(shimei==null || shimei.length() == 0){
-				flag=1;
+				errorcCount=1;
 			}
 			if(address==null || address.length() == 0){
-				flag=1;
+				errorcCount=1;
 			}
 			if(tel==null || tel.length() == 0){
-				flag=1;
+				errorcCount=1;
 			}
 			//表示するメッセージを設定
-			if(flag==1){
+			if(errorcCount==1){
 				msg = errorMsg;
 			}
 
-			if(flag==0){
+			if(errorcCount==0){
 
 			//受け取ったデータの表示
 			System.out.println(shimei+address+tel);
@@ -144,9 +144,9 @@ public class Addressget extends HttpServlet {
 			out.println("</head>");
 			out.println("<body>");
 			out.println("<center>");
-			out.println("<p>" + msg + "<p>");
-			out.println("<br>");
-			if(flag==0)
+			out.println("<p>" + msg + "</p>");
+			out.println("<br><br />");
+			if(errorcCount==0)
 				out.println("<INPUT type=button value=一覧表示 onclick=location.href='http://localhost:8080/servletstudy/Addresslist'>");
 			else
 				out.println("<INPUT type=button value=新規登録 onclick=location.href='Addressbook.jsp'>");

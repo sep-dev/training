@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"pageEncoding="UTF-8"%>
 <%@page import="java.sql.*"%>
 <%!
 public void jspInit(){
@@ -16,6 +15,7 @@ public void jspInit(){
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>更新画面</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/hoge/css/style.css">
 </head>
 <body>
 	<h1>会員情報の更新</h1>
@@ -40,12 +40,14 @@ public void jspInit(){
 	            rs = stmt.executeQuery("select * from tbAddress where id = ("+id+");");
 	            rs.next();
 	%>
+				<table>
                 <%-- レコードのnameフィールドを表示 --%>
-                <%= "氏名："+rs.getString("name")%>
+                <tn><%= "氏名："+rs.getString("name")%></tn>
                 <%-- レコードのaddressフィールドを表示 --%>
-                <%= "　住所："+rs.getString("address")%>
+                <ta><%= "　住所："+rs.getString("address")%></ta>
                 <%-- レコードのtelフィールドを表示 --%>
-                <%= "　電話番号："+rs.getString("tel")%>
+                <tt><%= "　電話番号："+rs.getString("tel")%></tt>
+                </table>
 
                 <FORM ACTION="Update"method="get">
                 	<p>
@@ -61,7 +63,7 @@ public void jspInit(){
 						電話番号：<input type="text" name="tel" size="48" maxlength="20" value=<%=rs.getString("tel") %>>
 					</p>
 					<input type="submit" value="更新">
-					<br>
+					<br />
 					<input type="reset" value="リセット">
 				</FORM>
 				<FORM ACTION="itiran.jsp">

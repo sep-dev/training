@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"pageEncoding="UTF-8"%>
 <%@page import="java.sql.*"%>
 <%!
 public void jspInit(){
@@ -16,6 +15,7 @@ public void jspInit(){
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>一覧画面</title>
+		<link rel="stylesheet" type="text/css" href="http://localhost:8080/hoge/css/style.css">
 	</head>
 	<body>
 		<h1>会員一覧</h1>
@@ -42,29 +42,43 @@ public void jspInit(){
 	            	String id =rs.getString("id");
 		%>
 				<FORM name="radio" method="POST"ACTION="Update.jsp">
+				<table>
+				<td>
 				<%if(i!=1){ %>
 					<input type="radio" name="addressbook" value=<%=id%>>
 				<% }else{ %>
 					<input type="radio" name="addressbook" value=<%=id%> checked="checked">
 				<% } %>
 
+				</td>
+				<td>
+					<tn>
+		                <%-- レコードのnameフィールドを表示 --%>
+		                <%= "氏名："+rs.getString("name")%>
+	                </tn>
+                </td>
+                <td>
+                	<ta>
+		                <%-- レコードのaddressフィールドを表示 --%>
+		                <%= "住所："+rs.getString("address")%>
+	                </ta>
+                </td>
+                <td>
+                	<tt>
+		                <%-- レコードのtelフィールドを表示 --%>
+		                <%= "電話番号："+rs.getString("tel")%>
+	                </tt>
+                </td>
+                </table>
 
-                <%-- レコードのnameフィールドを表示 --%>
-                <%= "氏名："+rs.getString("name")%>
-                <%-- レコードのaddressフィールドを表示 --%>
-                <%= "　住所："+rs.getString("address")%>
-                <%-- レコードのtelフィールドを表示 --%>
-                <%= "　電話番号："+rs.getString("tel")%>
-
-                <br>
 		<%
 	            i++;
 				}
 	    %>
-	    		<br>
+	    		<br />
 	            	<input type="submit" value="更新or削除">
 	            </FORM>
-	            <br>
+	            <br />
 	            <FORM ACTION="Addressbook.jsp">
 	            	<input type="submit" value="新規登録">
 	            </FORM>

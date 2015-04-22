@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"pageEncoding="UTF-8"%>
 <%@page import="java.sql.*"%>
 <%!
 public void jspInit(){
@@ -16,6 +15,7 @@ public void jspInit(){
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>削除</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/hoge/css/style.css">
 </head>
 <body>
 	<h1>本当に削除してもいいですか？</h1>
@@ -47,13 +47,13 @@ public void jspInit(){
                 <%-- レコードのtelフィールドを表示 --%>
                 <%= "　電話番号："+rs.getString("tel")%>
 
-                <br>
-                <br>
+                <br />
+                <br />
                 <FORM ACTION="Delete" method="get">
                 	<input type="hidden" name="id" value=<%=id%>>
                 	<input type="submit" value="削除">
                 </FORM>
-                <br>
+                <br />
                 <FORM ACTION="itiran.jsp">
 					<input type="submit" value="一覧表示">
 				</FORM>

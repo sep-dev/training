@@ -35,6 +35,15 @@ public class DatabaseHelper {
         public static final int DELETE = 3;
     }
 
+    /* ToDo
+     *  Singletonパターンを採用
+     *   private static DatabaseHelper instance = new DatabaseHelper();
+     *   private DarabaseHelper(){}
+     *   public static DatabaseHelper getInstance(){
+     *       return this.insatance;
+     *   }
+     */
+
     private StringBuffer query;  //クエリ格納StringBuffer
     private Connection conn;     //データベース接続用Connection
     private ResultSet resultSet; //クエリ実行結果格納
@@ -171,23 +180,33 @@ public class DatabaseHelper {
 
     //Update処理
     private boolean update(int id,String name,String address,String tel){
+        HashMap<Integer,String> map = new HashMap<Integer,String>(); //値格納用HashMap
+
         query.append("UPDATE ").append(TABLE_NAME).append(" SET ");
 
-        if(name != null && !name.equals(""))
-            query.append(Columns.NAME).append("='" + name + "'").append(",");
+        if(name != null && !name.equals("")){
+            map.put(map.size()+1, name);
+            query.append(DatabaseHelper.Columns.NAME).append("=?,");
+        }
 
-        if(address != null && !address.equals(""))
-            query.append(Columns.ADDRESS).append("='" + address + "'").append(",");
+        if(address != null && !address.equals("")){
+            map.put(map.size()+1, address);
+            query.append(DatabaseHelper.Columns.ADDRESS).append("=?,");
+        }
 
-        if(tel != null && !tel.equals(""))
-            query.append(Columns.TEL).append("='" + tel + "'").append(",");
+        if(tel != null && !tel.equals("")){
+            map.put(map.size()+1,tel);
+            query.append(DatabaseHelper.Columns.TEL).append("=?,");
+        }
+
 
         query = query.deleteCharAt(query.lastIndexOf(",")); //末尾の "," を削除する(必ず付加されているため）
         query.append(" WHERE id=?");
-
+        System.out.println(query.toString());
         try{
             preStmt = conn.prepareStatement(query.toString());
-            preStmt.setInt(1, id);
+            for(int i=1 ; i <= map.size() ; i++) preStmt.setString(i, map.get(i)); //ループで値をセット
+            preStmt.setInt(map.size()+1, id);
             preStmt.executeUpdate();
         }catch(SQLException e){
             e.printStackTrace();

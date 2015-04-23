@@ -10,13 +10,20 @@
 <body>
 	<center>
 		<h1>会員情報の登録</h1>
+
 		<form method="POST" action="http://localhost:8080/hoge/Addressbook" name="from1">
-			<br> 氏名<input type="text" name="name" size="50" value="ここに氏名を入力" onFocus="cText(this)" onBlur="sText(this)" style="color:#999"/><br />
-			<br> 住所<input type="text" name="address" size="50"value="ここに住所を入力" onFocus="cText(this)" onBlur="sText(this)" style="color:#999"/><br />
-			<br> 電話番号<input type="text"name="tel" size="50" maxlength="14" value="ここに電話番号を入力"onFocus="cText(this)" onBlur="sText(this)" style="color:#999" /><br />
+		<p class = kaigyou>
+			 氏名<input type="text" name="name" size="50" value="ここに氏名を入力" onFocus="cText(this)" onBlur="sText(this)" style="color:#999"/>
+			 </p><p class = kaigyou>
+			 住所<input type="text" name="address" size="50"value="ここに住所を入力" onFocus="cText(this)" onBlur="sText(this)" style="color:#999"/>
+			 </p><p class = kaigyou>
+			 電話番号<input type="text"name="tel" size="50" maxlength="14" value="ここに電話番号を入力"onFocus="cText(this)" onBlur="sText(this)" style="color:#999" />
+			 </p>
 			<input type="submit" value="登録" /> <input type="reset" value="リセット" />
 			<input type="button" value="一覧表示" onclick="location.href='http://localhost:8080/hoge/Addresslist'" />
+
 		</form>
+
 		<script type="text/javascript"><!--
 		function cText(obj){
 			if(obj.value==obj.defaultValue){
@@ -24,7 +31,6 @@
 			obj.style.color="#000";
 			}
 			}
-
 			function sText(obj){
 			if(obj.value==""){
 			obj.value=obj.defaultValue;

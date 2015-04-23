@@ -40,7 +40,6 @@ public class Addresslist extends HttpServlet {
 			// SELECTを実行し、結果表(ResultSet)を取得
 			ResultSet rs = stmt.executeQuery(sqlStr);
 
-
 			PrintWriter out = response.getWriter();
 
 				out.println("<!DOCTYPE html>");
@@ -52,7 +51,7 @@ public class Addresslist extends HttpServlet {
 				out.println("<center>");
 				out.println("<h1>会員一覧</h1>");
 				out.println("</center>");
-				out.println("<br>");
+				out.println("<br />");
 				out.println("<p class=neko>");
 				out.println("　　　↓一つだけ選択可能");
 				out.println("<br />");
@@ -73,13 +72,11 @@ public class Addresslist extends HttpServlet {
 				out.println("氏名:" + name);
 				out.println("住所:" + address);
 				out.println("電話番号 " + tel);
-				out.println("<br>");
+				out.println("<br />");
 				out.println("</p>");
-
 			}
-
 				out.println("<input type=submit value=更新or削除>");
-				out.println("<br>");
+				out.println("<br />");
 				out.println("<input type=button value=新規登録 onclick=location.href='Addressbook.jsp'>");
 				out.println("</form>");
 				out.println("</center>");

@@ -42,7 +42,6 @@ public class Address extends HttpServlet {
 		if (tel == null || tel.length() == 0) {
 			isError = false;
 		}
-
 		// 表示するメッセージを設定
 		if (isError == false) {
 			msg = errorMsg;
@@ -99,13 +98,10 @@ public class Address extends HttpServlet {
 			conn.close();
 			} catch (SQLException e) {
 						e.printStackTrace();
-
 					}
 				}
-
 			}
 		}
-
 		// HTMLを入力
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
@@ -119,9 +115,9 @@ public class Address extends HttpServlet {
 				out.println("<body>");
 				out.println("<center>");
 				out.println("<p class=neko>");
-				out.println("<br>");
+				out.println("<br />");
 				out.println(msg);
-				out.println("<br /><br>");
+				out.println("<br />");
 				out.println("</p>");
 				out.println("<br />");
 		if (isError == true)
@@ -131,7 +127,5 @@ public class Address extends HttpServlet {
 				out.println("</center>");
 				out.println("</body>");
 				out.println("</html>");
-
 	}
-
 }

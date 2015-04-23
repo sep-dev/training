@@ -48,7 +48,7 @@ public class Addressup extends HttpServlet {
 				out.println("<body>");
 				out.println("<center>");
 				out.println("<h1>会員情報の更新</h1>");
-				out.println("<br>");
+				out.println("<br />");
 				out.println("<form method=POST action='http://localhost:8080/hoge/Addressupdate' name=from1>");
 				out.println("<br />");
 
@@ -69,21 +69,20 @@ public class Addressup extends HttpServlet {
 				out.println("住所:" + address);
 				out.println("電話番号" + tel);
 				out.println("</p>");
-
 				out.println("←選択されたデータ");
-				out.println("<br>");
+				out.println("<br />");
 				out.println("氏名<input type=text name=name size=50 value="+ name + " /><br />");
-				out.println("<br>");
+				out.println("<br />");
 				out.println("住所<input type=text name=address size=50 value="+ address + " /><br />");
-				out.println("<br>");
+				out.println("<br />");
 				out.println("電話番号<input type=text name=tel size=50 value="+ tel + " /><br />");
 				out.println("<br>");
 				out.println("<input type=hidden name=question value=" + id+ "><br />");
-				out.println("<br>");
+				out.println("<br />");
 				out.println("<input type=submit value='更新' />");
 				out.println("<input type=reset value='リセット' />");
 				out.println("<input type=button value=一覧表示 onclick=location.href='http://localhost:8080/hoge/Addresslist' /><br />");
-				out.println("<br>");
+				out.println("<br />");
 				out.println("</form>");
 				out.println("<form method=POST action='http://localhost:8080/hoge/Addressdelete.jsp' name=from1>");
 				out.println("<input type=hidden name=question value=" + id+ ">");
@@ -92,7 +91,6 @@ public class Addressup extends HttpServlet {
 				out.println("</center>");
 				out.println("</body>");
 				out.println("</html>");
-
 			}
 
 		} catch (ClassNotFoundException e) {

@@ -58,7 +58,6 @@ public class Addressdelete extends HttpServlet {
 				}
 			}
 		}
-
 		// HTMLを入力
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
@@ -71,17 +70,16 @@ public class Addressdelete extends HttpServlet {
 				out.println("</head>");
 				out.println("<body>");
 				out.println("<center>");
-				out.println("<br>");
+				out.println("<br />");
 				out.println("<p class=neko>");
 				out.println("削除しました！！");
 				out.println("<br />");
 				out.println("</p>");
-				out.println("<br>");
+				out.println("<br />");
 				out.println("<input type=button value=一覧表示 onclick=location.href='http://localhost:8080/hoge/Addresslist'>");
 				out.println("<br />");
 				out.println("</center>");
 				out.println("</body>");
 				out.println("</html>");
-
 	}
 }

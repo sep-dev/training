@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+body{
+	background-color:#98FB98;
+}
+h1{
+	font-size:100px;
+}
+
+
+button{
+	width:200px;
+	height:50px;
+	font-size:140%;
+	font-weight:800;
+	background-color:#FFFF00;
+}

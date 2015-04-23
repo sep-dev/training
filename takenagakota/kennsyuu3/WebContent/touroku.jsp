@@ -8,7 +8,8 @@
       <title>“o˜^‰æ–Ê</title>
    </head>
    <body>
-   <div align="center" class="box">
+   <div align="center">
+
       <h1>‰ïˆõî•ñ‚Ì“o˜^</h1>
 
          <form action="botan" method="post">
@@ -22,7 +23,7 @@
          <form action="itirann.jsp" method="post">
           <button type="submit" onclick="hyou">ˆê——•\Ž¦</button>
           </form>
-          </h5>
+          </5>
 
     </div>
    </body>

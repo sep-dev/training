@@ -5,12 +5,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  <link rel="stylesheet" type="text/css" href="http://localhost:8080/kennsyuu3/css/sippai.css">
-<title>登録失敗画面</title>
+<title>更新失敗画面</title>
 </head>
 <body>
 <div align="center">
-<h1>登録失敗！！！！！<br>空欄を埋めてください</h1>
-<form action="touroku.jsp" method="post">
+<h1>更新失敗</h1>
+<form method="post" action="touroku.jsp">
 <input type="submit" value="新規登録">
 </form>
 </div>

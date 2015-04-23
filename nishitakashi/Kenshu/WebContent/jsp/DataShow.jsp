@@ -14,13 +14,11 @@
 <link rel="stylesheet" href="../css/c_list.css" type="text/css" />
 </head>
 <body>
+    <div id="wrap">
     <%--会員一覧をデータベースから取得し表示する画面--%>
     <h1 id="title">会員一覧</h1>
-    <div id="body">
     <P>↓1つだけ選択可能</P>
-
     <form action="UpdateScreen.jsp" method="post">
-
 <%
     // データベースへのアクセス開始
     Connection con = null;
@@ -36,25 +34,23 @@
         // データベース操作を行うためのStatementオブジェクトの取得
         stmt = con.createStatement();
         // SQL文作成
-        rs = stmt.executeQuery(
-              "select  * from tbAddress");
+        rs = stmt.executeQuery("select  * from tbAddress");
         request.setCharacterEncoding("utf-8");
         // 得られた結果をレコードごとに表示
-
         while (rs.next()) {
 %>
+            <div id="list">
             <%--ラジオボタン idを次の画面に渡す--%>
             <input type="radio" name="select_radio"  value=<%= rs.getInt("id")%> required/>
             氏名：<%= rs.getString("name")%>　
             住所：<%= rs.getString("address")%>　
             電話番号：<%= rs.getString("tel")%>
-            <br/><br/>
+            </div><%--/list --%>
 <%
         }
     } catch (Exception e) {
         e.printStackTrace();
         System.out.print("失敗");
-
     } finally {
     // データベースとの接続をクローズ
         try { rs.close(); } catch (Exception e) {}
@@ -62,17 +58,13 @@
         try { con.close(); } catch (Exception e) {}
     }
 %>
-
     <%-- 更新削除ボタン --%>
-    <button type="submit" name="button_update">更新or削除</button>
+    <div id="button"><button type="submit" name="button_update">更新or削除</button></div>
     </form>
-    <br/>
-
-
     <%-- 新規登録ボタン --%>
     <form Action="MainScreen.jsp">
-    <button type="submit" name="new" value="newfile">新規登録</button>
+    <div id="button"><button type="submit" name="new" value="newfile">新規登録</button></div>
     </form>
-    </div>
+    </div><%--/wrap --%>
 </body>
 </html>

@@ -14,7 +14,6 @@
 <link rel="stylesheet" href="../css/c_list.css" type="text/css" />
 </head>
 <body>
-
 <%
     // データベースへのアクセス開始
     Connection con = null;
@@ -34,31 +33,24 @@
         rs = stmt.executeQuery(
               "select  * from tbAddress where id="+id+";");
         rs.next();
-
 %>
-        <div id="body">
-        <p>本当に削除してもいいですか？</p><br/>
-
+        <div id="wrap">
+        <p>本当に削除してもいいですか？</p>
         <%-- 得られた結果を表示 --%>
-
-        氏名：<%= rs.getString("name")%>　住所<%= rs.getString("address")%>　電話番号：<%= rs.getString("tel")%>
-
-        <form action=".././DataDelete" method="post">
-        <button type="submit" name="del" value=<%=id%>>削除</button>
+        <p>氏名：<%= rs.getString("name")%>　住所<%= rs.getString("address")%>　電話番号：<%= rs.getString("tel")%></p>
+        <form action="../DataDelete" method="post">
+        <div id="button"><button type="submit" name="del" value=<%=id%>>削除</button></div>
         </form>
-        <br/>
         <form action="DataShow.jsp" method="post">
-        <button type="submit" name="return" value="">一覧表示</button>
+        <div id="button"><button type="submit" name="return" value="">一覧表示</button></div>
         </form>
-        </div>
+        </div><%--/wrap --%>
 <%
-
     } catch (Exception e) {
         e.printStackTrace();
         System.out.print("失敗");
-
     } finally {
-            // データベースとの接続をクローズ
+        // データベースとの接続をクローズ
         try { rs.close(); } catch (Exception e) {}
         try { stmt.close(); } catch (Exception e) {}
         try { con.close(); } catch (Exception e) {}

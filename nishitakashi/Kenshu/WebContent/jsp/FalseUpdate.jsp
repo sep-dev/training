@@ -8,13 +8,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="css/c_list.css" type="text/css" />
 <title>更新失敗画面</title>
 </head>
 <body>
     <h1>更新できませんでした</h1>
-    <div id="body">特殊な文字が使用されています</div>
+    <p>特殊な文字が使用されています</p>
     <form action="jsp/DataShow.jsp">
-    <button type="submit" name="list_show" value="">一覧表示</button>
+    <div id="button"><button type="submit" name="list_show" value="">一覧表示</button></div>
     </form>
 </body>
 </html>

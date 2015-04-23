@@ -30,34 +30,18 @@ function spaceNo() {
 </SCRIPT>
 </head>
 <body>
+    <div id="wrap">
     <h1 id="title">会員登録</h1>
-
-    <div id="body">
-    <table>
-        <form action=".././DataAdd" method="post">
-
-        <tr>
-        <td>氏名：</td>
-        <td><input type="text" name="name" value="" placeholder="名前を入力してください" size="50" maxlength="50" onkeyDown="return spaceNo()" required/></td>
-        </tr><br/>
-        <tr>
-        <td>住所：</td><td><input type="text" name="address" value="" placeholder="住所を入力してください" size="50" maxlength="50" onkeyDown="return spaceNo()" required/></td>
-        </tr><br/>
-        <tr>
-        <td>電話番号：</td><td><input type="tel" name="tel" value="" placeholder="電話番号を入力してください" maxlength="11" size="50" onkeyDown="return numOnly()" required/></td>
-        </tr><br/><br/>
-        <tr>
-        <td><button type="submit" name="touroku" value="登録">登録</button>
-        <button type="reset" name="reset" value="リセット">リセット</button></td>
-        </tr>
-        </form>
-        <tr>
-        <td><form action="DataShow.jsp"  method="post">
-        <button type="submit" name="show" value="一覧表示">一覧表示</button>
-        </form></td>
-        </tr>
-    </table>
-
-    </div>
+    <form action="../DataAdd" method="post">
+    <div id="edittext">氏名：<input type="text" name="name" value="" placeholder="名前を入力してください" size="50" maxlength="50" onkeyDown="return spaceNo()" required/></div>
+    <div id="edittext">住所：<input type="text" name="address" value="" placeholder="住所を入力してください" size="50" maxlength="50" onkeyDown="return spaceNo()" required/></div>
+    <div id="edittext">電話番号：<input type="tel" name="tel" value="" placeholder="電話番号を入力してください" maxlength="11" size="50" onkeyDown="return numOnly()" required/></div>
+    <div id="button"><button type="submit" name="touroku" value="登録">登録</button></div>
+    <div id="button"><button type="reset" name="reset" value="リセット">リセット</button></div>
+    </form>
+    <form action="DataShow.jsp"  method="post">
+    <div id="button"><button type="submit" name="show" value="一覧表示">一覧表示</button></div>
+    </form>
+    </div><%--/wrap --%>
 </body>
 </html>

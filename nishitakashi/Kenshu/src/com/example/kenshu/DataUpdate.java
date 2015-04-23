@@ -38,12 +38,13 @@ public class DataUpdate extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    	//データベース接続
-    	Connection conn = dm.datalink(request, response);
-    	//SQLの実行
-        dm.excute(conn, DatabaseHelper.UPDATE);
-
+        int command=DatabaseHelper.UPDATE;
+        //データベース接続
+        Connection conn = dm.datalink(request, response);
+        //SQLの実行
+        if(dm.excute(conn,command)){
+            //問題が起きた時
+            dm. falseSQL(conn,command);
+        }
     }
-
 }

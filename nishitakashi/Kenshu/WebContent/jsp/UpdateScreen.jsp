@@ -49,44 +49,32 @@ function spaceNo() {
         rs = stmt.executeQuery(
               "select  * from tbAddress where id="+id+";");
         rs.next();
-
 %>
-
-    <h1 id="title">会員情報更新</h1>
-    <div id="body">
-    <%-- 得られた結果を表示 --%>
-    氏名：<%= rs.getString("name")%>　住所<%= rs.getString("address")%>　電話番号：<%= rs.getString("tel")%>
-
-
-    <%-- 更新入力フォーム --%>
-    <form action=".././DataUpdate" method="post">
-    氏名：<input type="text" name="name" value="<%= rs.getString("name")%>" placeholder="名前を入力してください" size="50" maxlength="50" onkeyDown="return spaceNo()" required/><br/>
-    住所：<input type="text" name="address" value="<%= rs.getString("address")%>" placeholder="住所を入力してください" size="50" maxlength="50" onkeyDown="return spaceNo()" required/><br/>
-    電話番号：<input type="tel" name="tel" value="<%= rs.getString("tel")%>" placeholder="電話番号を入力してください" size="50" maxlength="11" onkeyDown="return numOnly()" required/><br/>
-    <button type="submit" name="upd" value=<%=id%>>更新</button>
-    <button type="reset" name="reset" value="リセット">リセット</button>
-    </form>
-    <br/>
-
-    <%-- 一覧表示ボタン --%>
-    <form action="DataShow.jsp"  method="post">
-    <button type="submit" name="show" value="一覧表示">一覧表示</button>
-    </form>
-
-
-    <%-- 削除ボタン --%>
-    <form action="DeleteScreen.jsp"  method="post">
-    <button type="submit" name="delete" value=<%=request.getParameter("select_radio")%>>削除</button>
-    </form>
-    </div>
-
+        <div id="wrap">
+        <h1 id="title">会員情報更新</h1>
+        <%-- 得られた結果を表示 --%>
+        <p>氏名：<%= rs.getString("name")%>　住所<%= rs.getString("address")%>　電話番号：<%= rs.getString("tel")%></p>
+        <%-- 更新入力フォーム --%>
+        <form action="../DataUpdate" method="post">
+        <div id="edittext">氏名：<input type="text" name="name" value="<%= rs.getString("name")%>" placeholder="名前を入力してください" size="50" maxlength="50" onkeyDown="return spaceNo()" required/></div>
+        <div id="edittext">住所：<input type="text" name="address" value="<%= rs.getString("address")%>" placeholder="住所を入力してください" size="50" maxlength="50" onkeyDown="return spaceNo()" required/></div>
+        <div id="edittext">電話番号：<input type="tel" name="tel" value="<%= rs.getString("tel")%>" placeholder="電話番号を入力してください" size="50" maxlength="11" onkeyDown="return numOnly()" required/></div>
+        <div id="button"><button type="submit" name="upd" value=<%=id%>>更新</button></div>
+        <div id="button"><button type="reset" name="reset" value="リセット">リセット</button></div>
+        </form>
+        <%-- 一覧表示ボタン --%>
+        <form action="DataShow.jsp"  method="post">
+        <div id="button"><button type="submit" name="show" value="一覧表示">一覧表示</button></div>
+        </form>
+        <%-- 削除ボタン --%>
+        <form action="DeleteScreen.jsp"  method="post">
+        <div id="button"><button type="submit" name="delete" value=<%=request.getParameter("select_radio")%>>削除</button></div>
+        </form>
+        </div><%--/wrap --%>
 <%
-
     } catch (Exception e) {
         e.printStackTrace();
         System.out.print("失敗");
-
-
     } finally {
         // データベースとの接続をクローズ
         try { rs.close(); } catch (Exception e) {}
@@ -94,6 +82,5 @@ function spaceNo() {
         try { con.close(); } catch (Exception e) {}
     }
 %>
-
 </body>
 </html>

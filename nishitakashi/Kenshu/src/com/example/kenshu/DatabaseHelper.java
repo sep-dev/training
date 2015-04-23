@@ -18,7 +18,6 @@ public class DatabaseHelper {
     public static final int COL_NUM=COL_NAME.length;
     public static final int INNIT_COL_NO = NAME;//どのカラムから処理していくか（今回はidがオートインクリメントなのでnameから）
 
-
     //顧客情報検索用
     public static final int MAX_CUSTOMER_NUM=100;
     public static String [][] customer_current=new String[COL_NUM][MAX_CUSTOMER_NUM];
@@ -28,5 +27,4 @@ public class DatabaseHelper {
     public static final int UPDATE=1;
     public static final int DELETE=2;
     public static final int SELECT=3;
-
 }

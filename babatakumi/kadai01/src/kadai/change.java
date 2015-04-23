@@ -54,69 +54,53 @@ public class change extends HttpServlet {
 	      String user = "root";
 	      String pass = "sazi6675";
 
-	     int flag = 0;
+		 //ページ遷移の判定
 
-	    //ページ遷移の判定
-	  	//フォームの中がからじゃない
-	        if(name != "" && address != "" && tell != ""){
-	      //フォームの中がnullじゃない
-	  	      if(name != null && address != null && tell != null){
-	  	//tellが10文字ある
-	  	    	  if(tell.length() == 10){
-	  	//成功
-	  	    		try {
-		    		      //データベースに接続
-		    			  conn = DriverManager.getConnection(url, user, pass);
+	      //tellが10文字ある
+	      if(tell.length() != 10){
+	    	  //フォームの中が空じゃない、もしくは、フォームの中がnullじゃない
+	    	  if(name == "" || name == null || address == "" || address == null || tell == "" || tell == null){
 
-		    		      //SQL ステートメント・オブジェクトの作成
-		    			 Statement stmt = conn.createStatement();
-		    			 //SQL ステートメントの発行
-		    			 String  query2 = "UPDATE sample.tbaddress set name = '"+name+"', address = '"+address+"', tel = '"+tell+"' where id = "+id+"";
-		    			 int rs2 = stmt.executeUpdate(query2) ;
+	    		  request.setAttribute("flag", "3");
 
-		    			 //データベースのクローズ
-		    				stmt.close();
-		    				conn.close();
-
-		    				flag = 2;
-		    				String sflag = String.valueOf(flag);
-
-		    				request.setAttribute("flag", sflag);
-		    				RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/seikou.jsp");
-		    				dispatcher.forward(request, response);
-
-		    		    } catch (SQLException e) {
-		    		    	//表示
-		    		    	    PrintWriter out = response.getWriter();
-
-		    		    	    out.println("例外発生：" + e );
-		    		    	    System.out.println("失敗" + e);
-		    		    }
-	  	    	//以下失敗
-				  }else{
-					  flag = 4;
-	    				String sflag = String.valueOf(flag);
-
-	    				request.setAttribute("flag", sflag);
-						RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/sippai.jsp");
-						dispatcher.forward(request, response);
-				  }
-		      }else{
-		    	  flag = 3;
-					String sflag = String.valueOf(flag);
-
-					request.setAttribute("flag", sflag);
 					RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/sippai.jsp");
 					dispatcher.forward(request, response);
-		      }
-	      }else{
-	    	  flag = 3;
-				String sflag = String.valueOf(flag);
+					return;
+			  }
+	    	  request.setAttribute("flag", "4");
 
-				request.setAttribute("flag", sflag);
-
-				RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/sippai.jsp");
-				dispatcher.forward(request, response);
+			  RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/sippai.jsp");
+			  dispatcher.forward(request, response);
+			  return;
 	      }
+
+	      	//ページ遷移成功
+			try {
+			      //データベースに接続
+				  conn = DriverManager.getConnection(url, user, pass);
+
+			      //SQL ステートメント・オブジェクトの作成
+				 Statement stmt = conn.createStatement();
+
+				 //SQL ステートメントの発行
+				 String  query2 = "UPDATE sample.tbaddress set name = '"+name+"', address = '"+address+"', tel = '"+tell+"' where id = "+id+"";
+				 int rs2 = stmt.executeUpdate(query2) ;
+
+				 	//データベースのクローズ
+					stmt.close();
+					conn.close();
+
+					request.setAttribute("flag", "2");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/seikou.jsp");
+					dispatcher.forward(request, response);
+
+			    } catch (SQLException e) {
+			    		//表示
+			    	    PrintWriter out = response.getWriter();
+
+			    	    out.println("例外発生：" + e );
+			    	    System.out.println("失敗" + e);
+			    }
 		}
 }
+

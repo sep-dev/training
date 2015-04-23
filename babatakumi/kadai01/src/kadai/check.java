@@ -57,69 +57,54 @@ public class check extends HttpServlet {
 	      String user = "root";
 	      String pass = "sazi6675";
 
-	      int flag = 0;
-//ページ遷移の判定
-	//フォームの中がからじゃない
-      if(name != "" && address != "" && tell != ""){
-    //フォームの中がnullじゃない
-	      if(name != null && address != null && tell != null){
-	//tellが10文字ある
-	    	  if(tell.length() == 10){
-	//成功
-	    		  try {
-	    		      //データベースに接続
-	    			  conn = DriverManager.getConnection(url, user, pass);
+	   //ページ遷移の判定
 
-	    		      //SQL ステートメント・オブジェクトの作成
-	    			 Statement stmt = conn.createStatement();
-	    			 //SQL ステートメントの発行
+	      //tellが10文字ある
+	      if(tell.length() != 10){
+	    	  //フォームの中がからじゃない、もしくは、フォームの中がnullじゃない
+	    	  if(name == "" || name == null || address == "" || address == null || tell == "" || tell == null){
 
-	    			 String  query2 = "INSERT INTO sample.tbaddress(name,address,tel)VALUES("+ "\""+name+"\"" +","+ "\""+address+"\"" +","+  "\""+tell+"\"" +");";
-	    			 int rs2 = stmt.executeUpdate(query2) ;
+	    		  request.setAttribute("flag", "1");
 
-	    			 //データベースのクローズ
-	    				stmt.close();
-	    				conn.close();
-
-	    				flag = 1;
-	    				String sflag = String.valueOf(flag);
-
-	    				request.setAttribute("flag", sflag);
-	    				RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/seikou.jsp");
-	    				dispatcher.forward(request, response);
-
-	    		    } catch (SQLException e) {
-	    		    	//表示
-	    		    	    PrintWriter out = response.getWriter();
-
-	    		    	    out.println("例外発生：" + e );
-	    		    	    System.out.println("失敗" + e);
-	    		    }
-//以下失敗
-			  }else{
-				  flag = 2;
-  					String sflag = String.valueOf(flag);
-
-  					request.setAttribute("flag", sflag);
 					RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/sippai.jsp");
 					dispatcher.forward(request, response);
+					return;
 			  }
-	      }else{
-	    	  flag = 1;
-				String sflag = String.valueOf(flag);
+	    	  request.setAttribute("flag", "2");
 
-				request.setAttribute("flag", sflag);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/sippai.jsp");
-				dispatcher.forward(request, response);
+			  RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/sippai.jsp");
+			  dispatcher.forward(request, response);
+			  return;
 	      }
-      }else{
-    	  flag = 1;
-			String sflag = String.valueOf(flag);
 
-			request.setAttribute("flag", sflag);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/sippai.jsp");
-			dispatcher.forward(request, response);
-      }
+		  //ページ遷移成功
+		  try {
+		      //データベースに接続
+			  conn = DriverManager.getConnection(url, user, pass);
+
+		      //SQL ステートメント・オブジェクトの作成
+			 Statement stmt = conn.createStatement();
+
+			 //SQL ステートメントの発行
+			 String  query2 = "INSERT INTO sample.tbaddress(name,address,tel)VALUES("+ "\""+name+"\"" +","+ "\""+address+"\"" +","+  "\""+tell+"\"" +");";
+			 int rs2 = stmt.executeUpdate(query2) ;
+
+			 //データベースのクローズ
+				stmt.close();
+				conn.close();
+
+				request.setAttribute("flag", "1");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/seikou.jsp");
+				dispatcher.forward(request, response);
+				return;
+
+		    }catch (SQLException e){
+		    	//表示
+		    	PrintWriter out = response.getWriter();
+
+		    	out.println("例外発生：" + e );
+		    	System.out.println("失敗" + e);
+		    }
 	}
 
 }

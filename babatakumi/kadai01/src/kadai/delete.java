@@ -52,38 +52,30 @@ public class delete extends HttpServlet {
 	      String user = "root";
 	      String pass = "sazi6675";
 
-	      int flag = 3;
+		try {
+		      //データベースに接続
+			  conn = DriverManager.getConnection(url, user, pass);
 
-	    //ページ遷移の判定
+		     //SQL ステートメント・オブジェクトの作成
+			 Statement stmt = conn.createStatement();
+			 //SQL ステートメントの発行
+			 String  query2 = "DELETE FROM sample.tbaddress where id = "+id+"";
+			 int rs2 = stmt.executeUpdate(query2) ;
 
-	  	    		try {
-		    		      //データベースに接続
-		    			  conn = DriverManager.getConnection(url, user, pass);
+			 //データベースのクローズ
+				stmt.close();
+				conn.close();
 
-		    		      //SQL ステートメント・オブジェクトの作成
-		    			 Statement stmt = conn.createStatement();
-		    			 //SQL ステートメントの発行
-		    			 String  query2 = "DELETE FROM sample.tbaddress where id = "+id+"";
-		    			 int rs2 = stmt.executeUpdate(query2) ;
+				request.setAttribute("flag", "3");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/seikou.jsp");
+				dispatcher.forward(request, response);
 
-		    			 //データベースのクローズ
-		    				stmt.close();
-		    				conn.close();
+		    } catch (SQLException e) {
+		    	//表示
+		    	    PrintWriter out = response.getWriter();
 
-		    				flag = 3;
-		    				String sflag = String.valueOf(flag);
-
-		    				request.setAttribute("flag", sflag);
-		    				RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/seikou.jsp");
-		    				dispatcher.forward(request, response);
-
-		    		    } catch (SQLException e) {
-		    		    	//表示
-		    		    	    PrintWriter out = response.getWriter();
-
-		    		    	    out.println("例外発生：" + e );
-		    		    	    System.out.println("失敗" + e);
-		    		    }
-	  	    	//以下失敗
+		    	    out.println("例外発生：" + e );
+		    	    System.out.println("失敗" + e);
+		    }
 	}
 }

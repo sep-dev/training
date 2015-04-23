@@ -9,9 +9,13 @@
 <body>
 <div align="center">
 <h1>登録失敗！！！！！<br>空欄を埋めてください</h1>
+<<<<<<< HEAD
 <form action="touroku.jsp" method="post">
 <input type="submit" value="新規登録">
 </form>
+=======
+<input type="submit" value="新規登録">
+>>>>>>> origin/master
 </div>
 </body>
 </html>

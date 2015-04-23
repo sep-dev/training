@@ -7,7 +7,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+<<<<<<< HEAD
 import javax.servlet.RequestDispatcher;
+=======
+>>>>>>> origin/master
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -48,6 +51,7 @@ public class botan extends HttpServlet {
 		String name=request.getParameter("name");
 		String pass=request.getParameter("pass");
 		String dennwa=request.getParameter("dennwa");
+<<<<<<< HEAD
 
 		if(name.trim() =="" || pass.trim() =="" || dennwa.trim() == ""){
 			out.println(name);
@@ -64,6 +68,19 @@ public class botan extends HttpServlet {
 		//	out.println(dennwa);
 		//	//return;
 		//}
+=======
+		
+		if(name !="" && pass!="" && dennwa!="");{
+		out.println(name);
+		out.println(pass);
+		out.println(dennwa);
+		}
+	
+		
+				
+
+		
+>>>>>>> origin/master
 		Connection conn = null;
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
@@ -88,15 +105,21 @@ public class botan extends HttpServlet {
 			e.printStackTrace();
 		}finally{
 			try {
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 				conn.close();
 			} catch (SQLException e1) {
 				// TODO 自動生成された catch ブロック
 				e1.printStackTrace();
 			}
 		}
+<<<<<<< HEAD
 		RequestDispatcher disp =getServletContext().getRequestDispatcher("/seikou.jsp");
 		disp.forward(request, response);
+=======
+>>>>>>> origin/master
 	}
 }
 

@@ -1,0 +1,30 @@
+#title{
+	margin: 0 auto;
+	text-align:center;
+	color:#FFFFFF;
+	width:250px;
+	background: #116600;
+	height:40px;
+	line-height:40px;
+}
+#head{
+
+	margin-left : auto ;
+	margin-right : auto ;
+	margin-top : 100px ;
+	font-size : 250% ;
+	margin-bottom : auto ;
+	width:550px;
+}
+#body{
+
+	margin-left : auto ;
+	margin-right : auto ;
+	margin-top : 100px ;
+	margin-bottom : auto ;
+	width:550px;
+}
+
+body {
+	background-color: #aaccbb;
+	}

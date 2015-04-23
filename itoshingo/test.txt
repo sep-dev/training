@@ -1,0 +1,5 @@
+<<<<<<< HEAD
+Test
+=======
+test
+>>>>>>> feature/itoshingo-first-commit-training

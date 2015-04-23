@@ -9,9 +9,13 @@
  <body class=center>
     <div align="center">
        <h1>登録成功！！！！！</h1>
+<<<<<<< HEAD
        <form action="itirann.jsp" method="post">
        <input type="submit" value="一覧表示">
        </form>
+=======
+       <input type="submit" value="一覧表示">
+>>>>>>> origin/master
     </div>
  </body>
 </html>

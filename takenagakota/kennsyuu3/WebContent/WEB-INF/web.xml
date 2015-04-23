@@ -39,6 +39,7 @@
     <servlet-name>botan</servlet-name>
     <url-pattern>/botan</url-pattern>
   </servlet-mapping>
+<<<<<<< HEAD
   <servlet>
     <description></description>
     <display-name>itirann</display-name>
@@ -79,4 +80,6 @@
     <servlet-name>botan4</servlet-name>
     <url-pattern>/botan4</url-pattern>
   </servlet-mapping>
+=======
+>>>>>>> origin/master
 </web-app>

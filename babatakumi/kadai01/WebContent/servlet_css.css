@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+body{
+	background-color : #006699;
+}
+
+h1,h2{
+	color :#00FFFF;
+	text-align: center;
+}
+
+form{
+	text-align: center;
+}
+
+p{
+	text-align: left;
+}

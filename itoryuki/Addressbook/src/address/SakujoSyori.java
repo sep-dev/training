@@ -20,24 +20,24 @@ import javax.servlet.http.HttpServletResponse;
 public class SakujoSyori extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public SakujoSyori() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public SakujoSyori() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	* @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	*/
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	* @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	*/
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
@@ -71,13 +71,13 @@ public class SakujoSyori extends HttpServlet {
 					e.printStackTrace();
 				} finally {
 						 if (conn != null){
-					          try {
+							 try {
 								conn.close();
 							} catch (SQLException e) {
 								// TODO 自動生成された catch ブロック
 								e.printStackTrace();
 							}
-					          System.out.println("aaaaaa");
+							 	System.out.println("aaaaaa");
 			}
 	}
 	}

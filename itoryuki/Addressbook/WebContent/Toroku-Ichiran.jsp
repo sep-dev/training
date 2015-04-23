@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"pageEncoding="UTF-8"%>
 <%@page import="java.sql.*"%>
 
 <% //ドライバのロード
@@ -51,8 +50,8 @@
 				e.printStackTrace();
 			}finally{
 				try { rs.close(); } catch (Exception e) {}
-	            try { stmt.close(); } catch (Exception e) {}
-	            try { conn.close(); } catch (Exception e) {}
+				try { stmt.close(); } catch (Exception e) {}
+				try { conn.close(); } catch (Exception e) {}
 			}
 %>
 				<br>

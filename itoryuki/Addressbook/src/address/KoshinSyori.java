@@ -12,64 +12,64 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class Kousinseihi
- */
+	/**
+	* Servlet implementation class Kousinseihi
+	*/
 public class KoshinSyori extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * タグを無害化します。
-	 * @param str
-	 * @return
-	 */
+	* タグを無害化します。
+	* @param str
+	* @return
+	*/
 	private static String convertSanitize( String str ) {
-	    if(str==null) {
-	        return str;
-	    }
-	    str = str.replaceAll("&" , "＆" );
-	    str = str.replaceAll("<" , "＜"  );
-	    str = str.replaceAll(">" , "＞"  );
-	    str = str.replaceAll("\"", "”");
-	    str = str.replaceAll("'" , "’" );
-	    return str;
+		if(str==null) {
+			return str;
+		}
+		str = str.replaceAll("&" , "＆" );
+		str = str.replaceAll("<" , "＜"  );
+		str = str.replaceAll(">" , "＞"  );
+		str = str.replaceAll("\"", "”");
+		str = str.replaceAll("'" , "’" );
+		return str;
 	 }
 
 	/**
-	 * 無害化されたタグを元に戻します
-	 * @param str
-	 * @return
-	 */
+	* 無害化されたタグを元に戻します
+	* @param str
+	* @return
+	*/
 	private static String convertUnsanitize( String str ) {
-	    if(str==null) {
-	        return str;
-	    }
-	    str = str.replaceAll("&#39;" , "'" );
-	    str = str.replaceAll("&quot;", "\"");
-	    str = str.replaceAll("&gt;"  , ">" );
-	    str = str.replaceAll("&lt;"  , "<" );
-	    str = str.replaceAll("&amp;" , "&" );
-	    return str;
-	 }
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public KoshinSyori() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+		if(str==null) {
+			return str;
+		}
+		str = str.replaceAll("&#39;" , "'" );
+		str = str.replaceAll("&quot;", "\"");
+		str = str.replaceAll("&gt;"  , ">" );
+		str = str.replaceAll("&lt;"  , "<" );
+		str = str.replaceAll("&amp;" , "&" );
+		return str;
+	}
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public KoshinSyori() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	* @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	*/
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 *
-	 */
+	* @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	*
+	*/
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 

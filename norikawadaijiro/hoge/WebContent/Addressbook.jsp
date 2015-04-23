@@ -10,13 +10,13 @@
 		<h1>会員情報の登録</h1>
 		<FORM ACTION="Insert"method="get">
 			<p>
-				　氏名　：<input type="text" name="name" size="40" maxlength="20"placeholder="氏名を入力してください">
+				　氏名　：<input type="text" name="name" size="50" maxlength="20"placeholder="氏名を入力してください">
 			</p>
 			<p>
 				　住所　：<input type="text" name="address" size="50" maxlength="50"placeholder="住所を入力してください">
 			</p>
 			<p>
-				電話番号：<input type="text" name="tel" size="40" maxlength="20"placeholder="電話番号を入力してください">
+				電話番号：<input type="text" name="tel" size="48" maxlength="20"placeholder="電話番号を入力してください">
 			</p>
 			<input type="submit" value="登録">
 			<br>

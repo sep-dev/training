@@ -30,12 +30,6 @@ public class Addressbook_success extends HttpServlet {
 		PrintWriter out = response.getWriter();
 	    //StringBuffer sb = new StringBuffer();
 
-		String name = request.getParameter("name");
-	    String address = request.getParameter("address");
-	    String tell = request.getParameter("tel");
-
-
-
 	    out.println("<html>");
 	    out.println("  <body>");
 	    out.println("  <h1><center>登録成功！！！！！！</center></h1>");

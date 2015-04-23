@@ -9,32 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-
-/**
- * Servlet implementation class ShowAll
- */
 public class ShowAll extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public ShowAll() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		request.setCharacterEncoding("Windows-31J");
 		response.setContentType("text/html; charset=Windows-31J");
 
 		PrintWriter out=response.getWriter();
-
 
 		out.println("<html>");
 		out.println("<head>");
@@ -52,6 +39,7 @@ public class ShowAll extends HttpServlet {
 
 		if(con != null){
 			ResultSet rs = sql.select(con, null);
+
 			try{
 				out.println("<table border=\"1\">");
 				out.println("<tr><th></th><td>氏名</td><td>住所</td><td>電話番号</td></tr>");
@@ -114,9 +102,6 @@ public class ShowAll extends HttpServlet {
 		out.println("</html>");
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}

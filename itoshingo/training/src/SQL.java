@@ -3,7 +3,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-
 public class SQL {
 
 	protected Connection connect(){
@@ -13,7 +12,7 @@ public class SQL {
 		try{
 			// ドライバクラスをロード
 			Class.forName("com.mysql.jdbc.Driver");
-            // データベースへ接続
+			// データベースへ接続
 			con = DriverManager.getConnection("jdbc:mysql://localhost/address","root","zxcASDqwe");
 			return con;
 		}catch(Exception e){
@@ -28,13 +27,13 @@ public class SQL {
 	        // ステートメントオブジェクトを生成
 			ps = con.prepareStatement(sql);
 			ps.setString(1, name);
-	        ps.setString(2,address);
-	        ps.setString(3,tel);
+			ps.setString(2,address);
+			ps.setString(3,tel);
 
-	        int result = ps.executeUpdate();
+			int result = ps.executeUpdate();
 
-	        ps.close();
-	        con.close();
+			ps.close();
+			con.close();
 			return true;
 
 		}catch(Exception e){
@@ -49,17 +48,17 @@ public class SQL {
 		try{
 			String sql = "update tbaddress set name = ?,address = ?,tel = ? where id = ?";
 
-        	ps = con.prepareStatement(sql);
+			ps = con.prepareStatement(sql);
 
-        	ps.setString(1,name);
-        	ps.setString(2,address);
-        	ps.setString(3,tel);
-        	ps.setString(4,id);
+			ps.setString(1,name);
+			ps.setString(2,address);
+			ps.setString(3,tel);
+			ps.setString(4,id);
 
-        	int result = ps.executeUpdate();
+			int result = ps.executeUpdate();
 
-        	ps.close();
-        	con.close();
+			ps.close();
+			con.close();
 			return true;
 		}catch(Exception e){
 			return false;

@@ -14,15 +14,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class botan
+ * Servlet implementation class botan2
  */
-public class botan extends HttpServlet {
+public class botan2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public botan() {
+    public botan2() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,17 +34,17 @@ public class botan extends HttpServlet {
 		// TODO Auto-generated method stub
 	}
 
-
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 		request.setCharacterEncoding("Windows-31J");
 		response.setContentType("text/plain; charset=Windows-31J");
 
 		PrintWriter out=response.getWriter();
+		String id=request.getParameter("id");
 		String name=request.getParameter("name");
 		String pass=request.getParameter("pass");
 		String dennwa=request.getParameter("dennwa");
@@ -70,7 +70,7 @@ public class botan extends HttpServlet {
 			conn=DriverManager.getConnection("jdbc:mysql://localhost/zyuusyoroku","root","BACK-ON7");
 			conn.setAutoCommit(false);
 			Statement smt=conn.createStatement();
-			int count=smt.executeUpdate("INSERT INTO tbaddress(name,zyuusyo,bangou) VALUES('"+name+"','"+pass+"','"+dennwa+"')");
+			int count=smt.executeUpdate("UPDATE tbaddress(id,name,zyuusyo,bangou) VALUES('"+id+"','"+name+"','"+pass+"','"+dennwa+"')");
 			conn.commit();
 			System.out.println("通りました");
 		}catch(SQLException e){
@@ -81,25 +81,9 @@ public class botan extends HttpServlet {
 			// TODO 自動生成された catch ブロック
 				e1.printStackTrace();
 			}
-
-
-		} catch (ClassNotFoundException e) {
+	} catch (ClassNotFoundException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
-		}finally{
-			try {
-
-				conn.close();
-			} catch (SQLException e1) {
-				// TODO 自動生成された catch ブロック
-				e1.printStackTrace();
-			}
 		}
-		RequestDispatcher disp =getServletContext().getRequestDispatcher("/seikou.jsp");
-		disp.forward(request, response);
-	}
-}
 
-
-
-
+}}

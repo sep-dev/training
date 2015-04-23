@@ -180,12 +180,12 @@ public class DatabaseHelper {
 
     //Update処理
     private boolean update(int id,String name,String address,String tel){
-        HashMap<Integer,String> map = new HashMap<Integer,String>(); //値格納用HashMap
+        HashMap<Integer,String> map = new HashMap<Integer,String>(); //値格納用HashMap<何番目,挿入値>
 
         query.append("UPDATE ").append(TABLE_NAME).append(" SET ");
 
         if(name != null && !name.equals("")){
-            map.put(map.size()+1, name);
+            map.put(map.size()+1, name); // +1しているのは、パラメータ番号の開始値が1～なので
             query.append(DatabaseHelper.Columns.NAME).append("=?,");
         }
 
@@ -199,10 +199,9 @@ public class DatabaseHelper {
             query.append(DatabaseHelper.Columns.TEL).append("=?,");
         }
 
-
         query = query.deleteCharAt(query.lastIndexOf(",")); //末尾の "," を削除する(必ず付加されているため）
         query.append(" WHERE id=?");
-        System.out.println(query.toString());
+
         try{
             preStmt = conn.prepareStatement(query.toString());
             for(int i=1 ; i <= map.size() ; i++) preStmt.setString(i, map.get(i)); //ループで値をセット

@@ -126,9 +126,9 @@ public class DatabaseLogic {
 			return(records);	// カウントしたレコード件数を、呼び出し元に返す
 
 		}catch(SQLException e) {
-				System.err.println("データ件数カウントの際に、エラーが起こりました");
-				e.printStackTrace();
-				return 0;
+			System.err.println("データ件数カウントの際に、エラーが起こりました");
+			e.printStackTrace();
+			return 0;
 		}
 	}
 

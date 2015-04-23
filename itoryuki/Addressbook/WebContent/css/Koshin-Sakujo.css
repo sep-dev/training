@@ -1,0 +1,30 @@
+@CHARSET "UTF-8";
+
+h1 { font-family: “Meiryo”, sans-serif;
+		text-align: center;
+		color: #000000 ;
+		background: #FFFF66;
+		line-height: 1;
+		margin:10px 450px;
+		padding: 5px 5px 5px 5px;
+		box-shadow:1px 3px 7px 0px #003300 ;
+		border-top:7px solid #FFFF99;
+		border-bottom:7px solid #FFFF99;
+		border-radius: 5px ;
+		}
+
+body {background-color:#FFFF77;
+		font-size : large;
+		font-family: "Meiryo";
+		line-height: 2;
+		}
+
+p {text-align: center;}
+
+label{margin-left: 420px;}
+
+input[type=text]{height:25px;}
+
+div {text-align : center ;}
+
+input.button{font-size:18px; font-family: "Meiryo";}

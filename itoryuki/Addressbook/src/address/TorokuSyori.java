@@ -18,6 +18,39 @@ import javax.servlet.http.HttpServletResponse;
 public class TorokuSyori extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * タグを無害化します。
+	 * @param str
+	 * @return
+	 */
+	private static String convertSanitize( String str ) {
+	    if(str==null) {
+	        return str;
+	    }
+	    str = str.replaceAll("&" , "&amp;" );
+	    str = str.replaceAll("<" , "&lt;"  );
+	    str = str.replaceAll(">" , "&gt;"  );
+	    str = str.replaceAll("\"", "&quot;");
+	    str = str.replaceAll("'" , "&#39;" );
+	    return str;
+	 }
+
+	/**
+	 * 無害化されたタグを元に戻します
+	 * @param str
+	 * @return
+	 */
+	private static String convertUnsanitize( String str ) {
+	    if(str==null) {
+	        return str;
+	    }
+	    str = str.replaceAll("&#39;" , "'" );
+	    str = str.replaceAll("&quot;", "\"");
+	    str = str.replaceAll("&gt;"  , ">" );
+	    str = str.replaceAll("&lt;"  , "<" );
+	    str = str.replaceAll("&amp;" , "&" );
+	    return str;
+	 }
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -39,6 +72,7 @@ public class TorokuSyori extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
+		response.setContentType("text/html; charset=utf-8");
 		String name1;
 		String  address1;
 		String tel1;
@@ -86,13 +120,10 @@ public class TorokuSyori extends HttpServlet {
 					//登録失敗画面へ
 					RequestDispatcher dispatcher =request.getRequestDispatcher("/WEB-INF/jsp/Toroku-Shippai.jsp");
 					dispatcher.forward(request, response);
-
 			}
 		}
 
-
 	private void value(String string, String string2, String string3) {
 		// TODO 自動生成されたメソッド・スタブ
-
 	}
 }

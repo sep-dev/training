@@ -7,12 +7,11 @@
 		<head>
 			<meta charset="UTF-8">
 			<title>更新成功</title>
+			<link href="css/Koshin-Seiko.css" rel="stylesheet" type="text/css" media="screen" />
 		</head>
-			<body><BODY bgcolor="#87f3ff">
-				<h1 style="text-align:center">更新成功！！！！！！！</h1>
+			<body>
+				<h1>更新成功！！！！！！！</h1>
 				<br><br>
-				<div Align="center">
-					<input type="button" value="一覧表示" onclick="location.href='Toroku-Ichiran.jsp'">
-				</div>
+				<div><input type="button" class="button" value="一覧表示" onclick="location.href='Toroku-Ichiran.jsp'"></div>
 			</body>
 </html>

@@ -18,6 +18,39 @@ import javax.servlet.http.HttpServletResponse;
 public class KoshinSyori extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * タグを無害化します。
+	 * @param str
+	 * @return
+	 */
+	private static String convertSanitize( String str ) {
+	    if(str==null) {
+	        return str;
+	    }
+	    str = str.replaceAll("&" , "＆" );
+	    str = str.replaceAll("<" , "＜"  );
+	    str = str.replaceAll(">" , "＞"  );
+	    str = str.replaceAll("\"", "”");
+	    str = str.replaceAll("'" , "’" );
+	    return str;
+	 }
+
+	/**
+	 * 無害化されたタグを元に戻します
+	 * @param str
+	 * @return
+	 */
+	private static String convertUnsanitize( String str ) {
+	    if(str==null) {
+	        return str;
+	    }
+	    str = str.replaceAll("&#39;" , "'" );
+	    str = str.replaceAll("&quot;", "\"");
+	    str = str.replaceAll("&gt;"  , ">" );
+	    str = str.replaceAll("&lt;"  , "<" );
+	    str = str.replaceAll("&amp;" , "&" );
+	    return str;
+	 }
     /**
      * @see HttpServlet#HttpServlet()
      */

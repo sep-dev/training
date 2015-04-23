@@ -1,4 +1,4 @@
-package servlet;
+﻿package servlet;
 
 import java.io.IOException;
 
@@ -14,39 +14,39 @@ import javax.servlet.http.HttpSession;
 public class Select extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+
+	// 「一覧表示画面」で更新or削除ボタンが押された場合
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// フォワード先
-		String forwardPath = null;
-
-		// フォームに入力された情報を取得
+		// 選択された会員のIDを取得
 		request.setCharacterEncoding("UTF-8");
-		String id = request.getParameter("id");		// 会員のID
+		String id = request.getParameter("id");
 
-		// 入力エラーのチェック
+		// エラーチェック
 		boolean error = false;
 		if(id == null) {
-			// 会員が選択されていなければエラー
-			error = true;
+
+			error = true;	// 会員が選択されていなければエラー
 		}
 
-		// 会員が選択されていれば
+		// ↓ エラーがなければ ↓
 		if(error == false) {
+
+			// 選択した会員のIDをセッションスコープに保存
 			HttpSession session = request.getSession();
-			session.setAttribute("id", id);		// 選択した会員のIDをセッションスコープに保存
+			session.setAttribute("id", id);
 
-			// フォワード先に, 「更新フォーム」のJSPファイルを設定
-			forwardPath = "/WEB-INF/jsp/updateForm.jsp";
+			// 「更新フォーム」にフォワード
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/updateForm.jsp");
+			dispatcher.forward(request, response);
 		}
 
-		// 会員が選択されていなければ
+		// ↓ エラーがあれば ↓
 		else {
-			// フォワード先に, 「一覧表示」のJSPファイルを設定
-			forwardPath = "/WEB-INF/jsp/list.jsp";		// 選択し直し
-		}
 
-		// 設定されたフォワード先にフォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
-		dispatcher.forward(request, response);
+			// 「一覧表示」にリダイレクト
+			response.sendRedirect("/addressBook/list.jsp");		// 選択し直し
+		}
 	}
+
 }

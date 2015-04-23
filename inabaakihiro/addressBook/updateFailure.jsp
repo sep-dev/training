@@ -9,7 +9,7 @@
 	</head>
 
 	<body>
-		<h2>登録が完了しました</h2>
+		<h2>更新する情報が入力されていません</h2>
 
 		<p><a href="/addressBook/SwitchMenu?action=list">
 			<input type="button" value="一覧表示">

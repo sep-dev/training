@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+
+h1{ font-family: “Meiryo”, sans-serif;
+		text-align: center;
+		font-size: 30pt ;
+		}
+
+body{background-color:#FFCCFF;}
+
+div {text-align : center ;}
+
+input.button{font-size:18px; font-family: "Meiryo";}

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"pageEncoding="UTF-8"%>
 <%@page import="java.sql.*"%>
 
 <% //ドライバのロード
@@ -8,7 +7,6 @@
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
-
 %>
 
 <!DOCTYPE html>
@@ -16,11 +14,14 @@
 		<head>
 			<meta charset="UTF-8">
 			<title>会員一覧</title>
+			<link href="css/TorokuIchiran.css" rel="stylesheet" type="text/css" media="screen" />
 		</head>
 			<body>
-				<h2>会員一覧</h2>
+				<h1>会員一覧</h1>
 					<p>↓一つだけ選択可能</p>
 	<form action="Koshin-Sakujo.jsp" method="post">
+
+
 <%
 		//	データベースにアクセス
 		Connection conn = null;
@@ -38,22 +39,24 @@
 			//テーブルの中身を表示
 			  while(rs.next()){
 %>
-	            	<label><p><input type ="radio" name="add" value=<%= rs.getString("id")%> required>
-	            	氏名：<%= rs.getString("name")%>　住所：<%= rs.getString("address")%>　電話番号<%= rs.getString("tel")%></label></p>
+
+			<label><input type ="radio" name="add" value=<%= rs.getString("id")%> required>
+				氏名：<%= rs.getString("name")%>　住所：<%= rs.getString("address")%>　電話番号：<%= rs.getString("tel")%></label><br>
+
 <%
 			//データベースから切断
-			  }
+			}
 			}catch (SQLException e){
 				e.printStackTrace();
 			}finally{
 				try { rs.close(); } catch (Exception e) {}
-	            try { stmt.close(); } catch (Exception e) {}
-	            try { conn.close(); } catch (Exception e) {}
+				try { stmt.close(); } catch (Exception e) {}
+				try { conn.close(); } catch (Exception e) {}
 			}
 %>
-				<input type="submit"  value="更新or削除"><br>
+				<br>
+				<div><input type="submit" class="button" value="更新or削除"  >　　
 				</form>
-				<br><br>
-				<input type="button" value="新規登録" onclick="location.href='http://localhost:8080/Addressbook/Shinki-Toroku.jsp'">
+				<input type="button" class="button" value="新規登録" onclick="location.href='http://localhost:8080/Addressbook/Shinki-Toroku.jsp'"></div>
 		</body>
 </html>

@@ -40,15 +40,15 @@ public class DatabaseManager {
         switch(command){
         //データの追加処理
         case DatabaseHelper.INSERT:
-            isError=insertSQL(conn);
+            isError=insertSQL();
             break;
         //データの更新処理
         case DatabaseHelper.UPDATE:
-            isError=updateSQL(conn);
+            isError=updateSQL();
             break;
         //データの削除
         case DatabaseHelper.DELETE:
-            isError=deleteSQL(conn);
+            isError=deleteSQL();
             break;
         }
         return isError;
@@ -73,7 +73,7 @@ public class DatabaseManager {
     }
 
     //追加処理
-    private boolean insertSQL(Connection conn){
+    private boolean insertSQL(){
         boolean isError=false;
         try{
             conn.setAutoCommit(false);
@@ -98,7 +98,7 @@ public class DatabaseManager {
     }
 
     //更新処理
-    private boolean updateSQL(Connection conn){
+    private boolean updateSQL(){
         boolean isError=false;
         try{
             conn.setAutoCommit(false);
@@ -123,7 +123,7 @@ public class DatabaseManager {
     }
 
     //削除処理
-    private boolean deleteSQL(Connection conn){
+    private boolean deleteSQL(){
         boolean isError=false;
         try{
             conn.setAutoCommit(false);

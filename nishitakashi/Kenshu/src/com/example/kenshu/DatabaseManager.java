@@ -40,11 +40,11 @@ public class DatabaseManager {
         switch(command){
         //データの追加処理
         case DatabaseHelper.INSERT:
-        	isError=insertSQL(conn);
+            isError=insertSQL(conn);
             break;
         //データの更新処理
         case DatabaseHelper.UPDATE:
-        	isError=updateSQL(conn);
+            isError=updateSQL(conn);
             break;
         //データの削除
         case DatabaseHelper.DELETE:
@@ -91,7 +91,7 @@ public class DatabaseManager {
             isError=false;
             stmt.close();
         }catch(Exception e){
-        	isError=true;
+            isError=true;
             e.printStackTrace();
         }
         return isError;
@@ -116,7 +116,7 @@ public class DatabaseManager {
             isError=false;
             stmt.close();
         }catch(Exception e){
-        	isError=true;
+            isError=true;
             e.printStackTrace();
         }
         return isError;
@@ -133,10 +133,10 @@ public class DatabaseManager {
             int num = stmt.executeUpdate(sql);
             isError=false;
             stmt.close();
-    	}catch(Exception e){
-    		isError=true;
-    		e.printStackTrace();
-    	}
+        }catch(Exception e){
+            isError=true;
+            e.printStackTrace();
+        }
         return isError;
     }
 }

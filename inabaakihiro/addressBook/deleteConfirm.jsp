@@ -1,4 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="model.DatabaseLogic" %>
 <!DOCTYPE html>
@@ -10,7 +10,7 @@
 	</head>
 
 	<body>
-		<h1>会員情報の更新</h1>
+		<h2>本当に削除してもよろしいですか？</h2>
 
 		<%
 		// セッションスコープから、選択中の会員のIDを取得
@@ -35,20 +35,12 @@
 		dbLogic.disconnect();
 		%>
 
-		<form action="/addressBook/Update" method="post">
-			<p>・氏名<br><input type="text" name="name"><br></p>
-			<p>・住所<br><input type="text" name="address"></p>
-			<p>・電話番号<br><input type="text" name="tel"><br></p>
-			<input type="submit" value="更新">
-			<input type="reset" value="リセット">
+		<form action="/addressBook/Delete" method="post">
+			<input type="submit" value="削除">
 		</form>
 
 		<p><a href="/addressBook/SwitchMenu?action=list">
 			<input type="button" value="一覧表示">
-		</a></p>
-
-		<p><a href="/addressBook/Delete">
-			<input type="button" value="削除">
 		</a></p>
 
 	</body>

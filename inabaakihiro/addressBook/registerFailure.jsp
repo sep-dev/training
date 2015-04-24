@@ -4,6 +4,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<link rel="stylesheet" href="common.css" type="text/css">
 		<title>住所録システム</title>
 	</head>
 

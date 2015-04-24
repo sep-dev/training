@@ -8,12 +8,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="css/c_list.css" type="text/css" />
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>削除できませんでした</h1>
-	<form action="jsp/DataShow.jsp">
-	<button type="submit" name="list_show" value="">一覧表示</button>
-	</form>
+    <h1>削除できませんでした</h1>
+    <form action="jsp/DataShow.jsp">
+    <div id="button"><button type="submit" name="list_show" value="">一覧表示</button></div>
+    </form>
 </body>
 </html>

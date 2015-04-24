@@ -12,12 +12,9 @@
 <link rel="stylesheet" href="css/c_list.css" type="text/css" />
 </head>
 <body>
-	<div id="head">削除しました！</div>
-	<br>
-	<div id="body">
-	<form action="jsp/DataShow.jsp">
-	<button type="submit" name="return" value="">一覧表示</button>
-	</form>
-	</div>
+    <h1>削除しました！</h1>
+    <form action="jsp/DataShow.jsp">
+    <div="button"><button type="submit" name="return" value="">一覧表示</button></div>
+    </form>
 </body>
 </html>

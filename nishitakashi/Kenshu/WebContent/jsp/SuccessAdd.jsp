@@ -12,11 +12,9 @@
 <title>読み込み成功</title>
 </head>
 <body>
-	<div id="head">登録成功！</div>
-	<div id="body">
-	<form action="jsp/DataShow.jsp">
-	<button type="submit" name="list_show" value="">一覧表示</button>
-	</form>
-	</div>
+    <h1>登録成功！</h1>
+    <form action="jsp/DataShow.jsp">
+    <div id="button"><button type="submit" name="list_show" value="">一覧表示</button></div>
+    </form>
 </body>
 </html>

@@ -8,13 +8,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="css/c_list.css" type="text/css" />
 <title>読み込み失敗</title>
 </head>
 <body>
-	<h1>登録できませんでした</h1>
-	<div id="body">特殊な文字が使用されています</div>
-	<form action="jsp/MainScreen.jsp">
-	<button type="submit" name="list_show" value="">新規登録</button>
-	</form>
+    <h1>登録できませんでした</h1>
+    <p>特殊な文字が使用されています</p>
+    <form action="jsp/MainScreen.jsp">
+    <div id="button"><button type="submit" name="list_show" value="">新規登録</button></div>
+    </form>
 </body>
 </html>

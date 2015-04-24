@@ -1,162 +1,142 @@
 package com.example.kenshu;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+//データベースへの接続やデータ操作を行うクラス
 public class DatabaseManager {
-	public String [] escapeParameter;
-	private String [] col;
-	public DatabaseManager(){
-		escapeParameter=new String[DatabaseHelper.COL_NUM];
-		col=new String[DatabaseHelper.COL_NUM];
-	}
-	public ResultSet datalink(int command,HttpServletRequest request, HttpServletResponse response){
+    private String [] col;
+    private HttpServletRequest request;
+    private  HttpServletResponse response;
+    private Connection conn;
 
-	    Connection conn = null;
-		Statement stmt = null;
-		ResultSet rs = null;
-		String sql=null;
-		col[0]=request.getParameter(DatabaseHelper.COL_NAME[0]);
-		for(int i=1;i<DatabaseHelper.COL_NUM;i++){
-			 //SQLインジェクション対策として特殊文字をエスケープ
-			col[i]=SQLEscape.sqlEscape(request.getParameter(DatabaseHelper.COL_NAME[i]));
-		}
+    public DatabaseManager(){
+        col=new String[DatabaseHelper.COL_NUM];
+    }
 
-		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			conn = DriverManager.getConnection(DatabaseHelper.URL, DatabaseHelper.USER, DatabaseHelper.PASSWORD);
-			 //自動でコミットさせないようにする処理
-			conn.setAutoCommit(false);
+    //データベースと接続
+    public Connection datalink(HttpServletRequest request, HttpServletResponse response){
+        this.request=request;
+        this.response=response;
+        try {
+            request.setCharacterEncoding("utf-8");
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            conn = DriverManager.getConnection(DatabaseHelper.URL, DatabaseHelper.USER, DatabaseHelper.PASSWORD);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return conn;
+    }
 
-			stmt = conn.createStatement();
+    //SQLの実行
+    public boolean excute(int command){
+        boolean isError=false;
+        switch(command){
+        //データの追加処理
+        case DatabaseHelper.INSERT:
+            isError=insertSQL();
+            break;
+        //データの更新処理
+        case DatabaseHelper.UPDATE:
+            isError=updateSQL();
+            break;
+        //データの削除
+        case DatabaseHelper.DELETE:
+            isError=deleteSQL();
+            break;
+        }
+        return isError;
+    }
 
-			switch(command){
-			case DatabaseHelper.INSERT:
-				sql=insertData();
-				int num = stmt.executeUpdate(sql);
-				RequestDispatcher disp = request.getRequestDispatcher("jsp/SuccessAdd.jsp");
-			    disp.forward(request, response);
-				break;
-			case DatabaseHelper.UPDATE:
-				sql=updateData();
-				int num2 = stmt.executeUpdate(sql);
-				RequestDispatcher disp2 = request.getRequestDispatcher("jsp/SuccessUpdate.jsp");
-			    disp2.forward(request, response);
-				break;
-			case DatabaseHelper.DELETE:
-				rs=deleteData();
-				break;
-			case DatabaseHelper.SELECT:
-				rs=selectData(col);
-				break;
-			}
-			stmt.close();
-			conn.commit();
+    //トランザクション処理
+    //問題がなければコミットし、問題発生時ロールバックする
+    public void transaction(boolean isError){
+        if(isError){
+            try {
+                conn.rollback();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }else{
+            try {
+                conn.commit();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
-		} catch (InstantiationException e) {
-			try {
-				conn.rollback();
+    //追加処理
+    private boolean insertSQL(){
+        boolean isError=false;
+        try{
+            conn.setAutoCommit(false);
+            Statement stmt = conn.createStatement();
+            col[DatabaseHelper.ID]=request.getParameter(DatabaseHelper.COL_NAME[DatabaseHelper.ID]);
+            //SQLインジェクション対策として特殊文字をエスケープ
+            for(int i=DatabaseHelper.INNIT_COL_NO;i<DatabaseHelper.COL_NUM;i++){
+                col[i]=SQLEscape.sqlEscape(request.getParameter(DatabaseHelper.COL_NAME[i]));
+            }
+            String sql="insert into "+ DatabaseHelper.TABLE_NAME+"("+DatabaseHelper.COL_NAME[DatabaseHelper.NAME]
+                 +","+DatabaseHelper.COL_NAME[DatabaseHelper.ADDRESS]
+                 +","+DatabaseHelper.COL_NAME[DatabaseHelper.TEL]+")"
+                 + "values(\""+col[DatabaseHelper.NAME]+"\",\""+col[DatabaseHelper.ADDRESS]+"\",\""+col[DatabaseHelper.TEL]+"\")";
+            int num = stmt.executeUpdate(sql);
+            isError=false;
+            stmt.close();
+        }catch(Exception e){
+            isError=true;
+            e.printStackTrace();
+        }
+        return isError;
+    }
 
-			} catch (SQLException e1) {
+    //更新処理
+    private boolean updateSQL(){
+        boolean isError=false;
+        try{
+            conn.setAutoCommit(false);
+            Statement stmt = conn.createStatement();
+            col[DatabaseHelper.ID]=request.getParameter(DatabaseHelper.COL_NAME[DatabaseHelper.ID]);
+            //SQLインジェクション対策として特殊文字をエスケープ
+            for(int i=DatabaseHelper.INNIT_COL_NO;i<DatabaseHelper.COL_NUM;i++){
+                col[i]=SQLEscape.sqlEscape(request.getParameter(DatabaseHelper.COL_NAME[i]));
+            }
+            for(int current_col_No=DatabaseHelper.INNIT_COL_NO;current_col_No<DatabaseHelper.COL_NUM;current_col_No++){
+                String sql=null;
+                sql="update "+ DatabaseHelper.TABLE_NAME+" set "+ DatabaseHelper.COL_NAME[current_col_No]+"= \""+col[current_col_No]+"\" where id="+request.getParameter("upd")+";";
+                int num = stmt.executeUpdate(sql);
+            }
+            isError=false;
+            stmt.close();
+        }catch(Exception e){
+            isError=true;
+            e.printStackTrace();
+        }
+        return isError;
+    }
 
-				e1.printStackTrace();
-
-			}
-			e.printStackTrace();
-			RequestDispatcher disp = request.getRequestDispatcher("jsp/FalseAdd.jsp");
-		      try {
-				disp.forward(request, response);
-			} catch (ServletException e1) {
-				// TODO 自動生成された catch ブロック
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				// TODO 自動生成された catch ブロック
-				e1.printStackTrace();
-			}
-		} catch (IllegalAccessException e) {
-			try {
-				conn.rollback();
-			} catch (SQLException e1) {
-				// TODO 自動生成された catch ブロック
-				e1.printStackTrace();
-			}
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			try {
-				conn.rollback();
-			} catch (SQLException e1) {
-				// TODO 自動生成された catch ブロック
-				e1.printStackTrace();
-			}
-			e.printStackTrace();
-		} catch (SQLException e) {
-			try {
-				conn.rollback();
-			} catch (SQLException e1) {
-				// TODO 自動生成された catch ブロック
-				e1.printStackTrace();
-			}
-			e.printStackTrace();
-		} catch (ServletException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}finally{
-		      try{
-		    	  if (conn != null){
-
-		    		  conn.close();
-		    	  }
-		      }catch (SQLException e){
-		    	 e.printStackTrace();
-		    	 try {
-					conn.rollback();
-				} catch (SQLException e1) {
-					// TODO 自動生成された catch ブロック
-					e1.printStackTrace();
-				}
-		      }
-		}
-
-		return rs;
-
-	}
-	private String insertData(){
-		String sql=null;
-		sql="insert into "+ DatabaseHelper.TABLE_NAME+"("+DatabaseHelper.COL_NAME[DatabaseHelper.NAME]
-				+","+DatabaseHelper.COL_NAME[DatabaseHelper.ADDRESS]
-				+","+DatabaseHelper.COL_NAME[DatabaseHelper.TEL]+")"
-	    		+ "values(\""+col[DatabaseHelper.NAME]+"\",\""+col[DatabaseHelper.ADDRESS]+"\",\""+col[DatabaseHelper.TEL]+"\")";
-
-
-		return sql;
-
-	}
-	private String updateData(){
-		ResultSet rs=null;
-		return null;
-
-	}
-	private ResultSet deleteData(){
-		ResultSet rs=null;
-		return null;
-
-	}
-	private ResultSet selectData(String[] col){
-		ResultSet rs=null;
-		return null;
-
-	}
-
+    //削除処理
+    private boolean deleteSQL(){
+        boolean isError=false;
+        try{
+            conn.setAutoCommit(false);
+            Statement stmt = conn.createStatement();
+            col[DatabaseHelper.ID]=request.getParameter("del");
+            String sql="delete  from tbAddress where id ="+col[DatabaseHelper.ID]+";";
+            int num = stmt.executeUpdate(sql);
+            isError=false;
+            stmt.close();
+        }catch(Exception e){
+            isError=true;
+            e.printStackTrace();
+        }
+        return isError;
+    }
 }

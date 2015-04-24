@@ -3,6 +3,7 @@ package com.example.kenshu;
 import java.io.IOException;
 import java.sql.Connection;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -43,9 +44,18 @@ public class DataAdd extends HttpServlet {
         //データベース接続
         Connection conn = dm.datalink(request, response);
         //SQLの実行
-        if(dm.excute(conn,command)){
-            //問題が起きた時
-            dm. falseSQL(conn,command);
+        //実行の正否判定
+        boolean isError=dm.excute(command);
+        //トランザクション処理
+        dm.transaction(isError);
+        if(isError){
+            //エラー時は登録失敗画面へ遷移
+            RequestDispatcher disp = request.getRequestDispatcher("jsp/FalseAdd.jsp");
+            disp.forward(request, response);
+        }else{
+            //問題なければ登録成功画面へ遷移
+            RequestDispatcher disp = request.getRequestDispatcher("jsp/SuccessAdd.jsp");
+            disp.forward(request, response);
         }
     }
 }

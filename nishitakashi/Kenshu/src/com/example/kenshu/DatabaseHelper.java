@@ -23,6 +23,7 @@ public class DatabaseHelper {
     public static String [][] customer_current=new String[COL_NUM][MAX_CUSTOMER_NUM];
 
     //SQLコマンド
+    public static final int COMMAND_NUM=4;
     public static final int INSERT=0;
     public static final int UPDATE=1;
     public static final int DELETE=2;

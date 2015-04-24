@@ -14,15 +14,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class botan
+ * Servlet implementation class botan4
  */
-public class botan extends HttpServlet {
+public class botan4 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public botan() {
+    public botan4() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,8 +34,6 @@ public class botan extends HttpServlet {
 		// TODO Auto-generated method stub
 	}
 
-
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -45,49 +43,36 @@ public class botan extends HttpServlet {
 		response.setContentType("text/plain; charset=Windows-31J");
 
 		PrintWriter out=response.getWriter();
-		String name=request.getParameter("name");
-		String pass=request.getParameter("pass");
-		String dennwa=request.getParameter("dennwa");
-
-		if(name.trim() =="" || pass.trim() =="" || dennwa.trim() == ""){
-			out.println(name);
-			out.println(pass);
-			out.println(dennwa);
-			RequestDispatcher disp =getServletContext().getRequestDispatcher("/sippai.jsp");
-			disp.forward(request, response);
-			return;
-		}
-
-		//if(name !=" " && pass!=" " && dennwa!=" "){
-		//	out.println(name);
-		//	out.println(pass);
-		//	out.println(dennwa);
-		//	//return;
-		//}
-
-
+		String id=request.getParameter("id");
+		String name=request.getParameter("simei");
+		String pass=request.getParameter("ie");
+		String dennwa=request.getParameter("tell");
 		Connection conn = null;
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
 			conn=DriverManager.getConnection("jdbc:mysql://localhost/zyuusyoroku","root","BACK-ON7");
 			conn.setAutoCommit(false);
-			Statement smt=conn.createStatement();
-			int count=smt.executeUpdate("INSERT INTO tbaddress(name,zyuusyo,bangou) VALUES('"+name+"','"+pass+"','"+dennwa+"')");
+			Statement smt= conn.createStatement();
+			int count=smt.executeUpdate("delete from tbaddress where id="+(id));
 			conn.commit();
-			System.out.println("通りました");
+			out.println("通りました");
 		}catch(SQLException e){
 			e.printStackTrace();
 			try {
 				conn.rollback();
+				out.println("rollback");
 			}catch (SQLException e1) {
 			// TODO 自動生成された catch ブロック
 				e1.printStackTrace();
+
+				out.println("error１");
 			}
 
 
 		} catch (ClassNotFoundException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
+			out.println("error２");
 		}finally{
 			try {
 
@@ -95,13 +80,13 @@ public class botan extends HttpServlet {
 			} catch (SQLException e1) {
 				// TODO 自動生成された catch ブロック
 				e1.printStackTrace();
+				out.println("error3");
 			}
 		}
-		RequestDispatcher disp =getServletContext().getRequestDispatcher("/seikou.jsp");
+		RequestDispatcher disp =getServletContext().getRequestDispatcher("/sakuzyo.jsp");
 		disp.forward(request, response);
+		}
+
 	}
-}
-
-
 
 

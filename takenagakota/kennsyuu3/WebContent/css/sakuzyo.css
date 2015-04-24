@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+body{
+	background-color:#FFFF00;
+}
+h1{
+	color:#DC143C;
+	font-size:300%;
+
+}
+input{
+	width:200px;
+	height:50px;
+	font-size:140%;
+	font-weight:800;
+
+}

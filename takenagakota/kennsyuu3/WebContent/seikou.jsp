@@ -4,13 +4,14 @@
 <html>
  <head>
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/kennsyuu3/css/seikou.css">
    <title>登録成功画面</title>
   </head>
  <body class=center>
     <div align="center">
        <h1>登録成功！！！！！</h1>
        <form action="itirann.jsp" method="post">
-       <input type="submit" value="一覧表示">
+       <button type="submit" >一覧表示</button>
        </form>
     </div>
  </body>

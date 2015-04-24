@@ -5,6 +5,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>登録画面</title>
+		<link rel="stylesheet" type="text/css" href="http://localhost:8080/hoge/css/style.css">
 	</head>
 	<body>
 		<h1>会員情報の登録</h1>
@@ -16,13 +17,13 @@
 				　住所　：<input type="text" name="address" size="50" maxlength="50"placeholder="住所を入力してください">
 			</p>
 			<p>
-				電話番号：<input type="text" name="tel" size="48" maxlength="20"placeholder="電話番号を入力してください">
+				電話番号：<input type="text" name="tel" size="48" maxlength="11"placeholder="電話番号を入力してください">
 			</p>
 			<input type="submit" value="登録">
 			<br>
 			<input type="reset" value="リセット">
 		</FORM>
-		
+
 		<FORM ACTION="itiran.jsp">
 			<input type="submit" value="一覧表示">
 		</FORM>

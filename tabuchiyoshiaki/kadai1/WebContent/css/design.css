@@ -1,0 +1,98 @@
+@CHARSET "UTF-8";
+
+h1 {
+	position: relative;
+	padding: 0.8em;
+	margin: 0 0 1.5em;
+	font-size: 1.25em;
+	font-weight: bold;
+	text-align: center;
+	color: #fff;
+	background: #E9967A;
+	transform: rotate(-1deg) skew(-1deg);
+	-webkit-transform: rotate(-1deg) skew(-1deg);
+	-moz-transform: rotate(-1deg) skew(-1deg);
+	-o-transform: rotate(-1deg) skew(-1deg);
+	-ms-transform: rotate(-1deg) skew(-1deg);
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 1.0em 0 0 0 #E9967A, -1.0em
+		0 0 0 #E9967A;
+	-moz-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 1.0em 0 0 0 #E9967A,
+		-1.0em 0 0 0 #E9967A;
+	-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 1.0em 0 0 0 #E9967A,
+		-1.0em 0 0 0 #E9967A;
+	-o-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 1.0em 0 0 0 #E9967A,
+		-1.0em 0 0 0 #E9967A;
+	-ms-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 1.0em 0 0 0 #E9967A,
+		-1.0em 0 0 0 #E9967A;
+}
+
+button {
+	border: solid 1px #ccc;
+	padding: 15px 30px;
+	margin: 0 0 20px;
+	font-family: Arial, sans-serif;
+	font-size: 1.2em;
+	text-transform: uppercase;
+	font-weight: bold;
+	color: #333;
+	cursor: pointer;
+}
+
+input {
+	border: solid 1px #ccc;
+	padding: 15px 30px;
+	margin: 0 0 20px;
+	font-family: Arial, sans-serif;
+	font-size: 1.2em;
+	text-transform: uppercase;
+	font-weight: bold;
+	color: #333;
+	cursor: pointer;
+}
+
+body {
+	background: -webkit-linear-gradient(45deg, hsla(163, 99%, 41%, 1) 0%,
+		hsla(163, 99%, 41%, 0) 70%),
+		-webkit-linear-gradient(315deg, hsla(227, 93%, 47%, 1) 10%,
+		hsla(227, 93%, 47%, 0) 80%),
+		-webkit-linear-gradient(225deg, hsla(185, 99%, 42%, 1) 10%,
+		hsla(185, 99%, 42%, 0) 80%),
+		-webkit-linear-gradient(135deg, hsla(342, 98%, 47%, 1) 100%,
+		hsla(342, 98%, 47%, 0) 70%);
+	background: linear-gradient(45deg, hsla(163, 99%, 41%, 1) 0%,
+		hsla(163, 99%, 41%, 0) 70%),
+		linear-gradient(135deg, hsla(227, 93%, 47%, 1) 10%,
+		hsla(227, 93%, 47%, 0) 80%),
+		linear-gradient(225deg, hsla(185, 99%, 42%, 1) 10%,
+		hsla(185, 99%, 42%, 0) 80%),
+		linear-gradient(315deg, hsla(342, 98%, 47%, 1) 100%,
+		hsla(342, 98%, 47%, 0) 70%);
+	/* 画像を常に天地左右の中央に配置 */
+	background-position: center center;
+	/* 画像をタイル状に繰り返し表示しない */
+	background-repeat: no-repeat;
+	/* コンテンツの高さが画像の高さより大きい時、動かないように固定 */
+	background-attachment: fixed;
+	/* 表示するコンテナの大きさに基づいて、背景画像を調整 */
+	background-size: cover;
+	/* 背景画像が読み込まれる前に表示される背景のカラー */
+	background-color: #464646;
+	font-family: 'GulimChe', sans-serif;
+	font-size: 120%;
+	width: 800px;
+	margin-top: auto;
+	margin-right: auto;
+	margin-bottom: auto;
+	margin-left: auto;
+	color: #ffffff;
+}
+
+.cinema {
+	font-size: 30px;
+	font-family: bold;
+	text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0
+		#b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, .1), 0 0 5px
+		rgba(0, 0, 0, .1), 0 1px 3px rgba(0, 0, 0, .3), 0 3px 5px
+		rgba(0, 0, 0, .2), 0 5px 10px rgba(0, 0, 0, .25), 0 10px 10px
+		rgba(0, 0, 0, .2), 0 20px 20px rgba(0, 0, 0, .15);
+}

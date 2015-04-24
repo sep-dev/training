@@ -1,45 +1,50 @@
-<%@ page contentType="text/html; charset=utf-8" import="java.sql.*" %>
+<%@ page contentType="text/html; charset=utf-8" import="java.sql.*"%>
 
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
+<meta charset="UTF-8" />
 <title>Tablelist</title>
+<link rel="stylesheet" type="text/css"
+	href="http://localhost:8080/kadai1/css/design.css">
 </head>
 
 <body>
-<h1>会員一覧</h1>
-<p>↓一つだけ選択可能</p><br>
+	<h1>会員一覧</h1>
+	<p>↓一つだけ選択可能</p>
+	<br />
 
-<%
-    Class.forName("com.mysql.jdbc.Driver");
-Connection conn = DriverManager.getConnection(
-        "jdbc:mysql://localhost/kadai1",
-        "root", "onrain14");
-    Statement st=conn.createStatement();
-    ResultSet res = st.executeQuery("select * from tbaddress");
-    request.setCharacterEncoding("utf-8");
-    String id=null;
-    while(res.next()){
-    	id = res.getString("id");
-    
+	<%
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection conn = DriverManager.getConnection(
+				"jdbc:mysql://localhost/kadai1", "root", "onrain14");
+		Statement st = conn.createStatement();
+		ResultSet rs = st.executeQuery("select * from tbaddress");
+		request.setCharacterEncoding("utf-8");
+		String id = null;
+		while (rs.next()) {
+			id = rs.getString("id");
+	%>
+	<form action="/kadai1/Update.jsp" method="post">
+		<input type="radio" value=<%=id%> name="radioid" checked>
 
-%>
-<form action="/kadai1/Update.jsp" method="post">
-    	<input type="radio" value=<%=id%> name="radioid"  >
 
-    	<%
-        out.println("<tr>");
-        out.println("<td>" + "氏名:"+ res.getString("name") + "</td>");
-        out.println("<td>" + "住所:" + res.getString("address") + "</td>");
-        out.println("<td>" + "電話番号:" + res.getString("tel") + "</td>");
-        out.println("<br>");
-        out.println("</tr>");
-    }
-    st.close();
-    conn.close();
-
+		<%
+			out.println("<tr>");
+				out.println("<td>" + "氏名:" + rs.getString("name") + "</td>");
+				out.println("<td>" + "住所:" + rs.getString("address") + "</td>");
+				out.println("<td>" + "電話番号:" + rs.getString("tel") + "</td>");
+				out.println("<br />");
+				out.println("</tr>");
+			}
+			st.close();
+			conn.close();
 		%>
-
-<INPUT type="submit" value="更新or削除">
-</form>
+		<INPUT type="submit" value="更新or削除">
+	</form>
+	<br />
+	<form action="NewFile.jsp">
+		<INPUT type="submit" value="新規登録">
+	</form>
 </body>
 </html>

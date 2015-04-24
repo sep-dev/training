@@ -13,6 +13,10 @@
 			</h3>
 			<br><br>
 			<a href="addressbook.jsp"><input type="button" value="V‹K“o˜^"></a>
+			<br><br>
+			<form action="ShowAll" method="get">
+				<input type="submit" value="ˆê——•\Ž¦">
+			</form>
 		</div>
 	</body>
 </html>

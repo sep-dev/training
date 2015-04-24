@@ -1,10 +1,6 @@
-
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import javax.servlet.RequestDispatcher;
@@ -13,25 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class Select
- */
 public class Select extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public Select() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 
 		request.setCharacterEncoding("Windows-31J");
 		response.setContentType("text/html; charset=Windows-31J");
@@ -46,45 +32,41 @@ public class Select extends HttpServlet {
 		out.println("<body>");
 		out.println("<h1>会員情報の更新</h1>");
 
+		String id = request.getParameter("list");
 		Connection con = null;
-		PreparedStatement  ps;
+		SQL sql = new SQL();
 
-		String num = request.getParameter("list");
+		con = sql.connect();
 
-		try{
-			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost/address","root","zxcASDqwe");
+		if(con != null){
+			ResultSet rs = sql.select(con, id);
+			try{
+				rs.next();
+				String name = rs.getString("name");
+				String address = rs.getString("address");
+				String tel = rs.getString("tel");
 
-			String sql = "select * from tbaddress where id = "+ num;
+				out.println(" 氏名: "+ name);
+				out.println(" 住所: "+ address);
+				out.println(" 電話番号: "+ tel);
+				out.println("<br><br>");
 
-			ps = con.prepareStatement(sql);
-
-			ResultSet rs = ps.executeQuery();
-			rs.next();
-
-
-			String name = rs.getString("name");
-			String address = rs.getString("address");
-			String tel = rs.getString("tel");
-
-			out.println(" 氏名: "+ name);
-			out.println(" 住所: "+ address);
-			out.println(" 電話番号: "+ tel);
-			out.println("<br><br>");
-
-
-			ps.close();
-			rs.close();
-			con.close();
+				rs.close();
+				con.close();
+			}catch(Exception e){
+				RequestDispatcher disp = request.getRequestDispatcher("errordb.jsp");
+				disp.forward(request, response);
+			}
 
 
-		}catch(Exception e){
+		}else{
 			RequestDispatcher disp = request.getRequestDispatcher("errordb.jsp");
 			disp.forward(request, response);
 		}
 
+
 		out.println("<form action=\"Update\"method=\"post\">");
-		out.println("<input type=\"hidden\" name=\"id\" value="+ num +">");
+		out.println("<input type=\"hidden\" name=\"id\" value="+ id +">");
 		out.println("<table aling = \"center\">");
 		out.println("<tr><th>");
 		out.println("氏名 ");
@@ -109,7 +91,7 @@ public class Select extends HttpServlet {
 		out.println("</form>");
 		out.println("<br><br>");
 		out.println("<form action=\"Delete\" method=\"get\">");
-		out.println("<input type=\"hidden\" name=\"id\" value="+ num +">");
+		out.println("<input type=\"hidden\" name=\"id\" value="+ id +">");
 		out.println("<input type=\"submit\" value=\"削除\">");
 		out.println("</form>");
 
@@ -117,9 +99,7 @@ public class Select extends HttpServlet {
 		out.println("</html>");
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}

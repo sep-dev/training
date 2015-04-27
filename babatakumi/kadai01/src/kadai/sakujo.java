@@ -60,7 +60,7 @@ public class sakujo extends HttpServlet {
 //SQL ステートメント・オブジェクトの作成
 			Statement stmt = conn.createStatement();
 
-				 //SQL ステートメントの発行
+//SQL ステートメントの発行
 			String  query = "SELECT * from sample.tbaddress where id = "+id;
 			ResultSet rs = stmt.executeQuery(query) ;
 			rs.next();
@@ -83,11 +83,6 @@ public class sakujo extends HttpServlet {
 
 		    	out.println("<p>"+"名前：" + name + "住所：" + address + "電話：" + tell+"</p>" );
 
-		  System.out.println(id2);
-		  System.out.println(name);
-	      System.out.println(address);
-	      System.out.println(tell);
-
 				out.println("<form action=\""+ "/kadai01/delete \" method=\"post\">");
 				out.println("<input type=\"hidden\" name=\"id\" value= " +id2+">");
 				out.println("<input type=\"submit\" value=\"削除\">");
@@ -100,7 +95,7 @@ public class sakujo extends HttpServlet {
 				out.println("</body>");
 				out.println("</html>");
 
-			  //データベースのクローズ
+//データベースのクローズ
 			 rs.close();
 			 stmt.close();
 			 conn.close();

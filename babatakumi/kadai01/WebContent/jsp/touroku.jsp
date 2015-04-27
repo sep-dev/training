@@ -25,11 +25,17 @@
 			<h1>会員情報の登録</h1>
 
 
+
 			<!--入力フォーム -->
 			<form action="/kadai01/check" method="post">
-					<p><label for="name">氏名:</label>     <input type="text" name="name"></p>
-					<p><label for="address">住所:</label>  <input type="text" name="address"></p>
-					<p><label for="tell">電話番号:</label> <input type="text" name="tell" maxlength="10" onkeyDown="return numOnly()"><p>
+			<table class="i_tb" align ="center">
+					<tr><td><label for="name">氏名:</label></td>
+						<td><input type="text" name="name" style="width : 300px"></td></tr>
+					<tr><td><label for="address">住所:</label></td>
+						<td><input type="text" name="address" style="width : 300px"></td></tr>
+					<tr><td><label for="tell">電話:</label></td>
+						<td><input type="text" name="tell" maxlength="10" onkeyDown="return numOnly()" style="width : 300px"></td></tr>
+			</table>
 
 				<!-- ボタン -->
 				<p>
@@ -38,7 +44,7 @@
 				</p>
 			</form>
 			<form action="/kadai01/itirann" method=post>
-				<input type="submit" value="一覧表示">
+				<p><input type="submit" value="一覧表示"></p>
 			</form>
 		</body>
 </html>

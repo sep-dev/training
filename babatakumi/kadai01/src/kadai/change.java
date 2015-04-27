@@ -54,50 +54,53 @@ public class change extends HttpServlet {
 	      String user = "root";
 	      String pass = "sazi6675";
 
-	    //ページ遷移の判定
-	  	//フォームの中がからじゃない
-	        if(name != "" && address != "" && tell != ""){
-	      //フォームの中がnullじゃない
-	  	      if(name != null && address != null && tell != null){
-	  	//tellが10文字ある
-	  	    	  if(tell.length() == 10){
-	  	//成功
-	  	    		try {
-		    		      //データベースに接続
-		    			  conn = DriverManager.getConnection(url, user, pass);
+		 //ページ遷移の判定
 
-		    		      //SQL ステートメント・オブジェクトの作成
-		    			 Statement stmt = conn.createStatement();
-		    			 //SQL ステートメントの発行
-		    			 String  query2 = "UPDATE sample.tbaddress set name = '"+name+"', address = '"+address+"', tel = '"+tell+"' where id = "+id+"";
-		    			 int rs2 = stmt.executeUpdate(query2) ;
+	      //tellが10文字ある
+	      if(tell.length() != 10){
+	    	  //フォームの中が空じゃない、もしくは、フォームの中がnullじゃない
+	    	  if(name == "" || name == null || address == "" || address == null || tell == "" || tell == null){
 
-		    			 //データベースのクローズ
-		    				stmt.close();
-		    				conn.close();
+	    		  request.setAttribute("flag", "3");
 
-		    				RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/k_seikou.jsp");
-		    				dispatcher.forward(request, response);
-
-		    		    } catch (SQLException e) {
-		    		    	//表示
-		    		    	    PrintWriter out = response.getWriter();
-
-		    		    	    out.println("例外発生：" + e );
-		    		    	    System.out.println("失敗" + e);
-		    		    }
-	  	    	//以下失敗
-				  }else{
-						RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/k_sippai_tell.jsp");
-						dispatcher.forward(request, response);
-				  }
-		      }else{
-					RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/k_sippai.jsp");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/sippai.jsp");
 					dispatcher.forward(request, response);
-		      }
-	      }else{
-				RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/k_sippai.jsp");
-				dispatcher.forward(request, response);
+					return;
+			  }
+	    	  request.setAttribute("flag", "4");
+
+			  RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/sippai.jsp");
+			  dispatcher.forward(request, response);
+			  return;
 	      }
+
+	      	//ページ遷移成功
+			try {
+			      //データベースに接続
+				  conn = DriverManager.getConnection(url, user, pass);
+
+			      //SQL ステートメント・オブジェクトの作成
+				 Statement stmt = conn.createStatement();
+
+				 //SQL ステートメントの発行
+				 String  query2 = "UPDATE sample.tbaddress set name = '"+name+"', address = '"+address+"', tel = '"+tell+"' where id = "+id+"";
+				 int rs2 = stmt.executeUpdate(query2) ;
+
+				 	//データベースのクローズ
+					stmt.close();
+					conn.close();
+
+					request.setAttribute("flag", "2");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/seikou.jsp");
+					dispatcher.forward(request, response);
+
+			    } catch (SQLException e) {
+			    		//表示
+			    	    PrintWriter out = response.getWriter();
+
+			    	    out.println("例外発生：" + e );
+			    	    System.out.println("失敗" + e);
+			    }
 		}
 }
+

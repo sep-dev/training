@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import dao.MyDao;
-import dao.MyParameter;
+import dao.UserParameter;
 import form.DeleteForm;
 import form.InsertForm;
 import form.SelectForm;
@@ -30,7 +30,8 @@ public class AppController {
     private JdbcTemplate jdbcTemplate;
     @Autowired
     private MyDao dao;
-
+    @Autowired
+    private UserParameter user;
     /**
      * 新規登録(初期画面）
      * @param jt jdbcTemplateでデータベースの準備用
@@ -107,9 +108,9 @@ public class AppController {
             return "/showList";
         }else{
             UpdateForm updateForm=new UpdateForm();
-            updateForm.setRadio1(MyParameter.id);
-            dao.selectRadio(selectForm);
-            String res="氏名："+MyParameter.name+"　住所："+MyParameter.address+"　電話番号："+MyParameter.tel;
+            updateForm.setRadio1(user.getId());
+            dao.selectRadio(selectForm,user);
+            String res="氏名："+user.getName()+"　住所："+user.getAddress()+"　電話番号："+user.getTel();
             model.addAttribute("updateForm",updateForm);
             model.addAttribute("title","更新");
             model.addAttribute("selectForm",selectForm);
@@ -124,15 +125,15 @@ public class AppController {
      */
     @RequestMapping(value="/updateData",method=RequestMethod.POST,produces="text/plain;charset=utf-8")
     public String update(@Valid @ModelAttribute UpdateForm updateForm,BindingResult result,Model model){
-        updateForm.setRadio1(MyParameter.id);
-        String res="氏名："+MyParameter.name+"　住所："+MyParameter.address+"　電話番号："+MyParameter.tel;
+        updateForm.setRadio1(user.getId());
+        String res="氏名："+user.getName()+"　住所："+user.getAddress()+"　電話番号："+user.getTel();
         if(result.hasErrors()){
             model.addAttribute("title", "[ERROR]");
             model.addAttribute("message", "値を再度入力してください");
             model.addAttribute("updateForm",updateForm);
             return "/updateData";
         }else{
-            dao.update(updateForm,MyParameter.id);
+            dao.update(updateForm,user);
             model.addAttribute("updateForm",updateForm);
             model.addAttribute("title","更新成功！");
             model.addAttribute("message","更新が成功しました！");
@@ -147,7 +148,7 @@ public class AppController {
     @RequestMapping(value = "/delete", method = RequestMethod.GET, produces="text/plain;charset=utf-8")
     public String init_delete(Model model) {
         DeleteForm deleteForm=new DeleteForm();
-        String res="氏名："+MyParameter.name+"　住所："+MyParameter.address+"　電話番号："+MyParameter.tel;
+        String res="氏名："+user.getName()+"　住所："+user.getAddress()+"　電話番号："+user.getTel();
         model.addAttribute("title","削除");
         model.addAttribute("message",res);
         model.addAttribute("confirm","本当に削除しますか？");
@@ -160,9 +161,9 @@ public class AppController {
      */
     @RequestMapping(value="/delete",method=RequestMethod.POST,produces="text/plain;charset=utf-8")
     public String delete(@Valid @ModelAttribute DeleteForm deleteForm,BindingResult result,Model model){
+    	dao.delete(user);
         model.addAttribute("title","削除成功");
         model.addAttribute("message","削除しました！");
-        dao.delete(MyParameter.id);
         return "/successDel";
     }
 }

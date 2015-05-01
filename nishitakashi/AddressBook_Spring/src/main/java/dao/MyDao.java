@@ -27,17 +27,17 @@ public class MyDao {
     /**
      * 1件選択した会員情報を保持
      */
-    public void selectRadio(SelectForm selectForm){
+    public void selectRadio(SelectForm selectForm,UserParameter user){
         String sql_name="SELECT name FROM tbAddress WHERE id = ?";
         String sql_adr="SELECT address FROM tbAddress WHERE id = ?";
         String sql_tel="SELECT tel FROM tbAddress WHERE id = ?";
         String rs_name=jdbcTemplate.queryForObject(sql_name, new Object[] {selectForm.getRadio1()}, String.class);
         String rs_adr=jdbcTemplate.queryForObject(sql_adr, new Object[] {selectForm.getRadio1()}, String.class);
         String rs_tel=jdbcTemplate.queryForObject(sql_tel, new Object[] {selectForm.getRadio1()}, String.class);
-        MyParameter.id=selectForm.getRadio1();
-        MyParameter.name=rs_name;
-        MyParameter.address=rs_adr;
-        MyParameter.tel=rs_tel;
+        user.setId(selectForm.getRadio1());
+        user.setName(rs_name);
+        user.setAddress(rs_adr);
+        user.setTel(rs_tel);
     }
 
     /**
@@ -53,7 +53,7 @@ public class MyDao {
     /**
      * データベースの更新
      */
-    public void update(UpdateForm model,String selectId) {
+    public void update(UpdateForm model,UserParameter user) {
         final String sql = "update tbAddress set name=?, address=?, tel=? where id=? ;";
         jdbcTemplate .update(sql, new Object[]{model.getName(),
                                     model.getAddress(),
@@ -64,10 +64,10 @@ public class MyDao {
     /**
      * データベースから選択したデータを削除
      */
-    public void delete(String id) {
-        System.out.println(id);
+    public void delete(UserParameter user) {
+        System.out.println(user.getId());
         final String sql = "delete from tbAddress where id=? ;";
-        jdbcTemplate .update(sql, new Object[]{id});
+        jdbcTemplate .update(sql, new Object[]{user.getId()});
     }
 
     /**

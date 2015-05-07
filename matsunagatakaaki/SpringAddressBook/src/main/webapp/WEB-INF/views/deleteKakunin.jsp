@@ -7,22 +7,29 @@
 <html>
   <head>
     <title>削除確認</title>
+    <link href="<c:url value="/resources/css/addressbook.css" />" rel="stylesheet" >
   </head>
   <body>
     <h1>削除しますか？</h1>
-    <form:form modelAttribute="deleteUser" method="POST" action="./excute">
+    <form:form modelAttribute="deleteUser" method="POST" action="./excute" class="inputForm">
       <form:hidden path="id" value="${deleteUser.id}"/>
       <form:hidden path="name" value="${deleteUser.name}}"/>
       <form:hidden path="address" value="${deleteUser.address}}"/>
       <form:hidden path="tel" value="${deleteUser.tel}}"/>
       <table>
         <tr>
-          <td>${deleteUser.name}</td><td>${deleteUser.address}</td><td>${deleteUser.tel}</td>
+          <td>${deleteUser.name}</td>
+        </tr>
+        <tr>
+          <td>${deleteUser.address}</td>
+        </tr>
+        <tr>
+          <td>${deleteUser.tel}</td>
         </tr>
       </table>
-      <input type="submit" value="削除" />
+      <p><input type="submit" value="削除" /></p>
       </form:form>
-      <form:form action="${pageContext.request.contextPath}/addressList">
+      <form:form action="${pageContext.request.contextPath}/addressList" class="linkForm" method="GET">
         <input type="submit" value="住所一覧へ" />
       </form:form>
   </body>

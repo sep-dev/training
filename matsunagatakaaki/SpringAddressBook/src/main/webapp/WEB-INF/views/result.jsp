@@ -7,11 +7,12 @@
 <html>
   <head>
     <title>${title}</title>
+    <link href="<c:url value="/resources/css/addressbook.css" />" rel="stylesheet" >
   </head>
   <body>
     <h1>${title}</h1>
     <p>${message}</p>
-    <form action="${pageContext.request.contextPath}">
+    <form action="${pageContext.request.contextPath}" class="linkForm">
       <input type="submit" value="TOPへ" />
     </form>
   </body>

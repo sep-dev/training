@@ -7,9 +7,10 @@
 <html>
   <head>
     <title>更新情報入力</title>
+    <link href="<c:url value="/resources/css/addressbook.css" />" rel="stylesheet" >
   </head>
   <body>
-    <form:form modelAttribute="updateUser" method="POST" action="./result">
+    <form:form modelAttribute="updateUser" method="POST" action="./result" class="inputForm">
       <form:hidden path="id"/>
       <table>
         <tr>
@@ -25,8 +26,8 @@
           <td><form:input path="tel"/></td>
         </tr>
       </table>
-      <input type="submit" value="更新" />
-      <input type="submit" value="削除" formaction="./../delete/kakunin" />
+      <p><input type="submit" value="更新" /></p>
+      <p><input type="submit" value="削除" formaction="./../delete/kakunin" /><p>
     </form:form>
   </body>
 </html>

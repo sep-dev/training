@@ -7,10 +7,11 @@
 <html>
   <head>
     <title>会員情報の登録</title>
+    <link href="<c:url value="/resources/css/addressbook.css" />" rel="stylesheet" >
   </head>
     <body>
       <h1>会員情報の登録</h1>
-      <form:form modelAttribute="user" action="./insert" method="POST">
+      <form:form modelAttribute="user" action="./insert" method="POST" class="inputForm">
         <form:hidden path="id"/>
         <table>
           <tr>
@@ -28,6 +29,8 @@
       </table>
       <p><input type="submit" value="登録"/></p>
     </form:form>
-    <form:form action="./addressList" method="GET"><input type="submit" value="会員一覧へ"/></form:form>
+    <form:form action="./addressList" method="GET" class="linkForm">
+      <input type="submit" value="会員一覧へ"/>
+    </form:form>
   </body>
 </html>

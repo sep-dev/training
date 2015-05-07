@@ -27,6 +27,7 @@ public class MyDao {
     /**
      * 1件選択した会員情報を保持
      */
+
     public void selectRadio(SelectForm selectForm,UserParameter user){
         String sql_name="SELECT name FROM tbAddress WHERE id = ?";
         String sql_adr="SELECT address FROM tbAddress WHERE id = ?";

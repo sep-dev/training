@@ -1,14 +1,22 @@
 package form;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 /**
  * 一覧選択画面でのデータ受け渡し用クラス
  * @param radio1 ラジオボタンで選択した会員ID
  */
-public class SelectForm{
+@Entity
+@Table(name="tbAddress")
+public class SelectForm implements Serializable{
 
     @NotNull
+    @Column(name="id")
     private String radio1;
 
     public String getRadio1(){

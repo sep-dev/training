@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>jp.com</groupId>
     <artifactId>addressbook</artifactId>
-    <name>AddressBook2</name>
+    <name>AddressBook3</name>
     <packaging>war</packaging>
     <version>1.0.0-BUILD-SNAPSHOT</version>
     <properties>
@@ -162,7 +162,6 @@
             <version>4.2.1.Final</version>
         </dependency>
 
-
 	</dependencies>
     <build>
         <plugins>
@@ -203,3 +202,4 @@
         </plugins>
     </build>
 </project>
+

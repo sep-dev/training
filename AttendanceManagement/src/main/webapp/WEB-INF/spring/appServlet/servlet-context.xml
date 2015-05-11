@@ -27,6 +27,7 @@
 
     <!-- Enables the Spring MVC @Controller programming model -->
     <mvc:annotation-driven />
+    <tx:annotation-driven />
 
     <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
     <mvc:resources mapping="/resources/**" location="/resources/" />
@@ -38,5 +39,47 @@
     </bean>
 
     <context:component-scan base-package="com.attendance.controller" />
+
+    <!-- プロパティファイル読み込み -->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+
+     <!-- データソースの登録 -->
+     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"  destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClassName}" />
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="testOnBorrow" value="true" />
+        <property name="testOnReturn" value="true" />
+        <property name="testWhileIdle" value="true" />
+        <property name="timeBetweenEvictionRunsMillis" value="1800000"/>
+        <property name="numTestsPerEvictionRun" value="3"/>
+        <property name="minEvictableIdleTimeMillis" value="1800000"/>
+    </bean>
+
+    <!-- エンティティマネージャの登録 -->
+    <bean id="entityManagerFactory"
+      class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+              <property name="showSql" value="true" />
+          </bean>
+        </property>
+        <property name="persistenceUnitName" value="persistenceUnit" />
+        <property name="dataSource" ref="dataSource" />
+        <property name="persistenceXmlLocation" value="classpath:/META-INF/persistence.xml" />
+    </bean>
+
+    <!--
+          トランザクションマネージャの登録
+    Dao内でEntityManagerプロパティに@PersistenceContextアノテーションを付加することで、
+          トランザクション管理等の処理を明示的に記述する必要はなくなる。
+    -->
+    <bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+    <jpa:repositories base-package="com.attendance.repository"/>
 
 </beans>

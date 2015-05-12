@@ -6,11 +6,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
   <head>
-    <title>ユーザ選択画面</title>
   </head>
   <body>
-    <h1>ユーザ選択画面</h1>
-    <a href="./loginManager">管理者</a>
-    <a href="./loginStudent">生徒</a>
+    <h1>管理者メインページ</h1>
   </body>
 </html>

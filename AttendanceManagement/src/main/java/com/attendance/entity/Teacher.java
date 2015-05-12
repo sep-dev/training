@@ -11,6 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 
 /**
@@ -26,20 +30,25 @@ public class Teacher implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="teacher_id")
+    @NotNull
     private Integer teacherId;
 
     @Column(name="class_id")
     private Integer classId;
 
+    @NotEmpty
     @Column(name="teacher_address")
     private String teacherAddress;
 
+    @NotEmpty
     @Column(name="teacher_name")
     private String teacherName;
 
+    @Length(min=8)
     @Column(name="teacher_password")
     private String teacherPassword;
 
+    @NotEmpty
     @Column(name="teacher_tel")
     private String teacherTel;
 

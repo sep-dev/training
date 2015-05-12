@@ -1,0 +1,45 @@
+@CHARSET "UTF-8";
+
+body{
+  font-family: 'メイリオ';
+  margin: 0;
+  passing: 0;
+}
+
+h1{
+  margin-top: 10px;
+  text-align: center;
+}
+
+form{
+  width: 350px;
+  heighht: 300;
+  margin: 10px auto;
+  padding: 0;
+}
+
+.error{
+  width: 350px;
+  margin: 0 auto;
+  color: #ff0000;
+}
+
+.link_button{
+  width: 30px;
+  height: 15px;
+  font-size: 10px;
+  border-radius: 10%;
+  border: 1px solid;
+  border-color: #909090 #707070 #707070 #909090;
+  padding: 5px;
+  background-color: #c0c0c0;
+  box-shadow: #a0a0a0 1px 1px 1px;
+  color: #000000;
+  text-align: center;
+  display: block;
+  text-decoration: none;
+}
+
+.link_button:hover{
+  background-color: #808080;
+}

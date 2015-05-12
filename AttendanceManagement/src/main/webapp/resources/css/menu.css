@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+
+nav{
+  width: 20%;
+  height: 100%;
+  background-color: #00ffff;
+  float: left;
+}
+
+section{
+  clear: left;
+}

@@ -7,6 +7,7 @@
 <html>
   <head>
     <title>ユーザ選択画面</title>
+    <link href="<c:url value="/resources/css/common.css" />" rel="stylesheet" >
   </head>
   <body>
     <h1>ユーザ選択画面</h1>

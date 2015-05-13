@@ -60,7 +60,7 @@ public class LoginController {
     public String login(@Valid @ModelAttribute LoginForm loginForm,BindingResult result,RedirectAttributes attribute){
         StringBuilder redirectUrl = new StringBuilder("redirect:"); //リダイレクト先を作成するStringBuilder
         int loginUserType = loginForm.getType();
-        String successUrl = loginUserType==Helper.TYPE_MANAGER ? "/manager/top" : "/student/top"; //認証成功時リダイレクト先
+        String successUrl = loginUserType==Helper.TYPE_MANAGER ? "/manager/top" : "/student/lectureList"; //認証成功時リダイレクト先
         String notSuccessUrl = loginUserType==Helper.TYPE_MANAGER ? "/loginManager" : "/loginStudent"; //認証失敗時リダイレクト先
 
         if(result.hasErrors()){

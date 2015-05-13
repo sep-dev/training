@@ -7,6 +7,48 @@ nav{
   float: left;
 }
 
-section{
-  clear: left;
+.logout_button{
+  width: 150px;
+  height: 20px;
+  font-size: 0.85em;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 2px solid;
+  border-color: #909090 #707070 #707070 #909090;
+  display: block;
+  background-color: #c0c0c0;
+  box-shadow: #a0a0a0 1px 1px 1px;
+  color: #000000;
+  text-align: center;
+  text-shadow: 1px 1px 1px rgba(255,255,255,0.5);
+  text-decoration: none;
+  margin: 20px auto 10px auto;
+  padding: 5px;
 }
+
+.logout_button:hover{
+  background-color: #808080;
+  color: #ffffff;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+}
+
+nav ul{
+  display: inline-block;
+  list-style-position: inside
+
+}
+
+nav ul li{
+  margin: 10px 0 10px 20px;
+}
+
+nav ul li:first-child{
+  font-size: 1.1em;
+  margin: 10px 0;
+}
+
+section {
+   height: 100%;
+   width: 80%;
+   float: right;
+}}

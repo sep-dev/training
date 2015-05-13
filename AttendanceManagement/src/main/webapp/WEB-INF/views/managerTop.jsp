@@ -12,7 +12,7 @@
   </head>
   <body>
     <nav>
-      <a href="./logout" class="link_button">ログアウト</a>
+      <a href="./logout" class="logout_button">ログアウト</a>
       <ul>
         <li><a href="./">管理者メイン画面</a></li>
         <li><a href="">生徒管理</a></li>

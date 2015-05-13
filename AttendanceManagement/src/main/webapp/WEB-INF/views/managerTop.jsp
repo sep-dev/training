@@ -12,7 +12,7 @@
   </head>
   <body>
     <nav>
-      <a href="./logout" class="link_button">ログアウト</a>
+      <a href="./logout" class="logout_button">ログアウト</a>
       <ul>
         <li><a href="./">管理者メイン画面</a></li>
         <li><a href="">生徒管理</a></li>
@@ -20,11 +20,11 @@
         <li><a href="">講師管理</a></li>
         <li><a href="">クラス管理</a></li>
         <li><a href="">科目管理</a></li>
-        <li><a href="">出席管理</a></li>
+        <li><a href="">出席一覧</a></li>
       </ul>
     </nav>
     <section>
-      <iframe src="./managerMainPage" scrolling="no">iframeを使用</iframe>
+      <iframe src="./managerMainPage">iframeを使用</iframe>
     </section>
   </body>
 </html>

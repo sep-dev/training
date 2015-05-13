@@ -8,6 +8,7 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>
           /WEB-INF/spring/root-context.xml
+          <!-- /WEB-INF/spring/security.xml -->
           </param-value>
     </context-param>
 
@@ -33,7 +34,7 @@
     </servlet-mapping>
 
     <welcome-file-list>
-      <welcome-file>/login</welcome-file>
+      <welcome-file>login/</welcome-file>
     </welcome-file-list>
 
     <!-- 文字コードフィルタ -->

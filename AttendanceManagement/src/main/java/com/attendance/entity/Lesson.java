@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -26,7 +24,6 @@ public class Lesson implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="lesson_id")
     private Integer lessonId;
 
@@ -42,6 +39,8 @@ public class Lesson implements Serializable {
     @JoinColumn(name="lesson_teacher_id")
     private Teacher teacher;
 
+    
+    
     public Lesson() {
     }
 
@@ -90,5 +89,7 @@ public class Lesson implements Serializable {
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
     }
+    
+   
 
 }

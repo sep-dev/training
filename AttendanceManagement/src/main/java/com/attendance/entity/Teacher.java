@@ -1,17 +1,19 @@
 package com.attendance.entity;
 
 import java.io.Serializable;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 
@@ -26,21 +28,26 @@ public class Teacher implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @NotNull
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="teacher_id")
-    private Integer teacherId;
     @NotNull
+    private Integer teacherId;
+
     @Column(name="class_id")
     private Integer classId;
+
     @NotEmpty
     @Column(name="teacher_address")
     private String teacherAddress;
+
     @NotEmpty
     @Column(name="teacher_name")
     private String teacherName;
-    @NotEmpty
+
+    @Length(min=8)
     @Column(name="teacher_password")
     private String teacherPassword;
+
     @NotEmpty
     @Column(name="teacher_tel")
     private String teacherTel;
@@ -87,10 +94,10 @@ public class Teacher implements Serializable {
     public String getTeacherPassword() {
         return this.teacherPassword;
     }
-    public void setTeacherPassword(String teacherPassword) throws NoSuchAlgorithmException {
-    	this.teacherPassword=teacherPassword;
-    }
 
+    public void setTeacherPassword(String teacherPassword) {
+        this.teacherPassword = teacherPassword;
+    }
 
     public String getTeacherTel() {
         return this.teacherTel;

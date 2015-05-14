@@ -1,16 +1,14 @@
 package com.attendance.entity;
 
 import java.io.Serializable;
-import java.security.NoSuchAlgorithmException;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotEmpty;
 
 
 /**
@@ -24,22 +22,22 @@ public class Student implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @NotNull
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="student_id")
     private Integer studentId;
-    @NotNull
+
     @Column(name="class_id")
-    private Integer classId;
-    @NotEmpty
+    private int classId;
+
     @Column(name="student_address")
     private String studentAddress;
-    @NotEmpty
+
     @Column(name="student_name")
     private String studentName;
-    @NotEmpty
+
     @Column(name="student_password")
     private String studentPassword;
-    @NotEmpty
+
     @Column(name="student_tel")
     private String studentTel;
 
@@ -54,11 +52,11 @@ public class Student implements Serializable {
         this.studentId = studentId;
     }
 
-    public Integer getClassId() {
+    public int getClassId() {
         return this.classId;
     }
 
-    public void setClassId(Integer classId) {
+    public void setClassId(int classId) {
         this.classId = classId;
     }
 
@@ -82,17 +80,16 @@ public class Student implements Serializable {
         return this.studentPassword;
     }
 
-    public void setStudentPassword(String studentPassword) throws NoSuchAlgorithmException {
-    	this.studentPassword=studentPassword;
+    public void setStudentPassword(String studentPassword) {
+        this.studentPassword = studentPassword;
     }
 
-	public String getStudentTel() {
+    public String getStudentTel() {
         return this.studentTel;
     }
 
     public void setStudentTel(String studentTel) {
         this.studentTel = studentTel;
     }
-
 
 }

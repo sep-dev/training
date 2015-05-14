@@ -1,48 +1,33 @@
 package com.attendance.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.attendance.entity.Student;
-import com.attendance.repository.StudentRepository;
+import com.attendance.entity.LectureAttendancePK;
+import com.attendance.helper.Helper;
+import com.attendance.service.StudentService;
 
-
-/**
- * Handles requests for the application home page.
- */
 @Controller
+@RequestMapping(value="/student")
 public class StudentController {
-	 @Autowired
-     private StudentRepository repository;
-	 @RequestMapping(value = "/studentList", method = RequestMethod.GET, produces="text/plain;charset=utf-8")
-	    public String helo(Model model) {
-	        Student data=new Student();
-	        model.addAttribute("title","生徒管理画面");
-	        model.addAttribute("message","生徒一覧から目的の生徒を検索し、編集・削除等が可能");
-	        model.addAttribute("myData",data);
-	        List<Student> list = repository.findAll();
-	        model.addAttribute("datalist",list);
 
-	        return "/studentList";
-	    }
-	    
-	    @RequestMapping(value = "/studentList", method = RequestMethod.POST, produces="text/plain;charset=utf-8")
-	    public String search(HttpServletRequest request,Model model) {
+    @Autowired
+    private StudentService studentService;
+    private ModelAndView mav;
 
-	        String param=request.getParameter("fstr");
-	        System.out.println(param);
-	        model.addAttribute("title","検索");
-	        model.addAttribute("message","「"+param+"」の"+"検索結果");
-	        //名前・住所であいまい検索
-	        List<Student> list = repository.findByStudentNameLikeOrStudentAddressLike("%"+param+"%","%"+param+"%");
-	        model.addAttribute("datalist",list);
-	        return "/studentList";
-	    }
+    @RequestMapping(value="lectureList")
+    public ModelAndView lectureList(){
+        mav = new ModelAndView("lectureList");
+        Integer studentId = 0;
+        mav.addObject("lectureList", studentService.getTodayLectureList(studentId)); //一時的に0を入れているだけ
+        LectureAttendancePK lap = new LectureAttendancePK();
+        lap.setStudentId(studentId);
+        mav.addObject("lecture_attendancePK",lap);
+        mav.addObject("date", Helper.formatJapaneseDate(new Date()));
+        return mav;
+    }
 }

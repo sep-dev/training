@@ -29,7 +29,7 @@ public class StudentController {
 	        model.addAttribute("myData",data);
 	        List<Student> list = repository.findAll();
 	        model.addAttribute("datalist",list);
-
+            int i=0;
 	        return "/studentList";
 	    }
 	    

@@ -7,10 +7,11 @@
 <html>
   <head>
     <title>ユーザ選択画面</title>
+    <link href="<c:url value="/resources/css/common.css" />" rel="stylesheet" >
   </head>
   <body>
     <h1>ユーザ選択画面</h1>
-    <a href="./login/manager">管理者</a>
-    <a href="./login/student">生徒</a>
+    <a href="./loginManager">管理者</a>
+    <a href="./loginStudent">生徒</a>
   </body>
 </html>

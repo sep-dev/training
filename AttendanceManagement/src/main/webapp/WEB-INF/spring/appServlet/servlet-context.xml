@@ -39,8 +39,7 @@
         <property name="suffix" value=".jsp" />
     </bean>
 
-    <context:component-scan base-package="com.attendance.controller" /> <!-- コントローラーパッケージ -->
-    <context:component-scan base-package="com.attendance.service"/> <!-- サービスパッケージ -->
+    <context:component-scan base-package="com.attendance.controller" />
 
     <!-- プロパティファイル読み込み -->
     <context:property-placeholder location="classpath:jdbc.properties"/>
@@ -75,23 +74,13 @@
     <!--
           トランザクションマネージャの登録
     Dao内でEntityManagerプロパティに@PersistenceContextアノテーションを付加することで、
-          エンティティに関するトランザクション管理等の処理を明示的に記述する必要はなくなる。
+          トランザクション管理等の処理を明示的に記述する必要はなくなる。
     -->
     <bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
 
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
-    <jpa:repositories base-package="com.attendance.repository"/> <!-- リポジトリパッケージ -->
-
-
-    <bean id="dataSourceTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-      <property name="dataSource" ref="dataSource"/>
-    </bean>
-    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-      <property name="dataSource" ref="dataSource"/>
-      <property name="databaseProductName" value="MySQL"/>
-    </bean>
-    <context:component-scan base-package="com.attendance.dao"/>
+    <jpa:repositories base-package="com.attendance.repository"/>
 
 </beans>

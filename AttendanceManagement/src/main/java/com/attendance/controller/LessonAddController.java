@@ -34,7 +34,8 @@ public class LessonAddController {
 	        model.addAttribute("title","科目新規作成画面");
 	        model.addAttribute("message","科目情報の新規作成が可能");
 	        model.addAttribute("lesson",lesson);
-
+	        List<Teacher> teacher_list=teacher_repository.findAll();       
+	        model.addAttribute("selectTeacher",teacher_list); 
 	        return "/lessonAdd";
 	    }
 

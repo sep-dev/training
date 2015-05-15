@@ -37,6 +37,8 @@ public class LessonUpdateController {
 	        model.addAttribute("message","科目情報の編集が可能");
 	        Lesson lesson = repository.findOne(id);
 	        model.addAttribute("lesson",lesson);
+	        List<Teacher> teacher_list=teacher_repository.findAll();       
+	        model.addAttribute("selectTeacher",teacher_list); 
 	        return "/lessonUpdate";
 	    }
 

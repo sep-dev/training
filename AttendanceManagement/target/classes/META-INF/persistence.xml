@@ -13,13 +13,14 @@
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <class>com.attendance.entity.Lecture</class>
     <class>com.attendance.entity.Lesson</class>
+    <class>com.attendance.entity.Clas</class>
     <class>com.attendance.entity.Student</class>
     <class>com.attendance.entity.Teacher</class>
-    <class>com.attendance.entity.Class</class>
+    <class>com.attendance.entity.LectureAttendance</class>
+    <class>com.attendance.entity.LectureAttendancePK</class>
 
     <properties>
         <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
-        <property name="hibernate.hbm2ddl.auto" value="create"/>
         <property name="javax.presistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
     </properties>
   </persistence-unit>

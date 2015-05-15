@@ -4,11 +4,14 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 
 /**
@@ -19,77 +22,78 @@ import javax.persistence.Table;
 @Table(name="students")
 @NamedQuery(name="Student.findAll", query="SELECT s FROM Student s")
 public class Student implements Serializable {
-    private static final long serialVersionUID = 1L;
-
+	private static final long serialVersionUID = 1L;
+    @NotNull
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="student_id")
     private Integer studentId;
+    @NotEmpty
+	@Column(name="student_address")
+	private String studentAddress;
+    @NotEmpty
+	@Column(name="student_name")
+	private String studentName;
+    @NotEmpty
+	@Column(name="student_password")
+	private String studentPassword;
+    @NotEmpty
+	@Column(name="student_tel")
+	private String studentTel;
 
-    @Column(name="class_id")
-    private int classId;
+	//bi-directional many-to-one association to Clas
+	@ManyToOne
+	@JoinColumn(name="class_id")
+	private Clas clas;
 
-    @Column(name="student_address")
-    private String studentAddress;
+	public Student() {
+	}
 
-    @Column(name="student_name")
-    private String studentName;
+	public Integer getStudentId() {
+		return this.studentId;
+	}
 
-    @Column(name="student_password")
-    private String studentPassword;
+	public void setStudentId(Integer studentId) {
+		this.studentId = studentId;
+	}
 
-    @Column(name="student_tel")
-    private String studentTel;
+	public String getStudentAddress() {
+		return this.studentAddress;
+	}
 
-    public Student() {
-    }
+	public void setStudentAddress(String studentAddress) {
+		this.studentAddress = studentAddress;
+	}
 
-    public Integer getStudentId() {
-        return this.studentId;
-    }
+	public String getStudentName() {
+		return this.studentName;
+	}
 
-    public void setStudentId(Integer studentId) {
-        this.studentId = studentId;
-    }
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
+	}
 
-    public int getClassId() {
-        return this.classId;
-    }
+	public String getStudentPassword() {
+		return this.studentPassword;
+	}
 
-    public void setClassId(int classId) {
-        this.classId = classId;
-    }
+	public void setStudentPassword(String studentPassword) {
+		this.studentPassword = studentPassword;
+	}
 
-    public String getStudentAddress() {
-        return this.studentAddress;
-    }
+	public String getStudentTel() {
+		return this.studentTel;
+	}
 
-    public void setStudentAddress(String studentAddress) {
-        this.studentAddress = studentAddress;
-    }
+	public void setStudentTel(String studentTel) {
+		this.studentTel = studentTel;
+	}
 
-    public String getStudentName() {
-        return this.studentName;
-    }
+	public Clas getClas() {
+		return this.clas;
+	}
 
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
-    }
-
-    public String getStudentPassword() {
-        return this.studentPassword;
-    }
-
-    public void setStudentPassword(String studentPassword) {
-        this.studentPassword = studentPassword;
-    }
-
-    public String getStudentTel() {
-        return this.studentTel;
-    }
-
-    public void setStudentTel(String studentTel) {
-        this.studentTel = studentTel;
-    }
+	public void setClas(Clas clas) {
+		this.clas = clas;
+	}
 
 }

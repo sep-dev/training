@@ -17,5 +17,7 @@
     <input type="button" onclick="location.href='teacherList'" value="講師管理画面" />
     <input type="button" onclick="location.href='lectureList'" value="講義管理画面" />
     <input type="button" onclick="location.href='lessonList'" value="科目管理画面" />
+    <input type="button" onclick="location.href='classList'" value="クラス管理画面" />
+    <input type="button" onclick="location.href='attendList'" value="出席生徒一覧表示画面" />
 </body>
 </html>

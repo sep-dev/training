@@ -23,8 +23,19 @@
             <td><form:input path="studentPassword" size="50"/></td></tr>
         <tr><td><form:label path="studentName">名前：</form:label></td>
             <td><form:input path="studentName" size="50"/></td></tr>
-        <tr><td><form:label path="classId">所属クラス：</form:label></td>
-            <td><form:input path="classId" size="50"/></td></tr>
+        <tr><td><form:label path="clas">所属クラス：</form:label></td>
+            <td><form:select path="clas"> 
+            <c:forEach items="${selectClass}" var="opt">
+            <c:choose>
+            <c:when test="${opt.classId eq id}">
+            <option value="${opt.classId}" selected="selected"><c:out value="${opt.className}"/></option>
+            </c:when>
+            <c:otherwise>
+            <option value="${opt.classId}"><c:out value="${opt.className}"/></option>
+            </c:otherwise>
+            </c:choose>
+            </c:forEach>
+            </form:select></td></tr>
         <tr><td><form:label path="studentAddress">住所：</form:label></td>
             <td><form:input path="studentAddress" size="50"/></td></tr>
         <tr><td><form:label path="studentTel">電話番号</form:label></td>

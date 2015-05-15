@@ -2,12 +2,17 @@ package com.attendance.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.*;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
+
 
 
 /**
  * The persistent class for the lecture_attendance database table.
- * 
+ *
  */
 @Entity
 @Table(name="lecture_attendance")

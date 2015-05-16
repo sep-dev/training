@@ -32,8 +32,8 @@
     <table width="800">
     <form:form modelAttribute="lecture">
         <tr><td></td><td><form:errors path="*" element="div" /></td></tr>
-        <tr><td><form:label path="lectureId">講義ID：</form:label></td>
-            <td><form:input path="lectureId"  size="50"/></td></tr>
+        <tr><td><form:label path="lectureId" >講義ID：</form:label></td>
+            <td><form:input path="lectureId"  size="50" readonly="true"/></td></tr>
         <tr><td><form:label path="lesson">講義名：</form:label></td>
             <td><form:select path="lesson">
             <c:forEach items="${selectLesson}" var="opt">

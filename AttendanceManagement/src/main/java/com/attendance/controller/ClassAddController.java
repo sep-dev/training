@@ -25,17 +25,28 @@ public class ClassAddController {
 	        Clas clas=new Clas();
 	        model.addAttribute("title","クラス新規作成画面");
 	        model.addAttribute("message","クラス情報の新規作成が可能");
-	        model.addAttribute("class",clas);
+	        model.addAttribute("clas",clas);
 
 	        return "/classAdd";
 	    }
 
 	   @RequestMapping(value = "/classAdd", method = RequestMethod.POST, produces="text/plain;charset=utf-8")
 	    public String repo(@Valid @ModelAttribute Clas data ,Errors result,Model model) {
+
 	    	if(result.hasErrors()){
-	            model.addAttribute("title","エラー画面");
-	            model.addAttribute("message","エラーが発生しました");
+	    		if(data.getClassId()==null){
+	    			model.addAttribute("title","エラー画面");
+		            model.addAttribute("message","IDが入力されてません");
+	    		}else{
+	    			model.addAttribute("title","エラー画面");
+		            model.addAttribute("message","エラーが発生しました");
+	    		}
+	            
 	            return "/classAdd";
+	    	}else if(repository.findByClassId(data.getClassId())!=null){
+	    		model.addAttribute("title","エラー画面");
+	            model.addAttribute("message","IDが重複しています");
+	    		return "/classAdd";
 	    	}else{
 	            repository.saveAndFlush(data);
 	            model.addAttribute("title","クラス管理画面");

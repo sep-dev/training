@@ -43,6 +43,14 @@ public class TeacherAddController {
 	    	if(result.hasErrors()){
 	            model.addAttribute("title","エラー画面");
 	            model.addAttribute("message","エラーが発生しました");
+	            List<Clas> class_list=class_repository.findAll();
+		        model.addAttribute("selectClass",class_list);
+	            return "/teacherAdd";
+	    	}else if(repository.findByTeacherId(data.getTeacherId())!=null){
+	    		model.addAttribute("title","エラー画面");
+	            model.addAttribute("message","IDが重複しています");
+	            List<Clas> class_list=class_repository.findAll();
+		        model.addAttribute("selectClass",class_list);
 	            return "/teacherAdd";
 	    	}else{
 	            repository.saveAndFlush(data);

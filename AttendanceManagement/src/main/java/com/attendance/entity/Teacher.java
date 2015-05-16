@@ -9,6 +9,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 
 /**
@@ -20,20 +23,20 @@ import javax.persistence.Table;
 @NamedQuery(name="Teacher.findAll", query="SELECT t FROM Teacher t")
 public class Teacher implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	@NotNull
 	@Id
 	@Column(name="teacher_id")
 	private Integer teacherId;
-
+	@NotEmpty
 	@Column(name="teacher_address")
 	private String teacherAddress;
-
+	@NotEmpty
 	@Column(name="teacher_name")
 	private String teacherName;
-
+	@NotEmpty
 	@Column(name="teacher_password")
 	private String teacherPassword;
-
+	@NotEmpty
 	@Column(name="teacher_tel")
 	private String teacherTel;
 

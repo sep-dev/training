@@ -18,7 +18,7 @@
     <form:form modelAttribute="class">
         <tr><td></td><td><form:errors path="*" element="div" /></td></tr>
         <tr><td><form:label path="classId">科目ID：</form:label></td>
-            <td><form:input path="classId"  size="50"/></td></tr>
+            <td><form:input path="classId"  size="50" readonly="true"/></td></tr>
         <tr><td><form:label path="className">科目名：</form:label></td>
             <td><form:input path="className" size="50"/></td></tr>
         <tr><td><input type="submit" value="確定"  onclick="location.href='classUpdate'"/></td>

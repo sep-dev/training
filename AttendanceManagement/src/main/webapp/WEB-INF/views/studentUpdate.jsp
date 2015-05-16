@@ -18,7 +18,7 @@
     <form:form modelAttribute="student">
         <tr><td></td><td><form:errors path="*" element="div" /></td></tr>
         <tr><td><form:label path="studentId">生徒ID：</form:label></td>
-            <td><form:input path="studentId"  size="50"/></td></tr>
+            <td><form:input path="studentId"  size="50" readonly="true"/></td></tr>
         <tr><td><form:label path="studentPassword">生徒パスワード：</form:label></td>
             <td><form:input path="studentPassword" value="********" size="50"/></td></tr>
         <tr><td><form:label path="studentName">名前：</form:label></td>

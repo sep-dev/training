@@ -39,9 +39,9 @@
 
 	<c:forEach var="obj" items="${datalist}" varStatus="status">
 		<tr align="center">
-		<td ><c:out value="${obj.lessonId}" /></td>
-		<td><c:out value="${obj.lessonName}"/></td>
-		<td><c:out value="${obj.teacher.teacherName}"/></td>
+		<td ><a href="<c:url value="lessonUpdate?id=${obj.lessonId}"/>" ><c:out value="${obj.lessonId}" /></td>
+		<td><a href="<c:url value="lessonUpdate?id=${obj.lessonId}"/>" ><c:out value="${obj.lessonName}"/></td>
+		<td><a href="<c:url value="teacherUpdate?id=${obj.teacher.teacherId}"/>" ><c:out value="${obj.teacher.teacherName}"/></td>
 
 		<td width="50"><button type="submit" name="id" value="${obj.lessonId}" onClick="form.action='lessonUpdate';return true">編集</button><br/>
 		    <button type="submit" name="id" value="${obj.lessonId}" onClick="form.action='lessonDelete';return true">削除</button></td>

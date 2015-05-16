@@ -15,7 +15,7 @@
     <h1>${title}</h1>
     <p>${message}</p>
     <table width="800">
-    <form:form modelAttribute="class">
+    <form:form modelAttribute="clas">
         <tr><td></td><td><form:errors path="*" element="div" /></td></tr>
         <tr><td><form:label path="classId">クラスID：</form:label></td>
             <td><form:input path="classId" size="50"/></td></tr>

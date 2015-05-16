@@ -14,7 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.attendance.entity.Teacher;
 import com.attendance.form.LoginForm;
-import com.attendance.helper.Helper;
+import com.attendance.helper.ShareHelper;
 import com.attendance.service.LoginService;
 
 @Controller
@@ -31,7 +31,7 @@ public class LoginController {
     //管理者用ログインフォーム要求
     @RequestMapping(value="/loginManager")
     public String loginManager(Model model){
-        model.addAttribute(getLoginForm(Helper.TYPE_MANAGER));
+        model.addAttribute(getLoginForm(ShareHelper.TYPE_MANAGER));
         return "loginManager";
     }
 
@@ -44,7 +44,7 @@ public class LoginController {
     //生徒用ログインフォーム要求
     @RequestMapping(value="/loginStudent")
     public String loginStudent(Model model){
-        model.addAttribute(getLoginForm(Helper.TYPE_STUDENT));
+        model.addAttribute(getLoginForm(ShareHelper.TYPE_STUDENT));
         return "loginStudent";
     }
 
@@ -57,11 +57,11 @@ public class LoginController {
 
     //ログイン処理
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public String login(@Valid @ModelAttribute LoginForm loginForm,BindingResult result,RedirectAttributes attribute){
+    public String login(@Valid LoginForm loginForm,BindingResult result,RedirectAttributes attribute){
         StringBuilder redirectUrl = new StringBuilder("redirect:"); //リダイレクト先を作成するStringBuilder
         int loginUserType = loginForm.getType();
-        String successUrl = loginUserType==Helper.TYPE_MANAGER ? "/manager/top" : "/student/lectureList"; //認証成功時リダイレクト先
-        String notSuccessUrl = loginUserType==Helper.TYPE_MANAGER ? "/loginManager" : "/loginStudent"; //認証失敗時リダイレクト先
+        String successUrl = loginUserType==ShareHelper.TYPE_MANAGER ? "/manager/top" : "/student/lectureList"; //認証成功時リダイレクト先
+        String notSuccessUrl = loginUserType==ShareHelper.TYPE_MANAGER ? "/loginManager" : "/loginStudent"; //認証失敗時リダイレクト先
 
         if(result.hasErrors()){
             attribute.addFlashAttribute("error","管理者IDまたはパスワードが違います");
@@ -70,13 +70,13 @@ public class LoginController {
         }
 
         boolean checkResult = false; //認証結果格納
-        String hashedPassword = Helper.hashingMd5(loginForm.getPassword()); //パスワードをMD5にハッシュ化
+        String hashedPassword = ShareHelper.hashingMd5(loginForm.getPassword()); //パスワードをMD5にハッシュ化
 
         switch(loginForm.getType()){
-        case Helper.TYPE_MANAGER:
+        case ShareHelper.TYPE_MANAGER:
             checkResult = loginService.isManager(loginForm.getId(), hashedPassword);
             break;
-        case Helper.TYPE_STUDENT:
+        case ShareHelper.TYPE_STUDENT:
             checkResult = loginService.isStudent(loginForm.getId(), hashedPassword);
             break;
         }

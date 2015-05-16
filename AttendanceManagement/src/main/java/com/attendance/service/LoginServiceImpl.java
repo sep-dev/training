@@ -3,9 +3,8 @@ package com.attendance.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.attendance.entity.Student;
 import com.attendance.entity.Teacher;
-import com.attendance.helper.Helper;
+import com.attendance.helper.ShareHelper;
 import com.attendance.repository.StudentRepository;
 import com.attendance.repository.TeacherRepository;
 
@@ -17,20 +16,18 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     StudentRepository studentRepository;
 
-    //生徒であるか
+    //存在する生徒であり、パスワードが一致するか
     @Override
     public boolean isStudent(Integer studentId, String password) {
-        Student student = studentRepository.findByStudentId(studentId);
-        if(student == null ) return false;
-        return password.equals(student.getStudentPassword());
+        if(!studentRepository.exists(studentId)) return false;
+        return password.equals(studentRepository.findByStudentId(studentId).getStudentPassword());
     }
 
-    //管理者であるか
+    //存在する管理者であり、パスワードが一致するか
     @Override
     public boolean isManager(Integer managerId, String password) {
-        Teacher teacher = teacherRepository.findByTeacherId(managerId);
-        if(teacher == null) return false;
-        return password.equals(teacher.getTeacherPassword());
+        if(!teacherRepository.exists(managerId)) return false;
+        return password.equals(teacherRepository.findByTeacherId(managerId).getTeacherPassword());
     }
 
     //講師情報初回更新
@@ -42,7 +39,7 @@ public class LoginServiceImpl implements LoginService {
         if(!teacher.getTeacherName().equals(updateTeacher.getTeacherName()))
             teacher.setTeacherName(updateTeacher.getTeacherName());
 
-        String hashedPassword = Helper.hashingMd5(updateTeacher.getTeacherPassword()); //md5でハッシュ化
+        String hashedPassword = ShareHelper.hashingMd5(updateTeacher.getTeacherPassword()); //md5でハッシュ化
         if(!teacher.getTeacherPassword().equals(hashedPassword))
             teacher.setTeacherPassword(hashedPassword);
 

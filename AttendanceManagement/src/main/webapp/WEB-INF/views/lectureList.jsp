@@ -18,19 +18,21 @@
       </tr>
       <c:forEach items="${lectureList}" var="list">
         <tr>
-          <form:form modelAttribute="lecture_attendancePK">
-            <form:hidden path="lectureId" value="${list.lectureId}"/>
-            <form:hidden path="studentId"/>
-            <td><c:out value="${list.lessonName}"/></td>
-            <td><c:out value="${list.hour}"/></td>
-            <td><c:out value="${list.teacherName}"/></td>
-            <td>
-              <c:choose>
-                <c:when test="${list.attendanceState != 0}">登録済み</c:when>
-                <c:when test="${list.attendanceState == 0}"><input type="submit" value="出席登録"/></c:when>
-              </c:choose>
-            </td>
-          </form:form>
+          <td><c:out value="${list.lessonName}"/></td>
+          <td><c:out value="${list.hour}"/></td>
+          <td><c:out value="${list.teacherName}"/></td>
+          <c:choose>
+            <c:when test="${list.attendanceState == 0}"><td>出席済み</td></c:when>
+            <c:when test="${list.attendanceState == 1}">
+              <form:form modelAttribute="lecture_attendancePK" action="./attendanceAdd?confirm">
+                <form:hidden path="lectureId" value="${list.lectureId}"/>
+                <form:hidden path="studentId"/>
+                <td><input type="submit" value="出席登録"/></td>
+              </form:form>
+            </c:when>
+            <c:when test="${list.attendanceState == 2}"><td>未登録</td></c:when>
+            <c:when test="${list.attendanceState == 3}"><td>未出席</td></c:when>
+          </c:choose>
         </tr>
       </c:forEach>
     </table>

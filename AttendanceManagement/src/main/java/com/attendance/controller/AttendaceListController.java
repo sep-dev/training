@@ -73,10 +73,7 @@ public class AttendaceListController {
 	        		+ "where b.student_name like ? and d.lesson_name like ? and c.lecture_date between ? and ? and c.lecture_hour like ?;";
 	        List<AttendForm> al=jdbcTemplate.query(sql, new BeanPropertyRowMapper<AttendForm>(AttendForm.class),
 	        		"%"+param+"%","%"+param2+"%",param3,param4,"%"+param5+"%");
-	        model.addAttribute("datalist",al);
-	        
-	        
-	        
+	        model.addAttribute("datalist",al);	        
 	        return "/attendList";
 	    }
 }

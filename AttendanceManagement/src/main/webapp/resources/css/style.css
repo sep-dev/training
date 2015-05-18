@@ -6,8 +6,8 @@ body{
   margin: 0;
 }
 
-h1{
-  margin-top: 10px;
+h1,h3{
+  margin: 10px;
   text-align: center;
 }
 
@@ -21,21 +21,21 @@ p{
   padding: 0;
 }
 
-.centerTable{
+.centerTable,.listTable{
   margin: 0 auto;
 }
 
-.centerTable tr td:first-child{
+.centerTable td,.menu_nav li,.centeringDiv,.errorMessage{
+  text-align: center;
+}
+
+
+.centerTable tr td:first-child,.searchForm th{
   text-align: right;
 }
 
 .errorMessage{
-  text-align: center;
   color: #dd2020;
-}
-
-.centeringDiv{
-  text-align: center;
 }
 
 .linkButton_ll,.linkButton_l,.linkButton_r,.linkButton_s{
@@ -113,10 +113,37 @@ section iframe{
   display: inline;
 }
 
-.menu_nav li{
+.listTable{
+  width: 550px;
+}
+
+.listTable thead th{
+  /*クリーム色*/
+  background-color: #f7f1af;
   text-align: center;
 }
 
-.listTable{
+.listTable td{
+  display: inline-block;
+  text-align: center;
+}
 
+.searchForm{
+  width: 400px;
+  height: 100px;
+  margin: 0 auto;
+  padding: 10px;
+  border: solid 1px;
+}
+
+.searchForm td{
+  text-align: center;
+}
+
+.searchForm th + td:first-child{
+  text-align: left;
+}
+
+.textLeft{
+  text-align: left;
 }

@@ -1,7 +1,9 @@
 package com.attendance.controller;
 
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,13 +19,13 @@ public class CsvDownloadView extends AbstractView{
     @Override
     protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/csv; charset=UTF-8");
-        String fileName = new String(model.get("fileName").toString().getBytes("MS932"), "ISO-8859-1");
-        System.out.println(fileName);
-        response.setHeader(
-                "Content-Discription",
-                "attachment; filename=\"" + fileName + "\"");
+        String fileName = model.get("fileName").toString();
+        fileName = URLEncoder.encode(fileName,"UTF-8");
+        response.setCharacterEncoding("Shift-JIS");
+        response.setLocale(Locale.JAPAN);
+        response.setHeader("Content-Type", "text/csv;charset=Shift-JIS");
+        response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+
         try(PrintWriter out = response.getWriter()){
 
             out.print(model.get("studentName").toString());

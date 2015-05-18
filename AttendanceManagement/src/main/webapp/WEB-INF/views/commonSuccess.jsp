@@ -7,10 +7,10 @@
 <html>
   <head>
     <title>${titile}</title>
-    <link href="<c:url value="/resources/css/common.css" />" rel="stylesheet" >
+    <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet" >
   </head>
   <body>
     <h1>${message}</h1>
-    <a href="./lectureList" class="link_button">本日の授業一覧へ</a>
+    <p><a href="./lectureList" class="linkButton_l">本日の授業一覧へ</a></p>
   </body>
 </html>

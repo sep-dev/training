@@ -1,11 +1,12 @@
 package com.attendance.entity;
 
 import java.io.Serializable;
-import java.security.NoSuchAlgorithmException;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -21,78 +22,78 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Table(name="students")
 @NamedQuery(name="Student.findAll", query="SELECT s FROM Student s")
 public class Student implements Serializable {
-    private static final long serialVersionUID = 1L;
-
-    @Id
+	private static final long serialVersionUID = 1L;
     @NotNull
+    @Id
     @Column(name="student_id")
     private Integer studentId;
-    @NotNull
-    @Column(name="class_id")
-    private Integer classId;
     @NotEmpty
-    @Column(name="student_address")
-    private String studentAddress;
+	@Column(name="student_address")
+	private String studentAddress;
     @NotEmpty
-    @Column(name="student_name")
-    private String studentName;
+	@Column(name="student_name")
+	private String studentName;
     @NotEmpty
-    @Column(name="student_password")
-    private String studentPassword;
+	@Column(name="student_password")
+	private String studentPassword;
     @NotEmpty
-    @Column(name="student_tel")
-    private String studentTel;
+	@Column(name="student_tel")
+	private String studentTel;
 
-    public Student() {
-    }
+	//bi-directional many-to-one association to Clas
+	@ManyToOne
+	@JoinColumn(name="class_id")
+	private Clas clas;
 
-    public Integer getStudentId() {
-        return this.studentId;
-    }
+	public Student() {
+	}
 
-    public void setStudentId(Integer studentId) {
-        this.studentId = studentId;
-    }
+	public Integer getStudentId() {
+		return this.studentId;
+	}
 
-    public Integer getClassId() {
-        return this.classId;
-    }
+	public void setStudentId(Integer studentId) {
+		this.studentId = studentId;
+	}
 
-    public void setClassId(Integer classId) {
-        this.classId = classId;
-    }
+	public String getStudentAddress() {
+		return this.studentAddress;
+	}
 
-    public String getStudentAddress() {
-        return this.studentAddress;
-    }
+	public void setStudentAddress(String studentAddress) {
+		this.studentAddress = studentAddress;
+	}
 
-    public void setStudentAddress(String studentAddress) {
-        this.studentAddress = studentAddress;
-    }
+	public String getStudentName() {
+		return this.studentName;
+	}
 
-    public String getStudentName() {
-        return this.studentName;
-    }
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
+	}
 
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
-    }
+	public String getStudentPassword() {
+		return this.studentPassword;
+	}
 
-    public String getStudentPassword() {
-        return this.studentPassword;
-    }
-
-    public void setStudentPassword(String studentPassword) throws NoSuchAlgorithmException {
-    	this.studentPassword=studentPassword;
-    }
+	public void setStudentPassword(String studentPassword) {
+		this.studentPassword = studentPassword;
+	}
 
 	public String getStudentTel() {
-        return this.studentTel;
-    }
+		return this.studentTel;
+	}
 
-    public void setStudentTel(String studentTel) {
-        this.studentTel = studentTel;
-    }
+	public void setStudentTel(String studentTel) {
+		this.studentTel = studentTel;
+	}
 
+	public Clas getClas() {
+		return this.clas;
+	}
+
+	public void setClas(Clas clas) {
+		this.clas = clas;
+	}
 
 }

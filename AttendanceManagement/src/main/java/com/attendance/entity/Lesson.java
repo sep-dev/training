@@ -11,6 +11,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 
 /**
@@ -22,11 +25,11 @@ import javax.persistence.Table;
 @NamedQuery(name="Lesson.findAll", query="SELECT l FROM Lesson l")
 public class Lesson implements Serializable {
     private static final long serialVersionUID = 1L;
-
+    @NotNull
     @Id
     @Column(name="lesson_id")
     private Integer lessonId;
-
+    @NotEmpty
     @Column(name="lesson_name")
     private String lessonName;
 

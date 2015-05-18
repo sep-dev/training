@@ -1,17 +1,12 @@
 package com.attendance.entity;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 /**
  * The persistent class for the classes database table.
- *
+ * 
  */
 @Entity
 @Table(name="classes")
@@ -20,12 +15,12 @@ public class Class implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="class_id")
 	private int classId;
 
 	@Column(name="class_name")
 	private String className;
-
 
 	public Class() {
 	}

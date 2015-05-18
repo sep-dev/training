@@ -5,8 +5,6 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,6 +12,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 
 /**
@@ -25,16 +24,15 @@ import javax.persistence.TemporalType;
 @NamedQuery(name="Lecture.findAll", query="SELECT l FROM Lecture l")
 public class Lecture implements Serializable {
     private static final long serialVersionUID = 1L;
-
+    @NotNull
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="lecture_id")
     private Integer lectureId;
-
+    @NotNull
     @Temporal(TemporalType.DATE)
     @Column(name="lecture_date")
     private Date lectureDate;
-
+    @NotNull
     @Column(name="lecture_hour")
     private Integer lectureHour;
 

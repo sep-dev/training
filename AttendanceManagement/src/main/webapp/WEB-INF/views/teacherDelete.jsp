@@ -23,8 +23,8 @@
             <td><form:input path="teacherPassword" size="50" value="********" disabled="true"/></td></tr>
         <tr><td><form:label path="teacherName">名前：</form:label></td>
             <td><form:input path="teacherName"  size="50" disabled="true"/></td></tr>
-        <tr><td><form:label path="classId">所属クラス：</form:label></td>
-            <td><form:input path="classId"  size="50" disabled="true"/></td></tr>
+        <tr><td><form:label path="class.className">所属クラス：</form:label></td>
+            <td><form:input path="class.className"  size="50" disabled="true"/></td></tr>
         <tr><td><form:label path="teacherAddress">住所：</form:label></td>
             <td><form:input path="teacherAddress"  size="50" disabled="true"/></td></tr>
         <tr><td><form:label path="teacherTel">電話番号</form:label></td>

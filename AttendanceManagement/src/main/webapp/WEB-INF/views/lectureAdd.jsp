@@ -9,24 +9,47 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>講義新規登録画面</title>
-    <link rel="stylesheet" href="<c:url value="/resources/css/c_list.css" />" type="text/css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/i18n/jquery.ui.datepicker-ja.js"></script>
+    <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" rel="stylesheet" />
 </head>
 <body>
+    <script type="text/javascript" >
+    <!--
+      $(function() {
+    	  $("#datepicker").datepicker({
+    		  showButtonPanel: true
+    	  });
+      });
+    -->
+    </script>
     <h1>${title}</h1>
     <p>${message}</p>
     <table width="800">
     <form:form modelAttribute="lecture">
         <tr><td></td><td><form:errors path="*" element="div" /></td></tr>
         <tr><td><form:label path="lectureId">講義ID：</form:label></td>
-            <td><form:input path="lectureId" size="50"/></td></tr>
-        <tr><td><form:label path="lesson.lessonId">科目ID：</form:label></td>
-            <td><form:input path="lesson.lessonId" size="50"/></td></tr>
-        <tr><td><form:label path="lectureDate">講義年月日：</form:label></td>
-            <td><form:input type=""  path="lectureDate" /></td></tr>
-        <tr><td><form:label path="lectureHour">講義時限：</form:label></td>
-            <td><form:input path="lectureHour" size="50"/></td></tr>
-
-
+            <td><form:input path="lectureId"  size="50"/></td></tr>
+        <tr><td><form:label path="lesson">講義名：</form:label></td>
+            <td><form:select path="lesson">
+            <c:forEach items="${selectLesson}" var="opt">
+            <c:choose>
+            <c:when test="${opt.lessonId eq id}">
+            <option value="${opt.lessonId}" selected="selected"><c:out value="${opt.lessonName}"/></option>
+            </c:when>
+            <c:otherwise>
+            <option value="${opt.lessonId}"><c:out value="${opt.lessonName}"/></option>
+            </c:otherwise>
+            </c:choose>
+            </c:forEach>
+            </form:select></td></tr>
+        <tr><td><form:label path="lesson.teacher">担当講師名：</form:label></td>
+            <td><form:select path="lesson.teacher"  items="${selectTeacher}" itemLabel="teacherName" itemValue="teacherId"/></td></tr>
+        <tr><td><form:label path="lectureDate">日付：</form:label></td>
+            <td><form:input id="datepicker" path="lectureDate"/></td></tr>
+        <tr><td><form:label path="lectureHour">時限：</form:label></td>
+            <td><form:input path="lectureHour"  /></td></tr>
         <tr><td><input type="submit" value="登録"  onclick="location.href='lectureAdd'"/></td>
             <td><input type="reset" value="リセット"/></td></tr>
     </form:form>

@@ -1,13 +1,20 @@
 package com.attendance.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.sql.Time;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 
 /**
  * The persistent class for the hour_mst database table.
- * 
+ *
  */
 @Entity
 @Table(name="hour_mst")
@@ -18,7 +25,7 @@ public class HourMst implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="hour_id")
-	private int hourId;
+	private Integer hourId;
 
 	@Column(name="end_time")
 	private Time endTime;
@@ -29,11 +36,11 @@ public class HourMst implements Serializable {
 	public HourMst() {
 	}
 
-	public int getHourId() {
+	public Integer getHourId() {
 		return this.hourId;
 	}
 
-	public void setHourId(int hourId) {
+	public void setHourId(Integer hourId) {
 		this.hourId = hourId;
 	}
 

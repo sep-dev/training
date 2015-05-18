@@ -22,7 +22,7 @@
         <tr><td><form:label path="lessonName">名前：</form:label></td>
             <td><form:input path="lessonName" size="50"/></td></tr>
         <tr><td><form:label path="teacher">担当講師名：</form:label></td>
-            <td><form:input path="teacher" size="50"/></td></tr>
+            <td><form:select path="teacher"  items="${selectTeacher}" itemLabel="teacherName" itemValue="teacherId"/></td></tr>
 
 
         <tr><td><input type="submit" value="登録"  onclick="location.href='lessonAdd'"/></td>

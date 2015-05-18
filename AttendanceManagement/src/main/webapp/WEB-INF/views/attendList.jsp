@@ -14,7 +14,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/i18n/jquery.ui.datepicker-ja.js"></script>
     <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" rel="stylesheet" />
     <script type="text/javascript">
-    
+
     </script>
 </head>
 <body>
@@ -26,27 +26,29 @@
     	  $("#datepicker2").datepicker({
     	  });
       });
-    
+
     -->
     </script>
     <h1>${title}</h1>
     <p>${message}</p>
-    <table>
+
 	<form action="${pageContext.request.contextPath}/attendList" method="post">
+	<table>
 		<tr><td>生徒名検索 :</td>
 		<td><input type="text" name="student_name" size="20" /></td></tr>
 		<tr><td>講義名検索 :</td>
 		<td><input type="text" name="lecture_name" size="20"/></td></tr>
 		<tr><td>日付検索 :</td>
-		<td><input type="text" name="lecture_date" id="datepicker"/>～<input type="text" name="lecture_date2" id="datepicker2"/></td></tr>
+		<td><input type="date" name="lecture_date"/>～<input type="date" name="lecture_date2"/></td></tr>
 		<tr><td>時限検索 :</td>
 		<td><input type="text" name="lecture_hour" size="20"/></td></tr>
 		<tr><td></td><td><input type="submit" value="検索"></td></tr>
+	</table>
 	</form>
 	<form action="${pageContext.request.contextPath}/attendList" method="get">
-		<tr><td></td><td><input type="submit" value="一覧表示"></td></tr>
+		<input type="submit" value="一覧表示">
 	</form>
-    </table>
+
 
     <hr>
     <form>

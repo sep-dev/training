@@ -11,17 +11,17 @@ import com.attendance.repository.HourMstRepository;
 @Service
 public class HourMstServiceImpl implements HourMstService {
 
-    @Autowired
-    private HourMstRepository hourRepository;
+	@Autowired
+	private HourMstRepository hourRepository;
 
-    @Override
-    public HourMst findByHourId(Integer hourId) {
-        return hourRepository.findByHourId(hourId);
-    }
+	@Override
+	public HourMst findByHourId(Integer hourId) {
+		return hourRepository.findByHourId(hourId);
+	}
 
-    @Override
-    public List<HourMst> findAll() {
-        return hourRepository.findAll();
-    }
+	@Override
+	public List<HourMst> findAll() {
+		return hourRepository.findAll();
+	}
 
 }

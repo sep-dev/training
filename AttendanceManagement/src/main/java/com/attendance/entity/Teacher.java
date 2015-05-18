@@ -13,36 +13,35 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-
 /**
  * The persistent class for the teachers database table.
  *
  */
 @Entity
-@Table(name="teachers")
-@NamedQuery(name="Teacher.findAll", query="SELECT t FROM Teacher t")
+@Table(name = "teachers")
+@NamedQuery(name = "Teacher.findAll", query = "SELECT t FROM Teacher t")
 public class Teacher implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@NotNull
 	@Id
-	@Column(name="teacher_id")
+	@Column(name = "teacher_id")
 	private Integer teacherId;
 	@NotEmpty
-	@Column(name="teacher_address")
+	@Column(name = "teacher_address")
 	private String teacherAddress;
 	@NotEmpty
-	@Column(name="teacher_name")
+	@Column(name = "teacher_name")
 	private String teacherName;
 	@NotEmpty
-	@Column(name="teacher_password")
+	@Column(name = "teacher_password")
 	private String teacherPassword;
 	@NotEmpty
-	@Column(name="teacher_tel")
+	@Column(name = "teacher_tel")
 	private String teacherTel;
 
-	//bi-directional many-to-one association to Clas
+	// bi-directional many-to-one association to Clas
 	@ManyToOne
-	@JoinColumn(name="class_id")
+	@JoinColumn(name = "class_id")
 	private Clas clas;
 
 	public Teacher() {

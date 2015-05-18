@@ -10,7 +10,7 @@
   </head>
   <body>
     <h1>ユーザ選択画面</h1>
-    <a href="./login/manager">管理者</a>
+    <a href="./login/loginManager">管理者</a>
     <a href="./login/student">生徒</a>
   </body>
 </html>

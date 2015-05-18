@@ -13,15 +13,24 @@ import com.attendance.form.SearchAttendancePastDataForm;
 
 public interface StudentService {
 
-    Student studentFindByStudentId(Integer studentId);
-    List<Lecture> getAllLecture();
-    List<Lecture> getLectureListfindByLectureDate(Date lectureDate);
-    List<TodayLecture> getTodayLectureList(Integer studentId); //引数に渡された生徒IDから、その生徒が本日受講可能講義一覧取得を取得する
-    boolean addLectureAtttendance(LectureAttendancePK id);
-    boolean updateStudentPassword(Integer studentId,String password);
-    List<AttendancePastData> getAttendancePastData(Integer studentId, SearchAttendancePastDataForm sapdf);
+	Student studentFindByStudentId(Integer studentId);
 
-    String getMinDate(Integer studentId);
-    Map<String,String> getSearcHourMap();
-    Map<String,String> getSearchLessonMap();
+	List<Lecture> getAllLecture();
+
+	List<Lecture> getLectureListfindByLectureDate(Date lectureDate);
+
+	List<TodayLecture> getTodayLectureList(Integer studentId); // 引数に渡された生徒IDから、その生徒が本日受講可能講義一覧取得を取得する
+
+	boolean addLectureAtttendance(LectureAttendancePK id);
+
+	boolean updateStudentPassword(Integer studentId, String password);
+
+	List<AttendancePastData> getAttendancePastData(Integer studentId,
+			SearchAttendancePastDataForm sapdf);
+
+	String getMinDate(Integer studentId);
+
+	Map<String, String> getSearcHourMap();
+
+	Map<String, String> getSearchLessonMap();
 }

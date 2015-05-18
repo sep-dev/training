@@ -24,7 +24,7 @@
       </ul>
     </nav>
     <section>
-      <iframe src="./managerMainPage">iframeを使用</iframe>
+      <iframe src="./managerMain">iframeを使用</iframe>
     </section>
   </body>
 </html>

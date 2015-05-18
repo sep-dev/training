@@ -10,8 +10,10 @@ import com.attendance.entity.Teacher;
 @Repository
 public interface TeacherRepository extends JpaRepository<Teacher, Integer> {
 
-	 public Teacher findByTeacherId(Integer teacherId);
+	public Teacher findByTeacherId(Integer teacherId);
 
-		public List<Teacher> findByTeacherNameLike(String teacherName);
-		public List<Teacher> findByTeacherNameLikeOrTeacherAddressLike(String teacherName,String teacherAddress);
+	public List<Teacher> findByTeacherNameLike(String teacherName);
+
+	public List<Teacher> findByTeacherNameLikeOrTeacherAddressLike(
+			String teacherName, String teacherAddress);
 }

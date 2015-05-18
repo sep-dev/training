@@ -11,26 +11,25 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-
 /**
  * The persistent class for the hour_mst database table.
  *
  */
 @Entity
-@Table(name="hour_mst")
-@NamedQuery(name="HourMst.findAll", query="SELECT h FROM HourMst h")
+@Table(name = "hour_mst")
+@NamedQuery(name = "HourMst.findAll", query = "SELECT h FROM HourMst h")
 public class HourMst implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="hour_id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "hour_id")
 	private Integer hourId;
 
-	@Column(name="end_time")
+	@Column(name = "end_time")
 	private Time endTime;
 
-	@Column(name="start_time")
+	@Column(name = "start_time")
 	private Time startTime;
 
 	public HourMst() {

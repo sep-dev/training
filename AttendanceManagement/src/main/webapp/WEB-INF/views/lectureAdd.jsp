@@ -20,6 +20,7 @@
       $(function() {
     	  $("#datepicker").datepicker({
     		  showButtonPanel: true
+
     	  });
       });
     -->
@@ -47,7 +48,7 @@
         <tr><td><form:label path="lesson.teacher">担当講師名：</form:label></td>
             <td><form:select path="lesson.teacher"  items="${selectTeacher}" itemLabel="teacherName" itemValue="teacherId"/></td></tr>
         <tr><td><form:label path="lectureDate">日付：</form:label></td>
-            <td><form:input id="datepicker" path="lectureDate"/></td></tr>
+            <td><form:input type="date" path="lectureDate"/></td></tr>
         <tr><td><form:label path="lectureHour">時限：</form:label></td>
             <td><form:input path="lectureHour"  /></td></tr>
         <tr><td><input type="submit" value="登録"  onclick="location.href='lectureAdd'"/></td>

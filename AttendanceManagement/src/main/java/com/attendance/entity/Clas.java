@@ -11,22 +11,21 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-
 /**
  * The persistent class for the clases database table.
  *
  */
 @Entity
-@Table(name="clases")
-@NamedQuery(name="Clas.findAll", query="SELECT c FROM Clas c")
+@Table(name = "clases")
+@NamedQuery(name = "Clas.findAll", query = "SELECT c FROM Clas c")
 public class Clas implements Serializable {
 	private static final long serialVersionUID = 1L;
-    @NotNull
+	@NotNull
 	@Id
-	@Column(name="class_id")
+	@Column(name = "class_id")
 	private Integer classId;
-    @NotEmpty
-	@Column(name="class_name")
+	@NotEmpty
+	@Column(name = "class_name")
 	private String className;
 
 	public Clas() {

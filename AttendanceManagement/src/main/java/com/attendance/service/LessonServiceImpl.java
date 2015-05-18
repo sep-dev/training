@@ -11,16 +11,16 @@ import com.attendance.repository.LessonRepository;
 @Service
 public class LessonServiceImpl implements LessonService {
 
-    @Autowired
-    private LessonRepository lessonRepository;
+	@Autowired
+	private LessonRepository lessonRepository;
 
-    @Override
-    public List<Lesson> findAll() {
-        return lessonRepository.findAll();
-    }
+	@Override
+	public List<Lesson> findAll() {
+		return lessonRepository.findAll();
+	}
 
-    @Override
-    public Lesson findByLessonId(Integer lessonId) {
-        return lessonRepository.findByLessonId(lessonId);
-    }
+	@Override
+	public Lesson findByLessonId(Integer lessonId) {
+		return lessonRepository.findByLessonId(lessonId);
+	}
 }

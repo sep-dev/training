@@ -19,33 +19,35 @@ import com.attendance.repository.ClassRepository;
 @Controller
 public class ClassUpdateController {
 
-	 @Autowired
-     private ClassRepository repository;
-	 @RequestMapping(value = "/classUpdate", method = RequestMethod.GET, produces="text/plain;charset=utf-8")
-	    public String helo(HttpServletRequest request,Model model) {
-		    int id=Integer.parseInt(request.getParameter("id"));
+	@Autowired
+	private ClassRepository repository;
 
-	        model.addAttribute("title","クラス編集画面");
-	        model.addAttribute("message","クラス情報の編集が可能");
-	        Clas clas = repository.findOne(id);
-	        model.addAttribute("class",clas);
-	        return "/classUpdate";
-	    }
+	@RequestMapping(value = "/classUpdate", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
+	public String helo(HttpServletRequest request, Model model) {
+		int id = Integer.parseInt(request.getParameter("id"));
 
-	   @RequestMapping(value = "/classUpdate", method = RequestMethod.POST, produces="text/plain;charset=utf-8")
-	    public String repo(@Valid @ModelAttribute Clas data ,Errors result,Model model) {
-	    	if(result.hasErrors()){
-	            model.addAttribute("title","エラー画面");
-	            model.addAttribute("message","エラーが発生しました");
-	            return "/classUpdate";
-	    	}else{
-	            repository.saveAndFlush(data);
-	            model.addAttribute("title","クラス管理画面");
-		        model.addAttribute("message","クラス一覧から目的のクラスを検索し、編集・削除等が可能");
-		        model.addAttribute("myData",data);
-		        List<Clas> list = repository.findAll();
-		        model.addAttribute("datalist",list);
-	            return "/classList";
-	    	}
-	    }
+		model.addAttribute("title", "クラス編集画面");
+		model.addAttribute("message", "クラス情報の編集が可能");
+		Clas clas = repository.findOne(id);
+		model.addAttribute("class", clas);
+		return "/classUpdate";
+	}
+
+	@RequestMapping(value = "/classUpdate", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
+	public String repo(@Valid @ModelAttribute Clas data, Errors result,
+			Model model) {
+		if (result.hasErrors()) {
+			model.addAttribute("title", "エラー画面");
+			model.addAttribute("message", "エラーが発生しました");
+			return "/classUpdate";
+		} else {
+			repository.saveAndFlush(data);
+			model.addAttribute("title", "クラス管理画面");
+			model.addAttribute("message", "クラス一覧から目的のクラスを検索し、編集・削除等が可能");
+			model.addAttribute("myData", data);
+			List<Clas> list = repository.findAll();
+			model.addAttribute("datalist", list);
+			return "/classList";
+		}
+	}
 }

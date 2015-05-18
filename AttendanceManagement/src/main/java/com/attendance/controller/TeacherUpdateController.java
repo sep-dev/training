@@ -1,6 +1,5 @@
 package com.attendance.controller;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,16 +9,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.attendance.dao.ClassPropertyEditor;
 import com.attendance.dao.PasswordManager;
+import com.attendance.entity.Clas;
 import com.attendance.entity.Teacher;
+import com.attendance.repository.ClassRepository;
 import com.attendance.repository.TeacherRepository;
 
 @Controller
 public class TeacherUpdateController {
+	 @Autowired
+     private ClassRepository class_repository;
 	 @Autowired
      private TeacherRepository repository;
 	 private PasswordManager pm;
@@ -34,6 +40,8 @@ public class TeacherUpdateController {
 	        Teacher teacher = repository.findOne(id);
 	        pm.setForwardHash(teacher.getTeacherPassword());
 	        model.addAttribute("teacher",teacher);
+	        List<Clas> class_list=class_repository.findAll();
+	        model.addAttribute("selectClass",class_list);
 	        return "/teacherUpdate";
 	    }
 
@@ -44,12 +52,7 @@ public class TeacherUpdateController {
 	            model.addAttribute("message","エラーが発生しました");
 	            return "/teacherUpdate";
 	    	}else{
-	    		try {
-					data.setTeacherPassword(pm.hashCreate(data.getTeacherPassword()));
-				} catch (NoSuchAlgorithmException e) {
-					// TODO 自動生成された catch ブロック
-					e.printStackTrace();
-				}
+	    		data.setTeacherPassword(pm.hashCreate(data.getTeacherPassword()));
 	            repository.saveAndFlush(data);
 	            model.addAttribute("title","講師管理画面");
 		        model.addAttribute("message","講師一覧から目的の講師を検索し、編集・削除等が可能");
@@ -59,4 +62,8 @@ public class TeacherUpdateController {
 	            return "/teacherList";
 	    	}
 	    }
+	   @InitBinder
+	   protected void initBinder(HttpServletRequest request,ServletRequestDataBinder binder)throws Exception{
+		   binder.registerCustomEditor(Clas.class,new ClassPropertyEditor(class_repository));
+	   }
 }

@@ -1,12 +1,6 @@
 package com.attendance.controller;
 
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,10 +12,8 @@ import com.attendance.helper.ShareHelper;
 import com.attendance.service.LoginService;
 
 @Controller
+@RequestMapping(value="/login")
 public class LoginController {
-
-    @Autowired
-    private LoginService loginService;
 
     @RequestMapping(value="/")
     public String index(){
@@ -87,31 +79,8 @@ public class LoginController {
         return redirectUrl.toString();
     }
 
-    //講師追加
-    @RequestMapping(value = "/teacherAdd",method = RequestMethod.POST)
-    public String addTeacher(@Valid @ModelAttribute Teacher teacher,BindingResult result,
-            @RequestParam("kakuninPassword") String kakuninPassword,RedirectAttributes attribute){
-        String successUrl = "redirect:manager/top";
-        String notSuccessUrl = "redirect:newTeacher";
-
-        //入力された値のチェックと、パスワード比較
-        if(result.hasErrors() || !teacher.getTeacherPassword().equals(kakuninPassword)){
-            attribute.addFlashAttribute("error","登録できませんでした");
-            return notSuccessUrl;
-        }
-
-        //更新処理
-        if(loginService.teacherUpdate(teacher)){
-            /*
-             * ToDo
-             * 更新に成功したら、ログイン済みにする
-             */
-            return successUrl;
-        }else{
-            attribute.addFlashAttribute("error", "許可されてないユーザIDです");
-            return notSuccessUrl;
-        }
-
+    @RequestMapping(value="student")
+    public String loginStudent(){
+        return "";
     }
-
 }

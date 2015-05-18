@@ -8,13 +8,15 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>講義新規登録画面</title>
+    <title>講義編集画面</title>
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/i18n/jquery.ui.datepicker-ja.js"></script>
     <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" rel="stylesheet" />
+   
 </head>
 <body>
+
     <script type="text/javascript" >
     <!--
       $(function() {
@@ -24,13 +26,14 @@
       });
     -->
     </script>
+
     <h1>${title}</h1>
     <p>${message}</p>
     <table width="800">
     <form:form modelAttribute="lecture">
         <tr><td></td><td><form:errors path="*" element="div" /></td></tr>
-        <tr><td><form:label path="lectureId">講義ID：</form:label></td>
-            <td><form:input path="lectureId"  size="50"/></td></tr>
+        <tr><td><form:label path="lectureId" >講義ID：</form:label></td>
+            <td><form:input path="lectureId"  size="50" readonly="true"/></td></tr>
         <tr><td><form:label path="lesson">講義名：</form:label></td>
             <td><form:select path="lesson">
             <c:forEach items="${selectLesson}" var="opt">
@@ -50,7 +53,7 @@
             <td><form:input id="datepicker" path="lectureDate"/></td></tr>
         <tr><td><form:label path="lectureHour">時限：</form:label></td>
             <td><form:input path="lectureHour"  /></td></tr>
-        <tr><td><input type="submit" value="登録"  onclick="location.href='lectureAdd'"/></td>
+        <tr><td><input type="submit" value="確定"  onclick="location.href='lectureUpdate'"/></td>
             <td><input type="reset" value="リセット"/></td></tr>
     </form:form>
     </table>

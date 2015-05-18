@@ -31,12 +31,15 @@ public class LessonUpdateController {
      private PasswordManager pm;
 	 @RequestMapping(value = "/lessonUpdate", method = RequestMethod.GET, produces="text/plain;charset=utf-8")
 	    public String helo(HttpServletRequest request,Model model) {
+		 System.out.println("ID"+request.getParameter("id"));
 		    int id=Integer.parseInt(request.getParameter("id"));
 
 	        model.addAttribute("title","科目編集画面");
 	        model.addAttribute("message","科目情報の編集が可能");
 	        Lesson lesson = repository.findOne(id);
 	        model.addAttribute("lesson",lesson);
+	        List<Teacher> teacher_list=teacher_repository.findAll();       
+	        model.addAttribute("selectTeacher",teacher_list); 
 	        return "/lessonUpdate";
 	    }
 

@@ -8,8 +8,10 @@ import org.springframework.stereotype.Repository;
 
 import com.attendance.entity.Lecture;
 
+
 @Repository
 public interface LectureRepository extends JpaRepository<Lecture, Integer> {
-    public Lecture findByLectureId(Integer lectureId);
-    public List<Lecture> findByLectureDate(Date lectureDate);
+    public List<Lecture> findByLectureId(Integer lectureId);
+
+	public List<Lecture> findByLectureDateBetween(Date param, Date param2);
 }

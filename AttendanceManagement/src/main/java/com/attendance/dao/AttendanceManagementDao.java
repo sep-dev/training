@@ -16,4 +16,5 @@ public interface AttendanceManagementDao {
     //過去情報検索欄用
     Map<String,String> getSearcHourMap();
     Map<String,String> getSearchLessonMap();
+    
 }

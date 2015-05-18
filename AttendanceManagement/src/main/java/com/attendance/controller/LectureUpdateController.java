@@ -31,59 +31,55 @@ import com.attendance.repository.LectureRepository;
 import com.attendance.repository.LessonRepository;
 import com.attendance.repository.TeacherRepository;
 
-
 @Controller
-public class LectureAddController {
+public class LectureUpdateController {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	 @Autowired
-    private LessonRepository lesson_repository;
-	 @Autowired
      private TeacherRepository teacher_repository;
 	 @Autowired
+     private LessonRepository lesson_repository;
+	 @Autowired
      private LectureRepository repository;
-	 @RequestMapping(value = "/lectureAdd", method = RequestMethod.GET, produces="text/plain;charset=utf-8")
-	    public String helo(Model model) {
-	        Lecture lecture=new Lecture();
-	        model.addAttribute("title","講義新規作成画面");
-	        model.addAttribute("message","講義情報の新規作成が可能");
-	        model.addAttribute("lecture",lecture);
+	 int id;
+	 @RequestMapping(value = "/lectureUpdate", method = RequestMethod.GET, produces="text/plain;charset=utf-8")
+	    public String helo(HttpServletRequest request,Model model) {
+		    id=Integer.parseInt(request.getParameter("id"));
 
+	        model.addAttribute("title","講義編集画面");
+	        model.addAttribute("message","講義情報の編集が可能");
+	        Lecture lecture = repository.findOne(id);
+	        model.addAttribute("lecture",lecture);
 	        List<Lesson> lesson_list=lesson_repository.findAll();
 	        model.addAttribute("selectLesson",lesson_list);
 	        List<Teacher> teacher_list=teacher_repository.findAll();
 	        model.addAttribute("selectTeacher",teacher_list);
-	        return "/lectureAdd";
+	        model.addAttribute("id",lecture.getLesson().getLessonId());
+	        return "/lectureUpdate";
 	    }
 
-	   @RequestMapping(value = "/lectureAdd", method = RequestMethod.POST, produces="text/plain;charset=utf-8")
+	   @RequestMapping(value = "/lectureUpdate", method = RequestMethod.POST, produces="text/plain;charset=utf-8")
 	    public String repo(@Valid @ModelAttribute Lecture data ,Errors result,Model model) {
 	    	if(result.hasErrors()){
 	            model.addAttribute("title","エラー画面");
 	            model.addAttribute("message","エラーが発生しました");
-	            List<Lesson> lesson_list=lesson_repository.findAll();
+	            Lecture lecture = repository.findOne(id);
+		        model.addAttribute("lecture",lecture);
+		        List<Lesson> lesson_list=lesson_repository.findAll();
 		        model.addAttribute("selectLesson",lesson_list);
 		        List<Teacher> teacher_list=teacher_repository.findAll();
 		        model.addAttribute("selectTeacher",teacher_list);
-	            return "/lectureAdd";
-	    	}else if(repository.findByLectureId(data.getLectureId())!=null){
-	    		model.addAttribute("title","エラー画面");
-	            model.addAttribute("message","IDが重複しています");
-	            List<Lesson> lesson_list=lesson_repository.findAll();
-		        model.addAttribute("selectLesson",lesson_list);
-		        List<Teacher> teacher_list=teacher_repository.findAll();
-		        model.addAttribute("selectTeacher",teacher_list);
-		        return "/lectureAdd";
+		        model.addAttribute("id",lecture.getLesson().getLessonId());
+	            return "/lectureUpdate";
 	    	}else{
 	            repository.saveAndFlush(data);
 	            model.addAttribute("title","講義管理画面");
-		        model.addAttribute("message","講義一覧から目的の科目を検索し、編集・削除等が可能");
+		        model.addAttribute("message","講義一覧から目的の講義を検索し、編集・削除等が可能");
 		        String sql="Select * from lectures as a inner join lessons as b on a.lesson_id=b.lesson_id inner join teachers as c on b.lesson_teacher_id=c.teacher_id ";
 		        List<LectureForm> al=jdbcTemplate.query(sql, new BeanPropertyRowMapper<LectureForm>(LectureForm.class));
 		        model.addAttribute("datalist",al);
 	            return "/lectureList";
 	    	}
-
 	    }
 	   @InitBinder
 	   protected void initBinder(HttpServletRequest request,ServletRequestDataBinder binder)throws Exception{

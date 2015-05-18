@@ -5,14 +5,15 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 
 /**
@@ -24,12 +25,11 @@ import javax.persistence.Table;
 @NamedQuery(name="Lesson.findAll", query="SELECT l FROM Lesson l")
 public class Lesson implements Serializable {
     private static final long serialVersionUID = 1L;
-
+    @NotNull
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="lesson_id")
     private Integer lessonId;
-
+    @NotEmpty
     @Column(name="lesson_name")
     private String lessonName;
 
@@ -42,6 +42,8 @@ public class Lesson implements Serializable {
     @JoinColumn(name="lesson_teacher_id")
     private Teacher teacher;
 
+    
+    
     public Lesson() {
     }
 
@@ -90,5 +92,7 @@ public class Lesson implements Serializable {
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
     }
+    
+   
 
 }

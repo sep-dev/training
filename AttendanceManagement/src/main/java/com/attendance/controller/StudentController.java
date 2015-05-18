@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.inject.Inject;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.attendance.entity.Student;
+import com.attendance.repository.StudentRepository;
 import com.attendance.entity.LectureAttendancePK;
 import com.attendance.form.PasswordEditForm;
 import com.attendance.form.SearchAttendancePastDataForm;
@@ -26,7 +30,6 @@ import com.attendance.service.StudentService;
 import com.attendance.validator.PasswordEqualsValidator;
 
 @Controller
-@RequestMapping(value="/student")
 public class StudentController {
 
     @Autowired
@@ -37,6 +40,8 @@ public class StudentController {
     private LessonService lessonService;
     @Autowired
     private HourMstService hourService;
+    @Autowired
+    private StudentRepository repository;
 
     @Inject
     private PasswordEqualsValidator passwordEqualsValidator;
@@ -45,7 +50,7 @@ public class StudentController {
 
     private Integer studentId = new Integer(0);
 
-    @RequestMapping(value="lectureList")
+    @RequestMapping(value="student/lectureList")
     public ModelAndView lectureList(){
         mav = new ModelAndView("lectureList");
         mav.addObject("lectureList", studentService.getTodayLectureList(studentId)); //一時的に0を入れているだけ
@@ -56,7 +61,7 @@ public class StudentController {
         return mav;
     }
 
-    @RequestMapping(value="attendanceAdd",params="confirm")
+    @RequestMapping(value="student/attendanceAdd",params="confirm")
     public String attendanceAddConfirm(LectureAttendancePK lectureAttendancePK,Model model){
         model.addAttribute("today", ShareHelper.getToday());
         model.addAttribute(lectureService.findByLectureId(lectureAttendancePK.getLectureId()));
@@ -64,7 +69,7 @@ public class StudentController {
         return "attendanceAddConfirm";
     }
 
-    @RequestMapping(value="attendanceAdd",params="add")
+    @RequestMapping(value="student/attendanceAdd",params="add")
     public String attendanceAdd(LectureAttendancePK id,Model model){
         if(!studentService.addLectureAtttendance(id)) return "redirect:lectureList"; //失敗画面へ
         model.addAttribute("title","出席登録完了");
@@ -72,13 +77,13 @@ public class StudentController {
         return "commonSuccess";
     }
 
-    @RequestMapping(value="studentPasswordEdit",params="input")
+    @RequestMapping(value="student/studentPasswordEdit",params="input")
     public String studentPasswordEdit(Model model){
         model.addAttribute(new PasswordEditForm(studentId));
         return "studentPassEdit";
     }
 
-    @RequestMapping(value="studentPasswordEdit", params="excute")
+    @RequestMapping(value="student/studentPasswordEdit", params="excute",method=RequestMethod.POST)
     public String studentPasswordUpdate(@Validated PasswordEditForm editForm,BindingResult result,Model model){
         if(result.hasErrors()) return "studentPassEdit";
         boolean updateResult = studentService.updateStudentPassword(editForm.getStudentId(), editForm.getNewPassword());
@@ -97,7 +102,7 @@ public class StudentController {
     }
 
     //ログインしている生徒の、過去の出席情報を一覧表示する
-    @RequestMapping(value="search")
+    @RequestMapping(value="student/search",method=RequestMethod.POST)
     public String attendanceDataSearch(@ModelAttribute SearchAttendancePastDataForm sapd,Model model){
         model.addAttribute("lessonList", studentService.getSearchLessonMap());
         model.addAttribute("hourList",studentService.getSearcHourMap());
@@ -111,7 +116,7 @@ public class StudentController {
         return "pastDataList";
     }
 
-    @RequestMapping(value="search",params="download")
+    @RequestMapping(value="student/search",params="download",method=RequestMethod.POST)
     public String downloadCSV(SearchAttendancePastDataForm sapd,Model model){
         model.addAttribute("fileName", "test.csv");
         model.addAttribute("studentName", studentService.studentFindByStudentId(studentId).getStudentName());
@@ -123,4 +128,28 @@ public class StudentController {
         model.addAttribute("pastDateList",studentService.getAttendancePastData(studentId, sapd));
         return "attendancePastDataDownload";
     }
+     
+    @RequestMapping(value = "/studentList", method = RequestMethod.GET, produces="text/plain;charset=utf-8")
+    public String helo(Model model) {
+        Student data=new Student();
+        model.addAttribute("title","生徒管理画面");
+        model.addAttribute("message","生徒一覧から目的の生徒を検索し、編集・削除等が可能");
+        model.addAttribute("myData",data);
+        List<Student> list = repository.findAll();
+        model.addAttribute("datalist",list);
+        return "/studentList";
+    }
+
+    @RequestMapping(value = "/studentList", method = RequestMethod.POST, produces="text/plain;charset=utf-8")
+    public String search(HttpServletRequest request,Model model) {
+        String param=request.getParameter("fstr");
+        System.out.println(param);
+        model.addAttribute("title","検索");
+        model.addAttribute("message","「"+param+"」の"+"検索結果");
+        //名前・住所であいまい検索
+        List<Student> list = repository.findByStudentNameLikeOrStudentAddressLike("%"+param+"%","%"+param+"%");
+        model.addAttribute("datalist",list);
+        return "/studentList";
+    }
 }
+

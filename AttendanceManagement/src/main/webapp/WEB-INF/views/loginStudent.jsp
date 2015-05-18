@@ -7,26 +7,26 @@
 <html>
   <head>
     <title>生徒ログイン画面</title>
-    <link href="<c:url value="/resources/css/common.css" />" rel="stylesheet" >
+    <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet" >
   </head>
   <body>
     <h1>生徒ログイン画面</h1>
-    <form:form modelAttribute="loginForm" action="./login">
+    <form:form modelAttribute="loginForm" action="./login" class="loginForm">
       <form:hidden path="type"/>
-      <table>
+      <table class="centerTable">
         <tr>
-          <td>生徒ID</td>
-          <td><form:input path="id" placeholder="生徒IDを入力してください"/></td>
+          <td>生徒ID：</td>
+          <td><form:input path="id" placeholder="生徒IDを入力してください" required="true"/></td>
         </tr>
         <tr>
-          <td>パスワード</td>
-          <td><form:password path="password" placeholder="パスワードを入力してください"/></td>
+          <td>パスワード：</td>
+          <td><form:password path="password" placeholder="パスワードを入力してください" required="true"/></td>
         </tr>
       </table>
       <p><input type="submit" value="ログイン" /></p>
     </form:form>
     <c:if test="${error != null}">
-      <div class="error">
+      <div class="errorMessage">
         <c:out value="${error}" />
       </div>
     </c:if>

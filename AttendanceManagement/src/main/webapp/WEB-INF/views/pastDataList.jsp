@@ -6,7 +6,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
   <head>
-    <title></title>
+    <title>本日の受講可能講義一覧</title>
+    <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet" >
   </head>
   <body>
     <form:form modelAttribute="searchAttendancePastDataForm">

@@ -32,6 +32,10 @@ public class ShareHelper {
     public static String formatJapaneseDate(Date date){
         return formatDate("yyyy年MM月dd日 (E)",date);
     }
+    
+    public static String csvFileName(String name){
+        return name + "_" + formatDate("yyyyMMddHms",new Date()) + ".csv";
+    }
 
     public static String getToday(){
         return formatJapaneseDate(new Date());

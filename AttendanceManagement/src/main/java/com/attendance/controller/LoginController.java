@@ -2,12 +2,6 @@ package com.attendance.controller;
 
 import javax.validation.Valid;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
-
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.attendance.domain.AccessUser;
@@ -25,7 +18,6 @@ import com.attendance.entity.Student;
 import com.attendance.entity.Teacher;
 import com.attendance.form.LoginForm;
 import com.attendance.helper.ShareHelper;
-
 import com.attendance.service.LoginService;
 import com.attendance.service.StudentService;
 import com.attendance.service.TeacherService;
@@ -39,13 +31,13 @@ public class LoginController extends AccessController{
     private StudentService studentService;
     @Autowired
     private TeacherService teacherService;
-    
+
     @RequestMapping(value="/")
     public String index(Model model,SessionStatus status){
-        status.isComplete(); //セッション情報削除
+        status.setComplete(); //セッション情報削除
         return "index";
     }
-    
+
     //ログアウト処理
     @RequestMapping(value="/logout")
     public String logout(AccessUser user){
@@ -56,7 +48,7 @@ public class LoginController extends AccessController{
         }
     }
 
-     //管理者用ログインフォーム要求
+    //管理者用ログインフォーム要求
     @RequestMapping(value="/loginManager")
     public String loginManager(Model model,SessionStatus status){
         status.setComplete();
@@ -87,7 +79,7 @@ public class LoginController extends AccessController{
         return loginForm;
     }
 
-   //ログイン処理
+    //ログイン処理
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public String login(@Valid LoginForm loginForm,BindingResult result,RedirectAttributes attribute,AccessUser user){
         StringBuilder redirectUrl = new StringBuilder("redirect:"); //リダイレクト先を作成するStringBuilder
@@ -161,4 +153,5 @@ public class LoginController extends AccessController{
         }
 
     }
+
 }

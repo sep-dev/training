@@ -9,7 +9,7 @@
     <title>過去の出席情報</title>
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet" >
   </head>
-  <body>
+  <body class="divBody">
     <h1>過去の出席情報検索ページ</h1>
     <form:form modelAttribute="searchAttendancePastDataForm" class="searchForm">
       <table>
@@ -30,33 +30,34 @@
           <td>
             <form:select path="hour" items="${hourList}" /> 時限目
           </td>
-          <td>   </td>
+          <td>  </td>
           <td><input type="submit" value="検索"/></td>
         </tr>
       </table>
     </form:form>
-
-    <table border="1">
-      <tr>
-        <th>日付</th><th>時限</th><th>科目</th>
-      </tr>
-      <c:forEach items="${pastDataList}" var="pastData">
-        <tr>
-          <td><c:out value="${pastData.date}"/></td>
-          <td><c:out value="${pastData.hour}"/></td>
-          <td><c:out value="${pastData.lessonName}"/></td>
-        </tr>
-      </c:forEach>
-    </table>
-
-    <p>
+    <div class="pastDiv">
+      <table class="pastListTable" border="1">
+        <thead>
+          <tr><th class="col_date">日付</th><th class="col_hour">時限</th><th class="col_lesson">科目</th></tr>
+        </thead>
+        <tbody>
+          <c:forEach items="${pastDataList}" var="pastData">
+            <tr>
+              <td class="col_date"><c:out value="${pastData.date}"/></td>
+              <td class="col_hour"><c:out value="${pastData.hour}"/></td>
+              <td class="col_lesson"><c:out value="${pastData.lessonName}"/></td>
+            </tr>
+          </c:forEach>
+        </tbody>
+      </table>
       <form:form modelAttribute="searchAttendancePastDataForm" action="./search?download">
         <form:hidden path="startDate"/>
         <form:hidden path="endDate"/>
         <form:hidden path="lesson_id"/>
         <form:hidden path="hour"/>
-        <input type="submit" value="CSV出力" />
+        <input type="submit" value="CSV出力" class="submitButton">
+        <a href="./lectureList" class="linkButton_r">本日の授業一覧へ</a>
       </form:form>
-    </p>
+    </div>
   </body>
 </html>

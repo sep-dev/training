@@ -118,6 +118,7 @@ public class StudentController extends AccessController{
         model.addAttribute("lessonList", studentService.getSearchLessonMap());
         model.addAttribute("hourList",studentService.getSearcHourMap());
 
+        sapd.dateCompare(); //日付の比較
         if(sapd.getStartDate().equals("")) sapd.setStartDate(studentService.getMinDate(user.getUserId()));
         if(sapd.getEndDate().equals("")) sapd.setEndDate(ShareHelper.formatHyphenDate(new Date()));
 

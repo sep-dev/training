@@ -11,24 +11,27 @@
   </head>
   <body>
     <h1>生徒ログイン画面</h1>
-    <form:form modelAttribute="loginForm" action="./login" class="loginForm">
+    <form:form modelAttribute="loginForm" action="./login">
       <form:hidden path="type"/>
-      <table class="centerTable">
+      <table class="loginTable">
         <tr>
           <td>生徒ID：</td>
-          <td><form:input path="id" placeholder="生徒IDを入力してください" required="true"/></td>
+          <td><form:input path="id" placeholder="生徒IDを入力してください" required="true" pattern="^[0-9]*$"/></td>
+          <form:errors path="id" cssClass="error" element="td"/>
         </tr>
         <tr>
           <td>パスワード：</td>
           <td><form:password path="password" placeholder="パスワードを入力してください" required="true"/></td>
+          <form:errors path="password" cssClass="error" element="td"/>
         </tr>
       </table>
-      <p><input type="submit" value="ログイン" /></p>
+      <p>
+        <input type="submit" value="ログイン" class="submitButton"/>
+        <a href="./" class="linkButton_r">戻る</a>
+      </p>
     </form:form>
     <c:if test="${error != null}">
-      <div class="errorMessage">
-        <c:out value="${error}" />
-      </div>
+      <div class="errorMessage"><c:out value="${error}" /></div>
     </c:if>
   </body>
 </html>

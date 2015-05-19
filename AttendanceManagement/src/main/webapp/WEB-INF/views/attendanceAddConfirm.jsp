@@ -7,11 +7,11 @@
 <html>
   <head>
     <title>出席登録確認</title>
-    <link href="<c:url value="/resources/css/common.css" />" rel="stylesheet" >
+    <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet" >
   </head>
   <body>
     <h1>出席確認</h1>
-    <table>
+    <table class="centeringTable">
       <tr>
         <th>日付：</th>
         <td>${today}</td>
@@ -29,8 +29,10 @@
     <form:form modelAttribute="id" action="./attendanceAdd?add">
       <form:hidden path="studentId"/>
       <form:hidden path="lectureId"/>
-      <input type="submit" value="はい"/>
-      <input type="submit" value="いいえ" formaction="./lectureList" />
+      <div class="centeringDiv">
+        <input type="submit" value="はい" class="submitButton"/>
+        <input type="submit" value="いいえ" formaction="./lectureList" class="submitButton"/>
+      </div>
     </form:form>
   </body>
 </html>

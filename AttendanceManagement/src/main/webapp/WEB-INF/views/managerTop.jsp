@@ -12,7 +12,7 @@
   </head>
   <body>
     <nav>
-      <a href="./logout" class="logout_button">ログアウト</a>
+      <a href="${pageContext.request.contextPath}/logout" class="logout_button">ログアウト</a>
       <ul>
         <li><a href="./">管理者メイン画面</a></li>
         <li><a href="">生徒管理</a></li>
@@ -24,7 +24,7 @@
       </ul>
     </nav>
     <section>
-      <iframe src="./managerMain">iframeを使用</iframe>
+      <iframe src="./managerMainPage">iframeを使用</iframe>
     </section>
   </body>
 </html>

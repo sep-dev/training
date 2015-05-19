@@ -40,7 +40,7 @@
           </tr>
           <tr>
             <th>パスワード</th>
-            <td><form:password path="password" required="true" placeholder="パスワードを入力してください" pattern="^*{8,}$"/></td>
+            <td><form:password path="password" required="true" placeholder="パスワードを入力してください"/></td>
             <form:errors path="password" cssClass="error" element="td"/>
           </tr>
           <tr>

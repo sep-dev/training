@@ -15,16 +15,18 @@
     <c:if test="${error != null}">
        <div class="error"><p>${error}</p></div>
     </c:if>
-    <form:form modelAttribute="loginForm" action="./login" method="post">
+    <form:form modelAttribute="loginForm" action="./login" method="post" class="loginForm">
       <form:hidden path="type"/>
-      <table class="centerTable">
+      <table class="loginTable">
         <tr>
           <td>管理者ID：</td>
-          <td><form:input path="id" placeholder="管理者IDを入力してください"/></td>
+          <td><form:input path="id" placeholder="管理者IDを入力してください" required="true" pattern="^[0-9]*$"/></td>
+          <form:errors path="id" cssClass="error" element="td"/>
         </tr>
         <tr>
           <td>パスワード：</td>
-          <td><form:password path="password" placeholder="パスワードを入力してください"/></td>
+          <td><form:password path="password" placeholder="パスワードを入力してください" required="true"/></td>
+          <form:errors path="password" cssClass="error" element="td"/>
         </tr>
       </table>
       <p>

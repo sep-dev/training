@@ -6,36 +6,52 @@ body{
   margin: 0;
 }
 
-h1,h3{
+h1,h2,h3{
   margin: 10px;
   text-align: center;
 }
 
-p{
+p{text-align: center;}
+
+
+.menu_nav li,.centeringDiv{
   text-align: center;
-}
-
-.loginForm{
-  width: 450px;
-  margin: 0 auto;
-  padding: 0;
-}
-
-.centerTable{
-  margin: 0 auto;
-}
-
-.centerTable td,.menu_nav li,.centeringDiv,.errorMessage{
-  text-align: center;
-}
-
-
-.centerTable tr td:first-child{
-  text-align: right;
 }
 
 .errorMessage{
   color: #dd2020;
+  text-align: center;
+}
+
+.centeringTable{
+  width: 300px;
+  margin: 20px auto;
+}
+
+.centeringTable th{
+  text-align: right;
+}
+
+.centeringTable td{
+  text-align: center;
+}
+
+/*生徒・管理者ログイン画面*/
+.loginTable{
+  width: 600px;
+  margin: 20px auto;
+}
+
+.loginTable td{
+  padding-left: 1px;
+  padding-right: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.loginTable td:first-child{
+  text-align: right;
 }
 
 .linkButton_ll,.linkButton_l,.linkButton_r,.linkButton_s,.submitButton{
@@ -78,6 +94,7 @@ p{
   background-color: #808080;
   color: #ffffff;
   text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+  cursor: pointer;
 }
 
 .errorTextBox{

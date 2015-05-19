@@ -11,7 +11,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class TeacherAddForm implements Serializable {
 
     @NotNull(message="入力してください")
-
     private Integer teacherId; //講師ID
 
     @NotEmpty(message="未入力です。文字を入力してください")

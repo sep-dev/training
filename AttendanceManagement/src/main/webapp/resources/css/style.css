@@ -113,6 +113,32 @@ section iframe{
   display: inline;
 }
 
+/*管理者ログイン画面リンク先の新規登録画面*/
+.singUpDiv{
+  width: 600px;
+  margin: 0 auto;
+}
+
+.singUpDiv ul{
+  list-style-position: inside;
+  list-style-type: none;
+  text-align: center;
+}
+
+.singUpDiv table{
+  width: 600px;
+  mergin: 0 auto;
+}
+
+.singUpDiv td{
+  padding: 5px 0;
+}
+
+.singUpDiv th{
+  text-align: right;
+  padding-right: 10px;
+}
+
 /*本日の授業一覧用*/
 .listTable{
   width: 550px;

@@ -1,5 +1,6 @@
 package com.attendance.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,34 +50,27 @@ public class LoginController extends AccessController{
     }
 
     //管理者用ログインフォーム要求
-    @RequestMapping(value="/loginManager")
-    public String loginManager(Model model,SessionStatus status){
+    @RequestMapping(value={"/loginManager","/loginStudent"})
+    public String loginManager(HttpServletRequest request,Model model,SessionStatus status){
         status.setComplete();
         model.addAttribute(new AccessUser());
-        model.addAttribute(getLoginForm(TYPE_MANAGER));
-        return "loginManager";
+        LoginForm loginForm = new LoginForm();
+        if(request.getRequestURI().indexOf("loginManager") != -1){
+            loginForm.setType(TYPE_MANAGER);
+            model.addAttribute(loginForm);
+            return "loginManager";
+        }else{
+            loginForm.setType(TYPE_STUDENT);
+            model.addAttribute(loginForm);
+            return "loginStudent";
+        }
     }
 
+    //管理者ログインページ内の「新規の方はこちら」リンク
     @RequestMapping(value="/newTeacher")
     public String requestNewTeacher(Model model){
-        model.addAttribute(new Teacher());
+        model.addAttribute(new TeacherAddForm());
         return "signUpTeacher";
-    }
-
-    //生徒用ログインフォーム要求
-    @RequestMapping(value="/loginStudent")
-    public String loginStudent(Model model,SessionStatus status){
-        status.setComplete();
-        model.addAttribute(new AccessUser());
-        model.addAttribute(getLoginForm(TYPE_STUDENT));
-        return "loginStudent";
-    }
-
-    //引数にログインユーザ識別番号を渡し、LoginFormオブジェクトを生成して返す
-    private LoginForm getLoginForm(int loginUserType){
-        LoginForm loginForm = new LoginForm();
-        loginForm.setType(loginUserType);
-        return loginForm;
     }
 
     //ログイン処理
@@ -126,32 +120,26 @@ public class LoginController extends AccessController{
         return redirectUrl.toString();
     }
 
+    @InitBinder("teacherAddForm")
+    public void initBinder(WebDataBinder binder){
+        binder.addValidators(this.teacherValidator); //パスワード確認用バリデータを追加
+    }
+
     //講師追加
     @RequestMapping(value = "/teacherAdd",method = RequestMethod.POST)
-    public String addTeacher(@Valid @ModelAttribute Teacher teacher,BindingResult result,
-            @RequestParam("kakuninPassword") String kakuninPassword,RedirectAttributes attribute){
-        String successUrl = "redirect:manager/top";
-        String notSuccessUrl = "redirect:newTeacher";
+    public String addTeacher(@Valid TeacherAddForm form,BindingResult result,Model model){
+        if(result.hasErrors()) return "signUpTeacher";
 
-        //入力された値のチェックと、パスワード比較
-        if(result.hasErrors() || !teacher.getTeacherPassword().equals(kakuninPassword)){
-            attribute.addFlashAttribute("error","登録できませんでした");
-            return notSuccessUrl;
-        }
-
-        //更新処理
-        if(loginService.teacherUpdate(teacher)){
+        Teacher teacher = teacherService.updateTeacher(form);
+        if(teacher != null){
             AccessUser user = new AccessUser();
             user.setUserId(teacher.getTeacherId());
             user.setUserName(teacher.getTeacherName());
             user.setUserType(TYPE_MANAGER);
-            attribute.addFlashAttribute(user); //変更が完了したら、ログイン済みにする
-            return successUrl;
-        }else{
-            attribute.addFlashAttribute("error", "許可されてないユーザIDです");
-            return notSuccessUrl;
+            model.addAttribute(user);//変更が完了したら、ログイン済みにする
+            return "redirect:manager/top";
         }
-
+        return "signUpTeacher"; //更新に成功しなければ、リクエスト元を表示
     }
 
 }

@@ -15,32 +15,34 @@ import com.attendance.repository.ClassRepository;
 
 @Controller
 public class ClassDeleteController {
-	 @Autowired
-     private ClassRepository repository;
-	 @RequestMapping(value = "/classDelete", method = RequestMethod.GET, produces="text/plain;charset=utf-8")
-	    public String helo(HttpServletRequest request,Model model) {
-		    int id=Integer.parseInt(request.getParameter("id"));
+	@Autowired
+	private ClassRepository repository;
 
-	        model.addAttribute("title","クラス削除画面");
-	        model.addAttribute("message","本当に削除しますか？");
+	@RequestMapping(value = "/classDelete", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
+	public String helo(HttpServletRequest request, Model model) {
+		int id = Integer.parseInt(request.getParameter("id"));
 
-	        Clas clas = repository.findOne(id);
-	        model.addAttribute("id",id);
-	        model.addAttribute("class",clas);
-	        return "/classDelete";
-	    }
+		model.addAttribute("title", "クラス削除画面");
+		model.addAttribute("message", "本当に削除しますか？");
 
-	   @RequestMapping(value = "/classDelete", method = RequestMethod.POST, produces="text/plain;charset=utf-8")
-	    public String repo(Model model,HttpServletRequest request) {
-		    System.out.println("id="+request.getParameter("id"));
-		    Clas clas = repository.findOne(Integer.parseInt(request.getParameter("id")));
-		    repository.delete(clas);
-	        model.addAttribute("title","クラス管理画面");
-		    model.addAttribute("message","クラス一覧から目的のクラスを検索し、編集・削除等が可能");
+		Clas clas = repository.findOne(id);
+		model.addAttribute("id", id);
+		model.addAttribute("class", clas);
+		return "/classDelete";
+	}
 
-		    List<Clas> list = repository.findAll();
-		    model.addAttribute("datalist",list);
-	        return "/classList";
+	@RequestMapping(value = "/classDelete", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
+	public String repo(Model model, HttpServletRequest request) {
+		System.out.println("id=" + request.getParameter("id"));
+		Clas clas = repository.findOne(Integer.parseInt(request
+				.getParameter("id")));
+		repository.delete(clas);
+		model.addAttribute("title", "クラス管理画面");
+		model.addAttribute("message", "クラス一覧から目的のクラスを検索し、編集・削除等が可能");
 
-	    }
+		List<Clas> list = repository.findAll();
+		model.addAttribute("datalist", list);
+		return "/classList";
+
+	}
 }

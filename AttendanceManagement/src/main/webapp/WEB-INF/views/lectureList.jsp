@@ -37,20 +37,22 @@
     </script>
     <h1>${title}</h1>
     <p>${message}</p>
-    <table width="800">
+
     <form action="${pageContext.request.contextPath}/lectureList" method="post">
+    <table width="800">
         <tr><td>講義名検索 :</td>
         <td><input type="text" name="lessonName" size="20"/></td></tr>
         <tr><td>講師名検索 :</td>
         <td><input type="text" name="teacherName" size="20"/></td></tr>
         <tr><td>日付検索 :</td>
-        <td><input type="text" name="date" id="datepicker"/>～<input type="text" name="date2" id="datepicker2"/></td></tr>
+        <td><input type="date" name="date"/>～<input type="date" name="date2"/></td></tr>
         <tr><td>時限検索 :</td>
         <td><input type="text" name="lectureHour" size="20"/></td></tr>
         <tr><td></td><td><input type="submit" value="検索"></td></tr>
+    </table>
     </form>
 
-    </table>
+
     <input type="submit" value="新規作成"  onclick="location.href='lectureAdd'"/>
     <hr>
     <form name='form'>

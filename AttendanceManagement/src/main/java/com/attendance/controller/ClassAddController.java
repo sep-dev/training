@@ -18,43 +18,45 @@ import com.attendance.repository.ClassRepository;
 @Controller
 public class ClassAddController {
 
-	 @Autowired
-     private ClassRepository repository;
-	 @RequestMapping(value = "/classAdd", method = RequestMethod.GET, produces="text/plain;charset=utf-8")
-	    public String helo(Model model) {
-	        Clas clas=new Clas();
-	        model.addAttribute("title","クラス新規作成画面");
-	        model.addAttribute("message","クラス情報の新規作成が可能");
-	        model.addAttribute("clas",clas);
+	@Autowired
+	private ClassRepository repository;
 
-	        return "/classAdd";
-	    }
+	@RequestMapping(value = "/classAdd", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
+	public String helo(Model model) {
+		Clas clas = new Clas();
+		model.addAttribute("title", "クラス新規作成画面");
+		model.addAttribute("message", "クラス情報の新規作成が可能");
+		model.addAttribute("clas", clas);
 
-	   @RequestMapping(value = "/classAdd", method = RequestMethod.POST, produces="text/plain;charset=utf-8")
-	    public String repo(@Valid @ModelAttribute Clas data ,Errors result,Model model) {
+		return "/classAdd";
+	}
 
-	    	if(result.hasErrors()){
-	    		if(data.getClassId()==null){
-	    			model.addAttribute("title","エラー画面");
-		            model.addAttribute("message","IDが入力されてません");
-	    		}else{
-	    			model.addAttribute("title","エラー画面");
-		            model.addAttribute("message","エラーが発生しました");
-	    		}
-	            
-	            return "/classAdd";
-	    	}else if(repository.findByClassId(data.getClassId())!=null){
-	    		model.addAttribute("title","エラー画面");
-	            model.addAttribute("message","IDが重複しています");
-	    		return "/classAdd";
-	    	}else{
-	            repository.saveAndFlush(data);
-	            model.addAttribute("title","クラス管理画面");
-		        model.addAttribute("message","クラス一覧から目的のクラスを検索し、編集・削除等が可能");
-		        model.addAttribute("myData",data);
-		        List<Clas> list = repository.findAll();
-		        model.addAttribute("datalist",list);
-	            return "/classList";
-	    	}
-	    }
+	@RequestMapping(value = "/classAdd", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
+	public String repo(@Valid @ModelAttribute Clas data, Errors result,
+			Model model) {
+
+		if (result.hasErrors()) {
+			if (data.getClassId() == null) {
+				model.addAttribute("title", "エラー画面");
+				model.addAttribute("message", "IDが入力されてません");
+			} else {
+				model.addAttribute("title", "エラー画面");
+				model.addAttribute("message", "エラーが発生しました");
+			}
+
+			return "/classAdd";
+		} else if (repository.findByClassId(data.getClassId()) != null) {
+			model.addAttribute("title", "エラー画面");
+			model.addAttribute("message", "IDが重複しています");
+			return "/classAdd";
+		} else {
+			repository.saveAndFlush(data);
+			model.addAttribute("title", "クラス管理画面");
+			model.addAttribute("message", "クラス一覧から目的のクラスを検索し、編集・削除等が可能");
+			model.addAttribute("myData", data);
+			List<Clas> list = repository.findAll();
+			model.addAttribute("datalist", list);
+			return "/classList";
+		}
+	}
 }

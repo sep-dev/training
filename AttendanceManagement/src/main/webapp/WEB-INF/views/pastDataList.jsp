@@ -6,10 +6,12 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
   <head>
-    <title></title>
+    <title>過去の出席情報</title>
+    <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet" >
   </head>
   <body>
-    <form:form modelAttribute="searchAttendancePastDataForm">
+    <h1>過去の出席情報検索ページ</h1>
+    <form:form modelAttribute="searchAttendancePastDataForm" class="searchForm">
       <table>
         <tr>
           <th>日付：</th>
@@ -26,11 +28,12 @@
         <tr>
           <th>時限：</th>
           <td>
-            <form:select path="hour" items="${hourList}" />
+            <form:select path="hour" items="${hourList}" /> 時限目
           </td>
+          <td>   </td>
+          <td><input type="submit" value="検索"/></td>
         </tr>
       </table>
-      <input type="submit" value="検索"/>
     </form:form>
 
     <table border="1">

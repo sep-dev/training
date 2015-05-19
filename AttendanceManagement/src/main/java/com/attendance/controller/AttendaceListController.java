@@ -28,52 +28,55 @@ public class AttendaceListController {
 	private JdbcTemplate jdbcTemplate;
 	@PersistenceContext
 	private EntityManager manager;
-	 @Autowired
-     private LectureRepository lecture_repository;
-	 @Autowired
-     private StudentRepository student_repository;
-	 @Autowired
-     private AttendanceListRepository repository;
-	 @RequestMapping(value = "/attendList", method = RequestMethod.GET, produces="text/plain;charset=utf-8")
-	    public String helo(Model model) {
-		    AttendForm af=new AttendForm();
+	@Autowired
+	private LectureRepository lecture_repository;
+	@Autowired
+	private StudentRepository student_repository;
+	@Autowired
+	private AttendanceListRepository repository;
 
-	        model.addAttribute("title","出席生徒画面");
-	        model.addAttribute("message","出席生徒一覧から目的の生徒を検索可能");
-	        String sql="Select * from lecture_attendance as a inner join students as b on a.student_id=b.student_id inner join lectures as c on a.lecture_id=c.lecture_id inner join lessons as d on c.lesson_id=d.lesson_id;";
-	        List<AttendForm> al=jdbcTemplate.query(sql, new BeanPropertyRowMapper<AttendForm>(AttendForm.class));
-	        model.addAttribute("datalist",al);
+	@RequestMapping(value = "/attendList", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
+	public String helo(Model model) {
+		AttendForm af = new AttendForm();
 
-	        return "/attendList";
-	    }
+		model.addAttribute("title", "出席生徒画面");
+		model.addAttribute("message", "出席生徒一覧から目的の生徒を検索可能");
+		String sql = "Select * from lecture_attendance as a inner join students as b on a.student_id=b.student_id inner join lectures as c on a.lecture_id=c.lecture_id inner join lessons as d on c.lesson_id=d.lesson_id;";
+		List<AttendForm> al = jdbcTemplate.query(sql,
+				new BeanPropertyRowMapper<AttendForm>(AttendForm.class));
+		model.addAttribute("datalist", al);
 
-	    @RequestMapping(value = "/attendList", method = RequestMethod.POST, produces="text/plain;charset=utf-8")
-	    public String search(HttpServletRequest request,Model model) {
+		return "/attendList";
+	}
 
-	        String param=request.getParameter("student_name");
-	        String param2=request.getParameter("lecture_name");
-	        String param3=request.getParameter("lecture_date");
-	        if(param3==null){
-	        	param3="1800-1-1 00:00:00";
-	        }
-	        String param4=request.getParameter("lecture_date2");
-	        if(param4.length()==0){
-	        	param4="2100-1-1 00:00:00";
-	        }
-	        
-	        String param5=request.getParameter("lecture_hour");
-            
-	        model.addAttribute("title","検索");
-	        model.addAttribute("message","「"+param+"」の"+"検索結果");
-	        
-	        //名前・住所であいまい検索
-	        
-	        String sql="Select * from lecture_attendance as a inner join students as b on a.student_id=b.student_id "
-	        		+ "inner join lectures as c on a.lecture_id=c.lecture_id inner join lessons as d on c.lesson_id=d.lesson_id "
-	        		+ "where b.student_name like ? and d.lesson_name like ? and c.lecture_date between ? and ? and c.lecture_hour like ?;";
-	        List<AttendForm> al=jdbcTemplate.query(sql, new BeanPropertyRowMapper<AttendForm>(AttendForm.class),
-	        		"%"+param+"%","%"+param2+"%",param3,param4,"%"+param5+"%");
-	        model.addAttribute("datalist",al);	        
-	        return "/attendList";
-	    }
+	@RequestMapping(value = "/attendList", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
+	public String search(HttpServletRequest request, Model model) {
+		String param = request.getParameter("student_name");
+		String param2 = request.getParameter("lecture_name");
+		String param3 = request.getParameter("lecture_date");
+		if (param3 == null) {
+			param3 = "1800-1-1 00:00:00";
+		}
+		String param4 = request.getParameter("lecture_date2");
+		if (param4.length() == 0) {
+			param4 = "2100-1-1 00:00:00";
+		}
+
+		String param5 = request.getParameter("lecture_hour");
+
+		model.addAttribute("title", "検索");
+		model.addAttribute("message", "「" + param + "」の" + "検索結果");
+
+		// 名前・住所であいまい検索
+
+		String sql = "Select * from lecture_attendance as a inner join students as b on a.student_id=b.student_id "
+				+ "inner join lectures as c on a.lecture_id=c.lecture_id inner join lessons as d on c.lesson_id=d.lesson_id "
+				+ "where b.student_name like ? and d.lesson_name like ? and c.lecture_date between ? and ? and c.lecture_hour like ?;";
+		List<AttendForm> al = jdbcTemplate.query(sql,
+				new BeanPropertyRowMapper<AttendForm>(AttendForm.class), "%"
+						+ param + "%", "%" + param2 + "%", param3, param4, "%"
+						+ param5 + "%");
+		model.addAttribute("datalist", al);
+		return "/attendList";
+	}
 }

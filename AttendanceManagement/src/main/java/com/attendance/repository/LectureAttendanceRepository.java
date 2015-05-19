@@ -9,7 +9,8 @@ import com.attendance.entity.LectureAttendance;
 import com.attendance.entity.LectureAttendancePK;
 
 @Repository
-public interface LectureAttendanceRepository extends JpaRepository<LectureAttendance, LectureAttendancePK> {
+public interface LectureAttendanceRepository extends
+		JpaRepository<LectureAttendance, LectureAttendancePK> {
 
-    List<LectureAttendance> findById(LectureAttendancePK id);
+	List<LectureAttendance> findById(LectureAttendancePK id);
 }

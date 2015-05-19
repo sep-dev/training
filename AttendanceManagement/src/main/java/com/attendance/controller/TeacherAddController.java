@@ -23,47 +23,52 @@ import com.attendance.repository.TeacherRepository;
 
 @Controller
 public class TeacherAddController {
-	 @Autowired
-     private ClassRepository class_repository;
-	 @Autowired
-     private TeacherRepository repository;
-	 @RequestMapping(value = "/teacherAdd", method = RequestMethod.GET, produces="text/plain;charset=utf-8")
-	    public String helo(Model model) {
-	        Teacher teacher=new Teacher();
-	        model.addAttribute("title","講師新規作成画面");
-	        model.addAttribute("message","講師情報の新規作成が可能");
-	        model.addAttribute("teacher",teacher);
-	        List<Clas> class_list=class_repository.findAll();
-	        model.addAttribute("selectClass",class_list);
-	        return "/teacherAdd";
-	    }
+	@Autowired
+	private ClassRepository class_repository;
+	@Autowired
+	private TeacherRepository repository;
 
-	   @RequestMapping(value = "/teacherAdd", method = RequestMethod.POST, produces="text/plain;charset=utf-8")
-	    public String repo(@Valid @ModelAttribute Teacher data ,Errors result,Model model) {
-	    	if(result.hasErrors()){
-	            model.addAttribute("title","エラー画面");
-	            model.addAttribute("message","エラーが発生しました");
-	            List<Clas> class_list=class_repository.findAll();
-		        model.addAttribute("selectClass",class_list);
-	            return "/teacherAdd";
-	    	}else if(repository.findByTeacherId(data.getTeacherId())!=null){
-	    		model.addAttribute("title","エラー画面");
-	            model.addAttribute("message","IDが重複しています");
-	            List<Clas> class_list=class_repository.findAll();
-		        model.addAttribute("selectClass",class_list);
-	            return "/teacherAdd";
-	    	}else{
-	            repository.saveAndFlush(data);
-	            model.addAttribute("title","講師管理画面");
-		        model.addAttribute("message","講師一覧から目的の講師を検索し、編集・削除等が可能");
-		        model.addAttribute("myData",data);
-		        List<Teacher> list = repository.findAll();
-		        model.addAttribute("datalist",list);
-	            return "/teacherList";
-	    	}
-	    }
-	   @InitBinder
-	   protected void initBinder(HttpServletRequest request,ServletRequestDataBinder binder)throws Exception{
-		   binder.registerCustomEditor(Clas.class,new ClassPropertyEditor(class_repository));
-	   }
+	@RequestMapping(value = "/teacherAdd", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
+	public String helo(Model model) {
+		Teacher teacher = new Teacher();
+		model.addAttribute("title", "講師新規作成画面");
+		model.addAttribute("message", "講師情報の新規作成が可能");
+		model.addAttribute("teacher", teacher);
+		List<Clas> class_list = class_repository.findAll();
+		model.addAttribute("selectClass", class_list);
+		return "/teacherAdd";
+	}
+
+	@RequestMapping(value = "/teacherAdd", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
+	public String repo(@Valid @ModelAttribute Teacher data, Errors result,
+			Model model) {
+		if (result.hasErrors()) {
+			model.addAttribute("title", "エラー画面");
+			model.addAttribute("message", "エラーが発生しました");
+			List<Clas> class_list = class_repository.findAll();
+			model.addAttribute("selectClass", class_list);
+			return "/teacherAdd";
+		} else if (repository.findByTeacherId(data.getTeacherId()) != null) {
+			model.addAttribute("title", "エラー画面");
+			model.addAttribute("message", "IDが重複しています");
+			List<Clas> class_list = class_repository.findAll();
+			model.addAttribute("selectClass", class_list);
+			return "/teacherAdd";
+		} else {
+			repository.saveAndFlush(data);
+			model.addAttribute("title", "講師管理画面");
+			model.addAttribute("message", "講師一覧から目的の講師を検索し、編集・削除等が可能");
+			model.addAttribute("myData", data);
+			List<Teacher> list = repository.findAll();
+			model.addAttribute("datalist", list);
+			return "/teacherList";
+		}
+	}
+
+	@InitBinder
+	protected void initBinder(HttpServletRequest request,
+			ServletRequestDataBinder binder) throws Exception {
+		binder.registerCustomEditor(Clas.class, new ClassPropertyEditor(
+				class_repository));
+	}
 }

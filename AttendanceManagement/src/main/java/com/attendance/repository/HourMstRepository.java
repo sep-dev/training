@@ -7,5 +7,5 @@ import com.attendance.entity.HourMst;
 
 @Repository
 public interface HourMstRepository extends JpaRepository<HourMst, Integer> {
-    HourMst findByHourId(Integer hourId);
+	HourMst findByHourId(Integer hourId);
 }

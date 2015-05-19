@@ -13,7 +13,7 @@
     <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/i18n/jquery.ui.datepicker-ja.js"></script>
     <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" rel="stylesheet" />
-   
+
 </head>
 <body>
 
@@ -50,7 +50,7 @@
         <tr><td><form:label path="lesson.teacher">担当講師名：</form:label></td>
             <td><form:select path="lesson.teacher"  items="${selectTeacher}" itemLabel="teacherName" itemValue="teacherId"/></td></tr>
         <tr><td><form:label path="lectureDate">日付：</form:label></td>
-            <td><form:input id="datepicker" path="lectureDate"/></td></tr>
+            <td><form:input type="date" path="lectureDate"/></td></tr>
         <tr><td><form:label path="lectureHour">時限：</form:label></td>
             <td><form:input path="lectureHour"  /></td></tr>
         <tr><td><input type="submit" value="確定"  onclick="location.href='lectureUpdate'"/></td>

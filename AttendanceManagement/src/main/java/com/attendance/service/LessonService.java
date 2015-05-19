@@ -6,6 +6,7 @@ import com.attendance.entity.Lesson;
 
 public interface LessonService {
 
-    List<Lesson> findAll();
-    Lesson findByLessonId(Integer lessonId);
+	List<Lesson> findAll();
+
+	Lesson findByLessonId(Integer lessonId);
 }

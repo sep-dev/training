@@ -7,7 +7,7 @@
 <html>
   <head>
     <title>管理者認証画面</title>
-    <link href="<c:url value="/resources/css/common.css" />" rel="stylesheet" >
+    <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet" >
   </head>
   <body>
     <h1>管理者認証画面</h1>
@@ -17,7 +17,7 @@
     </c:if>
       <form:form modelAttribute="loginForm" action="./login" method="post">
         <form:hidden path="type"/>
-        <table>
+        <table class="centerTable">
           <tr>
             <td>管理者ID</td>
             <td><form:input path="id"/></td>
@@ -29,6 +29,6 @@
         </table>
         <p><input type="submit" value="ログイン"/></p>
       </form:form>
-      <a href="./" class="link_button">戻る</a>
+      <a class="linkButton_r" href="./" class="link_button">戻る</a>
   </body>
 </html>

@@ -9,12 +9,12 @@ import com.attendance.repository.LectureRepository;
 @Service
 public class LectureServiceImpl implements LectureService {
 
-    @Autowired
-    private LectureRepository lectureRepository;
+	@Autowired
+	private LectureRepository lectureRepository;
 
-    @Override
-    public Lecture findByLectureId(Integer lectureId) {
-        return lectureRepository.findByLectureId(lectureId);
-    }
+	@Override
+	public Lecture findByLectureId(Integer lectureId) {
+		return lectureRepository.findByLectureId(lectureId);
+	}
 
 }

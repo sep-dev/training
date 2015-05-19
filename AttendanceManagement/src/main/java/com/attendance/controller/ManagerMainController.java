@@ -10,22 +10,15 @@ import com.attendance.repository.StudentRepository;
 
 @Controller
 public class ManagerMainController {
-	 @Autowired
-     private StudentRepository repository;
-	 @RequestMapping(value = "/", method = RequestMethod.GET, produces="text/plain;charset=utf-8")
-     public String fromInit(Model model) {
+	@Autowired
+	private StudentRepository repository;
 
-         model.addAttribute("title","管理者メイン画面");
-         model.addAttribute("message","管理者のメイン画面です");
+	@RequestMapping(value = "/managerMain", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
+	public String fromInit(Model model) {
 
-         return "/managerMain";
-     }
-	 @RequestMapping(value = "/**", method = RequestMethod.GET, produces="text/plain;charset=utf-8")
-	 public String fromStudent(Model model) {
+		model.addAttribute("title", "管理者メイン画面");
+		model.addAttribute("message", "管理者のメイン画面です");
 
-	      model.addAttribute("title","管理者メイン画面");
-	      model.addAttribute("message","管理者のメイン画面です");
-
-	      return "/managerMain";
-	 }
+		return "/managerMain";
+	}
 }

@@ -7,15 +7,17 @@
 <html>
   <head>
     <title>本日の授業一覧</title>
-    <link href="<c:url value="/resources/css/common.css" />" rel="stylesheet" >
+    <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet" >
   </head>
   <body>
     <h1>本日の授業一覧</h1>
-    <p>${date}</p>
-    <table border="1">
-      <tr>
-        <th>科目</th><th>時限</th><th>担当講師</th><th>出席確認</th>
-      </tr>
+    <h3>${date}</h3>
+    <table border="1" class="listTable">
+      <thead>
+        <tr>
+          <th>科目</th><th>時限</th><th>担当講師</th><th>出席確認</th>
+        </tr>
+      </thead>
       <c:forEach items="${lectureList}" var="list">
         <tr>
           <td><c:out value="${list.lessonName}"/></td>

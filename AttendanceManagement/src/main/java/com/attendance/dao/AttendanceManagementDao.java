@@ -9,12 +9,16 @@ import com.attendance.form.SearchAttendancePastDataForm;
 
 public interface AttendanceManagementDao {
 
-    List<TodayLecture> getTodayLectureList(Integer studentId);
-    List<AttendancePastData> getAttendancePastData(Integer studentId,SearchAttendancePastDataForm sapdf);
-    String getMinDate(Integer studentId);
+	List<TodayLecture> getTodayLectureList(Integer studentId);
 
-    //過去情報検索欄用
-    Map<String,String> getSearcHourMap();
-    Map<String,String> getSearchLessonMap();
-    
+	List<AttendancePastData> getAttendancePastData(Integer studentId,
+			SearchAttendancePastDataForm sapdf);
+
+	String getMinDate(Integer studentId);
+
+	// 過去情報検索欄用
+	Map<String, String> getSearcHourMap();
+
+	Map<String, String> getSearchLessonMap();
+
 }

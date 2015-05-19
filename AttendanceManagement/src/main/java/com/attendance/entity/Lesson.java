@@ -15,84 +15,79 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-
 /**
  * The persistent class for the lessons database table.
  *
  */
 @Entity
-@Table(name="lessons")
-@NamedQuery(name="Lesson.findAll", query="SELECT l FROM Lesson l")
+@Table(name = "lessons")
+@NamedQuery(name = "Lesson.findAll", query = "SELECT l FROM Lesson l")
 public class Lesson implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @NotNull
-    @Id
-    @Column(name="lesson_id")
-    private Integer lessonId;
-    @NotEmpty
-    @Column(name="lesson_name")
-    private String lessonName;
+	private static final long serialVersionUID = 1L;
+	@NotNull
+	@Id
+	@Column(name = "lesson_id")
+	private Integer lessonId;
+	@NotEmpty
+	@Column(name = "lesson_name")
+	private String lessonName;
 
-    //bi-directional many-to-one association to Lecture
-    @OneToMany(mappedBy="lesson")
-    private List<Lecture> lectures;
+	// bi-directional many-to-one association to Lecture
+	@OneToMany(mappedBy = "lesson")
+	private List<Lecture> lectures;
 
-    //bi-directional many-to-one association to Teacher
-    @ManyToOne
-    @JoinColumn(name="lesson_teacher_id")
-    private Teacher teacher;
+	// bi-directional many-to-one association to Teacher
+	@ManyToOne
+	@JoinColumn(name = "lesson_teacher_id")
+	private Teacher teacher;
 
-    
-    
-    public Lesson() {
-    }
+	public Lesson() {
+	}
 
-    public Integer getLessonId() {
-        return this.lessonId;
-    }
+	public Integer getLessonId() {
+		return this.lessonId;
+	}
 
-    public void setLessonId(Integer lessonId) {
-        this.lessonId = lessonId;
-    }
+	public void setLessonId(Integer lessonId) {
+		this.lessonId = lessonId;
+	}
 
-    public String getLessonName() {
-        return this.lessonName;
-    }
+	public String getLessonName() {
+		return this.lessonName;
+	}
 
-    public void setLessonName(String lessonName) {
-        this.lessonName = lessonName;
-    }
+	public void setLessonName(String lessonName) {
+		this.lessonName = lessonName;
+	}
 
-    public List<Lecture> getLectures() {
-        return this.lectures;
-    }
+	public List<Lecture> getLectures() {
+		return this.lectures;
+	}
 
-    public void setLectures(List<Lecture> lectures) {
-        this.lectures = lectures;
-    }
+	public void setLectures(List<Lecture> lectures) {
+		this.lectures = lectures;
+	}
 
-    public Lecture addLecture(Lecture lecture) {
-        getLectures().add(lecture);
-        lecture.setLesson(this);
+	public Lecture addLecture(Lecture lecture) {
+		getLectures().add(lecture);
+		lecture.setLesson(this);
 
-        return lecture;
-    }
+		return lecture;
+	}
 
-    public Lecture removeLecture(Lecture lecture) {
-        getLectures().remove(lecture);
-        lecture.setLesson(null);
+	public Lecture removeLecture(Lecture lecture) {
+		getLectures().remove(lecture);
+		lecture.setLesson(null);
 
-        return lecture;
-    }
+		return lecture;
+	}
 
-    public Teacher getTeacher() {
-        return this.teacher;
-    }
+	public Teacher getTeacher() {
+		return this.teacher;
+	}
 
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
-    }
-    
-   
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
+	}
 
 }

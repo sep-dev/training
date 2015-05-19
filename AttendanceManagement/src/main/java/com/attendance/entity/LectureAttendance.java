@@ -12,27 +12,27 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name="lecture_attendance")
-@NamedQuery(name="LectureAttendance.findAll", query="SELECT l FROM LectureAttendance l")
+@Table(name = "lecture_attendance")
+@NamedQuery(name = "LectureAttendance.findAll", query = "SELECT l FROM LectureAttendance l")
 public class LectureAttendance implements Serializable {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @EmbeddedId
-    private LectureAttendancePK id;
+	@EmbeddedId
+	private LectureAttendancePK id;
 
-    public LectureAttendance() {
-    }
+	public LectureAttendance() {
+	}
 
-    public LectureAttendance(LectureAttendancePK id){
-        this.id = id;
-    }
+	public LectureAttendance(LectureAttendancePK id) {
+		this.id = id;
+	}
 
-    public LectureAttendancePK getId() {
-        return this.id;
-    }
+	public LectureAttendancePK getId() {
+		return this.id;
+	}
 
-    public void setId(LectureAttendancePK id) {
-        this.id = id;
-    }
+	public void setId(LectureAttendancePK id) {
+		this.id = id;
+	}
 
 }

@@ -283,6 +283,125 @@ section iframe{
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
+
+
+/*本日の授業一覧用*/
+.listTable{
+  width: 550px;
+  margin: 10px auto;
+}
+
+.listTable thead th{
+  background-color: #f7f1af; /*クリーム色*/
+  text-align: center;
+}
+
+.listTable thead,.listTable tbody{
+  display: block;
+}
+
+.listTable tbody{
+  overflow-y: scroll;
+  height: 320px;
+}
 .col_date{width:150px; max-width:150px;}
 .col_lesson{width:400px; max-width:400px;}
 .col_hour{width:100px; max-width:100px;}
+
+/*管理者新規登録・編集・削除用*/
+.managerDiv{
+  width: 600px;
+  margin: 0 auto;
+}
+
+.managerDiv ul{
+  list-style-position: inside;
+  list-style-type: none;
+  text-align: center;
+}
+
+.managerDiv table{
+  width: 600px;
+  mergin: 0 auto;
+}
+
+.managerDiv td{
+  padding: 5px 0;
+}
+
+.managerDiv th{
+  text-align: center;
+  padding-right: 10px;
+}
+
+/*管理者一覧表示用*/
+.managerListTable{
+
+  height: 320px;
+  margin: 20px auto;
+
+}
+
+.managerListTable thead th{
+  background-color: #bbbbff; /*水色*/
+  text-align: center;
+}
+
+.managerListTable thead,.managerListTable tbody{
+  display: block;
+  text-align: center;
+}
+
+.managerListTable tbody{
+  overflow-y: scroll;
+  height:320px;
+
+}
+.managerListTable tbody td{
+  padding-left: 1px;
+  padding-right: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.col_s{width:80px; max-width:80px;}
+.col_m{width:200px; max-width:200px;}
+.col_l{width:200px; max-width:200px;}
+.col_ss{width:20px; max-width:20px;}
+.col_bottun{width:40px; max-width:40px;}
+
+/*管理者一覧表示用(クラス）*/
+.managerListTable{
+  height: 320px;
+  margin: 20px auto;
+
+}
+
+.managerListTable thead th{
+  background-color: #bbbbff; /*水色*/
+  text-align: center;
+}
+
+.managerListTable thead,.managerListTable tbody{
+  display: block;
+  text-align: center;
+}
+
+.managerListTable tbody{
+  overflow-y: scroll;
+  height:320px;
+
+}
+.managerListTable tbody td{
+  padding-left: 1px;
+  padding-right: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.col_s{width:80px; max-width:80px;}
+.col_m{width:200px; max-width:200px;}
+.col_l{width:400px; max-width:400px;}
+.col_ss{width:20px; max-width:20px;}
+.col_bottun{width:40px; max-width:40px;}

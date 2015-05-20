@@ -40,7 +40,7 @@ public class StudentAddController {
 	}
 
 	@RequestMapping(value = "/studentAdd", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
-	public String repo(@Valid @ModelAttribute Student data, Errors result,
+	public String repo(@Valid @ModelAttribute Student data,HttpServletRequest request, Errors result,
 			Model model) {
 		if (result.hasErrors()) {
 			model.addAttribute("title", "エラー画面");
@@ -51,6 +51,12 @@ public class StudentAddController {
 		} else if (repository.findByStudentId(data.getStudentId()) != null) {
 			model.addAttribute("title", "エラー画面");
 			model.addAttribute("message", "IDが重複しています");
+			List<Clas> class_list = class_repository.findAll();
+			model.addAttribute("selectClass", class_list);
+			return "/studentAdd";
+		}else if(!(request.getParameter("passwordConfirm").equals(data.getStudentPassword()))){
+			model.addAttribute("title", "エラー画面");
+			model.addAttribute("message", "入力パスワードが異なっています");
 			List<Clas> class_list = class_repository.findAll();
 			model.addAttribute("selectClass", class_list);
 			return "/studentAdd";

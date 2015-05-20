@@ -3,7 +3,6 @@ package com.attendance.controller;
 import java.util.Date;
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +15,8 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
+import com.attendance.domain.AccessUser;
 import com.attendance.entity.LectureAttendancePK;
 import com.attendance.entity.Student;
 import com.attendance.form.PasswordEditForm;
@@ -51,7 +50,7 @@ public class StudentController extends AccessController{
         if(!isPermitUser(user, TYPE_STUDENT)) return LOGIN_URL_STUDENT;
         return "studentMain"; //生徒用画面で、メニューを表示する
     }
-    
+
     @RequestMapping(value="/student/lectureList")
     public String lectureList(Model model,AccessUser user){
         if(!isPermitUser(user, TYPE_STUDENT)) return LOGIN_URL_STUDENT;
@@ -140,13 +139,9 @@ public class StudentController extends AccessController{
         model.addAttribute("pastDateList",studentService.getAttendancePastData(user.getUserId(), sapd));
         return "attendancePastDataDownload";
     }
-     
+
     @RequestMapping(value = "/studentList", method = RequestMethod.GET, produces="text/plain;charset=utf-8")
     public String helo(Model model) {
-        Student data=new Student();
-        model.addAttribute("title","生徒管理画面");
-        model.addAttribute("message","生徒一覧から目的の生徒を検索し、編集・削除等が可能");
-        model.addAttribute("myData",data);
         List<Student> list = repository.findAll();
         model.addAttribute("datalist",list);
         return "/studentList";
@@ -155,9 +150,7 @@ public class StudentController extends AccessController{
     @RequestMapping(value = "/studentList", method = RequestMethod.POST, produces="text/plain;charset=utf-8")
     public String search(HttpServletRequest request,Model model) {
         String param=request.getParameter("fstr");
-        System.out.println(param);
-        model.addAttribute("title","検索");
-        model.addAttribute("message","「"+param+"」の"+"検索結果");
+        model.addAttribute("find1",param);
         //名前・住所であいまい検索
         List<Student> list = repository.findByStudentNameLikeOrStudentAddressLike("%"+param+"%","%"+param+"%");
         model.addAttribute("datalist",list);

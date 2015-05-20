@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.attendance.dao.PasswordManager;
 import com.attendance.dao.TeacherPropertyEditor;
 import com.attendance.entity.Lesson;
 import com.attendance.entity.Teacher;
 import com.attendance.repository.LessonRepository;
 import com.attendance.repository.TeacherRepository;
+import com.attendance.service.PasswordManager;
 
 @Controller
 public class LessonUpdateController {
@@ -28,6 +28,7 @@ public class LessonUpdateController {
 	private TeacherRepository teacher_repository;
 	@Autowired
 	private LessonRepository repository;
+	@Autowired
 	private PasswordManager pm;
 
 	@RequestMapping(value = "/lessonUpdate", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")

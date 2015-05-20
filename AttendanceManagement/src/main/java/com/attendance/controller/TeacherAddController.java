@@ -36,24 +36,30 @@ public class TeacherAddController {
 		model.addAttribute("teacher", teacher);
 		List<Clas> class_list = class_repository.findAll();
 		model.addAttribute("selectClass", class_list);
-		return "/teacherAdd";
+		return "/teachersAdd";
 	}
 
-	@RequestMapping(value = "/teacherAdd", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
-	public String repo(@Valid @ModelAttribute Teacher data, Errors result,
+	@RequestMapping(value = "/teachersAdd", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
+	public String repo(@Valid @ModelAttribute Teacher data,HttpServletRequest request, Errors result,
 			Model model) {
 		if (result.hasErrors()) {
 			model.addAttribute("title", "エラー画面");
 			model.addAttribute("message", "エラーが発生しました");
 			List<Clas> class_list = class_repository.findAll();
 			model.addAttribute("selectClass", class_list);
-			return "/teacherAdd";
+			return "/teachersAdd";
 		} else if (repository.findByTeacherId(data.getTeacherId()) != null) {
 			model.addAttribute("title", "エラー画面");
 			model.addAttribute("message", "IDが重複しています");
 			List<Clas> class_list = class_repository.findAll();
 			model.addAttribute("selectClass", class_list);
-			return "/teacherAdd";
+			return "/teachersAdd";
+		}else if(!(request.getParameter("passwordConfirm").equals(data.getTeacherPassword()))){
+			model.addAttribute("title", "エラー画面");
+			model.addAttribute("message", "入力パスワードが異なっています");
+			List<Clas> class_list = class_repository.findAll();
+			model.addAttribute("selectClass", class_list);
+			return "/teachersAdd";
 		} else {
 			repository.saveAndFlush(data);
 			model.addAttribute("title", "講師管理画面");

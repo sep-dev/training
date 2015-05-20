@@ -8,7 +8,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>講師編集画面</title>
+    <title>講師新規登録画面</title>
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet" >
 </head>
 <body>
@@ -20,21 +20,25 @@
         <li>パスワードは8文字以上で入力してください</li>
     </ul>
     <table>
-    <form:form modelAttribute="teacher" action="teacherUpdate">
+    <form:form modelAttribute="teacher" action="teachersAdd">
+        <tr><td></td><td><form:errors path="*" element="div" /></td></tr>
         <tr><th>講師ID：</th>
             <td><form:input path="teacherId"  required="true" placeholder="講師IDを入力してください" pattern="^[0-9]*$"/></td>
             <form:errors path="teacherId" cssClass="error" element="td"/>
         </tr>
         <tr><th>講師パスワード：</th>
-            <td><form:password path="teacherPassword"  value="********" required="true" placeholder="パスワードを入力してください"/></td>
+            <td><form:password path="teacherPassword"  required="true" placeholder="パスワードを入力してください"/></td>
+            <form:errors path="teacherPassword" cssClass="error" element="td"/>
         </tr>
         <tr><th>講師パスワード(確認用)：</th>
             <td><input type="text" name="passwordConfirm"  required placeholder="パスワードを入力してください"/></td>
+
         </tr>
         <tr><th>名前：</th>
             <td><form:input path="teacherName" required="true" placeholder="氏名を入力してください"/></td>
             <form:errors path="teacherName" cssClass="error" element="td"/>
-        <tr><th>所属クラス：</th>
+         </tr>
+         <tr><th>所属クラス：</th>
             <td><form:select path="clas">
             <c:forEach items="${selectClass}" var="opt">
             <c:choose>
@@ -55,11 +59,12 @@
             <td><form:input path="teacherTel" required="true" placeholder="電話番号を入力してください" pattern="^[0-9]{10,11}$"/></td>
             <form:errors path="teacherTel" cssClass="error" element="td"/>
         </tr>
-        <tr><td><input type="submit" value="確定" /></td>
-            <td><input type="reset" value="リセット"/></td></tr>
+        <tr><td><input type="submit" value="登録" /></td>
+            <td><input type="reset" value="リセット" /></td></tr>
     </form:form>
     </table>
     <input type="submit" value="戻る"  onClick="history.go(-1)"/>
+
     </div>
 </body>
 </html>

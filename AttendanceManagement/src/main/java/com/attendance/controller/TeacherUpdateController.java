@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.attendance.dao.ClassPropertyEditor;
-import com.attendance.dao.PasswordManager;
 import com.attendance.entity.Clas;
 import com.attendance.entity.Teacher;
 import com.attendance.repository.ClassRepository;
 import com.attendance.repository.TeacherRepository;
+import com.attendance.service.PasswordManager;
 
 @Controller
 public class TeacherUpdateController {
@@ -28,6 +28,7 @@ public class TeacherUpdateController {
 	private ClassRepository class_repository;
 	@Autowired
 	private TeacherRepository repository;
+	@Autowired
 	private PasswordManager pm;
 
 	@RequestMapping(value = "/teacherUpdate", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
@@ -47,11 +48,17 @@ public class TeacherUpdateController {
 	}
 
 	@RequestMapping(value = "/teacherUpdate", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
-	public String repo(@Valid @ModelAttribute Teacher data, Errors result,
+	public String repo(@Valid @ModelAttribute Teacher data,HttpServletRequest request, Errors result,
 			Model model) {
 		if (result.hasErrors()) {
 			model.addAttribute("title", "エラー画面");
 			model.addAttribute("message", "エラーが発生しました");
+			return "/teacherUpdate";
+		}else if(!(request.getParameter("passwordConfirm").equals(data.getTeacherPassword()))){
+			model.addAttribute("title", "エラー画面");
+			model.addAttribute("message", "入力パスワードが異なっています");
+			List<Clas> class_list = class_repository.findAll();
+			model.addAttribute("selectClass", class_list);
 			return "/teacherUpdate";
 		} else {
 			data.setTeacherPassword(pm.hashCreate(data.getTeacherPassword()));

@@ -23,23 +23,15 @@ public class TeacherController {
 
 	@RequestMapping(value = "/teacherList", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
 	public String helo(Model model) {
-		Teacher data = new Teacher();
-		model.addAttribute("title", "講師管理画面");
-		model.addAttribute("message", "講師一覧から目的の講師を検索し、編集・削除等が可能");
-		model.addAttribute("myData", data);
 		List<Teacher> list = repository.findAll();
 		model.addAttribute("datalist", list);
-
 		return "/teacherList";
 	}
 
 	@RequestMapping(value = "/teacherList", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
 	public String search(HttpServletRequest request, Model model) {
-
 		String param = request.getParameter("fstr");
-		System.out.println(param);
-		model.addAttribute("title", "検索");
-		model.addAttribute("message", "「" + param + "」の" + "検索結果");
+		model.addAttribute("find1", param);
 		// 名前・住所であいまい検索
 		List<Teacher> list = repository
 				.findByTeacherNameLikeOrTeacherAddressLike("%" + param + "%",

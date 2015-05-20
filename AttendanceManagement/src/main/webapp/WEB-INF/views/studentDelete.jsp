@@ -9,9 +9,10 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>生徒削除画面</title>
-    <link rel="stylesheet" href="<c:url value="/resources/css/c_list.css" />" type="text/css" />
+    <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet" >
 </head>
 <body>
+    <div class="managerDiv">
     <h1>${title}</h1>
     <p>${message}</p>
     <table width="800">
@@ -23,8 +24,8 @@
             <td><form:input path="studentPassword" size="50" value="********" disabled="true"/></td></tr>
         <tr><td><form:label path="studentName">名前：</form:label></td>
             <td><form:input path="studentName" size="50" disabled="true"/></td></tr>
-        <tr><td><form:label path="class">所属クラス：</form:label></td>
-            <td><form:input path="class.className"  size="50" disabled="true"/></td></tr>
+        <tr><td><form:label path="clas">所属クラス：</form:label></td>
+            <td><form:input path="clas.className"  size="50" disabled="true"/></td></tr>
         <tr><td><form:label path="studentAddress">住所：</form:label></td>
             <td><form:input path="studentAddress"  size="50" disabled="true"/></td></tr>
         <tr><td><form:label path="studentTel">電話番号</form:label></td>
@@ -33,6 +34,7 @@
         <input type="hidden" name="id" value="${id}">
     </form:form>
     </table>
-    <input type="submit" value="戻る"  onclick="location.href='studentList'"/>
+    <input type="submit" value="戻る"  onClick="history.go(-1)"/>
+    </div>
 </body>
 </html>

@@ -9,9 +9,10 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>科目削除画面</title>
-    <link rel="stylesheet" href="<c:url value="/resources/css/c_list.css" />" type="text/css" />
+    <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet" >
 </head>
 <body>
+    <div class="managerDiv">
     <h1>${title}</h1>
     <p>${message}</p>
     <table width="800">
@@ -28,6 +29,7 @@
         <input type="hidden" name="id" value="${id}">
     </form:form>
     </table>
-    <input type="submit" value="戻る"  onclick="location.href='lessonList'"/>
+    <input type="submit" value="戻る"  onClick="history.go(-1)"/>
+    </div>
 </body>
 </html>

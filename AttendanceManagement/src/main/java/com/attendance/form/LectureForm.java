@@ -1,6 +1,5 @@
 package com.attendance.form;
 
-import java.util.Date;
 
 public class LectureForm {
 	private Integer lectureId;
@@ -8,7 +7,7 @@ public class LectureForm {
 	private Integer teacherId;
 	private String lessonName;
 	private String teacherName;
-	private Date lectureDate;
+	private String lectureDate;
 	private Integer lectureHour;
 
 	public Integer getLectureId() {
@@ -35,12 +34,13 @@ public class LectureForm {
 		this.lessonName = lessonName;
 	}
 
-	public Date getLectureDate() {
+	public String getLectureDate() {
+
 		return this.lectureDate;
 	}
 
-	public void setLectureDate(Date lectureDate) {
-
+	public void setLectureDate(String lectureDate) {
+		lectureDate.indexOf(11);
 		this.lectureDate = lectureDate;
 	}
 

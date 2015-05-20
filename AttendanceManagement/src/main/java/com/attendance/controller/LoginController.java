@@ -138,7 +138,7 @@ public class LoginController extends AccessController{
             user.setUserName(teacher.getTeacherName());
             user.setUserType(TYPE_MANAGER);
             model.addAttribute(user);//変更が完了したら、ログイン済みにする
-            return "redirect:manager/top";
+            return "managerMain";
         }
         return "signUpTeacher"; //更新に成功しなければ、リクエスト元を表示
     }

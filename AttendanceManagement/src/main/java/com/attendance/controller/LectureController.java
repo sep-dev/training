@@ -2,15 +2,19 @@ package com.attendance.controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -33,53 +37,51 @@ public class LectureController {
 
 	@RequestMapping(value = "/lectureList", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
 	public String helo(Model model) {
-		Lecture data = new Lecture();
-		model.addAttribute("title", "講義管理画面");
-		model.addAttribute("message", "講義一覧から目的の講義を検索し、編集・削除等が可能");
-		model.addAttribute("myData", data);
-
 		String sql = "Select * from lectures as a inner join lessons as b on a.lesson_id=b.lesson_id inner join teachers as c on b.lesson_teacher_id=c.teacher_id ";
 		List<LectureForm> al = jdbcTemplate.query(sql,
 				new BeanPropertyRowMapper<LectureForm>(LectureForm.class));
 		model.addAttribute("datalist", al);
-
 		return "/lectureList";
 	}
 
 	@RequestMapping(value = "/lectureList", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
 	public String search(HttpServletRequest request, Model model) {
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		String param=df.format(request.getParameter("date")).toString();
-
-
-		//String param = request.getParameter("date");
-
-		if (param == null) {
-			param = "1800-1-1 00:00:00";
+		String param = request.getParameter("lessonName");
+		String param2 = request.getParameter("teacherName");
+		String param3=request.getParameter("date");
+		if (param3 == null) {
+			param3 = "1800-1-1";
 		}
-		String param2=df.format(request.getParameter("date2")).toString();
-		if (param2.length() == 0) {
-			param2 = "2100-1-1 00:00:00";
+		String param4=request.getParameter("date2");
+		if (param4.length() == 0) {
+			param4 = "2100-1-1";
 		}
-		String param3 = request.getParameter("lessonName");
-		String param4 = request.getParameter("teacherName");
 		String param5 = request.getParameter("lectureHour");
-		System.out.println(param);
-		model.addAttribute("title", "検索");
-		model.addAttribute("message", "「" + param + "」の" + "検索結果");
+		model.addAttribute("find1", param);
+		model.addAttribute("find2", param2);
+		model.addAttribute("find3", param3);
+		model.addAttribute("find4", param4);
+		model.addAttribute("find5", param5);
 		// あいまい検索
 		List<Lecture> list = repository.findAll();
-		if (param != null && param2 != null) {
+		if (param3 != null && param4 != null) {
 			String sql = "Select * from lectures as a inner join lessons as b on a.lesson_id=b.lesson_id inner join teachers as c on b.lesson_teacher_id=c.teacher_id "
 					+ "where  b.lesson_name like ? and c.teacher_name like ? and a.lecture_date between ? and ? and a.lecture_hour like ?";
 			List<LectureForm> al = jdbcTemplate.query(sql,
 					new BeanPropertyRowMapper<LectureForm>(LectureForm.class),
-					"%" + param3 + "%", "%" + param4 + "%", param, param2, "%"
+					"%" + param + "%", "%" + param2 + "%", param3, param4, "%"
 							+ param5 + "%");
 			model.addAttribute("datalist", al);
 		}
 
 		return "/lectureList";
+	}
+	@InitBinder
+	protected void initBinder(HttpServletRequest request,
+			ServletRequestDataBinder binder) throws Exception {
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		CustomDateEditor editor = new CustomDateEditor(df, true);
+		binder.registerCustomEditor(Date.class, editor);
 	}
 
 

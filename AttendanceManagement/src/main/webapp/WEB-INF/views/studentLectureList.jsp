@@ -28,7 +28,7 @@
             <td class="list_hour"><c:out value="${list.hour}"/></td>
             <td class="list_teacher"><c:out value="${list.teacherName}"/></td>
             <c:choose>
-              <c:when test="${list.attendanceState == 0}"><td>出席済み</td></c:when>
+              <c:when test="${list.attendanceState == 0}"><td class="list_attend">出席済み</td></c:when>
               <c:when test="${list.attendanceState == 1}">
                 <form:form modelAttribute="lecture_attendancePK" action="./attendanceAdd?confirm">
                   <form:hidden path="lectureId" value="${list.lectureId}"/>

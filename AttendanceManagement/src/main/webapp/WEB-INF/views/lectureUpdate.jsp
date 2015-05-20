@@ -9,24 +9,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>講義編集画面</title>
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/i18n/jquery.ui.datepicker-ja.js"></script>
-    <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" rel="stylesheet" />
+    <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet" >
 
 </head>
 <body>
-
-    <script type="text/javascript" >
-    <!--
-      $(function() {
-    	  $("#datepicker").datepicker({
-    		  showButtonPanel: true
-    	  });
-      });
-    -->
-    </script>
-
+    <div class="managerDiv">
     <h1>${title}</h1>
     <p>${message}</p>
     <table width="800">
@@ -57,6 +44,7 @@
             <td><input type="reset" value="リセット"/></td></tr>
     </form:form>
     </table>
-    <input type="submit" value="戻る"  onclick="location.href='lectureList'"/>
+    <input type="submit" value="戻る"  onClick="history.go(-1)"/>
+    </div>
 </body>
 </html>

@@ -23,24 +23,16 @@ public class ClassController {
 
 	@RequestMapping(value = "/classList", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
 	public String helo(Model model) {
-		Clas data = new Clas();
-		model.addAttribute("title", "クラス管理画面");
-		model.addAttribute("message", "クラス一覧から目的のクラスを検索し、編集・削除等が可能");
-		model.addAttribute("myData", data);
-
 		List<Clas> list = repository.findAll();
 		model.addAttribute("datalist", list);
-
 		return "/classList";
 	}
 
 	@RequestMapping(value = "/classList", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
 	public String search(HttpServletRequest request, Model model) {
-
 		String param = request.getParameter("fstr");
 		System.out.println(param);
-		model.addAttribute("title", "検索");
-		model.addAttribute("message", "「" + param + "」の" + "検索結果");
+		model.addAttribute("find1", param);
 		// 名前・住所であいまい検索
 		List<Clas> list = repository.findByClassNameLike("%" + param + "%");
 		model.addAttribute("datalist", list);

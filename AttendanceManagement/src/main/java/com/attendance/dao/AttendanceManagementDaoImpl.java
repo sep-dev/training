@@ -86,7 +86,7 @@ public class AttendanceManagementDaoImpl implements AttendanceManagementDao {
                 .append("LEFT OUTER JOIN ")
                 .append("(SELECT lecture_id FROM lecture_attendance WHERE student_id = ?) as D ")
                 .append("ON A.lecture_id = D.lecture_id ")
-                .append("ORDER BY A.lecture_hour ASC");
+                .append("ORDER BY A.lecture_hour ASC,C.lesson_name ASC");
         return query.toString();
     }
 
@@ -100,7 +100,7 @@ public class AttendanceManagementDaoImpl implements AttendanceManagementDao {
 
         if (diffMinutes < 0) {
             return ShareHelper.ATTENDANCE_KESSEKI; // 値がマイナスなら欠席している
-        } else if (diffMinutes < 10) {
+        } else if (diffMinutes <= 10) {
             return ShareHelper.ATTENDANCE_NO; // 未登録のため、出席登録が可能
         } else {
             return ShareHelper.ATTENDANCE_BAT; // 開始時刻よりも10分以上前なので、登録を許可しない

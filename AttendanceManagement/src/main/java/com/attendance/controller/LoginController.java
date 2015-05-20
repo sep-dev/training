@@ -78,7 +78,8 @@ public class LoginController extends AccessController{
 
     //ログイン処理
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public String login(@Valid LoginForm loginForm,BindingResult result,AccessUser user,Model model){
+    public String login(@Valid LoginForm loginForm,BindingResult result,AccessUser user,
+            RedirectAttributes attribute,Model model){
 
         Integer userType = loginForm.getType(); //ログインユーザタイプ取得
 
@@ -98,7 +99,7 @@ public class LoginController extends AccessController{
                 user.setUserId(teacher.getTeacherId());
                 user.setUserName(teacher.getTeacherName());
                 user.setUserType(TYPE_MANAGER);
-                model.addAttribute(user);
+                attribute.addFlashAttribute(user);
             }
             break;
         case 1:
@@ -108,7 +109,7 @@ public class LoginController extends AccessController{
                 user.setUserId(student.getStudentId());
                 user.setUserName(student.getStudentName());
                 user.setUserType(TYPE_STUDENT);
-                model.addAttribute(user);
+                attribute.addFlashAttribute(user);
             }
             break;
         }
@@ -128,7 +129,7 @@ public class LoginController extends AccessController{
 
     //講師追加
     @RequestMapping(value = "/teacherAdd",method = RequestMethod.POST)
-    public String addTeacher(@Valid TeacherAddForm form,BindingResult result,Model model){
+    public String addTeacher(@Valid TeacherAddForm form,BindingResult result,RedirectAttributes attribute){
         if(result.hasErrors()) return "signUpTeacher";
 
         Teacher teacher = teacherService.updateTeacher(form);
@@ -137,7 +138,7 @@ public class LoginController extends AccessController{
             user.setUserId(teacher.getTeacherId());
             user.setUserName(teacher.getTeacherName());
             user.setUserType(TYPE_MANAGER);
-            model.addAttribute(user);//変更が完了したら、ログイン済みにする
+            attribute.addFlashAttribute(user);//変更が完了したら、ログイン済みにする
             return "redirect:manager/top";
         }
         return "signUpTeacher"; //更新に成功しなければ、リクエスト元を表示

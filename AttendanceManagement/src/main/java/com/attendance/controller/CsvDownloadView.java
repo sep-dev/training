@@ -34,7 +34,7 @@ public class CsvDownloadView extends AbstractView{
             out.print("\r\n\r\n");
             out.print("日付,");
             out.print(model.get("startDate").toString());
-            out.print("~");
+            out.print(",~,");
             out.print(model.get("endDate").toString());
             out.print("\r\n");
             out.print("科目,");

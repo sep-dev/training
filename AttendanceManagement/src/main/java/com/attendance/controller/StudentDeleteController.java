@@ -10,39 +10,39 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.attendance.domain.AccessUser;
 import com.attendance.entity.Student;
 import com.attendance.repository.StudentRepository;
-
+/**
+ * 生徒削除のコントローラ
+ */
 @Controller
-public class StudentDeleteController {
-	@Autowired
-	private StudentRepository repository;
+@RequestMapping(value = "/manager")
+public class StudentDeleteController extends AccessController{
+    @Autowired
+    private StudentRepository repository;
 
-	@RequestMapping(value = "/studentDelete", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
-	public String helo(HttpServletRequest request, Model model) {
-		int id = Integer.parseInt(request.getParameter("id"));
+    @RequestMapping(value = "/studentDelete", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
+    public String deleteConfirm(HttpServletRequest request, Model model,AccessUser user) {
+        if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
+        int id = Integer.parseInt(request.getParameter("id"));
+        model.addAttribute("message", "本当に削除しますか？");
+        Student student = repository.findOne(id);
+        model.addAttribute("id", id);
+        model.addAttribute("student", student);
+        return "/studentDelete";
+    }
 
-		model.addAttribute("title", "生徒削除画面");
-		model.addAttribute("message", "本当に削除しますか？");
+    @RequestMapping(value = "/studentDelete", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
+    public String deleteData(Model model, HttpServletRequest request,AccessUser user) {
+        if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
+        System.out.println("id=" + request.getParameter("id"));
+        Student student = repository.findOne(Integer.parseInt(request
+                .getParameter("id")));
+        repository.delete(student);
+        List<Student> list = repository.findAll();
+        model.addAttribute("datalist", list);
+        return "/studentList";
 
-		Student student = repository.findOne(id);
-		model.addAttribute("id", id);
-		model.addAttribute("student", student);
-		return "/studentDelete";
-	}
-
-	@RequestMapping(value = "/studentDelete", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
-	public String repo(Model model, HttpServletRequest request) {
-		System.out.println("id=" + request.getParameter("id"));
-		Student student = repository.findOne(Integer.parseInt(request
-				.getParameter("id")));
-		repository.delete(student);
-		model.addAttribute("title", "生徒管理画面");
-		model.addAttribute("message", "生徒一覧から目的の生徒を検索し、編集・削除等が可能");
-
-		List<Student> list = repository.findAll();
-		model.addAttribute("datalist", list);
-		return "/studentList";
-
-	}
+    }
 }

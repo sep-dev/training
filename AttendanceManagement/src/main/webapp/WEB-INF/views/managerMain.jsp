@@ -12,14 +12,13 @@
 </head>
 <body>
     <div class="managerDiv">
-    <h1>${title}</h1>
-    <p>${message}</p>
-    <input type="button" onclick="location.href='studentList'" value="生徒管理画面" class="submitButton"/>
-    <input type="button" onclick="location.href='teacherList'" value="講師管理画面" class="submitButton"/>
-    <input type="button" onclick="location.href='lectureList'" value="講義管理画面" class="submitButton"/>
-    <input type="button" onclick="location.href='lessonList'" value="科目管理画面" class="submitButton"/>
-    <input type="button" onclick="location.href='classList'" value="クラス管理画面" class="submitButton"/>
-    <input type="button" onclick="location.href='attendList'" value="出席生徒一覧表示画面" class="submitButton"/>
+    <h1>管理者メイン画面</h1>
+    <p><input type="button" onclick="location.href='studentList'" value="生徒管理画面" class="submitButton"/>
+    <input type="button" onclick="location.href='teacherList'" value="講師管理画面" class="submitButton"/></p>
+    <p><input type="button" onclick="location.href='lectureList'" value="講義管理画面" class="submitButton"/>
+    <input type="button" onclick="location.href='lessonList'" value="科目管理画面" class="submitButton"/></p>
+    <p><input type="button" onclick="location.href='classList'" value="クラス管理画面" class="submitButton"/>
+    <input type="button" onclick="location.href='attendList'" value="出席生徒一覧表示画面" class="submitButton"/></p>
     </div>
 </body>
 </html>

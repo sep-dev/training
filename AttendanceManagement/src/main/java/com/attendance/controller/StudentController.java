@@ -30,6 +30,7 @@ import com.attendance.service.StudentService;
 import com.attendance.validator.PasswordEqualsValidator;
 
 @Controller
+
 public class StudentController extends AccessController{
 
     @Autowired
@@ -109,7 +110,7 @@ public class StudentController extends AccessController{
     }
 
     //ログインしている生徒の、過去の出席情報を一覧表示する
-    @RequestMapping(value="student/search",method=RequestMethod.POST)
+    @RequestMapping(value="student/search")
    public String attendanceDataSearch(@ModelAttribute SearchAttendancePastDataForm sapd,
             Model model,AccessUser user){
         if(!isPermitUser(user, TYPE_STUDENT)) return LOGIN_URL_STUDENT;
@@ -140,15 +141,18 @@ public class StudentController extends AccessController{
         return "attendancePastDataDownload";
     }
 
-    @RequestMapping(value = "/studentList", method = RequestMethod.GET, produces="text/plain;charset=utf-8")
-    public String helo(Model model) {
+
+    @RequestMapping(value = "manager/studentList", method = RequestMethod.GET, produces="text/plain;charset=utf-8")
+    public String helo(Model model,AccessUser user) {
+        if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
         List<Student> list = repository.findAll();
         model.addAttribute("datalist",list);
         return "/studentList";
     }
 
-    @RequestMapping(value = "/studentList", method = RequestMethod.POST, produces="text/plain;charset=utf-8")
-    public String search(HttpServletRequest request,Model model) {
+    @RequestMapping(value = "manager/studentList", method = RequestMethod.POST, produces="text/plain;charset=utf-8")
+    public String search(HttpServletRequest request,Model model,AccessUser user) {
+        if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
         String param=request.getParameter("fstr");
         model.addAttribute("find1",param);
         //名前・住所であいまい検索

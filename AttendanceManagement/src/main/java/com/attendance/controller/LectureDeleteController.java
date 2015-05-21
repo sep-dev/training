@@ -12,24 +12,26 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.attendance.domain.AccessUser;
 import com.attendance.entity.Lecture;
 import com.attendance.form.LectureForm;
 import com.attendance.repository.LectureRepository;
-
+/**
+ * 講義削除のコントローラ
+ */
 @Controller
-public class LectureDeleteController {
+@RequestMapping(value = "/manager")
+public class LectureDeleteController extends AccessController{
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	@Autowired
 	private LectureRepository repository;
 
 	@RequestMapping(value = "/lectureDelete", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
-	public String helo(HttpServletRequest request, Model model) {
+	public String deleteConfirm(HttpServletRequest request, Model model,AccessUser user) {
+		if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
 		int id = Integer.parseInt(request.getParameter("id"));
-
-		model.addAttribute("title", "科目削除画面");
 		model.addAttribute("message", "本当に削除しますか？");
-
 		Lecture lecture = repository.findOne(id);
 		model.addAttribute("id", id);
 		model.addAttribute("lecture", lecture);
@@ -41,13 +43,12 @@ public class LectureDeleteController {
 	}
 
 	@RequestMapping(value = "/lectureDelete", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
-	public String repo(Model model, HttpServletRequest request) {
+	public String deleteData(Model model, HttpServletRequest request,AccessUser user) {
+		if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
 		System.out.println("id=" + request.getParameter("id"));
 		Lecture lecture = repository.findOne(Integer.parseInt(request
 				.getParameter("id")));
 		repository.delete(lecture);
-		model.addAttribute("title", "講義管理画面");
-		model.addAttribute("message", "講義一覧から目的の科目を検索し、編集・削除等が可能");
 		String sql = "Select * from lectures as a inner join lessons as b on a.lesson_id=b.lesson_id inner join teachers as c on b.lesson_teacher_id=c.teacher_id ";
 		List<LectureForm> al = jdbcTemplate.query(sql,
 				new BeanPropertyRowMapper<LectureForm>(LectureForm.class));

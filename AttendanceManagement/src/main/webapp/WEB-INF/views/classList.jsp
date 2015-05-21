@@ -12,52 +12,49 @@
     <script type="text/javascript">
     <!--
     function goServletB(){
-    	document.getElementById('form').action = 'studentUpdate';
-    	}
-    	function goServletC(){
-    	document.getElementById('form').action = 'servletCのパス';
-    	}
+      document.getElementById('form').action = 'studentUpdate';
+      }
+      function goServletC(){
+      document.getElementById('form').action = 'servletCのパス';
+      }
     // -->
     </script>
-</head>
-<body>
+  </head>
+  <body>
     <div class="managerDiv">
-    <h1>クラス管理画面</h1>
-    <p>クラス一覧を表示</p>
-
-	<form action="${pageContext.request.contextPath}/classList" method="post">
-	<table>
-		<tr><td>検索 :</td>
-		<td><input type="text" name="fstr" size="20"value="${find1}"/></td></tr>
-		<tr><td></td><td><input type="submit" value="検索"></td></tr>
-	</table>
-	</form>
-	<form action="${pageContext.request.contextPath}/classList" method="get">
-		<input type="submit" value="一覧表示">
-	</form>
-
-    <input type="submit" value="新規作成"  onclick="location.href='classAdd'"/>
-    <hr>
-    <form name='form'>
-    <c:if test="${datalist !=null}">
-	<table border="1" class="managerListTable">
-	<thead>
-		<tr><th class="col_l">クラスID</th><th class="col_l">クラス名</th><th class="col_bottun"></th><th class="col_ss"></th></tr>
-	</thead>
-	<tbody>
-	<c:forEach var="obj" items="${datalist}" varStatus="status">
-		<tr>
-		<td class="col_l"><a href="<c:url value="classUpdate?id=${obj.classId}"/>" ><c:out value="${obj.classId}" /></td>
-		<td class="col_l"><a href="<c:url value="classUpdate?id=${obj.classId}"/>" ><c:out value="${obj.className}"/></td>
-		<td class="col_button"><button type="submit" name="id" value="${obj.classId}" onClick="form.action='classUpdate';return true">編集</button><br/>
-		    <button type="submit" name="id" value="${obj.classId}" onClick="form.action='classDelete';return true">削除</button></td>
-		</tr>
-	</c:forEach>
-	</tbody>
-	</table>
-	</c:if>
-	</form>
-	<input type="submit" value="戻る"  onClick="history.go(-1)"/>
-	</div>
-</body>
+      <h1>クラス管理画面</h1>
+      <form action="${pageContext.request.contextPath}/manager/classList" method="post">
+        <table>
+          <tr><td>検索 :</td>
+            <td><input type="text" name="fstr" size="20"value="${find1}"/></td></tr>
+          <tr><td></td><td><input type="submit" value="検索"></td></tr>
+        </table>
+      </form>
+      <form action="${pageContext.request.contextPath}/manager/classList" method="get">
+        <input type="submit" value="一覧表示">
+      </form>
+      <input type="submit" value="新規作成"  onclick="location.href='classAdd'"/>
+      <hr>
+      <form name='form'>
+        <c:if test="${datalist !=null}">
+          <table border="1" class="managerListTable">
+            <thead>
+              <tr><th class="col_l">クラスID</th><th class="col_l">クラス名</th><th class="col_bottun"></th><th class="col_ss"></th></tr>
+            </thead>
+            <tbody>
+              <c:forEach var="obj" items="${datalist}" varStatus="status">
+                <tr>
+                  <td class="col_l"><a href="<c:url value="classUpdate?id=${obj.classId}"/>" ><c:out value="${obj.classId}" /></td>
+                  <td class="col_l"><a href="<c:url value="classUpdate?id=${obj.classId}"/>" ><c:out value="${obj.className}"/></td>
+                  <td class="col_button"><button type="submit" name="id" value="${obj.classId}" onClick="form.action='classUpdate';return true">編集</button><br/>
+                  <button type="submit" name="id" value="${obj.classId}" onClick="form.action='classDelete';return true">削除</button></td>
+                </tr>
+              </c:forEach>
+            </tbody>
+          </table>
+        </c:if>
+      </form>
+      <input type="submit" value="戻る"  onClick="location.href='managerMain'"/>
+    </div>
+  </body>
 </html>

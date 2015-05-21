@@ -6,31 +6,32 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <html>
-<head>
+  <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>科目新規登録画面</title>
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet" >
-</head>
-<body>
+  </head>
+  <body>
     <div class="managerDiv">
-    <h1>${title}</h1>
-    <p>${message}</p>
-    <table width="800">
-    <form:form modelAttribute="lesson">
-        <tr><td></td><td><form:errors path="*" element="div" /></td></tr>
-        <tr><td><form:label path="lessonId">科目ID：</form:label></td>
-            <td><form:input path="lessonId" size="50"/></td></tr>
-        <tr><td><form:label path="lessonName">名前：</form:label></td>
-            <td><form:input path="lessonName" size="50"/></td></tr>
-        <tr><td><form:label path="teacher">担当講師名：</form:label></td>
+      <h1>科目新規登録画面</h1>
+      <p>${message}</p>
+      <form:form modelAttribute="lesson" action="lessonAdd">
+        <table>
+          <tr><th>科目ID：</th>
+            <td><form:input path="lessonId" required="true" placeholder="IDを入力してください" pattern="^[0-9]*$"/></td>
+            <form:errors path="lessonId" cssClass="error" element="td"/>
+          </tr>
+          <tr><th>科目名：</th>
+            <td><form:input path="lessonName" required="true" placeholder="名前を入力してください"/></td>
+              <form:errors path="lessonName" cssClass="error" element="td"/>
+          </tr>
+          <tr><th>担当講師名：</th>
             <td><form:select path="teacher"  items="${selectTeacher}" itemLabel="teacherName" itemValue="teacherId"/></td></tr>
-
-
-        <tr><td><input type="submit" value="登録"  onclick="location.href='lessonAdd'"/></td>
-            <td><input type="reset" value="リセット"/></td></tr>
-    </form:form>
-    </table>
-    <input type="submit" value="戻る"  onClick="history.go(-1)"/>
+        </table>
+        <p><input type="submit" value="登録"/>
+        <input type="reset" value="リセット"/></p>
+      </form:form>
+      <p><input type="submit" value="戻る"  onClick="history.go(-1)"/></p>
     </div>
-</body>
+  </body>
 </html>

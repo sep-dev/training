@@ -40,7 +40,7 @@ public class CsvDownloadView extends AbstractView{
             out.print(model.get("hour").toString());
             out.print("\r\n");
             out.print("\r\n");
-            out.print("日付,科目名,日付");
+            out.print("日付,科目名,時限");
             out.print("\r\n");
 
             for(AttendancePastData pastData : (List<AttendancePastData>)model.get("pastDateList")){

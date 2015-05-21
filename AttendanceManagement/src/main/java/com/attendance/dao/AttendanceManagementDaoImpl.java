@@ -86,7 +86,7 @@ public class AttendanceManagementDaoImpl implements AttendanceManagementDao {
                 .append("LEFT OUTER JOIN ")
                 .append("(SELECT lecture_id FROM lecture_attendance WHERE student_id = ?) as D ")
                 .append("ON A.lecture_id = D.lecture_id ")
-                .append("ORDER BY A.lecture_hour ASC,C.lesson_name ASC");
+                .append("ORDER BY A.lecture_hour ASC,B.lesson_name ASC");
         return query.toString();
     }
 
@@ -167,7 +167,7 @@ public class AttendanceManagementDaoImpl implements AttendanceManagementDao {
         query.append("ON A.lecture_id = B.lecture_id ").append("INNER JOIN ")
                 .append("lessons AS C ")
                 .append("ON B.lesson_id = C.lesson_id ")
-                .append("ORDER BY B.lecture_date ASC,B.lecture_hour ASC");
+                .append("ORDER BY B.lecture_date ASC,B.lecture_hour ASC,C.lesson_name ASC");
         System.out.println(query.toString());
         return query.toString();
     }

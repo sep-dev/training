@@ -15,67 +15,65 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.attendance.dao.ClassPropertyEditor;
+import com.attendance.domain.AccessUser;
+import com.attendance.editor.ClassPropertyEditor;
 import com.attendance.entity.Clas;
 import com.attendance.entity.Teacher;
 import com.attendance.repository.ClassRepository;
 import com.attendance.repository.TeacherRepository;
 import com.attendance.service.PasswordManager;
-
+/**
+ * 講師更新のコントローラ
+ */
 @Controller
-public class TeacherUpdateController {
-	@Autowired
-	private ClassRepository class_repository;
-	@Autowired
-	private TeacherRepository repository;
-	@Autowired
-	private PasswordManager pm;
+@RequestMapping(value = "/manager")
+public class TeacherUpdateController extends AccessController{
+    @Autowired
+    private ClassRepository class_repository;
+    @Autowired
+    private TeacherRepository repository;
+    @Autowired
+    private PasswordManager pm;
 
-	@RequestMapping(value = "/teacherUpdate", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
-	public String helo(HttpServletRequest request, Model model) {
-		int id = Integer.parseInt(request.getParameter("id"));
+    @RequestMapping(value = "/teacherUpdate", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
+    public String entry(HttpServletRequest request, Model model,AccessUser user) {
+        if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
+        int id = Integer.parseInt(request.getParameter("id"));
+        // 既存のパスワードのデータを検索し、保存
+        pm = new PasswordManager();
+        Teacher teacher = repository.findOne(id);
+        pm.setForwardHash(teacher.getTeacherPassword());
+        model.addAttribute("teacher", teacher);
+        List<Clas> class_list = class_repository.findAll();
+        model.addAttribute("selectClass", class_list);
+        return "/teacherUpdate";
+    }
 
-		model.addAttribute("title", "講師編集画面");
-		model.addAttribute("message", "講師情報の編集が可能");
-		// 既存のパスワードのデータを検索し、保存
-		pm = new PasswordManager();
-		Teacher teacher = repository.findOne(id);
-		pm.setForwardHash(teacher.getTeacherPassword());
-		model.addAttribute("teacher", teacher);
-		List<Clas> class_list = class_repository.findAll();
-		model.addAttribute("selectClass", class_list);
-		return "/teacherUpdate";
-	}
+    @RequestMapping(value = "/teacherUpdate", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
+    public String updateData(@Valid @ModelAttribute Teacher data,HttpServletRequest request, Errors result,
+            Model model,AccessUser user) {
+        if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
+        if (result.hasErrors()) {
+            model.addAttribute("message", "エラーが発生しました");
+            return "/teacherUpdate";
+        }else if(!(request.getParameter("passwordConfirm").equals(data.getTeacherPassword()))){
+            model.addAttribute("message", "入力パスワードが異なっています");
+            List<Clas> class_list = class_repository.findAll();
+            model.addAttribute("selectClass", class_list);
+            return "/teacherUpdate";
+        } else {
+            data.setTeacherPassword(pm.hashCreate(data.getTeacherPassword()));
+            repository.saveAndFlush(data);
+            List<Teacher> list = repository.findAll();
+            model.addAttribute("datalist", list);
+            return "/teacherList";
+        }
+    }
 
-	@RequestMapping(value = "/teacherUpdate", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
-	public String repo(@Valid @ModelAttribute Teacher data,HttpServletRequest request, Errors result,
-			Model model) {
-		if (result.hasErrors()) {
-			model.addAttribute("title", "エラー画面");
-			model.addAttribute("message", "エラーが発生しました");
-			return "/teacherUpdate";
-		}else if(!(request.getParameter("passwordConfirm").equals(data.getTeacherPassword()))){
-			model.addAttribute("title", "エラー画面");
-			model.addAttribute("message", "入力パスワードが異なっています");
-			List<Clas> class_list = class_repository.findAll();
-			model.addAttribute("selectClass", class_list);
-			return "/teacherUpdate";
-		} else {
-			data.setTeacherPassword(pm.hashCreate(data.getTeacherPassword()));
-			repository.saveAndFlush(data);
-			model.addAttribute("title", "講師管理画面");
-			model.addAttribute("message", "講師一覧から目的の講師を検索し、編集・削除等が可能");
-			model.addAttribute("myData", data);
-			List<Teacher> list = repository.findAll();
-			model.addAttribute("datalist", list);
-			return "/teacherList";
-		}
-	}
-
-	@InitBinder
-	protected void initBinder(HttpServletRequest request,
-			ServletRequestDataBinder binder) throws Exception {
-		binder.registerCustomEditor(Clas.class, new ClassPropertyEditor(
-				class_repository));
-	}
+    @InitBinder
+    protected void initBinder(HttpServletRequest request,
+            ServletRequestDataBinder binder) throws Exception {
+        binder.registerCustomEditor(Clas.class, new ClassPropertyEditor(
+                class_repository));
+    }
 }

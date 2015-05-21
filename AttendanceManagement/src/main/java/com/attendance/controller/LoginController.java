@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.attendance.domain.AccessUser;
 import com.attendance.entity.Student;
@@ -45,11 +46,7 @@ public class LoginController extends AccessController{
     //ログアウト処理
     @RequestMapping(value="/logout")
     public String logout(AccessUser user){
-        if(user.getUserType() == TYPE_MANAGER){
-            return LOGIN_URL_MANAGER;
-        }else{
-            return LOGIN_URL_STUDENT;
-        }
+        return "index";
     }
 
     //管理者用ログインフォーム要求
@@ -139,7 +136,7 @@ public class LoginController extends AccessController{
             user.setUserName(teacher.getTeacherName());
             user.setUserType(TYPE_MANAGER);
             attribute.addFlashAttribute(user);//変更が完了したら、ログイン済みにする
-            return "redirect:manager/top";
+            return "redirect:managerTop";
         }
         return "signUpTeacher"; //更新に成功しなければ、リクエスト元を表示
     }

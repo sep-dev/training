@@ -6,27 +6,30 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <html>
-<head>
+  <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>クラス編集画面</title>
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet" >
-</head>
-<body>
+  </head>
+  <body>
     <div class="managerDiv">
-    <h1>${title}</h1>
-    <p>${message}</p>
-    <table width="800">
-    <form:form modelAttribute="class">
-        <tr><td></td><td><form:errors path="*" element="div" /></td></tr>
-        <tr><td><form:label path="classId">科目ID：</form:label></td>
-            <td><form:input path="classId"  size="50" readonly="true"/></td></tr>
-        <tr><td><form:label path="className">科目名：</form:label></td>
-            <td><form:input path="className" size="50"/></td></tr>
-        <tr><td><input type="submit" value="確定"  onclick="location.href='classUpdate'"/></td>
-            <td><input type="reset" value="リセット"/></td></tr>
-    </form:form>
-    </table>
-    <input type="submit" value="戻る"  onClick="history.go(-1)"/>
+      <h1>クラス編集画面</h1>
+      <p>${message}</p>
+      <form:form modelAttribute="clas" action="classUpdate">
+        <table>
+          <tr><th>クラスID：</th>
+            <td><form:input path="classId" required="true" placeholder="IDを入力してください" pattern="^[0-9]*$"/></td>
+            <form:errors path="classId" cssClass="error" element="td"/>
+          </tr>
+          <tr><th>クラス名：</th>
+            <td><form:input path="className" required="true" placeholder="名前を入力してください"/></td>
+            <form:errors path="className" cssClass="error" element="td"/>
+          </tr>
+        </table>
+        <p><input type="submit" value="確定"/>
+        <input type="reset" value="リセット"/></p>
+      </form:form>
+      <p><input type="submit" value="戻る"  onClick="history.go(-1)"/><p>
     </div>
-</body>
+  </body>
 </html>

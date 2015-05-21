@@ -314,7 +314,9 @@ section iframe{
   width: 600px;
   margin: 0 auto;
 }
-
+.managerDiv p{
+  color: #ff0000;
+}
 .managerDiv ul{
   list-style-position: inside;
   list-style-type: none;
@@ -327,6 +329,7 @@ section iframe{
 }
 
 .managerDiv td{
+  margin: 0 auto;
   padding: 5px 0;
 }
 
@@ -405,3 +408,33 @@ section iframe{
 .col_l{width:400px; max-width:400px;}
 .col_ss{width:20px; max-width:20px;}
 .col_bottun{width:40px; max-width:40px;}
+
+/*管理者一覧表示用(クラス）*/
+.attendListTable{
+  margin: 20px auto;
+}
+
+.attendListTable td{
+  text-align: center;
+}
+
+.submitManagerButton{
+  text-align: center;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 2px solid;
+  border-color: #909090 #707070 #707070 #909090;
+  display: inline-block;
+  background-color: #c0c0c0;
+  color: #000000;
+  text-shadow: 1px 1px 1px rgba(255,255,255,0.5);
+  text-decoration: none;
+  margin: 60px 0;
+  padding: 5px;
+}
+.submitManagerButton:hover{
+  background-color: #808080;
+  color: #ffffff;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+  cursor: pointer;
+}

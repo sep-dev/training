@@ -1,8 +1,6 @@
 package com.attendance.controller;
 
-import java.io.PrintWriter;
 import java.net.URLEncoder;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -10,8 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.view.AbstractView;
-
-import com.attendance.entity.AttendancePastData;
 
 public class CsvDownloadView extends AbstractView{
 
@@ -25,7 +21,7 @@ public class CsvDownloadView extends AbstractView{
         response.setLocale(Locale.JAPAN);
         response.setHeader("Content-Type", "text/csv;charset=Shift-JIS");
         response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
-
+/*
         try(PrintWriter out = response.getWriter()){
 
             out.print(model.get("studentName").toString());
@@ -55,7 +51,7 @@ public class CsvDownloadView extends AbstractView{
                 out.print(pastData.getHour());
                 out.print("\r\n");
             }
-        }
+        }*/
 
     }
 

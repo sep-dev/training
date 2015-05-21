@@ -109,7 +109,7 @@ public class StudentController extends AccessController{
     }
 
     //ログインしている生徒の、過去の出席情報を一覧表示する
-    @RequestMapping(value="student/search",method=RequestMethod.POST)
+    @RequestMapping(value="student/search")
    public String attendanceDataSearch(@ModelAttribute SearchAttendancePastDataForm sapd,
             Model model,AccessUser user){
         if(!isPermitUser(user, TYPE_STUDENT)) return LOGIN_URL_STUDENT;

@@ -15,15 +15,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.attendance.form.AttendForm;
+import com.attendance.helper.ShareHelper;
 import com.attendance.repository.AttendanceListRepository;
 import com.attendance.repository.LectureRepository;
 import com.attendance.repository.StudentRepository;
+import com.attendance.search.SerchAttend;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
-public class AttendaceListController {
+@RequestMapping(value = "/manager")
+public class AttendListController {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	@PersistenceContext
@@ -34,6 +37,8 @@ public class AttendaceListController {
 	private StudentRepository student_repository;
 	@Autowired
 	private AttendanceListRepository repository;
+	@Autowired
+	private SerchAttend search;
 
 	@RequestMapping(value = "/attendList", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
 	public String helo(Model model) {
@@ -51,32 +56,21 @@ public class AttendaceListController {
 
 	@RequestMapping(value = "/attendList", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
 	public String search(HttpServletRequest request, Model model) {
-		String param = request.getParameter("student_name");
-		String param2 = request.getParameter("lecture_name");
-		String param3 = request.getParameter("lecture_date");
-		if (param3 == null) {
-			param3 = "1800-1-1 00:00:00";
+		String studentName = request.getParameter("student_name");
+		String lectureName = request.getParameter("lecture_name");
+		String date1 = request.getParameter("lecture_date");
+		String date2 = request.getParameter("lecture_date2");
+		if (date2.length() == 0) {
+			date2 = ShareHelper.getToday();
 		}
-		String param4 = request.getParameter("lecture_date2");
-		if (param4.length() == 0) {
-			param4 = "2100-1-1 00:00:00";
-		}
-
-		String param5 = request.getParameter("lecture_hour");
-
-		model.addAttribute("title", "検索");
-		model.addAttribute("message", "「" + param + "」の" + "検索結果");
-
+		String hour = request.getParameter("lecture_hour");
+		model.addAttribute("find1", studentName);
+        model.addAttribute("find2", lectureName);
+        model.addAttribute("find3", date1);
+        model.addAttribute("find4", date2);
+        model.addAttribute("find5", hour);
 		// 名前・住所であいまい検索
-
-		String sql = "Select * from lecture_attendance as a inner join students as b on a.student_id=b.student_id "
-				+ "inner join lectures as c on a.lecture_id=c.lecture_id inner join lessons as d on c.lesson_id=d.lesson_id "
-				+ "where b.student_name like ? and d.lesson_name like ? and c.lecture_date between ? and ? and c.lecture_hour like ?;";
-		List<AttendForm> al = jdbcTemplate.query(sql,
-				new BeanPropertyRowMapper<AttendForm>(AttendForm.class), "%"
-						+ param + "%", "%" + param2 + "%", param3, param4, "%"
-						+ param5 + "%");
-		model.addAttribute("datalist", al);
+		model.addAttribute("datalist", search.getList(studentName, lectureName, date1, date2, hour));
 		return "/attendList";
 	}
 }

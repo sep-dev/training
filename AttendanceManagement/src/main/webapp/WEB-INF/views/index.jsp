@@ -11,8 +11,6 @@
   </head>
   <body>
     <h1>ユーザ選択画面</h1>
-    <a href="./login/loginManager">管理者</a>
-    <a href="./login/student">生徒</a>
     <p><a href="./loginManager" class="linkButton_ll">管理者</a></p>
     <p><a href="./loginStudent" class="linkButton_ll">生徒</a></p>
   </body>

@@ -25,7 +25,7 @@
         </tr>
         <tr>
           <td>パスワード：</td>
-          <td><form:password path="password" placeholder="パスワードを入力してください" required="true"/></td>
+          <td><form:password path="password" placeholder="パスワードを入力してください" pattern="^[a-zA-Z0-9]{8,}$" required="true"/></td>
           <form:errors path="password" cssClass="error" element="td"/>
         </tr>
       </table>

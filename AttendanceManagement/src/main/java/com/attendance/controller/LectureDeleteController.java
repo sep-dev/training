@@ -54,6 +54,5 @@ public class LectureDeleteController extends AccessController{
 				new BeanPropertyRowMapper<LectureForm>(LectureForm.class));
 		model.addAttribute("datalist", al);
 		return "/lectureList";
-
 	}
 }

@@ -36,7 +36,6 @@ public class ClassController extends AccessController{
     public String searchList(HttpServletRequest request, Model model,AccessUser user) {
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
         String param = request.getParameter("fstr");
-        System.out.println(param);
         model.addAttribute("find1", param);
         // 名前・住所であいまい検索
         List<Clas> list = repository.findByClassNameLike("%" + param + "%");

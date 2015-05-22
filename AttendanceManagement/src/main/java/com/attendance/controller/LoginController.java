@@ -43,12 +43,6 @@ public class LoginController extends AccessController{
         return "index";
     }
 
-    //ログアウト処理
-    @RequestMapping(value="/logout")
-    public String logout(AccessUser user){
-        return "index";
-    }
-
     //管理者用ログインフォーム要求
     @RequestMapping(value={"/loginManager","/loginStudent"})
     public String loginManager(HttpServletRequest request,Model model,SessionStatus status){

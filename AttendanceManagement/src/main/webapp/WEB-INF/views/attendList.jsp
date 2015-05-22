@@ -34,7 +34,7 @@
         <c:if test="${datalist !=null}">
           <table border="1" class="managerListTable">
             <thead>
-              <tr><th class="col_s">ID</th><th class="col_m">名前</th><th class="col_m">講義名</th><th class="col_m">日付</th>
+              <tr><th class="col_s">生徒ID</th><th class="col_m">生徒名</th><th class="col_m">講義名</th><th class="col_m">日付</th>
                 <th class="col_ss">時限</th><th class="col_bottun"></th><th class="col_ss"></th>
               </tr>
             </thead>

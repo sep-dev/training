@@ -25,7 +25,7 @@
       <h1>科目管理画面</h1>
       <form action="${pageContext.request.contextPath}/manager/lessonList" method="post">
         <table>
-          <tr><td>検索 :</td>
+          <tr><td>科目名検索 :</td>
             <td><input type="text" name="fstr" value="${find1}"/></td></tr>
           <tr><td></td><td><input type="submit" value="検索"></td></tr>
         </table>

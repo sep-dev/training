@@ -40,8 +40,7 @@ public class TeacherController extends AccessController{
         model.addAttribute("find1", param);
         // 名前・住所であいまい検索
         List<Teacher> list = repository
-                .findByTeacherNameLikeOrTeacherAddressLike("%" + param + "%",
-                        "%" + param + "%");
+                .findByTeacherNameLikeOrTeacherAddressLike("%" + param + "%","%" + param + "%");
         model.addAttribute("datalist", list);
         return "/teacherList";
     }

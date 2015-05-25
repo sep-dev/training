@@ -56,16 +56,13 @@ public class LectureUpdateController extends AccessController{
 
 	@RequestMapping(value = "/lectureUpdate", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
 	public String entry(HttpServletRequest request, Model model,AccessUser user) {
+		/*管理者かどうかの判定*/
 		if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
+		/*対象データの取り出し*/
 		id = Integer.parseInt(request.getParameter("id"));
 		Lecture lecture = repository.findByLectureId(id);
 		model.addAttribute("lecture", lecture);
-		List<Lesson> lesson_list = lesson_repository.findAll();
-		model.addAttribute("selectLesson", lesson_list);
-		List<Teacher> teacher_list = teacher_repository.findAll();
-		model.addAttribute("selectTeacher", teacher_list);
-		List<HourMst> hour_list = hour_repository.findAll();
-        model.addAttribute("selectHour", hour_list);
+		createList(model);
 		model.addAttribute("id", lecture.getLesson().getLessonId());
 
 		return "/lectureUpdate";
@@ -74,15 +71,14 @@ public class LectureUpdateController extends AccessController{
 	@RequestMapping(value = "/lectureUpdate", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
 	public String updateData(@Valid @ModelAttribute Lecture data, Errors result,
 			Model model,AccessUser user) {
+		/*管理者かどうかの判定*/
 		if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
-		if (result.hasErrors()) {
+		/*エラーチェック後問題なければデータ登録*/
+		if (isError(result, data, model)) {
 			model.addAttribute("message", "エラーが発生しました");
 			Lecture lecture = repository.findByLectureId(id);
 			model.addAttribute("lecture", lecture);
-			List<Lesson> lesson_list = lesson_repository.findAll();
-			model.addAttribute("selectLesson", lesson_list);
-			List<Teacher> teacher_list = teacher_repository.findAll();
-			model.addAttribute("selectTeacher", teacher_list);
+			createList(model);
 			model.addAttribute("id", lecture.getLesson().getLessonId());
 			return "/lectureUpdate";
 		} else {
@@ -92,6 +88,7 @@ public class LectureUpdateController extends AccessController{
 		}
 	}
 
+	/*型変換用*/
 	@InitBinder
 	protected void initBinder(HttpServletRequest request,
 			ServletRequestDataBinder binder) throws Exception {
@@ -103,4 +100,24 @@ public class LectureUpdateController extends AccessController{
 		CustomDateEditor editor = new CustomDateEditor(df, true);
 		binder.registerCustomEditor(Date.class, editor);
 	}
+
+	/*入力文字チェック*/
+    private boolean isError(Errors result,Lecture data,Model model){
+    	 if (result.hasErrors()) {
+             model.addAttribute("message", "エラーが発生しました");
+             return true;
+         } else {
+             return false;
+         }
+    }
+
+	/*検索用リストの生成*/
+    private void createList(Model model){
+		List<Lesson> lesson_list = lesson_repository.findAll();
+		model.addAttribute("selectLesson", lesson_list);
+		List<Teacher> teacher_list = teacher_repository.findAll();
+		model.addAttribute("selectTeacher", teacher_list);
+		List<HourMst> hour_list = hour_repository.findAll();
+        model.addAttribute("selectHour", hour_list);
+    }
 }

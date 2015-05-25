@@ -26,7 +26,9 @@ public class StudentDeleteController extends AccessController{
 
     @RequestMapping(value = "/studentDelete", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
     public String deleteConfirm(HttpServletRequest request, Model model,AccessUser user) {
+    	/*管理者かどうかの判定*/
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
+        /*対象情報の取り出し*/
         int id = Integer.parseInt(request.getParameter("id"));
         model.addAttribute("message", "本当に削除しますか？");
         Student student = repository.findOne(id);
@@ -37,7 +39,9 @@ public class StudentDeleteController extends AccessController{
 
     @RequestMapping(value = "/studentDelete", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
     public String deleteData(Model model, HttpServletRequest request,AccessUser user) {
+    	/*管理者かどうかの判定*/
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
+        /*対象の削除*/
         System.out.println("id=" + request.getParameter("id"));
         Student student = repository.findOne(Integer.parseInt(request
                 .getParameter("id")));

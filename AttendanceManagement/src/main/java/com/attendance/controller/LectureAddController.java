@@ -52,51 +52,34 @@ public class LectureAddController extends AccessController{
     private HourMstRepository hour_repository;
     @Autowired
     private SerchLecture search;
-
+    /*講義新規登録画面の表示*/
     @RequestMapping(value = "/lectureAdd", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
     public String newEntry(Model model,AccessUser user) {
+    	/*管理者かどうかの判定*/
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
         Lecture lecture = new Lecture();
         model.addAttribute("lecture", lecture);
-        List<Lesson> lesson_list = lesson_repository.findAll();
-        model.addAttribute("selectLesson", lesson_list);
-        List<Teacher> teacher_list = teacher_repository.findAll();
-        model.addAttribute("selectTeacher", teacher_list);
-        List<HourMst> hour_list = hour_repository.findAll();
-        model.addAttribute("selectHour", hour_list);
+        createList(model);
         return "/lectureAdd";
     }
 
     @RequestMapping(value = "/lectureAdd", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
     public String addData(@Valid @ModelAttribute Lecture data, Errors result,
             Model model,AccessUser user) {
+    	/*管理者かどうかの判定*/
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
-        if (result.hasErrors()) {
-            model.addAttribute("message", "エラーが発生しました");
-            List<Lesson> lesson_list = lesson_repository.findAll();
-            model.addAttribute("selectLesson", lesson_list);
-            List<Teacher> teacher_list = teacher_repository.findAll();
-            model.addAttribute("selectTeacher", teacher_list);
-            List<HourMst> hour_list = hour_repository.findAll();
-            model.addAttribute("selectHour", hour_list);
-            return "/lectureAdd";
-        } else if (repository.findByLectureId(data.getLectureId()) != null) {
-            model.addAttribute("message", "IDが重複しています");
-            List<Lesson> lesson_list = lesson_repository.findAll();
-            model.addAttribute("selectLesson", lesson_list);
-            List<Teacher> teacher_list = teacher_repository.findAll();
-            model.addAttribute("selectTeacher", teacher_list);
-            List<HourMst> hour_list = hour_repository.findAll();
-            model.addAttribute("selectHour", hour_list);
-            return "/lectureAdd";
-        } else {
+        /*入力文字チェック後問題なければ登録*/
+        if(isError(result, data, model)){
+        	createList(model);
+        	return "/lectureAdd";
+        }else{
             repository.saveAndFlush(data);
             model.addAttribute("datalist",search.getAll());
             return "/lectureList";
         }
-
     }
 
+    /*型変換用*/
     @InitBinder
     protected void initBinder(HttpServletRequest request,
             ServletRequestDataBinder binder) throws Exception {
@@ -108,4 +91,28 @@ public class LectureAddController extends AccessController{
         CustomDateEditor editor = new CustomDateEditor(df, true);
         binder.registerCustomEditor(Date.class, editor);
     }
+
+    /*検索用リストの生成*/
+    private void createList(Model model){
+    	List<Lesson> lesson_list = lesson_repository.findAll();
+        model.addAttribute("selectLesson", lesson_list);
+        List<Teacher> teacher_list = teacher_repository.findAll();
+        model.addAttribute("selectTeacher", teacher_list);
+        List<HourMst> hour_list = hour_repository.findAll();
+        model.addAttribute("selectHour", hour_list);
+    }
+
+    /*入力文字チェック*/
+    private boolean isError(Errors result,Lecture data,Model model){
+    	 if (result.hasErrors()) {
+             model.addAttribute("message", "エラーが発生しました");
+             return true;
+         } else if (repository.findByLectureId(data.getLectureId()) != null) {
+             model.addAttribute("message", "IDが重複しています");
+             return true;
+         } else {
+             return false;
+         }
+    }
+
 }

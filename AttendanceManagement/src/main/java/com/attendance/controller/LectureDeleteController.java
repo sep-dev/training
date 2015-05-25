@@ -30,7 +30,9 @@ public class LectureDeleteController extends AccessController{
 
 	@RequestMapping(value = "/lectureDelete", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
 	public String deleteConfirm(HttpServletRequest request, Model model,AccessUser user) {
+		/*管理者かどうかの判定*/
 		if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
+		/*対象データの取り出し*/
 		int id = Integer.parseInt(request.getParameter("id"));
 		model.addAttribute("message", "本当に削除しますか？");
 		Lecture lecture = repository.findOne(id);
@@ -42,13 +44,13 @@ public class LectureDeleteController extends AccessController{
 
 	@RequestMapping(value = "/lectureDelete", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
 	public String deleteData(Model model, HttpServletRequest request,AccessUser user) {
+		/*管理者かどうかの判定*/
 		if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
-		System.out.println("id=" + request.getParameter("id"));
+		/*データの削除*/
 		Lecture lecture = repository.findOne(Integer.parseInt(request
 				.getParameter("id")));
 		repository.delete(lecture);
-
-		model.addAttribute("datalist", repository.findAll());
+		model.addAttribute("datalist", search.getAll());
 		return "/lectureList";
 	}
 }

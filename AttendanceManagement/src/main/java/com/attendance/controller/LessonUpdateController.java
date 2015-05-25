@@ -39,21 +39,24 @@ public class LessonUpdateController extends AccessController{
 
     @RequestMapping(value = "/lessonUpdate", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
     public String entry(HttpServletRequest request, Model model,AccessUser user) {
+    	/*管理者かどうかの判定*/
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
+        /*対象の情報を取り出し*/
         int id = Integer.parseInt(request.getParameter("id"));
         Lesson lesson = repository.findOne(id);
         model.addAttribute("lesson", lesson);
-        List<Teacher> teacher_list = teacher_repository.findAll();
-        model.addAttribute("selectTeacher", teacher_list);
+        createList(model);
         return "/lessonUpdate";
     }
 
     @RequestMapping(value = "/lessonUpdate", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
     public String updateData(@Valid @ModelAttribute Lesson data, Errors result,
             Model model,AccessUser user) {
+    	/*管理者かどうかの判定*/
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
-        if (result.hasErrors()) {
-            model.addAttribute("message", "エラーが発生しました");
+        /*エラーチェック後問題なければ更新*/
+        if (isError(result, data, model)){
+            createList(model);
             return "/lessonUpdate";
         } else {
             repository.saveAndFlush(data);
@@ -64,11 +67,28 @@ public class LessonUpdateController extends AccessController{
         }
     }
 
+    /*型検索用*/
     @InitBinder
     protected void initBinder(HttpServletRequest request,
             ServletRequestDataBinder binder) throws Exception {
 
         binder.registerCustomEditor(Teacher.class, new TeacherPropertyEditor(
                 teacher_repository));
+    }
+
+    /*検索用リストの生成*/
+    private void createList(Model model){
+         List<Teacher> teacher_list = teacher_repository.findAll();
+         model.addAttribute("selectTeacher", teacher_list);
+    }
+
+    /*入力文字チェック*/
+    private boolean isError(Errors result,Lesson data,Model model){
+         if (result.hasErrors()) {
+             model.addAttribute("message", "エラーが発生しました");
+             return true;
+         } else {
+             return false;
+         }
     }
 }

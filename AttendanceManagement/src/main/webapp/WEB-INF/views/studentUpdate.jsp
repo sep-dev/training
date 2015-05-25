@@ -22,7 +22,7 @@
     <form:form modelAttribute="student" action="studentUpdate">
       <table>
         <tr><th>生徒ID：</th>
-          <td><form:input path="studentId"  required="true" placeholder="生徒IDを入力してください" pattern="^[0-9]*$"/></td>
+          <td><form:input path="studentId"  readonly="true"/></td>
           <form:errors path="studentId" cssClass="error" element="td"/>
         </tr>
         <tr><th>生徒パスワード：</th>

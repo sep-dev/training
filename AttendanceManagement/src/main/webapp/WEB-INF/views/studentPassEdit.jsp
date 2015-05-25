@@ -18,21 +18,21 @@
           <tr>
             <td><form:label path="password">現在のパスワード：</form:label></td>
             <td>
-              <form:password path="password" size="35" placeholder="現在のパスワードを入力してください" required="true"/>
+              <form:password path="password" size="35" pattern="^[a-zA-Z0-9]{8,}$" placeholder="現在のパスワードを入力してください" required="true"/>
             </td>
             <form:errors path="password" cssClass="error" element="td"/>
           </tr>
           <tr>
             <td><form:label path="newPassword">新しいパスワード：</form:label></td>
             <td>
-              <form:password path="newPassword" size="35" placeholder="新しいパスワードを入力してください" required="ture"/>
+              <form:password path="newPassword" size="35" pattern="^[a-zA-Z0-9]{8,}$" placeholder="新しいパスワードを入力してください" required="ture"/>
             </td>
            <form:errors path="newPassword" cssClass="error" element="td"/>
           </tr>
           <tr>
             <td><form:label path="newPasswordConfirm">新しいパスワード（確認用）：</form:label></td>
             <td>
-              <form:password path="newPasswordConfirm" size="35" placeholder="もう一度新しいパスワードを入力してください" required="ture"/>
+              <form:password path="newPasswordConfirm" size="35" pattern="^[a-zA-Z0-9]{8,}$" placeholder="もう一度新しいパスワードを入力してください" required="ture"/>
             </td>
             <form:errors path="newPasswordConfirm" cssClass="error" element="td"/>
           </tr>

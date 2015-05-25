@@ -1,21 +1,17 @@
 package com.attendance.controller;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.attendance.form.AttendForm;
-import com.attendance.helper.ShareHelper;
 import com.attendance.repository.AttendanceListRepository;
 import com.attendance.repository.LectureRepository;
 import com.attendance.repository.StudentRepository;
@@ -25,6 +21,7 @@ import com.attendance.search.SerchAttend;
  * Handles requests for the application home page.
  */
 @Controller
+@SessionAttributes("accessUser")
 @RequestMapping(value = "/manager")
 public class AttendListController {
 	@Autowired
@@ -42,15 +39,8 @@ public class AttendListController {
 
 	@RequestMapping(value = "/attendList", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
 	public String helo(Model model) {
-		AttendForm af = new AttendForm();
-
-		model.addAttribute("title", "出席生徒画面");
-		model.addAttribute("message", "出席生徒一覧から目的の生徒を検索可能");
-		String sql = "Select * from lecture_attendance as a inner join students as b on a.student_id=b.student_id inner join lectures as c on a.lecture_id=c.lecture_id inner join lessons as d on c.lesson_id=d.lesson_id;";
-		List<AttendForm> al = jdbcTemplate.query(sql,
-				new BeanPropertyRowMapper<AttendForm>(AttendForm.class));
-		model.addAttribute("datalist", al);
-
+		model.addAttribute("datalist", search.getAll());
+		model.addAttribute("count", search.getAll().size());
 		return "/attendList";
 	}
 
@@ -60,9 +50,6 @@ public class AttendListController {
 		String lectureName = request.getParameter("lecture_name");
 		String date1 = request.getParameter("lecture_date");
 		String date2 = request.getParameter("lecture_date2");
-		if (date2.length() == 0) {
-			date2 = ShareHelper.getToday();
-		}
 		String hour = request.getParameter("lecture_hour");
 		model.addAttribute("find1", studentName);
         model.addAttribute("find2", lectureName);
@@ -71,6 +58,7 @@ public class AttendListController {
         model.addAttribute("find5", hour);
 		// 名前・住所であいまい検索
 		model.addAttribute("datalist", search.getList(studentName, lectureName, date1, date2, hour));
+		model.addAttribute("count", search.getList(studentName, lectureName, date1, date2, hour).size());
 		return "/attendList";
 	}
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.attendance.domain.AccessUser;
 import com.attendance.editor.TeacherPropertyEditor;
@@ -25,12 +26,14 @@ import com.attendance.repository.TeacherRepository;
  * 科目追加のコントローラ
  */
 @Controller
+@SessionAttributes("accessUser")
 @RequestMapping(value = "/manager")
 public class LessonAddController extends AccessController{
     @Autowired
     private TeacherRepository teacher_repository;
     @Autowired
     private LessonRepository repository;
+    
 
     @RequestMapping(value = "/lessonAdd", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
     public String newEntry(Model model,AccessUser user) {

@@ -11,7 +11,7 @@
   </head>
   <body>
     <nav class="menu_nav">
-      <p><a href="${pageContext.request.contextPath}/logout" class="linkButton_l">ログアウト</a></p>
+      <p><a href="${pageContext.request.contextPath}/loginStudent" class="linkButton_l">ログアウト</a></p>
       <ul>
         <li><a href="./studentPasswordEdit?input" class="linkButton_r" target="section">パスワード変更</a></li>
         <li><a href="./search" class="linkButton_r" target="section">過去の出席情報へ</a></li>

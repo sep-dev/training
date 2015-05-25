@@ -44,7 +44,7 @@
                 <tr>
                   <td class="col_s"><a href="<c:url value="studentUpdate?id=${obj.studentId}"/>" ><c:out value="${obj.studentId}"  /></a></td>
                   <td class="col_m"><a href="<c:url value="studentUpdate?id=${obj.studentId}"/>" ><c:out value="${obj.studentName}"/></td>
-                  <td class="col_m"><a href="<c:url value="lessonUpdate?id=${obj.lectureId}"/>" ><c:out value="${obj.lessonName}" /></td>
+                  <td class="col_m"><a href="<c:url value="lessonUpdate?id=${obj.lessonId}"/>" ><c:out value="${obj.lessonName}" /></td>
                   <td class="col_m"><c:out value="${obj.lectureDate}" /></td>
                   <td class="col_ss"><c:out value="${obj.lectureHour}" /></td>
                 </tr>

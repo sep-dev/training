@@ -12,7 +12,7 @@
   </head>
   <body>
     <nav>
-      <a href="${pageContext.request.contextPath}/logout" class="logout_button">ログアウト</a>
+      <a href="${pageContext.request.contextPath}/loginManager" class="logout_button">ログアウト</a>
       <ul>
         <li><a href="managerMain" target="section">管理者メイン画面</a></li>
         <li><a href="studentList" target="section">生徒管理</a></li>

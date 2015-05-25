@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.attendance.domain.AccessUser;
 import com.attendance.editor.ClassPropertyEditor;
@@ -26,6 +27,7 @@ import com.attendance.service.PasswordManager;
  * 生徒更新のコントローラ
  */
 @Controller
+@SessionAttributes("accessUser")
 @RequestMapping(value = "/manager")
 public class StudentUpdateController extends AccessController{
     @Autowired

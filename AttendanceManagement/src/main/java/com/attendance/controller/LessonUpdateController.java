@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.attendance.domain.AccessUser;
 import com.attendance.editor.TeacherPropertyEditor;
@@ -26,6 +27,7 @@ import com.attendance.service.PasswordManager;
  * 科目更新のコントローラ
  */
 @Controller
+@SessionAttributes("accessUser")
 @RequestMapping(value = "/manager")
 public class LessonUpdateController extends AccessController{
     @Autowired
@@ -51,13 +53,10 @@ public class LessonUpdateController extends AccessController{
             Model model,AccessUser user) {
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
         if (result.hasErrors()) {
-            model.addAttribute("title", "エラー画面");
             model.addAttribute("message", "エラーが発生しました");
             return "/lessonUpdate";
         } else {
             repository.saveAndFlush(data);
-            model.addAttribute("title", "科目管理画面");
-            model.addAttribute("message", "科目一覧から目的の生徒を検索し、編集・削除等が可能");
             model.addAttribute("myData", data);
             List<Lesson> list = repository.findAll();
             model.addAttribute("datalist", list);

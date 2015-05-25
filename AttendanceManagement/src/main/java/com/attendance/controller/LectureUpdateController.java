@@ -10,7 +10,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,21 +19,25 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.attendance.domain.AccessUser;
 import com.attendance.editor.LessonPropertyEditor;
 import com.attendance.editor.TeacherPropertyEditor;
+import com.attendance.entity.HourMst;
 import com.attendance.entity.Lecture;
 import com.attendance.entity.Lesson;
 import com.attendance.entity.Teacher;
-import com.attendance.form.LectureForm;
+import com.attendance.repository.HourMstRepository;
 import com.attendance.repository.LectureRepository;
 import com.attendance.repository.LessonRepository;
 import com.attendance.repository.TeacherRepository;
+import com.attendance.search.SerchLecture;
 /**
  * 講義更新のコントローラ
  */
 @Controller
+@SessionAttributes("accessUser")
 @RequestMapping(value = "/manager")
 public class LectureUpdateController extends AccessController{
 	@Autowired
@@ -44,31 +47,37 @@ public class LectureUpdateController extends AccessController{
 	@Autowired
 	private LessonRepository lesson_repository;
 	@Autowired
+	private HourMstRepository hour_repository;
+	@Autowired
 	private LectureRepository repository;
 	int id;
+    @Autowired
+    private SerchLecture search;
 
 	@RequestMapping(value = "/lectureUpdate", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
 	public String entry(HttpServletRequest request, Model model,AccessUser user) {
 		if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
 		id = Integer.parseInt(request.getParameter("id"));
-		Lecture lecture = repository.findOne(id);
+		Lecture lecture = repository.findByLectureId(id);
 		model.addAttribute("lecture", lecture);
 		List<Lesson> lesson_list = lesson_repository.findAll();
 		model.addAttribute("selectLesson", lesson_list);
 		List<Teacher> teacher_list = teacher_repository.findAll();
 		model.addAttribute("selectTeacher", teacher_list);
+		List<HourMst> hour_list = hour_repository.findAll();
+        model.addAttribute("selectHour", hour_list);
 		model.addAttribute("id", lecture.getLesson().getLessonId());
+
 		return "/lectureUpdate";
 	}
 
 	@RequestMapping(value = "/lectureUpdate", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
-	public String updateData(@Valid @ModelAttribute Lecture data, Errors result,HttpServletRequest request,
+	public String updateData(@Valid @ModelAttribute Lecture data, Errors result,
 			Model model,AccessUser user) {
 		if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
 		if (result.hasErrors()) {
-			model.addAttribute("title", "エラー画面");
 			model.addAttribute("message", "エラーが発生しました");
-			Lecture lecture = repository.findOne(id);
+			Lecture lecture = repository.findByLectureId(id);
 			model.addAttribute("lecture", lecture);
 			List<Lesson> lesson_list = lesson_repository.findAll();
 			model.addAttribute("selectLesson", lesson_list);
@@ -78,10 +87,7 @@ public class LectureUpdateController extends AccessController{
 			return "/lectureUpdate";
 		} else {
 			repository.saveAndFlush(data);
-			String sql = "Select * from lectures as a inner join lessons as b on a.lesson_id=b.lesson_id inner join teachers as c on b.lesson_teacher_id=c.teacher_id ";
-			List<LectureForm> al = jdbcTemplate.query(sql,
-					new BeanPropertyRowMapper<LectureForm>(LectureForm.class));
-			model.addAttribute("datalist", al);
+			model.addAttribute("datalist",search.getAll());
 			return "/lectureList";
 		}
 	}

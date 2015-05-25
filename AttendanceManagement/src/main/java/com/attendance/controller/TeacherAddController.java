@@ -39,33 +39,23 @@ public class TeacherAddController extends AccessController{
 
     @RequestMapping(value = "/teacherAdd", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
     public String newEntry(Model model,AccessUser user) {
+    	/*管理者かどうかの判定*/
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
         Teacher teacher = new Teacher();
         model.addAttribute("teacher", teacher);
-        List<Clas> class_list = class_repository.findAll();
-        model.addAttribute("selectClass", class_list);
+        createList(model);
         return "/teachersAdd";
     }
 
     @RequestMapping(value = "/teachersAdd", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
     public String addData(@Valid @ModelAttribute Teacher data,HttpServletRequest request, Errors result,
             Model model,AccessUser user) {
+    	/*管理者かどうかの判定*/
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
-        if (result.hasErrors()) {
-            model.addAttribute("message", "エラーが発生しました");
-            List<Clas> class_list = class_repository.findAll();
-            model.addAttribute("selectClass", class_list);
-            return "/teachersAdd";
-        } else if (repository.findByTeacherId(data.getTeacherId()) != null) {
-            model.addAttribute("message", "IDが重複しています");
-            List<Clas> class_list = class_repository.findAll();
-            model.addAttribute("selectClass", class_list);
-            return "/teachersAdd";
-        }else if(!(request.getParameter("passwordConfirm").equals(data.getTeacherPassword()))){
-            model.addAttribute("message", "入力パスワードが異なっています");
-            List<Clas> class_list = class_repository.findAll();
-            model.addAttribute("selectClass", class_list);
-            return "/teachersAdd";
+        /*文字チェック後問題なければ登録*/
+        if (isError(request, result, data, model)){
+        	createList(model);
+        	return "/teachersAdd";
         } else {
         	data.setTeacherPassword(pm.hashCreate(data.getTeacherPassword()));
             repository.saveAndFlush(data);
@@ -75,10 +65,33 @@ public class TeacherAddController extends AccessController{
         }
     }
 
+    /*型変換用*/
     @InitBinder
     protected void initBinder(HttpServletRequest request,
             ServletRequestDataBinder binder) throws Exception {
         binder.registerCustomEditor(Clas.class, new ClassPropertyEditor(
                 class_repository));
+    }
+
+    /*検索用リストの生成*/
+    private void createList(Model model){
+    	 List<Clas> class_list = class_repository.findAll();
+         model.addAttribute("selectClass", class_list);
+    }
+
+    /*入力文字チェック*/
+    private boolean isError(HttpServletRequest request,Errors result,Teacher data,Model model){
+    	 if (result.hasErrors()) {
+             model.addAttribute("message", "エラーが発生しました");
+             return true;
+         } else if (repository.findByTeacherId(data.getTeacherId()) != null) {
+             model.addAttribute("message", "IDが重複しています");
+             return true;
+         }else if(!(request.getParameter("passwordConfirm").equals(data.getTeacherPassword()))){
+             model.addAttribute("message", "入力パスワードが異なっています");
+             return true;
+         } else {
+            return false;
+        }
     }
 }

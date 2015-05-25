@@ -25,25 +25,28 @@ public class ClassDeleteController extends AccessController{
 
     @Autowired
     private ClassRepository repository;
-
+    /*削除確認表示*/
     @RequestMapping(value = "/classDelete", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
     public String deleteConfirm(HttpServletRequest request, Model model,AccessUser user) {
+    	/*管理者かどうかの判定*/
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
+        /*対象データの取り出し*/
         int id = Integer.parseInt(request.getParameter("id"));
         Clas clas = repository.findOne(id);
-        model.addAttribute("message", "本当に削除しますか？");
         model.addAttribute("id", id);
         model.addAttribute("class", clas);
+        model.addAttribute("message", "本当に削除しますか？");
         return "/classDelete";
     }
-
+    /*削除*/
     @RequestMapping(value = "/classDelete", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
     public String delete(Model model, HttpServletRequest request,AccessUser user) {
+    	/*管理者かどうかの判定*/
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
-        System.out.println("id=" + request.getParameter("id"));
-        Clas clas = repository.findOne(Integer.parseInt(request
-                .getParameter("id")));
+        /*選択情報の削除*/
+        Clas clas = repository.findOne(Integer.parseInt(request.getParameter("id")));
         repository.delete(clas);
+        /*一覧リストの生成*/
         List<Clas> list = repository.findAll();
         model.addAttribute("datalist", list);
         return "/classList";

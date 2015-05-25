@@ -27,7 +27,9 @@ public class LessonController extends AccessController{
 
     @RequestMapping(value = "/lessonList", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
     public String showList(Model model,AccessUser user) {
+    	/*管理者かどうかの判定*/
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
+        /*一覧の生成*/
         List<Lesson> list = repository.findAll();
         model.addAttribute("datalist", list);
         return "/lessonList";
@@ -35,6 +37,7 @@ public class LessonController extends AccessController{
 
     @RequestMapping(value = "/lessonList", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
     public String searchList(HttpServletRequest request, Model model,AccessUser user) {
+    	/*管理者かどうかの判定*/
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
         String param = request.getParameter("fstr");
         model.addAttribute("find1",param);

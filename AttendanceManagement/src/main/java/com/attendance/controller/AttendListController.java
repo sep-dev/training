@@ -44,6 +44,7 @@ public class AttendListController {
 		return "/attendList";
 	}
 
+	/*検索要求があったとき*/
 	@RequestMapping(value = "/attendList", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
 	public String search(HttpServletRequest request, Model model) {
 		String studentName = request.getParameter("student_name");
@@ -56,9 +57,10 @@ public class AttendListController {
         model.addAttribute("find3", date1);
         model.addAttribute("find4", date2);
         model.addAttribute("find5", hour);
-		// 名前・住所であいまい検索
+		/* 名前・住所であいまい検索*/
 		model.addAttribute("datalist", search.getList(studentName, lectureName, date1, date2, hour));
 		model.addAttribute("count", search.getList(studentName, lectureName, date1, date2, hour).size());
 		return "/attendList";
 	}
+	
 }

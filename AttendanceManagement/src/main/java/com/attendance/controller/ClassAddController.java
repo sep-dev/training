@@ -27,7 +27,9 @@ public class ClassAddController extends AccessController{
 
     @RequestMapping(value = "/classAdd", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
     public String newEntry(Model model,AccessUser user) {
+    	/*管理者かどうかの判定*/
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
+        /*エンティティの生成*/
         Clas clas = new Clas();
         model.addAttribute("clas", clas);
         return "/classAdd";
@@ -36,18 +38,29 @@ public class ClassAddController extends AccessController{
     @RequestMapping(value = "/classAdd", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
     public String addData(@Valid @ModelAttribute Clas data, Errors result,
             Model model,AccessUser user) {
+    	/*管理者かどうかの判定*/
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
-        if (result.hasErrors()) {
-            model.addAttribute("message", "エラーが発生しました");
-            return "/classAdd";
-        } else if (repository.findByClassId(data.getClassId()) != null) {
-            model.addAttribute("message", "IDが重複しています");
-            return "/classAdd";
-        } else {
+        /*文字チェック後問題なければ登録*/
+        if(isError(result, data, model)){
+        	return "/classAdd";
+        }else{
             repository.saveAndFlush(data);
             List<Clas> list = repository.findAll();
             model.addAttribute("datalist", list);
             return "/classList";
         }
+    }
+
+    /*入力文字チェック*/
+    private boolean isError(Errors result,Clas data,Model model){
+    	 if (result.hasErrors()) {
+             model.addAttribute("message", "エラーが発生しました");
+             return true;
+         } else if (repository.findByClassId(data.getClassId()) != null) {
+             model.addAttribute("message", "IDが重複しています");
+             return true;
+         } else {
+             return false;
+         }
     }
 }

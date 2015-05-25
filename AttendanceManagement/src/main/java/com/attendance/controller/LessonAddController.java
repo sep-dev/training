@@ -33,32 +33,26 @@ public class LessonAddController extends AccessController{
     private TeacherRepository teacher_repository;
     @Autowired
     private LessonRepository repository;
-    
+
 
     @RequestMapping(value = "/lessonAdd", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
     public String newEntry(Model model,AccessUser user) {
+    	/*管理者かどうかの判定*/
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
         Lesson lesson = new Lesson();
         model.addAttribute("lesson", lesson);
-        List<Teacher> teacher_list = teacher_repository.findAll();
-        model.addAttribute("selectTeacher", teacher_list);
+        createList(model);
         return "/lessonAdd";
     }
 
     @RequestMapping(value = "/lessonAdd", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
     public String addData(@Valid @ModelAttribute Lesson data, Errors result,
             Model model,AccessUser user) {
+    	/*管理者かどうかの判定*/
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
-        if (result.hasErrors()) {
-            model.addAttribute("message", "エラーが発生しました");
-            List<Teacher> teacher_list = teacher_repository.findAll();
-            model.addAttribute("selectTeacher", teacher_list);
-            return "/lessonAdd";
-        } else if (repository.findByLessonId(data.getLessonId()) != null) {
-            model.addAttribute("message", "IDが重複しています");
-            List<Teacher> teacher_list = teacher_repository.findAll();
-            model.addAttribute("selectTeacher", teacher_list);
-            return "/lessonAdd";
+        if (isError(result, data, model)){
+        	createList(model);
+        	return "/lessonAdd";
         } else {
             repository.saveAndFlush(data);
             model.addAttribute("myData", data);
@@ -68,11 +62,31 @@ public class LessonAddController extends AccessController{
         }
     }
 
+    /*型変換用*/
     @InitBinder
     protected void initBinder(HttpServletRequest request,
             ServletRequestDataBinder binder) throws Exception {
 
         binder.registerCustomEditor(Teacher.class, new TeacherPropertyEditor(
                 teacher_repository));
+    }
+
+    /*検索用リストの生成*/
+    private void createList(Model model){
+    	 List<Teacher> teacher_list = teacher_repository.findAll();
+         model.addAttribute("selectTeacher", teacher_list);
+    }
+
+    /*入力文字チェック*/
+    private boolean isError(Errors result,Lesson data,Model model){
+    	 if (result.hasErrors()) {
+             model.addAttribute("message", "エラーが発生しました");
+             return true;
+    	 } else if (repository.findByLessonId(data.getLessonId()) != null) {
+             model.addAttribute("message", "IDが重複しています");
+             return true;
+         } else {
+             return false;
+         }
     }
 }

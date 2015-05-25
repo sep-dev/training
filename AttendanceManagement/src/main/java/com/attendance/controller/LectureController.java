@@ -40,15 +40,18 @@ public class LectureController extends AccessController{
 
     @RequestMapping(value = "/lectureList", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
     public String showList(Model model,AccessUser user) {
+    	/*管理者かどうかの判定*/
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
-
+        /*一覧リストの生成*/
         model.addAttribute("datalist", serch.getAll());
         return "/lectureList";
     }
 
     @RequestMapping(value = "/lectureList", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
     public String searchList(HttpServletRequest request, Model model,AccessUser user) {
+    	/*管理者かどうかの判定*/
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
+        /*あいまい検索リスト生成*/
         String lessonName = request.getParameter("lessonName");
         String teacherName = request.getParameter("teacherName");
         String date1=request.getParameter("date");
@@ -63,6 +66,8 @@ public class LectureController extends AccessController{
         model.addAttribute("datalist", serch.getList(lessonName, teacherName, date1, date2, hour));
         return "/lectureList";
     }
+    
+    /*型変換用*/
     @InitBinder
     protected void initBinder(HttpServletRequest request,
             ServletRequestDataBinder binder) throws Exception {

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.attendance.domain.AccessUser;
 import com.attendance.editor.ClassPropertyEditor;
@@ -21,16 +22,20 @@ import com.attendance.entity.Clas;
 import com.attendance.entity.Teacher;
 import com.attendance.repository.ClassRepository;
 import com.attendance.repository.TeacherRepository;
+import com.attendance.service.PasswordManager;
 /**
  * 講師追加のコントローラ
  */
 @Controller
+@SessionAttributes("accessUser")
 @RequestMapping(value = "/manager")
 public class TeacherAddController extends AccessController{
     @Autowired
     private ClassRepository class_repository;
     @Autowired
     private TeacherRepository repository;
+    @Autowired
+    private PasswordManager pm;
 
     @RequestMapping(value = "/teacherAdd", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
     public String newEntry(Model model,AccessUser user) {
@@ -62,6 +67,7 @@ public class TeacherAddController extends AccessController{
             model.addAttribute("selectClass", class_list);
             return "/teachersAdd";
         } else {
+        	data.setTeacherPassword(pm.hashCreate(data.getTeacherPassword()));
             repository.saveAndFlush(data);
             List<Teacher> list = repository.findAll();
             model.addAttribute("datalist", list);

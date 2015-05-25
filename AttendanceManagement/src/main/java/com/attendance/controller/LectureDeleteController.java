@@ -1,31 +1,32 @@
 package com.attendance.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.attendance.domain.AccessUser;
 import com.attendance.entity.Lecture;
-import com.attendance.form.LectureForm;
 import com.attendance.repository.LectureRepository;
+import com.attendance.search.SerchLecture;
 /**
  * 講義削除のコントローラ
  */
 @Controller
+@SessionAttributes("accessUser")
 @RequestMapping(value = "/manager")
 public class LectureDeleteController extends AccessController{
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	@Autowired
 	private LectureRepository repository;
+	@Autowired
+	private SerchLecture search;
 
 	@RequestMapping(value = "/lectureDelete", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
 	public String deleteConfirm(HttpServletRequest request, Model model,AccessUser user) {
@@ -35,10 +36,7 @@ public class LectureDeleteController extends AccessController{
 		Lecture lecture = repository.findOne(id);
 		model.addAttribute("id", id);
 		model.addAttribute("lecture", lecture);
-		String sql = "Select * from lectures as a inner join lessons as b on a.lesson_id=b.lesson_id inner join teachers as c on b.lesson_teacher_id=c.teacher_id where lecture_id=?";
-		List<LectureForm> al = jdbcTemplate.query(sql,
-				new BeanPropertyRowMapper<LectureForm>(LectureForm.class),id);
-		model.addAttribute("datalist", al);
+		model.addAttribute("datalist", repository.findByLectureId(id));
 		return "/lectureDelete";
 	}
 
@@ -49,10 +47,8 @@ public class LectureDeleteController extends AccessController{
 		Lecture lecture = repository.findOne(Integer.parseInt(request
 				.getParameter("id")));
 		repository.delete(lecture);
-		String sql = "Select * from lectures as a inner join lessons as b on a.lesson_id=b.lesson_id inner join teachers as c on b.lesson_teacher_id=c.teacher_id ";
-		List<LectureForm> al = jdbcTemplate.query(sql,
-				new BeanPropertyRowMapper<LectureForm>(LectureForm.class));
-		model.addAttribute("datalist", al);
+
+		model.addAttribute("datalist", repository.findAll());
 		return "/lectureList";
 	}
 }

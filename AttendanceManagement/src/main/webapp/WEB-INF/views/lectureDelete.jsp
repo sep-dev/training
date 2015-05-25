@@ -21,7 +21,7 @@
           <tr><td><form:label path="lectureId">講義ID：</form:label></td>
             <td><form:input path="lectureId"  size="50" disabled="true"/></td></tr>
           <tr><td><form:label path="lesson.lessonId">講義名：</form:label></td>
-            <td><form:input path="lesson.lessonId" size="50" disabled="true"/></td></tr>
+            <td><form:input path="lesson.lessonName" size="50" disabled="true"/></td></tr>
           <tr><td><form:label path="lesson.teacher.teacherName">担当講師氏名：</form:label></td>
             <td><form:input path="lesson.teacher.teacherName" size="50" disabled="true"/></td></tr>
           <tr><td><form:label path="lectureDate">講義日付：</form:label></td>

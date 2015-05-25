@@ -34,14 +34,12 @@
                 </c:choose>
               </c:forEach>
             </form:select></td></tr>
-          <tr><th>担当講師名：</th>
-            <td><form:select path="lesson.teacher"  items="${selectTeacher}" itemLabel="teacherName" itemValue="teacherId"/></td></tr>
+
           <tr><th>日付：</th>
             <td><form:input type="date" path="lectureDate" /></td>
           </tr>
           <tr><th>時限：</th>
-            <td><form:input path="lectureHour"  required="true" placeholder="時限を入力してください" pattern="^[0-9]*$"/></td>
-            <form:errors path="lectureHour" cssClass="error" element="td"/>
+            <td><form:select path="lectureHour"  items="${selectHour}" itemLabel="hourId" itemValue="hourId"/></td>
           </tr>
         </table>
         <p><input type="submit" value="登録"/>

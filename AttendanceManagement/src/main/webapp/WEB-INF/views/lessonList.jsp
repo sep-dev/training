@@ -39,16 +39,20 @@
         <c:if test="${datalist !=null}">
           <table border="1" class="managerListTable">
             <thead>
-              <tr><th class="col_s">科目ID</th><th class="col_l">科目名</th><th class="col_l">担当講師名</th>
-              <th class="col_bottun"></th><th class="col_ss"></th></tr>
+              <tr>
+                <th class="col_lessonId">科目ID</th>
+                <th class="col_lesson">科目名</th>
+                <th class="col_teacher">担当講師名</th>
+                <th class="col_bottun"></th>
+              </tr>
             </thead>
             <tbody>
               <c:forEach var="obj" items="${datalist}" varStatus="status">
                 <tr align="center">
-                  <td class="col_s"><a href="<c:url value="lessonUpdate?id=${obj.lessonId}"/>" ><c:out value="${obj.lessonId}" /></td>
-                  <td class="col_l"><a href="<c:url value="lessonUpdate?id=${obj.lessonId}"/>" ><c:out value="${obj.lessonName}"/></td>
-                  <td class="col_l"><a href="<c:url value="teacherUpdate?id=${obj.teacher.teacherId}"/>" ><c:out value="${obj.teacher.teacherName}"/></td>
-                  <td class="id_bottun"><button type="submit" name="id" value="${obj.lessonId}" onClick="form.action='lessonUpdate';return true">編集</button><br/>
+                  <td class="col_lessonId"><a href="<c:url value="lessonUpdate?id=${obj.lessonId}"/>" ><c:out value="${obj.lessonId}" /></td>
+                  <td class="col_lesson"><a href="<c:url value="lessonUpdate?id=${obj.lessonId}"/>" ><c:out value="${obj.lessonName}"/></td>
+                  <td class="col_teacher"><a href="<c:url value="teacherUpdate?id=${obj.teacher.teacherId}"/>" ><c:out value="${obj.teacher.teacherName}"/></td>
+                  <td class="col_bottun"><button type="submit" name="id" value="${obj.lessonId}" onClick="form.action='lessonUpdate';return true">編集</button><br/>
                   <button type="submit" name="id" value="${obj.lessonId}" onClick="form.action='lessonDelete';return true">削除</button></td>
                 </tr>
               </c:forEach>

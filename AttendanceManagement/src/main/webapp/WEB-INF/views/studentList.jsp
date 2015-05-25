@@ -39,18 +39,25 @@
       <c:if test="${datalist !=null}">
         <table border="1" class="managerListTable">
           <thead>
-            <tr><th class="col_s">ID</th><th class="col_m">名前</th><th class="col_l">住所</th>
-                <th class="col_m">電話番号</th><th class="col_bottun"></th><th class="col_ss"></th></tr>
+            <tr>
+              <th class="col_id">ID</th>
+              <th class="col_name">名前</th>
+              <th class="col_address">住所</th>
+              <th class="col_tel">電話番号</th>
+              <th class="col_bottun"></th>
+            </tr>
           </thead>
           <tbody>
             <c:forEach var="obj" items="${datalist}" varStatus="status">
               <tr>
-                <td class="col_s"><a href="<c:url value="studentUpdate?id=${obj.studentId}"/>" ><c:out value="${obj.studentId}" /></td>
-                <td class="col_m"><a href="<c:url value="studentUpdate?id=${obj.studentId}"/>" ><c:out value="${obj.studentName}"/></td>
-                <td class="col_l"><c:out value="${obj.studentAddress}" /></td>
-                <td class="col_m"><c:out value="${obj.studentTel}" /></td>
-                <td class="col_bottun"><button type="submit" name="id" value="${obj.studentId}" onClick="form.action='studentUpdate';return true">編集</button><br/>
-                <button type="submit" name="id" value="${obj.studentId}" onClick="form.action='studentDelete';return true">削除</button></td>
+                <td class="col_id"><a href="<c:url value="studentUpdate?id=${obj.studentId}"/>" ><c:out value="${obj.studentId}" /></td>
+                <td class="col_name"><a href="<c:url value="studentUpdate?id=${obj.studentId}"/>" ><c:out value="${obj.studentName}"/></td>
+                <td class="col_address"><c:out value="${obj.studentAddress}" /></td>
+                <td class="col_tel"><c:out value="${obj.studentTel}" /></td>
+                <td class="col_bottun">
+                  <button type="submit" name="id" value="${obj.studentId}" onClick="form.action='studentUpdate';return true">編集</button><br/>
+                  <button type="submit" name="id" value="${obj.studentId}" onClick="form.action='studentDelete';return true">削除</button>
+                </td>
               </tr>
             </c:forEach>
           </tbody>

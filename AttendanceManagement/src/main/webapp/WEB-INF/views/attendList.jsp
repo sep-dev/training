@@ -35,18 +35,22 @@
         <c:if test="${datalist !=null}">
           <table border="1" class="managerListTable">
             <thead>
-              <tr><th class="col_s">生徒ID</th><th class="col_m">生徒名</th><th class="col_m">講義名</th><th class="col_m">日付</th>
-                <th class="col_ss">時限</th><th class="col_bottun"></th><th class="col_ss"></th>
+              <tr>
+                <th class="col_id">生徒ID</th>
+                <th class="col_name">生徒名</th>
+                <th class="col_lecture">講義名</th>
+                <th class="col_date">日付</th>
+                <th class="col_hour">時限</th>
               </tr>
             </thead>
             <tbody>
               <c:forEach var="obj" items="${datalist}" varStatus="status">
                 <tr>
-                  <td class="col_s"><a href="<c:url value="studentUpdate?id=${obj.studentId}"/>" ><c:out value="${obj.studentId}"  /></a></td>
-                  <td class="col_m"><a href="<c:url value="studentUpdate?id=${obj.studentId}"/>" ><c:out value="${obj.studentName}"/></td>
-                  <td class="col_m"><a href="<c:url value="lessonUpdate?id=${obj.lessonId}"/>" ><c:out value="${obj.lessonName}" /></td>
-                  <td class="col_m"><c:out value="${obj.lectureDate}" /></td>
-                  <td class="col_ss"><c:out value="${obj.lectureHour}" /></td>
+                  <td class="col_id"><a href="<c:url value="studentUpdate?id=${obj.studentId}"/>" ><c:out value="${obj.studentId}"  /></a></td>
+                  <td class="col_name"><a href="<c:url value="studentUpdate?id=${obj.studentId}"/>" ><c:out value="${obj.studentName}"/></td>
+                  <td class="col_lecture"><a href="<c:url value="lessonUpdate?id=${obj.lessonId}"/>" ><c:out value="${obj.lessonName}" /></td>
+                  <td class="col_date"><c:out value="${obj.lectureDate}" /></td>
+                  <td class="col_hour"><c:out value="${obj.lectureHour}" /></td>
                 </tr>
               </c:forEach>
             </tbody>

@@ -176,7 +176,7 @@ section iframe{
   height: 320px;
 }
 
-.list_lesson{width:200px; max-width:200px;}
+.list_lesson{width:230px; max-width:230px;}
 .list_hour{width:50px; max-width:50px;}
 .list_teacher{width:120px; max-width:120px;}
 .list_attend{width:100px; max-width:100px;}
@@ -230,6 +230,10 @@ section iframe{
   text-align: right;
 }
 
+.searchForm select{
+  width: 100px;
+}
+
 .searchForm input[type=submit]{
   width: 130px;
 }
@@ -267,7 +271,7 @@ section iframe{
   text-align: center;
 }
 
-.pastListTable thead{
+.pastListTable thead th{
   background-color: #ffffad;
 }
 
@@ -283,8 +287,6 @@ section iframe{
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-
-
 
 /*本日の授業一覧用*/
 .listTable{
@@ -305,8 +307,8 @@ section iframe{
   overflow-y: scroll;
   height: 320px;
 }
-.col_date{width:150px; max-width:150px;}
-.col_lesson{width:400px; max-width:400px;}
+.col_date{width:130px; max-width:130px;}
+.col_lesson{width:380px; max-width:380px;}
 .col_hour{width:100px; max-width:100px;}
 
 /*管理者新規登録・編集・削除用*/
@@ -340,7 +342,6 @@ section iframe{
 
 /*管理者一覧表示用*/
 .managerListTable{
-
   height: 320px;
   margin: 20px auto;
 
@@ -349,6 +350,8 @@ section iframe{
 .managerListTable thead th{
   background-color: #bbbbff; /*水色*/
   text-align: center;
+  padding: 0;
+  margin: 0;
 }
 
 .managerListTable thead,.managerListTable tbody{
@@ -372,42 +375,30 @@ section iframe{
 .col_m{width:200px; max-width:200px;}
 .col_l{width:200px; max-width:200px;}
 .col_ss{width:20px; max-width:20px;}
-.col_bottun{width:40px; max-width:40px;}
+.col_bottun{width:50px; max-width:50px;}
 
-/*管理者一覧表示用(クラス）*/
-.managerListTable{
-  height: 320px;
-  margin: 20px auto;
+/*管理者【生徒&講師一覧】*/
+.col_id{width:40px; max-width:40px;}
+.col_name{width:150px; max-width:150px;}
+.col_address{width:190px; max-width:190px;}
+.col_tel{width:120px; max-width:120px;}
 
-}
+/*管理者【講義一覧】*/
+.col_lecture{width:180px; max-width:180px;}
+.col_lecTeacher{width:100px; max-width:100px;}
+.col_lecHour{width:50px;max-width:50px;}
 
-.managerListTable thead th{
-  background-color: #bbbbff; /*水色*/
-  text-align: center;
-}
+/*管理者【クラス一覧】*/
+.col_classId{width:200px;max-width:200px;}
+.col_className{width:300px;max-width:300px;}
 
-.managerListTable thead,.managerListTable tbody{
-  display: block;
-  text-align: center;
-}
+/*管理者【科目一覧】*/
+.col_lessonId{width:100px; max-width:100px;}
+.managerListTable .col_lesson{width:250px; max-width:250px;}
+.managerListTable .col_teacher{width:150px; max-width:150px;}
 
-.managerListTable tbody{
-  overflow-y: scroll;
-  height:320px;
-
-}
-.managerListTable tbody td{
-  padding-left: 1px;
-  padding-right: 1px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-.col_s{width:80px; max-width:80px;}
-.col_m{width:200px; max-width:200px;}
-.col_l{width:400px; max-width:400px;}
-.col_ss{width:20px; max-width:20px;}
-.col_bottun{width:40px; max-width:40px;}
+/*管理者【出席一覧】*/
+.managerListTable .col_hour{width:50px;max-width:50px;}
 
 /*管理者一覧表示用(クラス）*/
 .attendListTable{

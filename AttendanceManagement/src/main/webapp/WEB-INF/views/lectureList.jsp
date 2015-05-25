@@ -45,18 +45,23 @@
         <c:if test="${datalist !=null}">
           <table border="1" class="managerListTable">
             <thead>
-              <tr><th class="col_s">講義ID</th><th class="col_m">講義名</th><th class="col_m">担当講師名</th><th class="col_m">日付</th>
-                <th class="col_s">時限</th><th class="col_bottun"></th><th class="col_ss"></th>
+              <tr>
+                <th class="col_id">講義ID</th>
+                <th class="col_lecture">講義名</th>
+                <th class="col_lecTeacher">担当講師名</th>
+                <th class="col_date">日付</th>
+                <th class="col_lecHour">時限</th>
+                <th class="col_bottun"></th>
               </tr>
           </thead>
           <tbody>
               <c:forEach var="obj" items="${datalist}" varStatus="status">
                 <tr align="center">
-                  <td class="col_s"><a href="<c:url value="lectureUpdate?id=${obj.lectureId}"/>" ><c:out value="${obj.lectureId}" /></td>
-                  <td class="col_l"><a href="<c:url value="lessonUpdate?id=${obj.lessonId}"/>" ><c:out value="${obj.lessonName}"/></td>
-                  <td class="col_l"><a href="<c:url value="teacherUpdate?id=${obj.teacherId}"/>" ><c:out value="${obj.teacherName}"/></td>
-                  <td class="col_l"><c:out value="${obj.lectureDate}"/></td>
-                  <td class="col_s"><c:out value="${obj.lectureHour}"/></td>
+                  <td class="col_id"><a href="<c:url value="lectureUpdate?id=${obj.lectureId}"/>" ><c:out value="${obj.lectureId}" /></td>
+                  <td class="col_lecture"><a href="<c:url value="lessonUpdate?id=${obj.lessonId}"/>" ><c:out value="${obj.lessonName}"/></td>
+                  <td class="col_lecTeacher"><a href="<c:url value="teacherUpdate?id=${obj.teacherId}"/>" ><c:out value="${obj.teacherName}"/></td>
+                  <td class="col_date"><c:out value="${obj.lectureDate}"/></td>
+                  <td class="col_lecHour"><c:out value="${obj.lectureHour}"/></td>
                   <td class="col_bottun"><button type="submit" name="id" value="${obj.lectureId}" onClick="form.action='lectureUpdate';return true">編集</button><br/>
                     <button type="submit" name="id" value="${obj.lectureId}" onClick="form.action='lectureDelete';return true">削除</button></td>
                 </tr>

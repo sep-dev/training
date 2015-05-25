@@ -28,8 +28,9 @@ public class ClassController extends AccessController{
 
     @RequestMapping(value = "/classList", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
     public String showList(Model model ,AccessUser user) {
-        //管理者かどうかの判定
+        /*管理者かどうかの判定*/
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
+        /*一覧リストの生成*/
         List<Clas> list = repository.findAll();
         model.addAttribute("datalist", list);
         return "/classList";
@@ -37,10 +38,11 @@ public class ClassController extends AccessController{
 
     @RequestMapping(value = "/classList", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
     public String searchList(HttpServletRequest request, Model model,AccessUser user) {
+    	/*管理者かどうかの判定*/
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
+        /*名前・住所であいまい検索用リストの生成*/
         String param = request.getParameter("fstr");
         model.addAttribute("find1", param);
-        // 名前・住所であいまい検索
         List<Clas> list = repository.findByClassNameLike("%" + param + "%");
         model.addAttribute("datalist", list);
         return "/classList";

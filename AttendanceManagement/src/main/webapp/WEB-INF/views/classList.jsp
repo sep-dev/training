@@ -25,9 +25,14 @@
       <h1>クラス管理画面</h1>
       <form action="${pageContext.request.contextPath}/manager/classList" method="post">
         <table>
-          <tr><td>検索 :</td>
-            <td><input type="text" name="fstr" size="20"value="${find1}"/></td></tr>
-          <tr><td></td><td><input type="submit" value="検索"></td></tr>
+          <tr>
+            <td>検索 :</td>
+            <td><input type="text" name="fstr" size="20"value="${find1}"/></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><input type="submit" value="検索"></td>
+          </tr>
         </table>
       </form>
       <form action="${pageContext.request.contextPath}/manager/classList" method="get">
@@ -39,15 +44,21 @@
         <c:if test="${datalist !=null}">
           <table border="1" class="managerListTable">
             <thead>
-              <tr><th class="col_l">クラスID</th><th class="col_l">クラス名</th><th class="col_bottun"></th><th class="col_ss"></th></tr>
+              <tr>
+                <th class="col_classId">クラスID</th>
+                <th class="col_className">クラス名</th>
+                <th class="col_bottun"></th>
+              </tr>
             </thead>
             <tbody>
               <c:forEach var="obj" items="${datalist}" varStatus="status">
                 <tr>
-                  <td class="col_l"><a href="<c:url value="classUpdate?id=${obj.classId}"/>" ><c:out value="${obj.classId}" /></td>
-                  <td class="col_l"><a href="<c:url value="classUpdate?id=${obj.classId}"/>" ><c:out value="${obj.className}"/></td>
-                  <td class="col_button"><button type="submit" name="id" value="${obj.classId}" onClick="form.action='classUpdate';return true">編集</button><br/>
-                  <button type="submit" name="id" value="${obj.classId}" onClick="form.action='classDelete';return true">削除</button></td>
+                  <td class="col_classId"><a href="<c:url value="classUpdate?id=${obj.classId}"/>" ><c:out value="${obj.classId}" /></td>
+                  <td class="col_className"><a href="<c:url value="classUpdate?id=${obj.classId}"/>" ><c:out value="${obj.className}"/></td>
+                  <td class="col_bottun">
+                    <button type="submit" name="id" value="${obj.classId}" onClick="form.action='classUpdate';return true">編集</button><br/>
+                    <button type="submit" name="id" value="${obj.classId}" onClick="form.action='classDelete';return true">削除</button>
+                  </td>
                 </tr>
               </c:forEach>
             </tbody>

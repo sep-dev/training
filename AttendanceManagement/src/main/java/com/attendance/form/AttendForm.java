@@ -1,13 +1,12 @@
 package com.attendance.form;
 
-import java.util.Date;
 
 public class AttendForm {
 	private Integer studentId;
-	private Integer lectureId;
+	private Integer lessonId;
 	private String lessonName;
 	private String studentName;
-	private Date lectureDate;
+	private String lectureDate;
 	private Integer lectureHour;
 
 	public Integer getStudentId() {
@@ -18,12 +17,12 @@ public class AttendForm {
 		this.studentId = studentId;
 	}
 
-	public Integer getLectureId() {
-		return this.lectureId;
+	public Integer getLessonId() {
+		return this.lessonId;
 	}
 
-	public void setLectureId(Integer lectureId) {
-		this.lectureId = lectureId;
+	public void setLessonId(Integer lessonId) {
+		this.lessonId = lessonId;
 	}
 
 	public String getLessonName() {
@@ -43,12 +42,12 @@ public class AttendForm {
 		this.studentName = studentName;
 	}
 
-	public Date getLectureDate() {
+	public String getLectureDate() {
 		return this.lectureDate;
 	}
 
-	public void setLectureDate(Date lectureDate) {
-
+	public void setLectureDate(String lectureDate) {
+		lectureDate.indexOf(11);
 		this.lectureDate = lectureDate;
 	}
 

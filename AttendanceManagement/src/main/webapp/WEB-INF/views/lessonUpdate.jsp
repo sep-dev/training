@@ -18,7 +18,7 @@
       <form:form modelAttribute="lesson" action="lessonUpdate">
         <table>
           <tr><th>科目ID：</th>
-            <td><form:input path="lessonId" required="true" placeholder="IDを入力してください" pattern="^[0-9]*$"/></td>
+            <td><form:input path="lessonId" readonly="true"/></td>
             <form:errors path="lessonId" cssClass="error" element="td"/>
           </tr>
           <tr><th>科目名：</th>

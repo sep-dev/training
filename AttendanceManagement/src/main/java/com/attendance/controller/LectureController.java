@@ -3,13 +3,11 @@ package com.attendance.controller;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,10 +15,9 @@ import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.attendance.domain.AccessUser;
-import com.attendance.form.LectureForm;
-import com.attendance.helper.ShareHelper;
 import com.attendance.repository.LectureRepository;
 import com.attendance.repository.LessonRepository;
 import com.attendance.search.SerchLecture;
@@ -29,6 +26,7 @@ import com.attendance.search.SerchLecture;
  * 講義関連初期画面のコントローラ
  */
 @Controller
+@SessionAttributes("accessUser")
 @RequestMapping(value = "/manager")
 public class LectureController extends AccessController{
     @Autowired
@@ -43,10 +41,8 @@ public class LectureController extends AccessController{
     @RequestMapping(value = "/lectureList", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
     public String showList(Model model,AccessUser user) {
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
-        String sql = "Select * from lectures as a inner join lessons as b on a.lesson_id=b.lesson_id inner join teachers as c on b.lesson_teacher_id=c.teacher_id ";
-        List<LectureForm> al = jdbcTemplate.query(sql,
-                new BeanPropertyRowMapper<LectureForm>(LectureForm.class));
-        model.addAttribute("datalist", al);
+
+        model.addAttribute("datalist", serch.getAll());
         return "/lectureList";
     }
 
@@ -57,9 +53,6 @@ public class LectureController extends AccessController{
         String teacherName = request.getParameter("teacherName");
         String date1=request.getParameter("date");
         String date2=request.getParameter("date2");
-        if (date2.length() == 0) {
-            date2 = ShareHelper.getToday();
-        }
         String hour = request.getParameter("lectureHour");
         model.addAttribute("find1", lessonName);
         model.addAttribute("find2", teacherName);
@@ -68,8 +61,6 @@ public class LectureController extends AccessController{
         model.addAttribute("find5", hour);
         // あいまい検索
         model.addAttribute("datalist", serch.getList(lessonName, teacherName, date1, date2, hour));
-
-
         return "/lectureList";
     }
     @InitBinder

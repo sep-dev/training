@@ -15,11 +15,11 @@
   <body>
     <div class="managerDiv">
       <h1>講義編集画面</h1>
-      <p>"${message}"</p>
+      <p>${message}</p>
       <form:form modelAttribute="lecture" action="lectureUpdate">
         <table>
           <tr><th>講義ID：</th>
-            <td><form:input path="lectureId"  required="true" placeholder="IDを入力してください" pattern="^[0-9]*$"/></td>
+            <td><form:input path="lectureId"  readonly="true"/></td>
             <form:errors path="lectureId" cssClass="error" element="td"/>
           </tr>
           <tr><th>講義名：</th>
@@ -35,14 +35,12 @@
               </c:choose>
             </c:forEach>
           </form:select></td></tr>
-          <tr><th>担当講師名：</th>
-            <td><form:select path="lesson.teacher"  items="${selectTeacher}" itemLabel="teacherName" itemValue="teacherId"/></td></tr>
+          
           <tr><th>日付：</th>
             <td><form:input type="date" path="lectureDate" /></td>
           </tr>
           <tr><th>時限：</th>
-            <td><form:input path="lectureHour"  required="true" placeholder="時限を入力してください" pattern="^[0-9]*$"/></td>
-            <form:errors path="lectureHour" cssClass="error" element="td"/>
+            <td><form:select path="lectureHour"  items="${selectHour}" itemLabel="hourId" itemValue="hourId"/></td></tr>
           </tr>
         </table>
         <p><input type="submit" value="確定"/>

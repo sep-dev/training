@@ -18,7 +18,7 @@
       <form:form modelAttribute="clas" action="classUpdate">
         <table>
           <tr><th>クラスID：</th>
-            <td><form:input path="classId" required="true" placeholder="IDを入力してください" pattern="^[0-9]*$"/></td>
+            <td><form:input path="classId" readonly="true"/></td>
             <form:errors path="classId" cssClass="error" element="td"/>
           </tr>
           <tr><th>クラス名：</th>

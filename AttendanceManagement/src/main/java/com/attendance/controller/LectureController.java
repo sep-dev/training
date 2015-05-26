@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestDataBinder;
@@ -18,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.attendance.domain.AccessUser;
-import com.attendance.repository.LectureRepository;
-import com.attendance.repository.LessonRepository;
-import com.attendance.search.SerchLecture;
+import com.attendance.service.SerchLecture;
 
 /**
  * 講義関連初期画面のコントローラ
@@ -30,17 +27,11 @@ import com.attendance.search.SerchLecture;
 @RequestMapping(value = "/manager")
 public class LectureController extends AccessController{
     @Autowired
-    private JdbcTemplate jdbcTemplate;
-    @Autowired
-    private LessonRepository lesson_repository;
-    @Autowired
-    private LectureRepository repository;
-    @Autowired
     private SerchLecture serch;
 
     @RequestMapping(value = "/lectureList", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
     public String showList(Model model,AccessUser user) {
-    	/*管理者かどうかの判定*/
+        /*管理者かどうかの判定*/
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
         /*一覧リストの生成*/
         model.addAttribute("datalist", serch.getAll());
@@ -49,7 +40,7 @@ public class LectureController extends AccessController{
 
     @RequestMapping(value = "/lectureList", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
     public String searchList(HttpServletRequest request, Model model,AccessUser user) {
-    	/*管理者かどうかの判定*/
+        /*管理者かどうかの判定*/
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
         /*あいまい検索リスト生成*/
         String lessonName = request.getParameter("lessonName");
@@ -66,7 +57,7 @@ public class LectureController extends AccessController{
         model.addAttribute("datalist", serch.getList(lessonName, teacherName, date1, date2, hour));
         return "/lectureList";
     }
-    
+
     /*型変換用*/
     @InitBinder
     protected void initBinder(HttpServletRequest request,

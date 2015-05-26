@@ -12,15 +12,15 @@ import com.attendance.domain.AccessUser;
 @RequestMapping(value = "/manager")
 public class ManagerController extends AccessController{
 
-	@RequestMapping(value = "/top")
-	public String managerTop(AccessUser user) {
-		if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
-		return "managerTop";
-	}
+    @RequestMapping(value = "/top")
+    public String managerTop(AccessUser user) {
+        if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
+        return "managerTop";
+    }
 
-	@RequestMapping(value = "/managerMain")
-	public String managerMenu(AccessUser user) {
-		if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
-		return "managerMain";
-	}
+    @RequestMapping(value = "/managerMain")
+    public String managerMenu(AccessUser user) {
+        if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
+        return "managerMain";
+    }
 }

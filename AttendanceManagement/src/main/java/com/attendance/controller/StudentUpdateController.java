@@ -39,7 +39,7 @@ public class StudentUpdateController extends AccessController{
 
     @RequestMapping(value = "/studentUpdate", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
     public String entry(HttpServletRequest request, Model model,AccessUser user) {
-    	/*管理者かどうかの判定*/
+        /*管理者かどうかの判定*/
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
         int id = Integer.parseInt(request.getParameter("id"));
         // 既存のパスワードのデータを検索し、保存
@@ -57,14 +57,14 @@ public class StudentUpdateController extends AccessController{
     @RequestMapping(value = "/studentUpdate", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
     public String updateData(@Valid @ModelAttribute Student data,HttpServletRequest request, Errors result,
             Model model,AccessUser user) {
-    	/*管理者かどうかの判定*/
+        /*管理者かどうかの判定*/
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
         /*文字チェック後問題なければ登録*/
         if (isError(request, result, data, model)){
-        	createList(model);
-        	return "/studentUpdate";
+            createList(model);
+            return "/studentUpdate";
         } else {
-        	data.setStudentPassword(pm.hashCreate(data.getStudentPassword()));
+            data.setStudentPassword(pm.hashCreate(data.getStudentPassword()));
             repository.saveAndFlush(data);
             List<Student> list = repository.findAll();
             model.addAttribute("datalist", list);
@@ -74,21 +74,19 @@ public class StudentUpdateController extends AccessController{
 
     /*型変換用*/
     @InitBinder
-    protected void initBinder(HttpServletRequest request,
-            ServletRequestDataBinder binder) throws Exception {
-        binder.registerCustomEditor(Clas.class, new ClassPropertyEditor(
-                class_repository));
+    protected void initBinder(HttpServletRequest request,ServletRequestDataBinder binder) throws Exception {
+        binder.registerCustomEditor(Clas.class, new ClassPropertyEditor(class_repository));
     }
 
     /*検索用リストの生成*/
     private void createList(Model model){
-    	 List<Clas> class_list = class_repository.findAll();
-         model.addAttribute("selectClass", class_list);
+        List<Clas> class_list = class_repository.findAll();
+        model.addAttribute("selectClass", class_list);
     }
 
     /*入力文字チェック*/
     private boolean isError(HttpServletRequest request,Errors result,Student data,Model model){
-    	if (result.hasErrors()) {
+        if (result.hasErrors()) {
             model.addAttribute("message", "エラーが発生しました");
             return true;
         }else if(!(request.getParameter("passwordConfirm").equals(data.getStudentPassword()))

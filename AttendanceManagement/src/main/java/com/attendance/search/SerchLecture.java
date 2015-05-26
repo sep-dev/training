@@ -26,7 +26,7 @@ public class SerchLecture {
         }
         if (date1 != null && date2 != null) {
             String sql = "Select * from lectures as a inner join lessons as b on a.lesson_id=b.lesson_id inner join teachers as c on b.lesson_teacher_id=c.teacher_id "
-                    + "where  b.lesson_name like ? and c.teacher_name like ? and a.lecture_date between ? and ? and a.lecture_hour like ?";
+                    + "where  b.lesson_name like ? and c.teacher_name like ? and a.lecture_date between ? and ? and a.lecture_hour like ? order by a.lecture_date,a.lecture_hour,a.lecture_id";
             lf = jdbcTemplate.query(sql,new BeanPropertyRowMapper<LectureForm>(LectureForm.class),
                     "%" + lessonName + "%", "%" +teacherName + "%", date1, date2, "%"
                             + hour + "%");
@@ -36,7 +36,7 @@ public class SerchLecture {
     public List<LectureForm> getAll(){
         List<LectureForm> lf =null;
         // 全検索
-        String sql = "Select * from lectures as a inner join lessons as b on a.lesson_id=b.lesson_id inner join teachers as c on b.lesson_teacher_id=c.teacher_id ";
+        String sql = "Select * from lectures as a inner join lessons as b on a.lesson_id=b.lesson_id inner join teachers as c on b.lesson_teacher_id=c.teacher_id order by a.lecture_date,a.lecture_hour,a.lecture_id";
         lf = jdbcTemplate.query(sql,
                  new BeanPropertyRowMapper<LectureForm>(LectureForm.class));
         return lf;

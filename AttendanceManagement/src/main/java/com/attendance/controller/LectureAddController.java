@@ -10,7 +10,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -32,7 +31,7 @@ import com.attendance.repository.HourMstRepository;
 import com.attendance.repository.LectureRepository;
 import com.attendance.repository.LessonRepository;
 import com.attendance.repository.TeacherRepository;
-import com.attendance.search.SerchLecture;
+import com.attendance.service.SerchLecture;
 /**
  * 講義新規登録のコントローラ
  */
@@ -40,8 +39,6 @@ import com.attendance.search.SerchLecture;
 @SessionAttributes("accessUser")
 @RequestMapping(value = "/manager")
 public class LectureAddController extends AccessController{
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
     @Autowired
     private LessonRepository lesson_repository;
     @Autowired
@@ -55,7 +52,7 @@ public class LectureAddController extends AccessController{
     /*講義新規登録画面の表示*/
     @RequestMapping(value = "/lectureAdd", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
     public String newEntry(Model model,AccessUser user) {
-    	/*管理者かどうかの判定*/
+        /*管理者かどうかの判定*/
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
         Lecture lecture = new Lecture();
         model.addAttribute("lecture", lecture);
@@ -64,14 +61,13 @@ public class LectureAddController extends AccessController{
     }
 
     @RequestMapping(value = "/lectureAdd", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
-    public String addData(@Valid @ModelAttribute Lecture data, Errors result,
-            Model model,AccessUser user) {
-    	/*管理者かどうかの判定*/
+    public String addData(@Valid @ModelAttribute Lecture data, Errors result,Model model,AccessUser user) {
+        /*管理者かどうかの判定*/
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
         /*入力文字チェック後問題なければ登録*/
         if(isError(result, data, model)){
-        	createList(model);
-        	return "/lectureAdd";
+            createList(model);
+            return "/lectureAdd";
         }else{
             repository.saveAndFlush(data);
             model.addAttribute("datalist",search.getAll());
@@ -81,12 +77,9 @@ public class LectureAddController extends AccessController{
 
     /*型変換用*/
     @InitBinder
-    protected void initBinder(HttpServletRequest request,
-            ServletRequestDataBinder binder) throws Exception {
-        binder.registerCustomEditor(Lesson.class, new LessonPropertyEditor(
-                lesson_repository));
-        binder.registerCustomEditor(Teacher.class, new TeacherPropertyEditor(
-                teacher_repository));
+    protected void initBinder(HttpServletRequest request,ServletRequestDataBinder binder) throws Exception {
+        binder.registerCustomEditor(Lesson.class, new LessonPropertyEditor(lesson_repository));
+        binder.registerCustomEditor(Teacher.class, new TeacherPropertyEditor(teacher_repository));
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         CustomDateEditor editor = new CustomDateEditor(df, true);
         binder.registerCustomEditor(Date.class, editor);
@@ -94,7 +87,7 @@ public class LectureAddController extends AccessController{
 
     /*検索用リストの生成*/
     private void createList(Model model){
-    	List<Lesson> lesson_list = lesson_repository.findAll();
+        List<Lesson> lesson_list = lesson_repository.findAll();
         model.addAttribute("selectLesson", lesson_list);
         List<Teacher> teacher_list = teacher_repository.findAll();
         model.addAttribute("selectTeacher", teacher_list);
@@ -104,7 +97,7 @@ public class LectureAddController extends AccessController{
 
     /*入力文字チェック*/
     private boolean isError(Errors result,Lecture data,Model model){
-    	 if (result.hasErrors()) {
+         if (result.hasErrors()) {
              model.addAttribute("message", "エラーが発生しました");
              return true;
          } else if (repository.findByLectureId(data.getLectureId()) != null) {

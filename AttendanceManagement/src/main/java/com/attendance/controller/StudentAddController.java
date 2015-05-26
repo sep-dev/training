@@ -67,10 +67,8 @@ public class StudentAddController extends AccessController{
 
     /*型変換用*/
     @InitBinder
-    protected void initBinder(HttpServletRequest request,
-            ServletRequestDataBinder binder) throws Exception {
-        binder.registerCustomEditor(Clas.class, new ClassPropertyEditor(
-                class_repository));
+    protected void initBinder(HttpServletRequest request,ServletRequestDataBinder binder) throws Exception {
+        binder.registerCustomEditor(Clas.class, new ClassPropertyEditor(class_repository));
     }
 
     /*検索用リストの生成*/

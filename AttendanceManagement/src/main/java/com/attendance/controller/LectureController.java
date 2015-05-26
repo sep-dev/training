@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.attendance.domain.AccessUser;
-import com.attendance.repository.LectureRepository;
-import com.attendance.repository.LessonRepository;
 import com.attendance.service.SerchLecture;
 
 /**
@@ -29,15 +27,11 @@ import com.attendance.service.SerchLecture;
 @RequestMapping(value = "/manager")
 public class LectureController extends AccessController{
     @Autowired
-    private LessonRepository lesson_repository;
-    @Autowired
-    private LectureRepository repository;
-    @Autowired
     private SerchLecture serch;
 
     @RequestMapping(value = "/lectureList", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
     public String showList(Model model,AccessUser user) {
-    	/*管理者かどうかの判定*/
+        /*管理者かどうかの判定*/
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
         /*一覧リストの生成*/
         model.addAttribute("datalist", serch.getAll());
@@ -46,7 +40,7 @@ public class LectureController extends AccessController{
 
     @RequestMapping(value = "/lectureList", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
     public String searchList(HttpServletRequest request, Model model,AccessUser user) {
-    	/*管理者かどうかの判定*/
+        /*管理者かどうかの判定*/
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
         /*あいまい検索リスト生成*/
         String lessonName = request.getParameter("lessonName");

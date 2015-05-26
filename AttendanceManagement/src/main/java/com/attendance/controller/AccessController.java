@@ -11,19 +11,13 @@ public class AccessController {
     protected final Integer TYPE_MANAGER = 0; //管理者
     protected final Integer TYPE_STUDENT = 1; //生徒
 
-    private Integer permitType;
-
     protected final String LOGIN_URL_STUDENT = "redirect:/loginStudent"; //生徒ログイン画面
     protected final String LOGIN_URL_MANAGER = "redirect:/loginManager"; //管理者ログイン画面
 
-    protected void setPermitUserType(Integer permitUserType){
-        this.permitType = permitUserType;
-    }
-
-    protected boolean isPermitUser(AccessUser user){
+    protected boolean isPermitUser(AccessUser user,Integer permitUserType){
         if(user == null) return false;
-        if(user.getUserId() == null || user.getUserName().equals("") ||
-                user.getUserType() == null || user.getUserType() != this.permitType){
+        if(user.getUserId() == null ||user.getUserName().equals("") ||
+                user.getUserType() == null || user.getUserType() != permitUserType){
             return false;
         }
         /* ID、氏名、ユーザタイプのどれか一つでも欠落していればfalse。
@@ -31,12 +25,6 @@ public class AccessController {
          */
         return true;
     }
-
-    protected boolean isPermitUser(AccessUser user,Integer permitUserType){
-        this.permitType = permitUserType;
-        return isPermitUser(user);
-    }
-
 
     protected void print(String msg){
         System.out.println(msg);

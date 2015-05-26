@@ -10,7 +10,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -41,8 +40,6 @@ import com.attendance.service.SerchLecture;
 @RequestMapping(value = "/manager")
 public class LectureUpdateController extends AccessController{
     @Autowired
-    private JdbcTemplate jdbcTemplate;
-    @Autowired
     private TeacherRepository teacher_repository;
     @Autowired
     private LessonRepository lesson_repository;
@@ -69,8 +66,7 @@ public class LectureUpdateController extends AccessController{
     }
 
     @RequestMapping(value = "/lectureUpdate", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
-    public String updateData(@Valid @ModelAttribute Lecture data, Errors result,
-            Model model,AccessUser user) {
+    public String updateData(@Valid @ModelAttribute Lecture data, Errors result,Model model,AccessUser user) {
         /*管理者かどうかの判定*/
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
         /*エラーチェック後問題なければデータ登録*/
@@ -90,12 +86,9 @@ public class LectureUpdateController extends AccessController{
 
     /*型変換用*/
     @InitBinder
-    protected void initBinder(HttpServletRequest request,
-            ServletRequestDataBinder binder) throws Exception {
-        binder.registerCustomEditor(Lesson.class, new LessonPropertyEditor(
-                lesson_repository));
-        binder.registerCustomEditor(Teacher.class, new TeacherPropertyEditor(
-                teacher_repository));
+    protected void initBinder(HttpServletRequest request,ServletRequestDataBinder binder) throws Exception {
+        binder.registerCustomEditor(Lesson.class, new LessonPropertyEditor(lesson_repository));
+        binder.registerCustomEditor(Teacher.class, new TeacherPropertyEditor(teacher_repository));
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         CustomDateEditor editor = new CustomDateEditor(df, true);
         binder.registerCustomEditor(Date.class, editor);

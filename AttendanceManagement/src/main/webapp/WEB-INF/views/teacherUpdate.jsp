@@ -39,8 +39,8 @@
             <td><form:select path="clas">
               <c:forEach items="${selectClass}" var="opt">
                 <c:choose>
-                  <c:when test="${opt.classId eq id}">
-                    <option value="${opt.classId}" selected="selected"><c:out value="${opt.className}"/></option>
+                  <c:when test="${opt.classId eq teacher.clas.classId}">
+                    <option value="${opt.classId}" selected><c:out value="${opt.className}"/></option>
                   </c:when>
                   <c:otherwise>
                     <option value="${opt.classId}"><c:out value="${opt.className}"/></option>

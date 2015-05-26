@@ -39,7 +39,7 @@ public class StudentAddController extends AccessController{
 
     @RequestMapping(value = "/studentAdd", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
     public String newEntry(Model model,AccessUser user) {
-    	/*管理者かどうかの判定*/
+        /*管理者かどうかの判定*/
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
         Student studnet = new Student();
         model.addAttribute("student", studnet);
@@ -50,14 +50,14 @@ public class StudentAddController extends AccessController{
     @RequestMapping(value = "/studentAdd", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
     public String addData(@Valid @ModelAttribute Student data,HttpServletRequest request, Errors result,
             Model model,AccessUser user) {
-    	/*管理者かどうかの判定*/
+        /*管理者かどうかの判定*/
         if(!isPermitUser(user, TYPE_MANAGER)) return LOGIN_URL_MANAGER;
         /*文字チェック後問題なければ登録*/
         if (isError(request, result, data, model)){
-        	createList(model);
-        	return "/studentAdd";
+            createList(model);
+            return "/studentAdd";
         } else {
-        	data.setStudentPassword(pm.hashCreate(data.getStudentPassword()));
+            data.setStudentPassword(pm.hashCreate(data.getStudentPassword()));
             repository.saveAndFlush(data);
             List<Student> list = repository.findAll();
             model.addAttribute("datalist", list);
@@ -75,13 +75,13 @@ public class StudentAddController extends AccessController{
 
     /*検索用リストの生成*/
     private void createList(Model model){
-    	 List<Clas> class_list = class_repository.findAll();
+         List<Clas> class_list = class_repository.findAll();
          model.addAttribute("selectClass", class_list);
     }
 
     /*入力文字チェック*/
     private boolean isError(HttpServletRequest request,Errors result,Student data,Model model){
-    	if (result.hasErrors()) {
+        if (result.hasErrors()) {
             model.addAttribute("message", "エラーが発生しました");
             return true;
         } else if (repository.findByStudentId(data.getStudentId()) != null) {

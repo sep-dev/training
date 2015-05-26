@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestDataBinder;
@@ -20,7 +19,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.attendance.domain.AccessUser;
 import com.attendance.repository.LectureRepository;
 import com.attendance.repository.LessonRepository;
-import com.attendance.search.SerchLecture;
+import com.attendance.service.SerchLecture;
 
 /**
  * 講義関連初期画面のコントローラ
@@ -29,8 +28,6 @@ import com.attendance.search.SerchLecture;
 @SessionAttributes("accessUser")
 @RequestMapping(value = "/manager")
 public class LectureController extends AccessController{
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
     @Autowired
     private LessonRepository lesson_repository;
     @Autowired
@@ -66,7 +63,7 @@ public class LectureController extends AccessController{
         model.addAttribute("datalist", serch.getList(lessonName, teacherName, date1, date2, hour));
         return "/lectureList";
     }
-    
+
     /*型変換用*/
     @InitBinder
     protected void initBinder(HttpServletRequest request,

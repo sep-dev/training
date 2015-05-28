@@ -2,10 +2,7 @@ package form;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -17,22 +14,16 @@ import org.hibernate.validator.constraints.NotEmpty;
  * @param tel 会員電話番号
  * @param radio1 ラジオボタンで選択した会員ID
  */
-@Entity
-@Table(name="tbAddress")
-public class InsertForm implements Serializable{
-	@NotEmpty
-	@Column(name="name")
+
+public class InsertForm implements Serializable,Form{
+    @NotEmpty
     private String name;
-	@NotEmpty
-	@Column(name="address")
+    @NotEmpty
     private String address;
     @Id
-    @Column(name="id")
     private String radio1;
     @Digits(integer=12, fraction = 0)
-    @Column(name="tel")
     private String tel;
-
 
     public String getName(){
         return name;

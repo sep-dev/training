@@ -2,7 +2,6 @@ package form;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
@@ -18,21 +17,13 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 @Entity
 @Table(name="tbAddress")
-public class UpdateForm implements Serializable{
-
-    @NotEmpty
-    @Column(name="name")
+public class UpdateForm implements Serializable,Form{
     private String name;
     @NotEmpty
-    @Column(name="address")
     private String address;
-    @Column(name="id")
     private String radio1;
     @Digits(integer=12, fraction = 0)
-    @Column(name="tel")
     private String tel;
-
-
 
     public String getName(){
         return name;

@@ -1,0 +1,63 @@
+@CHARSET "UTF-8";
+
+body{
+  font-family: 'メイリオ';
+  margin: 0;
+  padding: 0;
+  color: #ffffff;
+  background-color: #008080;
+}
+
+h1{
+  margin-top: 10px;
+  text-align: center;
+  font-size: xx-large;
+  text-shadow: 2px 2px 2px #000000;
+}
+
+.inputForm{
+  width: 800px;
+  height: 150px;
+  margin: 20px auto 0 auto;
+  padding: 20px 0;
+}
+
+table{
+  margin: 10px auto 0 auto;
+  padding: 0;
+  overflow-y: scroll;
+}
+
+table tr th:first-child{
+  text-align: right;
+}
+
+table td:first-child{
+  padding-right: 10px;
+  text-align: center;
+  text-shadow: 1px 1px 1px #000000;
+}
+
+table td{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+table td.name_td{
+  width: 100px;
+  max-width: 120px;
+}
+
+table td.tel_td{
+  width: 100px;
+  max-width: 120px;
+}
+
+table td.address_td{
+  max-width: 300px;
+}
+
+.linkForm,p{
+    text-align: center;
+}

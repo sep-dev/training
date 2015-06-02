@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head lang="en">
+<meta charset="UTF-8" />
+<title>ログインユーザー情報</title>
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap.min.css}" />
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"
+	th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap-theme.min.css}" />
+</head>
+<body>
+	<div class="container">
+		<h1>ログインユーザー情報</h1>
+		<br />
+		<p>
+			<span sec:authentication="principal.user.username">duke</span>さんログイン中。
+			<a th:href="@{/logout}" class="btn btn-default btn-xs">ログアウト</a>
+		</p>
+		<form method="POST" action="/find">
+
+			<input type="text" name="str" /> <input type="submit" value="検索" />
+		</form>
+
+		<br />
+		<div class="col-sm-12">
+			<form th:action="@{/tblstaffmanagements/create}"
+				th:object="${tblstaffmanegementForm}" class="form-horizontal"
+				method="get">
+				<fieldset>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<button type="submit" class="btn btn-primary">新規登録</button>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+			<hr />
+
+			<table class="table table-striped table-bordered table-condensed">
+				<tr>
+					<th>ログインユーザー名称</th>
+					<th>ログインユーザー</th>
+					<th>パスワード</th>
+
+					<th colspan="2">編集</th>
+				</tr>
+				<tr th:each="tblstaffmanagement : ${tblstaffmanagement}">
+					<td th:text="${tblstaffmanagement.staffManId}"></td>
+					<td th:text="${tblstaffmanagement.staffId}"></td>
+					<td th:text="${tblstaffmanagement.clientId}"></td>
+					<td th:text="${tblstaffmanagement.startDate}"></td>
+					<td th:text="${tblstaffmanagement.endDate}"></td>
+					<td th:text="${tblstaffmanagement.amountMonth}"></td>
+
+					<td>
+
+						<form th:action="@{/customers/edit} ">
+							<input class="btn btn-default" type="submit" name="form"
+								value="編集" /> <input type="hidden" name="StaffManId"
+								th:value="${tblstaffmanagement.staffManId}" />
+						</form>
+					</td>
+					<td>
+						<form th:action="@{/customers/delete}" method="get">
+							<input class="btn btn-danger" type="submit" value="削除" /> <input
+								type="hidden" name="id"
+								th:value="${tblstaffmanagement.staffManId}" />
+						</form>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"
+		th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+	<script
+		src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"
+		th:src="@{/webjars/bootstrap/3.2.0/js/bootstrap.min.js}"></script>
+
+
+
+
+</body>
+</html>

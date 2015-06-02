@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title>メインメニュー</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"
+          th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap-theme.min.css}"/>
+</head>
+<body>
+
+<h2>メインメニュー</h2>
+<ul>
+<li><a href="list.html" target="_top">派遣先情報</a></li>
+<li><a href="member-infomation.html" target="_top">派遣社員情報</a></li>
+<li><a href="affiliation-infomation.html" target="_top">所属元情報</a></li>
+<li><a href="loan-infomation.html" target="_top">出向先情報</a></li>
+<li><a href="user-infomation.html" target="_top">ユーザ管理</a></li>
+</ul>
+
+
+  
+        <hr/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"
+        th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"
+        th:src="@{/webjars/bootstrap/3.2.0/js/bootstrap.min.js}"></script>
+        
+        
+ 
+
+</body>
+</html>

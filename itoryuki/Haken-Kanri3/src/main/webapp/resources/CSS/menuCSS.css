@@ -1,0 +1,18 @@
+@CHARSET "UTF-8";
+
+#menu {text-align:center;
+	margin-left:auto;
+	margin-right:auto;
+
+}
+
+#header { text-align:center;
+}
+
+#contents{float: right;
+	border:none;
+	text-align:center;
+	height:100%;
+	width:85%;
+
+}

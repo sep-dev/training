@@ -11,7 +11,7 @@
 </head>
 <body>
 	<h1>出向先登録</h1>
-	<form:form modelAttribute="formModel" action="Syukkousakiinsert">
+	<form:form modelAttribute="formModel" action="SyukkousakiInsert">
 		<table frame="border" border="1" width="640">
 			<tr>
 				<td width="240">出向先名称</td>

@@ -13,7 +13,7 @@
 </head>
 <body>
 <h1>所属元情報</h1>
-<form:form modelAttribute="formModel" action="Syozokumotokensaku">
+<form:form modelAttribute="formModel" action="SyozokumotoKensaku">
 <table>
 	<tr>
 		<td><form:label path="kensakuword">検索:</form:label></td>
@@ -22,7 +22,7 @@
 	</tr>
 </table>
 </form:form>
-<form:form modelAttribute="dataSet" action="Syozokumototouroku">
+<form:form modelAttribute="dataSet" action="SyozokumotoTouroku">
 <input type="submit" value="新規登録">
 </form:form>
 <br />
@@ -39,7 +39,7 @@
 		<tr>
 			<c:forEach var="obj" items="${list}">
 				<tr height="50">
-				<form:form action="Syozokumotohensyu" modelAttribute="formModel">
+				<form:form action="SyozokumotoHensyu" modelAttribute="formModel">
 					<td><c:out value="${obj.affiliationName}" /></td>
 					<td><c:out value="${obj.affiliationPostCode}" /></td>
 					<td><c:out value="${obj.affiliationAdd}" /></td>

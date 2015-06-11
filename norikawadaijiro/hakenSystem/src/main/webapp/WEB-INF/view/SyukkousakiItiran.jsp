@@ -13,7 +13,7 @@
 </head>
 <body>
 <h1>出向先情報</h1>
-<form:form modelAttribute="formModel" action="Syukkousakikensaku">
+<form:form modelAttribute="formModel" action="SyukkousakiKensaku">
 <table>
 	<tr>
 		<td><form:label path="kensakuword">検索:</form:label></td>
@@ -22,7 +22,7 @@
 	</tr>
 </table>
 </form:form>
-<form:form modelAttribute="dataSet" action="Syukkousakitouroku">
+<form:form modelAttribute="dataSet" action="SyukkousakiTouroku">
 <input type="submit" value="新規登録">
 </form:form>
 <br />
@@ -39,7 +39,7 @@
 		<tr>
 			<c:forEach var="obj" items="${list}">
 				<tr height="50">
-				<form:form action="Syukkousakihensyu" modelAttribute="formModel">
+				<form:form action="SyukkousakiHensyu" modelAttribute="formModel">
 					<td><c:out value="${obj.clientName}" /></td>
 					<td><c:out value="${obj.clientPostCode}" /></td>
 					<td><c:out value="${obj.clientAdd}" /></td>

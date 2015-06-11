@@ -13,7 +13,7 @@
 </head>
 <body>
 <h1>派遣社員情報</h1>
-<form:form modelAttribute="formModel" action="Hakensyainkensaku">
+<form:form modelAttribute="formModel" action="HakensyainKensaku">
 <table>
 	<tr>
 		<td><form:label path="kensakuword">検索:</form:label></td>
@@ -22,7 +22,7 @@
 	</tr>
 </table>
 </form:form>
-<form:form modelAttribute="dataSet" action="Hakensyaintouroku">
+<form:form modelAttribute="dataSet" action="HakensyainTouroku">
 	<input type="submit" value="新規登録">
 </form:form>
 <br />
@@ -42,7 +42,7 @@
 		<tr>
 			<c:forEach var="obj" items="${list}">
 				<tr height="50">
-				<form:form action="Hakensyainhensyu" modelAttribute="formModel">
+				<form:form action="HakensyainHensyu" modelAttribute="formModel">
 					<td><c:out value="${obj.staffName}" /></td>
 					<td><c:out value="${obj.staffEMail}" /></td>
 					<td><c:out value="${obj.staffPostCode}" /></td>

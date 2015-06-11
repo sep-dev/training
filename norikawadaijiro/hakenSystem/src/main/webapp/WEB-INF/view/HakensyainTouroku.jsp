@@ -11,7 +11,7 @@
 </head>
 <body>
 	<h1>派遣社員登録</h1>
-	<form:form modelAttribute="formModel" action="Hakensyaininsert">
+	<form:form modelAttribute="formModel" action="HakensyainInsert">
 		<table frame="border" border="1" width="640">
 			<tr>
 				<th colspan="2" width="320">社員名称</th>

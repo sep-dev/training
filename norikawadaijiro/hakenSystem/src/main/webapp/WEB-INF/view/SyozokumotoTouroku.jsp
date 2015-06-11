@@ -11,7 +11,7 @@
 </head>
 <body>
 	<h1>所属元登録</h1>
-	<form:form modelAttribute="formModel" action="Syozokumotoinsert">
+	<form:form modelAttribute="formModel" action="SyozokumotoInsert">
 		<table frame="border" border="1" width="640">
 			<tr>
 				<td width="240">企業名</td>

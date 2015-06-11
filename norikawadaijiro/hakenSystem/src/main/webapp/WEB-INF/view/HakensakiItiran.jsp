@@ -14,10 +14,10 @@
 <body>
 	<h1>派遣先情報一覧</h1>
 	表示期間：
-	<form:form modelAttribute="dataSet" action="Hakensakikensaku">
+	<form:form modelAttribute="dataSet" action="HakensakiKensaku">
 	<form:select path="year">
 		<%
-			for(int i=2000;i<=2017;i++){
+			for(int i=2010;i<=2016;i++){
 		%>
 				<form:option value='<%= String.format("%02d",i) %>'><%= i %></form:option>
 		<%
@@ -45,7 +45,7 @@
 		</tr>
 	</table>
 	</form:form>
-	<form:form modelAttribute="dataSet" action="Hakensakitouroku">
+	<form:form modelAttribute="dataSet" action="HakensakiTouroku">
 		<input type="submit" value="新規登録">
 	</form:form>
 
@@ -79,7 +79,7 @@
 							<td><c:out value="${obj.endDate}" /></td>
 							<td><c:out value="${obj.staffManRemarks}" /></td>
 
-							<form:form action="Hakensakihensyu" modelAttribute="formModel">
+							<form:form action="HakensakiHensyu" modelAttribute="formModel">
 								<td><input type="hidden" value="${obj.staffManId}" name="updatestaffManId">
 									<input type="submit" value="編集"></td>
 							</form:form>

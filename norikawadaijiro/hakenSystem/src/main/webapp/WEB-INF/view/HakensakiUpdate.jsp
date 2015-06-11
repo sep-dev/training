@@ -12,7 +12,7 @@
 
 	<body>
 		<h1>派遣先情報一覧</h1>
-		<form:form modelAttribute="formModel" action="Hakensakiupdate">
+		<form:form modelAttribute="formModel" action="HakensakiUpdate">
 			<table frame="border" border="1" width="640">
 				<tr>
 					<th colspan="2" width="320">派遣社員名称</th>

@@ -14,7 +14,7 @@
 	<c:if test="${loginfailureflag == true}">
 		<p>登録失敗！違うパスワードが入力されました！！</p>
 	</c:if>
-	<form:form modelAttribute="formModel" action="Userinsert">
+	<form:form modelAttribute="formModel" action="UserInsert">
 		<table frame="border" border="1" width="640">
 			<tr>
 				<td width="240">ユーザー名称</td>

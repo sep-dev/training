@@ -11,7 +11,7 @@
 </head>
 <body>
 	<h1>出向先編集</h1>
-	<form:form modelAttribute="formModel" action="Syukkousakiupdate">
+	<form:form modelAttribute="formModel" action="SyukkousakiUpdate">
 		<table frame="border" border="1" width="640">
 			<tr>
 			<c:forEach var="obj" items="${updatelist}">

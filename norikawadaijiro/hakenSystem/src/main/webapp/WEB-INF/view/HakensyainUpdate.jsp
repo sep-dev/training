@@ -11,7 +11,7 @@
 </head>
 <body>
 	<h1>派遣社員登録</h1>
-	<form:form modelAttribute="formModel" action="Hakensyainupdate">
+	<form:form modelAttribute="formModel" action="HakensyainUpdate">
 		<table frame="border" border="1" width="640">
 			<tr>
 				<c:forEach var="obj" items="${updatelist}">

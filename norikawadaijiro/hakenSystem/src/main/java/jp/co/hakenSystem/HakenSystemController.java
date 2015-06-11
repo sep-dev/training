@@ -80,7 +80,7 @@ public class HakenSystemController {
 		return "HakensakiItiran";
 	}
 
-	@RequestMapping(value = "/Hakensakihensyu", method = RequestMethod.POST)
+	@RequestMapping(value = "/HakensakiHensyu", method = RequestMethod.POST)
 	public String hakensakiupdate(
 			@ModelAttribute HakensakiItiranFormModel formModel, Model model) {
 
@@ -101,7 +101,7 @@ public class HakenSystemController {
 		return "HakensakiUpdate";
 	}
 
-	@RequestMapping(value = "/Hakensakiupdate", method = RequestMethod.POST)
+	@RequestMapping(value = "/HakensakiUpdate", method = RequestMethod.POST)
 	public String update(@ModelAttribute HakensakiItiranFormModel formModel,
 			Model model) {
 		// 個別で入力された年・月・日を結合させる
@@ -132,7 +132,7 @@ public class HakenSystemController {
 		return "redirect:HakensakiItiran";
 	}
 
-	@RequestMapping(value = "/Hakensakiinsert", method = RequestMethod.POST)
+	@RequestMapping(value = "/HakensakiInsert", method = RequestMethod.POST)
 	public String insert(@ModelAttribute HakensakiItiranFormModel formModel,
 			Model model) {
 		// 個別で入力された年・月・日を結合させる
@@ -163,8 +163,8 @@ public class HakenSystemController {
 		return "redirect:HakensakiItiran";
 	}
 
-	@RequestMapping(value = "/Hakensakitouroku", method = RequestMethod.POST)
-	public String Hakensakitouroku(Model model) {
+	@RequestMapping(value = "/HakensakiTouroku", method = RequestMethod.POST)
+	public String hakensakitouroku(Model model) {
 		List<Map<String, Object>> stafflist = jdbcTemplate
 				.queryForList("SELECT staffName,staffManId,staffId from tblStaff left join tblStaffManagement using(staffId)");
 		List<Map<String, Object>> clientlist = jdbcTemplate
@@ -176,7 +176,7 @@ public class HakenSystemController {
 		return "HakensakiTouroku";
 	}
 
-	@RequestMapping(value = "/Hakensakikensaku", method = RequestMethod.POST)
+	@RequestMapping(value = "/HakensakiKensaku", method = RequestMethod.POST)
 	public String kensaku(@ModelAttribute HakensakiItiranFormModel formModel,
 			@ModelAttribute DataSet dataSet, Model model) {
 
@@ -213,7 +213,7 @@ public class HakenSystemController {
 		return "HakensyainItiran";
 	}
 
-	@RequestMapping(value = "/Hakensyaintouroku", method = RequestMethod.POST)
+	@RequestMapping(value = "/HakensyainTouroku", method = RequestMethod.POST)
 	public String hakensyaintouroku(Model model) {
 		UpdateFormModel formModel = new UpdateFormModel();
 		List<Map<String, Object>> list = jdbcTemplate
@@ -223,7 +223,7 @@ public class HakenSystemController {
 		return "HakensyainTouroku";
 	}
 
-	@RequestMapping(value = "/Hakensyaininsert", method = RequestMethod.POST)
+	@RequestMapping(value = "/HakensyainInsert", method = RequestMethod.POST)
 	public String hakensyaininsert(@ModelAttribute UpdateFormModel formModel,
 			Model model) {
 		jdbcTemplate
@@ -238,7 +238,7 @@ public class HakenSystemController {
 		return "redirect:HakensyainItiran";
 	}
 
-	@RequestMapping(value = "/Hakensyainkensaku", method = RequestMethod.POST)
+	@RequestMapping(value = "/HakensyainKensaku", method = RequestMethod.POST)
 	public String hakensyainkensaku(@ModelAttribute UpdateFormModel formModel,
 			Model model) {
 		List<Map<String, Object>> list = jdbcTemplate
@@ -250,7 +250,7 @@ public class HakenSystemController {
 		return "HakensyainItiran";
 	}
 
-	@RequestMapping(value = "/Hakensyainhensyu", method = RequestMethod.POST)
+	@RequestMapping(value = "/HakensyainHensyu", method = RequestMethod.POST)
 	public String hakensyainhensyu(@ModelAttribute UpdateFormModel formModel,
 			Model model) {
 		List<Map<String, Object>> updatelist = jdbcTemplate.queryForList(
@@ -266,7 +266,7 @@ public class HakenSystemController {
 		return "HakensyainUpdate";
 	}
 
-	@RequestMapping(value = "/Hakensyainupdate", method = RequestMethod.POST)
+	@RequestMapping(value = "/HakensyainUpdate", method = RequestMethod.POST)
 	public String hakensyainupdate(@ModelAttribute UpdateFormModel formModel,
 			Model model) {
 
@@ -295,14 +295,14 @@ public class HakenSystemController {
 		return "SyozokumotoItiran";
 	}
 
-	@RequestMapping(value = "/Syozokumototouroku", method = RequestMethod.POST)
+	@RequestMapping(value = "/SyozokumotoTouroku", method = RequestMethod.POST)
 	public String syozokumototouroku(Model model) {
 		UpdateFormModel formModel = new UpdateFormModel();
 		model.addAttribute("formModel", formModel);
 		return "SyozokumotoTouroku";
 	}
 
-	@RequestMapping(value = "/Syozokumotoinsert", method = RequestMethod.POST)
+	@RequestMapping(value = "/SyozokumotoInsert", method = RequestMethod.POST)
 	public String syozokumotoinsert(@ModelAttribute UpdateFormModel formModel,
 			Model model) {
 		jdbcTemplate
@@ -317,7 +317,7 @@ public class HakenSystemController {
 		return "redirect:SyozokumotoItiran";
 	}
 
-	@RequestMapping(value = "/Syozokumotokensaku", method = RequestMethod.POST)
+	@RequestMapping(value = "/SyozokumotoKensaku", method = RequestMethod.POST)
 	public String syozokumotokensaku(@ModelAttribute UpdateFormModel formModel,
 			Model model) {
 		List<Map<String, Object>> list = jdbcTemplate.queryForList(
@@ -328,7 +328,7 @@ public class HakenSystemController {
 		return "SyozokumotoItiran";
 	}
 
-	@RequestMapping(value = "/Syozokumotohensyu", method = RequestMethod.POST)
+	@RequestMapping(value = "/SyozokumotoHensyu", method = RequestMethod.POST)
 	public String syozokumotohensyu(@ModelAttribute UpdateFormModel formModel,
 			Model model) {
 		List<Map<String, Object>> updatelist = jdbcTemplate.queryForList(
@@ -342,7 +342,7 @@ public class HakenSystemController {
 		return "SyozokumotoUpdate";
 	}
 
-	@RequestMapping(value = "/Syozokumotoupdate", method = RequestMethod.POST)
+	@RequestMapping(value = "/SyozokumotoUpdate", method = RequestMethod.POST)
 	public String syozokumotoupdate(@ModelAttribute UpdateFormModel formModel,
 			Model model) {
 
@@ -371,14 +371,14 @@ public class HakenSystemController {
 		return "SyukkousakiItiran";
 	}
 
-	@RequestMapping(value = "/Syukkousakitouroku", method = RequestMethod.POST)
+	@RequestMapping(value = "/SyukkousakiTouroku", method = RequestMethod.POST)
 	public String syukkousakitouroku(Model model) {
 		UpdateFormModel formModel = new UpdateFormModel();
 		model.addAttribute("formModel", formModel);
 		return "SyukkousakiTouroku";
 	}
 
-	@RequestMapping(value = "/Syukkousakiinsert", method = RequestMethod.POST)
+	@RequestMapping(value = "/SyukkousakiInsert", method = RequestMethod.POST)
 	public String syukkousakiinsert(@ModelAttribute UpdateFormModel formModel,
 			Model model) {
 		jdbcTemplate
@@ -392,8 +392,8 @@ public class HakenSystemController {
 		return "redirect:SyukkousakiItiran";
 	}
 
-	@RequestMapping(value = "/Syukkousakikensaku", method = RequestMethod.POST)
-	public String Syukkousakikensaku(@ModelAttribute UpdateFormModel formModel,
+	@RequestMapping(value = "/SyukkousakiKensaku", method = RequestMethod.POST)
+	public String syukkousakikensaku(@ModelAttribute UpdateFormModel formModel,
 			Model model) {
 		List<Map<String, Object>> list = jdbcTemplate.queryForList(
 				"SELECT * from tblClient WHERE clientName LIKE ?",
@@ -403,7 +403,7 @@ public class HakenSystemController {
 		return "SyukkousakiItiran";
 	}
 
-	@RequestMapping(value = "/Syukkousakihensyu", method = RequestMethod.POST)
+	@RequestMapping(value = "/SyukkousakiHensyu", method = RequestMethod.POST)
 	public String syukkousakihensyu(@ModelAttribute UpdateFormModel formModel,
 			Model model) {
 		List<Map<String, Object>> updatelist = jdbcTemplate.queryForList(
@@ -416,7 +416,7 @@ public class HakenSystemController {
 		return "SyukkousakiUpdate";
 	}
 
-	@RequestMapping(value = "/Syukkousakiupdate", method = RequestMethod.POST)
+	@RequestMapping(value = "/SyukkousakiUpdate", method = RequestMethod.POST)
 	public String syukkousakiupdate(@ModelAttribute UpdateFormModel formModel,
 			Model model) {
 
@@ -434,7 +434,7 @@ public class HakenSystemController {
 	}
 
 	@RequestMapping(value = "/UserItiran", method = RequestMethod.GET)
-	public String UserItiran(Model model) {
+	public String userItiran(Model model) {
 		UpdateFormModel formModel = new UpdateFormModel();
 		model.addAttribute("formModel", formModel);
 
@@ -444,14 +444,14 @@ public class HakenSystemController {
 		return "UserItiran";
 	}
 
-	@RequestMapping(value = "/Usertouroku", method = RequestMethod.POST)
-	public String Usertouroku(Model model) {
+	@RequestMapping(value = "/UserTouroku", method = RequestMethod.POST)
+	public String usertouroku(Model model) {
 		UpdateFormModel formModel = new UpdateFormModel();
 		model.addAttribute("formModel", formModel);
 		return "UserTouroku";
 	}
 
-	@RequestMapping(value = "/Userinsert", method = RequestMethod.POST)
+	@RequestMapping(value = "/UserInsert", method = RequestMethod.POST)
 	public String userinsert(@ModelAttribute UpdateFormModel formModel,
 			Model model) {
 		if (formModel.getPassword().equals(formModel.getPasswordcheck())) {
@@ -468,8 +468,8 @@ public class HakenSystemController {
 		return "redirect:UserItiran";
 	}
 
-	@RequestMapping(value = "/Userkensaku", method = RequestMethod.POST)
-	public String Userkensaku(@ModelAttribute UpdateFormModel formModel,
+	@RequestMapping(value = "/UserKensaku", method = RequestMethod.POST)
+	public String userkensaku(@ModelAttribute UpdateFormModel formModel,
 			Model model) {
 		List<Map<String, Object>> list = jdbcTemplate.queryForList(
 				"SELECT * from tblLoginUser WHERE loginUserName LIKE ?",
@@ -479,7 +479,7 @@ public class HakenSystemController {
 		return "UserItiran";
 	}
 
-	@RequestMapping(value = "/Userhensyu", method = RequestMethod.POST)
+	@RequestMapping(value = "/UserHensyu", method = RequestMethod.POST)
 	public String userhensyu(@ModelAttribute UpdateFormModel formModel,
 			Model model) {
 		List<Map<String, Object>> updatelist = jdbcTemplate.queryForList(
@@ -493,7 +493,7 @@ public class HakenSystemController {
 		return "UserUpdate";
 	}
 
-	@RequestMapping(value = "/Userupdate", method = RequestMethod.POST)
+	@RequestMapping(value = "/UserUpdate", method = RequestMethod.POST)
 	public String userupdate(@ModelAttribute UpdateFormModel formModel,
 			Model model) {
 

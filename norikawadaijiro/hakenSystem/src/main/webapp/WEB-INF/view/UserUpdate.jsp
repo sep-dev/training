@@ -11,7 +11,7 @@
 </head>
 <body>
 	<h1>管理者編集</h1>
-	<form:form modelAttribute="formModel" action="Userupdate">
+	<form:form modelAttribute="formModel" action="UserUpdate">
 		<table frame="border" border="1" width="640">
 			<tr>
 			<c:forEach var="obj" items="${updatelist}">

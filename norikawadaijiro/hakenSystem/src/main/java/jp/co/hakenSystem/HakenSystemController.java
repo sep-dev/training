@@ -203,7 +203,7 @@ public class HakenSystemController {
 	}
 
 	@RequestMapping(value = "/HakensyainItiran", method = RequestMethod.GET)
-	public String hakensyainItiran(Model model) {
+	public String hakensyainitiran(Model model) {
 		UpdateFormModel formModel = new UpdateFormModel();
 		model.addAttribute("formModel", formModel);
 
@@ -285,7 +285,7 @@ public class HakenSystemController {
 	}
 
 	@RequestMapping(value = "/SyozokumotoItiran", method = RequestMethod.GET)
-	public String syozokumotoItiran(Model model) {
+	public String syozokumotoitiran(Model model) {
 		UpdateFormModel formModel = new UpdateFormModel();
 		model.addAttribute("formModel", formModel);
 
@@ -361,7 +361,7 @@ public class HakenSystemController {
 	}
 
 	@RequestMapping(value = "/SyukkousakiItiran", method = RequestMethod.GET)
-	public String syukkousakiItiran(Model model) {
+	public String syukkousakiitiran(Model model) {
 		UpdateFormModel formModel = new UpdateFormModel();
 		model.addAttribute("formModel", formModel);
 
@@ -434,7 +434,7 @@ public class HakenSystemController {
 	}
 
 	@RequestMapping(value = "/UserItiran", method = RequestMethod.GET)
-	public String userItiran(Model model) {
+	public String useritiran(Model model) {
 		UpdateFormModel formModel = new UpdateFormModel();
 		model.addAttribute("formModel", formModel);
 

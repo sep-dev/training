@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/jdbc
+		http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+		http://www.springframework.org/schema/security
+		http://www.springframework.org/schema/security/spring-security-3.2.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+	<context:property-placeholder location="classpath:jdbc.properties"/>
+
+	<!-- ログイン認証処理 -->
+	<security:http auto-config="true">
+	<security:intercept-url pattern="/book/**" access="ROLE_ADMIN, ROLE_USER"/>
+	<security:intercept-url pattern="/home/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+	<security:form-login login-page="/login" default-target-url="/book/OK"
+											authentication-failure-url="/loginNG"/>
+	<security:logout logout-url="/logout"
+									logout-success-url="/logoutok"
+									invalidate-session="false"/>
+	<security:access-denied-handler error-page="/403" />
+	<security:session-management
+		invalid-session-url="/403"
+		session-authentication-error-url="/403"
+		session-fixation-protection="migrateSession" />
+	</security:http>
+
+	<!-- DBに接続して認証 -->
+	<security:authentication-manager>
+		<security:authentication-provider>
+				<security:jdbc-user-service data-source-ref="dataSource"
+				users-by-username-query="select loginUser as j_username, loginUserPass as j_password, 'true' as enabled from tblLoginUser where loginUser=?"
+				authorities-by-username-query="select loginUser as j_username, 'ROLE_ADMIN' as authority from tblLoginUser where loginUser=?"/>
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+</beans>

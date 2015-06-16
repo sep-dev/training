@@ -3,15 +3,16 @@ package FormModel;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class UserModel {
-
-	public String usearch;
-	public String loginuserid;
-
+	private String usearch;
+	private String loginuserid;
 	@NotEmpty
-	public String loginusername;
-	public String loginuser;
-	public String loginuserpass1;
-	public String loginuserpass2;
+	private String loginusername;
+	@NotEmpty
+	private String loginuser;
+	@NotEmpty
+	private String loginuserpass1;
+	@NotEmpty
+	private String loginuserpass2;
 
 	public String getLoginuserid() {
 		return loginuserid;

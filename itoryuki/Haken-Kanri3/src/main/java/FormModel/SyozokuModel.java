@@ -3,15 +3,19 @@ package FormModel;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class SyozokuModel {
-	public String asearch;
+	private String affiliationid;
+	private String affiliationremarks;
+	private String asearch;
 	@NotEmpty
-	public String affiliationid;
-	public String affiliationname;
-	public String affiliationtel;
-	public String affiliationpostcode;
-	public String affiliationadd;
-	public String affiliationneareststation;
-	public String affiliationremarks;
+	private String affiliationname;
+	@NotEmpty
+	private String affiliationtel;
+	@NotEmpty
+	private String affiliationpostcode;
+	@NotEmpty
+	private String affiliationadd;
+	@NotEmpty
+	private String affiliationneareststation;
 
 	public String getAffiliationid() {
 		return affiliationid;

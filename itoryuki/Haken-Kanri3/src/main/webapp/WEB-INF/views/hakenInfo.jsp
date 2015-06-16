@@ -9,17 +9,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8)">
-		<meta http-equiv="Content-Script-Type" content="text/javascript">
-			<!-- 削除確認 -->
-			<script type="text/javascript"><!--
-				function kakunin(){
-					if(window.confirm( 'この派遣先情報を削除しますか？')){
-						return true;
-					}else{
-						return false;
-					}
-				}
-			// --></script>
+			<script src="<c:url value="/resources/js/sakujo.js" />" type="text/javascript"></script>
 		<title>派遣先一覧</title>
 	</head>
 	<body>
@@ -29,7 +19,7 @@
 	</div>
 	<br>
 	<!-- 検索-->
-		<form action="Haken" method="post">
+		<form action="hakenSearch" method="post">
 			<p>表示期間：<select name="startdate1">
 									<c:forEach var="obj" items="${ydata}">
 										<option><c:out value="${obj.syear}"/></option>
@@ -49,12 +39,12 @@
 									<option value="11">11</option>
 									<option value="12">12</option>
 								</select>月</p>
-			検索：<input type="text" maxlength="20" name="hsearch">　<input type="submit" value="検索" name="hakenSearch"/>
+			検索：<input type="text" maxlength="20" name="hsearch">　<input type="submit" value="検索"/>
 		</form>
 	<br>
 	<!-- 新規登録 -->
-		<form action="Haken">
-			<input type="submit" name="hakenInsert1" value="新規登録" />
+		<form action="hakenInsert1">
+			<input type="submit" value="新規登録" />
 		</form>
 	<br>
 	<!-- 取得した派遣先情報を表示 -->
@@ -73,10 +63,10 @@
 		<c:forEach var="obj" items="${data}">
 			<tr><td rowspan=2>
 					<!-- 社員情報編集へ -->
-						<a href="syainUpdate3 ?value='${obj.staffId}'" name="staffid" target="contents" ><c:out value="${obj.staffName}"/></a></td>
+						<a href="syainUpdate1 ?value='${obj.staffId}'" name="staffid" target="contents" ><c:out value="${obj.staffName}"/></a></td>
 			<td rowspan=2>
 					<!-- 出向先情報編集へ -->
-						<a href="syukkoUpdate3 ?value='${obj.clientId}'" name="clientid" target="contents"><c:out value="${obj.clientName}"/></a></td>
+						<a href="syukkoUpdate1 ?value='${obj.clientId}'" name="clientid" target="contents"><c:out value="${obj.clientName}"/></a></td>
 			<td rowspan=2><c:out value="${obj.amountMonth}"/>円</td>
 			<td rowspan=2><c:out value="${obj.conditions}" /></td>
 			<td rowspan=2><c:out value="${obj.deductionUnitPrice}"/>円</td>
@@ -86,14 +76,14 @@
 			<td rowspan=2><c:out value="${obj.endDate}"/></td>
 			<td rowspan=2><c:out value="${obj.staffManRemarks}"/></td>
 			<td width="40px">
-				<form action="Haken"><!-- 編集画面へ -->
+				<form action="hakenUpdate1"><!-- 編集画面へ -->
 					<input type="hidden" value="${obj.staffManId}" name="staffmanid">
-					<input type="submit" name="hakenUpdate1" value="編集" />
+					<input type="submit"value="編集" />
 				</form></td></tr>
 			<tr><td width="40px"><!-- 削除確認へ -->
-				<form action="Haken" method="post">
+				<form action="hakenDelete" method="post">
 					<input type="hidden" value="${obj.staffManId}" name="staffmanid">
-					<input type="submit" value="削除" name="hakenDelete"  onClick="return kakunin();">
+					<input type="submit" value="削除" onClick="return kakunin();">
 				</form></td></tr>
 			</c:forEach>
 		</table>

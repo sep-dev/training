@@ -9,7 +9,6 @@
 		<title>ログイン画面</title>
 	</head>
 	<body>
-	<div class="container-fluid">
 	<div align="center">
 		<h1>ログイン画面</h1>
 			<c:if test="${not empty param.error}">
@@ -17,7 +16,7 @@
 			Error: ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
 		</font>
 			</c:if>
-		<form class="well" method="POST" action="<c:url value="/j_spring_security_check"/>">
+		<form method="POST" action="<c:url value="/j_spring_security_check"/>">
 			<table>
 				<tr><td align="right" class="col-sm-3">ユーザー名</td>
 						<td class="col-sm-6"><input type="text" name="j_username"/></td></tr>
@@ -29,7 +28,6 @@
 							<input type="reset" value="リセット"  class="btn btn-info"/></td></tr>
 			</table>
 		</form>
-	</div>
 	</div>
 	</body>
 </html>

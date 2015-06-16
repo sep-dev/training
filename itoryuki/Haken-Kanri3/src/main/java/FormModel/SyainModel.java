@@ -3,18 +3,25 @@ package FormModel;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class SyainModel {
-	public String ssearch;
+	private String staffid;
+	private String staffremarks;
+	private String ssearch;
 	@NotEmpty
-	public String staffid;
-	public String staffname;
-	public String staffemail;
-	public String stafftel;
-	public String staffmobiletel;
-	public String staffpostcode;
-	public String staffadd;
-	public String staffneareststation;
-	public String affiliationid;
-	public String staffremarks;
+	private String staffname;
+	@NotEmpty
+	private String staffemail;
+	@NotEmpty
+	private String stafftel;
+	@NotEmpty
+	private String staffmobiletel;
+	@NotEmpty
+	private String staffpostcode;
+	@NotEmpty
+	private String staffadd;
+	@NotEmpty
+	private String staffneareststation;
+	@NotEmpty
+	private String affiliationid;
 
 	public String getStaffid() {
 		return staffid;

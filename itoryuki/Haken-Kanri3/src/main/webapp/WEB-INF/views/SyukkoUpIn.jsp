@@ -19,7 +19,8 @@
 		</div>
 		<br>
 		<div align="center">
-			<form:form modelAttribute="syukkoModel">
+			<form:form modelAttribute="syukkoModel" action="syukkoInsert2" >
+			<input type="hidden" value="${clientId}" name="clientid">
 			<table border=1>
 				<tr><th colspan=2>出向先名称</th><td colspan=2><form:input path="clientname"/></td></tr>
 				<tr><th colspan=2>電話番号</th><td colspan=2><form:input path="clienttel" maxlength='14' pattern="^[0-9]+$"/></td></tr>
@@ -29,10 +30,11 @@
 				<tr><th colspan=2>備考</th><td colspan=2><form:input path="clientremarks"/></td></tr>
 			</table>
 		<br>
-				<input type="submit" name="syukkoInsert2" value="登録" />　
+				<input type="submit" value="登録" />　
 				<input type="button" onclick="javascript: history.back();" value="戻る">　
 				<input type="reset" value="リセット" />
 			</form:form>
+			<p><font color="red">※備考は空欄可。</font></p>
 		</div>
 		</body>
 	</html>
@@ -51,7 +53,8 @@
 		</div>
 		<br>
 		<div align="center">
-			<form:form modelAttribute="syukkoModel">
+			<form:form modelAttribute="syukkoModel"  action="syukkoUpdate3">
+			<input type="hidden" value="${clientId}" name="clientid">
 			<table border=1>
 				<tr><th colspan=2>出向先名称</th><td colspan=2><form:input path="clientname" value="${clientName}"/></td></tr>
 				<tr><th colspan=2>電話番号</th><td colspan=2><form:input path="clienttel" value="${clientTel}" maxlength='14' pattern="^[0-9]+$"/></td></tr>
@@ -61,10 +64,11 @@
 				<tr><th colspan=2>備考</th><td colspan=2><form:input path="clientremarks" value="${clientRemarks}"/></td></tr>
 			</table>
 		<br>
-				<input type="submit" name="syukkoUpdate2" value="確定" />　
+				<input type="submit" value="確定" />　
 				<input type="button" onclick="javascript: history.back();" value="戻る">　
 				<input type="reset" value="リセット" />
 			</form:form>
+			<p><font color="red">※備考は空欄可。</font></p>
 		</div>
 		</body>
 	</html>

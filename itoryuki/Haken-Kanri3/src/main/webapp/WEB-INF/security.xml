@@ -27,7 +27,7 @@
 	<security:http auto-config="true">
 	<security:intercept-url pattern="/book/**" access="ROLE_ADMIN, ROLE_USER"/>
 	<security:intercept-url pattern="/home/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-	<security:form-login login-page="/login.jsp" default-target-url="/book/OK"
+	<security:form-login login-page="/login" default-target-url="/book/OK"
 											authentication-failure-url="/loginNG"/>
 	<security:logout logout-url="/logout"
 									logout-success-url="/logoutok"

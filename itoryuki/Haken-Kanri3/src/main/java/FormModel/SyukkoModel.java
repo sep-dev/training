@@ -3,15 +3,19 @@ package FormModel;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class SyukkoModel {
-	public String csearch;
+	private String clientid;
+	private String clientremarks;
+	private String csearch;
 	@NotEmpty
-	public String clientid;
-	public String clientname;
-	public String clienttel;
-	public String clientpostcode;
-	public String clientadd;
-	public String clientneareststation;
-	public String clientremarks;
+	private String clientname;
+	@NotEmpty
+	private String clienttel;
+	@NotEmpty
+	private String clientpostcode;
+	@NotEmpty
+	private String clientadd;
+	@NotEmpty
+	private String clientneareststation;
 
 	public String getClientid() {
 		return clientid;

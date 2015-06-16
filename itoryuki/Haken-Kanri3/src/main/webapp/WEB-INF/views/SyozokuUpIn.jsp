@@ -20,7 +20,7 @@
 		</div>
 		<br>
 		<div align="center">
-			<form:form modelAttribute="syozokuModel">
+			<form:form modelAttribute="syozokuModel" action="syozokuInsert2">
 			<table border=1>
 				<tr><th colspan=2>所属元名称</th><td colspan=2><form:input path="affiliationname"/></td></tr>
 				<tr><th colspan=2>電話番号</th><td colspan=2><form:input path="affiliationtel" maxlength='14' pattern="^[0-9]+$"/></td></tr>
@@ -30,10 +30,11 @@
 				<tr><th colspan=2>備考</th><td colspan=2><form:input path="affiliationremarks"/></td></tr>
 			</table>
 		<br>
-			<input type="submit" name="syozokuInsert2" value="登録" />　
+			<input type="submit" value="登録" />　
 			<input type="button" onclick="javascript: history.back();" value="戻る">　
 			<input type="reset" value="リセット" />
 			</form:form>
+			<p><font color="red">※備考は空欄可。</font></p>
 		</div>
 		</body>
 	</html>
@@ -53,7 +54,8 @@
 		</div>
 		<br>
 		<div align="center">
-			<form:form modelAttribute="syozokuModel">
+			<form:form modelAttribute="syozokuModel" action="syozokuUpdate3" >
+			<input type="hidden" value="${affiliationId}" name="affiliationid">
 			<table border=1>
 				<tr><th colspan=2>所属元名称</th><td colspan=2><form:input path="affiliationname" value="${affiliationName}"/></td></tr>
 				<tr><th colspan=2>電話番号</th><td colspan=2><form:input path="affiliationtel" value="${affiliationTel}" maxlength='14' pattern="^[0-9]+$"/></td></tr>
@@ -63,10 +65,11 @@
 				<tr><th colspan=2>備考</th><td colspan=2><form:input path="affiliationremarks" value="${affiliationRemarks}"/></td></tr>
 			</table>
 		<br>
-				<input type="submit" name="syozokuUpdate2" value="確定" />　
+				<input type="submit" value="確定" />　
 				<input type="button" onclick="javascript: history.back();" value="戻る">　
 				<input type="reset" value="リセット" />
 			</form:form>
+			<p><font color="red">※備考は空欄可。</font></p>
 		</div>
 		</body>
 	</html>

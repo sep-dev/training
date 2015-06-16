@@ -1,24 +1,53 @@
 package FormModel;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class HakenModel {
-	public String staffmanid;
-	public String staffid;
-	public String clientid;
-	public String amountmonth;
-	public String conditions;
-	public String deductionunitprice;
-	public String overtimerate;
-	public String site;
-	public String startdate;
-	public String startdate1;
-	public String startdate2;
-	public String startdate3;
-	public String enddate;
-	public String enddate1;
-	public String enddate2;
-	public String enddate3;
-	public String staffmanremarks;
-	public String hsearch;
+	private String staffmanid;
+	private String staffid;
+	private String clientid;
+	private String hsearch;
+	private String conditions;
+	private String staffmanremarks;
+	@NotEmpty
+	private String amountmonth;
+	@NotEmpty
+	private String deductionunitprice;
+	@NotEmpty
+	private String overtimerate;
+	@NotEmpty
+	private String site;
+	@NotEmpty
+	@Size(min = 4 ,max=4)
+	private String startdate1;
+	@NotEmpty
+	@Size(min = 2 ,max=2)
+	@Min(01)
+	@Max(12)
+	private String startdate2;
+	@NotEmpty
+	@Size(min = 2 ,max=2)
+	@Min(01)
+	@Max(31)
+	private String startdate3;
+	@NotEmpty
+	@Size(min = 4 ,max=4)
+	private String enddate1;
+	@NotEmpty
+	@Size(min = 2 ,max=2)
+	@Min(01)
+	@Max(12)
+	private String enddate2;
+	@NotEmpty
+	@Size(min = 2 ,max=2)
+	@Min(01)
+	@Max(31)
+	private String enddate3;
+
 
 	public String getStaffmanid() {
 		return staffmanid;
@@ -68,12 +97,6 @@ public class HakenModel {
 	public void setSite(String site) {
 		this.site = site;
 	}
-	public String getStartdate() {
-		return startdate;
-	}
-	public void setStartdate(String startdate) {
-		this.startdate = startdate;
-	}
 	public String getStartdate1() {
 		return startdate1;
 	}
@@ -91,12 +114,6 @@ public class HakenModel {
 	}
 	public void setStartdate3(String startdate3) {
 		this.startdate3 = startdate3;
-	}
-	public String getEnddate() {
-		return enddate;
-	}
-	public void setEnddate(String enddate) {
-		this.enddate = enddate;
 	}
 	public String getEnddate1() {
 		return enddate1;

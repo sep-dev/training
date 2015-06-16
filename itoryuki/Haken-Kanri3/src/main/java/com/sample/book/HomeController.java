@@ -23,8 +23,8 @@ public class HomeController {
 		return "home";
 	}
 
-		@RequestMapping(value="login", method = RequestMethod.GET)
-		public String redirect(Locale locale, Model model) {
+		@RequestMapping(value="/login", method = RequestMethod.GET)
+		public String Login(Locale locale, Model model) {
 			return "login";
 		}
 
@@ -33,7 +33,7 @@ public class HomeController {
 			return "loginOK";
 		}
 
-		@RequestMapping(value="/book/Menu", params="menu", method = RequestMethod.GET)
+		@RequestMapping(value="/book/menu", method = RequestMethod.GET)
 		public String Menu(){
 			return "menu";
 		}

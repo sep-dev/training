@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,31 +33,35 @@ import FormModel.SyainModel;
 				return"syainInfo";
 			}
 
-
-			//派遣社員新規登録
-			@RequestMapping(value="/book/Syain", params="syainInsert1", method=RequestMethod.GET)
+			//派遣社員新規登録画面へ
+			@RequestMapping(value="/book/syainInsert1", method=RequestMethod.GET)
 			public String SyainIn(Model model){
-				SyainModel sm1 = new SyainModel();
-				model.addAttribute("syainModel", sm1);
+				SyainModel syainmodel = new SyainModel();
+				model.addAttribute("syainModel", syainmodel);
 				List<Map<String, Object>> afflist = jdbcTemplate.queryForList("select affiliationId, affiliationName from tblAffiliation ");
 				model.addAttribute("Adata", afflist);
 				model.addAttribute("List", "null");
-				return "SyainUpIn";
+				return "syainUpIn";
 			}
-			@RequestMapping(value="/book/Syain", params="syainInsert2", method=RequestMethod.POST)
-			public String SyainIn2(@ModelAttribute SyainModel sm1, Model model){
-				String sn = sm1.getStaffname();
-				String se = sm1.getStaffemail();
-				String st = sm1.getStafftel();
-				String smt = sm1.getStaffmobiletel();
-				String spc = sm1.getStaffpostcode();
-				String sa= sm1.getStaffadd();
-				String sns = sm1.getStaffneareststation();
-				String ai = sm1.getAffiliationid();
-				String sr = sm1.getStaffremarks();
+			//登録処理
+			@RequestMapping(value="/book/syainInsert2", method=RequestMethod.POST)
+			public String SyainIn2(@Valid @ModelAttribute SyainModel syainmodel, BindingResult result, Model model){
+				if (result.hasErrors()) {
+					model.addAttribute("message", "空欄があるか入力された数値が不適切です！");
+				} else {
+				String staffName = syainmodel.getStaffname();
+				String staffEmail = syainmodel.getStaffemail();
+				String staffTel = syainmodel.getStafftel();
+				String staffMobTel = syainmodel.getStaffmobiletel();
+				String staffPostCode = syainmodel.getStaffpostcode();
+				String staffAdd= syainmodel.getStaffadd();
+				String staffNear = syainmodel.getStaffneareststation();
+				String affiliationId = syainmodel.getAffiliationid();
+				String staffRe = syainmodel.getStaffremarks();
 				String sql = "insert into tblStaff (staffName, staffEMail, staffTel, staffMobileTel, staffPostCode, staffAdd, "
 						+ "staffNearestStation, affiliationId, staffRemarks) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-				jdbcTemplate.update(sql,new Object[]{sn, se, st, smt, spc, sa, sns, ai, sr});
+				jdbcTemplate.update(sql,new Object[]{staffName, staffEmail , staffTel, staffMobTel, staffPostCode, staffAdd, staffNear, affiliationId, staffRe});
+				}
 				//一覧に戻る
 				List<Map<String, Object>> list
 				= jdbcTemplate.queryForList("select * from tblStaff as tb1 "
@@ -63,13 +70,13 @@ import FormModel.SyainModel;
 				return"syainInfo";
 			}
 
-
 			//派遣社員情報編集(社員名を押した場合)
-			@RequestMapping(value="/book/syainUpdate3", method=RequestMethod.GET)
-			public String SyainUp1(@ModelAttribute SyainModel sm1, Model model, @RequestParam("value") String si){
+			@RequestMapping(value="/book/syainUpdate1", method=RequestMethod.GET)
+			public String SyainUp1(@ModelAttribute SyainModel syainmodel, Model model, @RequestParam("value") String staffId){
+				System.out.println(staffId);
 				List<Map<String, Object>> afflist = jdbcTemplate.queryForList("select affiliationId, affiliationName from tblAffiliation ");
 				model.addAttribute("Adata", afflist);
-				List<Map<String, Object>> list = jdbcTemplate.queryForList("select * from tblStaff where staffId = " + si +";");
+				List<Map<String, Object>> list = jdbcTemplate.queryForList("select * from tblStaff where staffId = " + staffId +";");
 				model.addAttribute("staffId", list.get(0).get("staffId"));
 				model.addAttribute("staffName", list.get(0).get("staffName"));
 				model.addAttribute("staffEMail", list.get(0).get("staffEMail"));
@@ -81,16 +88,17 @@ import FormModel.SyainModel;
 				model.addAttribute("affiliationId", list.get(0).get("affiliationId"));
 				model.addAttribute("staffRemarks", list.get(0).get("staffRemarks"));
 				model.addAttribute("List", "edit");
-				return "SyainUpIn";
+				return "syainUpIn";
 			}
 
 			//派遣社員情報編集画面へ(編集ボタンを押した場合)
-			@RequestMapping(value="/book/Syain", params="syainUpdate1", method=RequestMethod.GET)
-			public String SyainUp2(@ModelAttribute SyainModel sm1, Model model){
-				String si = sm1.getStaffid();
+			@RequestMapping(value="/book/syainUpdate2", method=RequestMethod.GET)
+			public String SyainUp2(@ModelAttribute SyainModel syainmodel, Model model){
+				String staffId = syainmodel.getStaffid();
+				System.out.println(staffId);
 				List<Map<String, Object>> afflist = jdbcTemplate.queryForList("select affiliationId, affiliationName from tblAffiliation ");
 				model.addAttribute("Adata", afflist);
-				List<Map<String, Object>> list = jdbcTemplate.queryForList("select * from tblStaff where staffId = " + si +";");
+				List<Map<String, Object>> list = jdbcTemplate.queryForList("select * from tblStaff where staffId = " + staffId +";");
 				model.addAttribute("staffId", list.get(0).get("staffId"));
 				model.addAttribute("staffName", list.get(0).get("staffName"));
 				model.addAttribute("staffEMail", list.get(0).get("staffEMail"));
@@ -102,24 +110,30 @@ import FormModel.SyainModel;
 				model.addAttribute("affiliationId", list.get(0).get("affiliationId"));
 				model.addAttribute("staffRemarks", list.get(0).get("staffRemarks"));
 				model.addAttribute("List", "edit");
-				return "SyainUpIn";
+				return "syainUpIn";
 			}
 
 			//DB更新処理
-			@RequestMapping(value="/book/Syain", params="syainUpdate2", method=RequestMethod.POST)
-			public String SyainUp3(@ModelAttribute SyainModel sm1, Model model){
-				String si= sm1.getStaffid();
-				String sn= sm1.getStaffname();
-				String sem= sm1.getStaffemail();
-				String st= sm1.getStafftel();
-				String smt= sm1.getStaffmobiletel();
-				String spc= sm1.getStaffpostcode();
-				String sa= sm1.getStaffadd();
-				String ai = sm1.getAffiliationid();
-				String sr= sm1.getStaffremarks();
+			@RequestMapping(value="/book/syainUpdate3", method=RequestMethod.POST)
+			public String SyainUp3(@Valid  @ModelAttribute SyainModel syainmodel, BindingResult result, Model model){
+				if (result.hasErrors()) {
+					model.addAttribute("message", "空欄があるか入力された数値が不適切です！");
+				} else {
+				String staffId= syainmodel.getStaffid();
+				String staffName= syainmodel.getStaffname();
+				String staffEmail= syainmodel.getStaffemail();
+				String staffTel= syainmodel.getStafftel();
+				String staffMobTel= syainmodel.getStaffmobiletel();
+				String staffPostCode= syainmodel.getStaffpostcode();
+				String staffAdd= syainmodel.getStaffadd();
+				String staffNear= syainmodel.getStaffneareststation();
+				String affiliationId = syainmodel.getAffiliationid();
+				String staffRe= syainmodel.getStaffremarks();
+				System.out.println(staffId);
 				String sql = "update tblStaff set staffName=?, staffEMail=?, staffTel=?, staffMobileTel=?,"
-						+ "staffPostCode=?, staffAdd=?, AffiliationId=?, staffRemarks=? where staffId=? ";
-				jdbcTemplate.update(sql,new Object[]{sn, sem, st, smt, spc, sa, ai, sr, si});
+						+ "staffPostCode=?, staffAdd=?, StaffNeareStstation=?, AffiliationId=?, staffRemarks=? where staffId=? ";
+				jdbcTemplate.update(sql,new Object[]{staffName, staffEmail, staffTel, staffMobTel, staffPostCode, staffAdd, staffNear, affiliationId, staffRe, staffId});
+				}
 				//社員情報一覧に戻る
 				List<Map<String, Object>> list
 				= jdbcTemplate.queryForList("select * from tblStaff as tb1 "
@@ -127,13 +141,12 @@ import FormModel.SyainModel;
 				model.addAttribute("data", list);
 				return"syainInfo";
 			}
-
 
 			//派遣社員情報削除
-			@RequestMapping(value="/book/Syain", params="syainDelete", method=RequestMethod.POST)
-			public String SyainDe(@ModelAttribute SyainModel sm1, Model model){
-				String si = sm1.getStaffid();
-				jdbcTemplate.update("delete from tblStaff where staffId= " + si +";");
+			@RequestMapping(value="/book/syainDelete", method=RequestMethod.POST)
+			public String SyainDe(@ModelAttribute SyainModel syainmodel, Model model){
+				String staffId = syainmodel.getStaffid();
+				jdbcTemplate.update("delete from tblStaff where staffId= " + staffId +";");
 				//社員情報一覧に戻る
 				List<Map<String, Object>> list
 				= jdbcTemplate.queryForList("select * from tblStaff as tb1 "
@@ -142,15 +155,12 @@ import FormModel.SyainModel;
 				return"syainInfo";
 			}
 
-
 			//派遣社員情報検索
-			@RequestMapping(value="/book/Syain", params="syainSearch", method=RequestMethod.POST)
-			public String SyainSe(@ModelAttribute SyainModel sm1, Model model){
-				String ss = sm1.getSsearch();
-				List<Map<String, Object>> list = jdbcTemplate.queryForList("select * from tblStaff where staffName like '%"+ss+"%';");
+			@RequestMapping(value="/book/syainSearch", method=RequestMethod.POST)
+			public String SyainSe(@ModelAttribute SyainModel syainmodel, Model model){
+				String syainSearch = syainmodel.getSsearch();
+				List<Map<String, Object>> list = jdbcTemplate.queryForList("select * from tblStaff where staffName like '%"+syainSearch+"%';");
 				model.addAttribute("data", list);
 				return"syainInfo";
 			}
-
-
 }

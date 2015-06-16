@@ -9,16 +9,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8)">
-		<meta http-equiv="Content-Script-Type" content="text/javascript">
-			<script type="text/javascript"><!--
-				function kakunin(){
-					if(window.confirm( 'この派遣先情報を削除しますか？')){
-						return true;
-					}else{
-						return false;
-					}
-				}
-			// --></script>
+		<script src="<c:url value="/resources/js/sakujo.js" />" type="text/javascript"></script>
 		<title>派遣社員情報</title>
 	</head>
 	<body>
@@ -28,12 +19,12 @@
 	</div>
 	<br>
 	<!-- 検索-->
-		<form action="Syain" method="post">
-			検索：<input type="text" maxlength="20" name="ssearch">　<input type="submit" value="検索" name="syainSearch"/>
+		<form action="syainSearch" method="post">
+			検索：<input type="text" maxlength="20" name="ssearch">　<input type="submit" value="検索"/>
 		</form>
 	<!-- 新規登録 -->
-		<form action="Syain">
-			<p><input type="submit" name="syainInsert1" value="新規登録" /></p>
+		<form action="syainInsert1">
+			<p><input type="submit" value="新規登録" /></p>
 		</form>
 		<table border=1 width="100%">
 			<tr><th>社員名</th>
@@ -49,7 +40,7 @@
 		<c:forEach var="obj" items="${data}" >
 			<tr><td rowspan=2>
 						<!-- ※下記の編集ボタンと同じ機能 -->
-						<a href="syainUpdate3 ?value='${obj.staffId}'" name="staffid" target="contents" ><c:out value="${obj.staffName}"/></a></td>
+						<a href="syainUpdate1 ?value='${obj.staffId}'" name="staffid" target="contents" ><c:out value="${obj.staffName}"/></a></td>
 			<td rowspan=2><c:out value="${obj.staffEMail}"/></td>
 			<td rowspan=2><c:out value="${obj.staffPostCode}"/></td>
 			<td rowspan=2><c:out value="${obj.staffAdd}" /></td>
@@ -59,14 +50,14 @@
 			<td rowspan=2><c:out value="${obj.affiliationName}"/></td>
 			<td rowspan=2><c:out value="${obj.staffRemarks}"/></td>
 			<td width="40px">
-				<form action="Syain"><!-- 編集画面へ -->
+				<form action="syainUpdate2"><!-- 編集画面へ -->
 					<input type="hidden" value="${obj.staffId}" name="staffid">
-					<input type="submit" name="syainUpdate1" value="編集" />
+					<input type="submit" value="編集" />
 				</form></td></tr>
 			<tr><td width="40px"><!-- 削除確認 -->
-				<form action="Syain" method="post">
+				<form action="syainDelete" method="post">
 					<input type="hidden" value="${obj.staffId}" name="staffid">
-					<input type="submit" value="削除" name="syainDelete"  onClick="return kakunin();">
+					<input type="submit" value="削除" onClick="return kakunin();">
 				</form></td></tr>
 		</c:forEach>
 		</table>

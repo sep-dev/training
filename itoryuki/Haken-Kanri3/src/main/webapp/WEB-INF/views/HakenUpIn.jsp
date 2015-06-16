@@ -19,7 +19,7 @@
 			</div>
 			<br>
 			<div align="center">
-			<form:form modelAttribute="hakenModel">
+			<form:form modelAttribute="hakenModel"  action="hakenInsert2">
 				<table border=1>
 					<tr><th colspan=2>派遣社員名称</th>
 							<td colspan=2>
@@ -35,24 +35,25 @@
 											<form:option value="${obj.clientId}"><c:out value="${obj.clientName}"/></form:option>
 										</c:forEach>
 								</form:select></td></tr>
-					<tr><th>単金</th><td><form:input path="amountmonth" pattern="^[0-9]+$"/>円</td>
+					<tr><th>単金</th><td><form:input type="required" path="amountmonth" pattern="^[0-9]+$" maxlength="8" />円</td>
 							<th>条件</th><td><form:input path="conditions" /></td></tr>
-					<tr><th>控除単価</th><td><form:input path="deductionunitprice" pattern="^[0-9]+$"/>円</td>
-							<th>超過単価</th><td><form:input path="overtimerate" pattern="^[0-9]+$"/>円</td></tr>
+					<tr><th>控除単価</th><td><form:input path="deductionunitprice" pattern="^[0-9]+$" maxlength="8"/>円</td>
+							<th>超過単価</th><td><form:input path="overtimerate" pattern="^[0-9]+$" maxlength="8" />円</td></tr>
 					<tr><th colspan=2>サイト</th><td colspan=2><form:input path="site" /></td></tr>
-					<tr><th>開始日</th><td><form:input path="startdate1" maxlength="4" size="4" pattern="^[0-9]+$"/>年
-									<form:input path="startdate2" maxlength="2" size="2" pattern="^[0-9]+$"/>月
-									<form:input path="startdate3" maxlength="2" size="2" pattern="^[0-9]+$"/>日</td>
-							<th>終了日</th><td><form:input path="enddate1" maxlength="4" size="4" pattern="^[0-9]+$"/>年
-									<form:input path="enddate2" maxlength="2" size="2" pattern="^[0-9]+$"/>月
-									<form:input path="enddate3" maxlength="2" size="2" pattern="^[0-9]+$"/>日</td></tr>
+					<tr><th>開始日</th><td><form:input path="startdate1" maxlength="4" size="4" pattern="^[0-9]+$" />年
+									<form:input path="startdate2" maxlength="2" size="2" pattern="^[0-9]+$" max="12"/>月
+									<form:input path="startdate3" maxlength="2" size="2" pattern="^[0-9]+$" max="31"/>日</td>
+							<th>終了日</th><td><form:input path="enddate1" maxlength="4" size="4" pattern="^[0-9]+$" />年
+									<form:input path="enddate2" maxlength="2" size="2" pattern="^[0-9]+$" max="12"/>月
+									<form:input path="enddate3" maxlength="2" size="2" pattern="^[0-9]+$" max="31" />日</td></tr>
 					<tr><th colspan=2 rowspan=3>備考</th><td colspan=2 rowspan=3><form:input path="staffmanremarks" /></td></tr>
 				</table>
 			<br>
-				<input type="submit" name="hakenInsert2" value="登録" />　
+				<input type="submit" value="登録" />　
 				<input type="button" onclick="javascript: history.back();" value="戻る">　
 				<input type="reset" value="リセット" />
 			</form:form>
+			<p><font color="red">※条件と備考は空欄可。</font></p>
 			</div>
 		</body>
 	</html>
@@ -72,7 +73,8 @@
 		</div>
 		<br>
 		<div align="center">
-			<form:form modelAttribute="hakenModel">
+			<form:form modelAttribute="hakenModel"  action="hakenUpdate2" >
+			<input type="hidden" value="${staffManId}" name="staffmanid">
 			<table border=1>
 				<tr><th colspan=2>派遣社員名称</th>
 						<td colspan=2>
@@ -89,24 +91,25 @@
 										<form:option value="${obj.clientId}"><c:out value="${obj.clientName}"/></form:option>
 									</c:forEach>
 							</form:select></td></tr>
-				<tr><th>単金</th><td><form:input path="amountmonth" value="${amountMonth}"/></td>
+				<tr><th>単金</th><td><form:input path="amountmonth"  minlength="1" value="${amountMonth}"/></td>
 						<th>条件</th><td><form:input path="conditions" value="${conditions}"/></td></tr>
-				<tr><th>控除単価</th><td><form:input path="deductionunitprice" value="${deductionUnitPrice}"/></td>
-						<th>超過単価</th><td><form:input path="overtimerate" value="${overtimeRate}"/></td></tr>
+				<tr><th>控除単価</th><td><form:input path="deductionunitprice" minlength="1" value="${deductionUnitPrice}" /></td>
+						<th>超過単価</th><td><form:input path="overtimerate" minlength="1" value="${overtimeRate}" /></td></tr>
 				<tr><th colspan=2>サイト</th><td colspan=2><form:input path="site" value="${site}"/></td></tr>
 				<tr><th>開始日</th><td><form:input path="startdate1" maxlength="4" size="4" value="${syear}"/>年
-								<form:input path="startdate2"  maxlength="2" size="2" value="${smonth}"/>月
-								<form:input path="startdate3"  maxlength="2" size="2" value="${sday}"/>日</td>
-						<th>終了日</th><td><form:input path="enddate1" maxlength="4" size="4" value="${eyear}"/>年
-								<form:input path="enddate2"  maxlength="2" size="2" value="${emonth}"/>月
-								<form:input path="enddate3"  maxlength="2" size="2" value="${eday}"/>日</td></tr>
+								<form:input path="startdate2" maxlength="2" size="2" max="12" value="${smonth}"/>月
+								<form:input path="startdate3" maxlength="2" size="2" max="31" value="${sday}" />日</td>
+						<th>終了日</th><td><form:input path="enddate1" maxlength="4" size="4" value="${eyear}" />年
+								<form:input path="enddate2" maxlength="2" size="2" max="12" value="${emonth}"/>月
+								<form:input path="enddate3" maxlength="2" size="2" max="31" value="${eday}"/>日</td></tr>
 				<tr><th colspan=2>備考</th><td colspan=2><form:input path="staffmanremarks" /></td></tr>
 			</table>
 		<br>
-				<input type="submit" name="hakenUpdate2" value="確定" />　
+				<input type="submit" value="確定" />　
 				<input type="button" onclick="javascript: history.back();" value="戻る">　
 				<input type="reset" value="リセット" />
 			</form:form>
+			<p><font color="red">※条件と備考は空欄可。</font></p>
 		</div>
 		</body>
 	</html>

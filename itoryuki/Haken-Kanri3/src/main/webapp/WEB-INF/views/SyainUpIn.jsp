@@ -19,7 +19,7 @@
 		</div>
 		<br>
 		<div align="center">
-			<form:form modelAttribute="syainModel">
+			<form:form modelAttribute="syainModel"  action="syainInsert2">
 			<table border=1>
 				<tr><th colspan=2>社員名称</th><td colspan=2><form:input path="staffname" /></td></tr>
 				<tr><th colspan=2>メールアドレス</th><td colspan=2><form:input path="staffemail" /></td></tr>
@@ -37,10 +37,11 @@
 				<tr><th colspan=2>備考</th><td colspan=2><form:input path="staffremarks" /></td></tr>
 			</table>
 		<br>
-				<input type="submit" name="syainInsert2" value="登録" />　
+				<input type="submit" value="登録" />　
 				<input type="button" onclick="javascript: history.back();" value="戻る">　
 				<input type="reset" value="リセット" />
 			</form:form>
+			<p><font color="red">※備考は空欄可。</font></p>
 			</div>
 		</body>
 	</html>
@@ -59,7 +60,8 @@
 		</div>
 		<br>
 		<div align="center">
-			<form:form modelAttribute="syainModel">
+			<form:form modelAttribute="syainModel"  action="syainUpdate3">
+			<input type="hidden" value="${staffId}" name="staffid">
 			<table border=1>
 				<tr><th colspan=2>社員名称</th><td colspan=2><form:input path="staffname" value="${staffName}"/></td></tr>
 				<tr><th colspan=2>メールアドレス</th><td colspan=2><form:input path="staffemail" value="${staffEMail}"/></td></tr>
@@ -76,12 +78,13 @@
 							</form:select></td></tr>
 				<tr><th colspan=2>備考</th><td colspan=2><form:input path="staffremarks" value="${staffRemarks}"/></td></tr>
 				</table>
-			<br>
-					<input type="submit" name="syainUpdate2" value="確定" />　
-					<input type="button" onclick="javascript: history.back();" value="戻る">　
-					<input type="reset" value="リセット" />
-				</form:form>
-			</div>
+		<br>
+				<input type="submit" value="確定" />　
+				<input type="button" onclick="javascript: history.back();" value="戻る">　
+				<input type="reset" value="リセット" />
+			</form:form>
+			<p><font color="red">※備考は空欄可。</font></p>
+		</div>
 		</body>
 	</html>
 	</c:if>

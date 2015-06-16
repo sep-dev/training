@@ -9,16 +9,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8)">
-		<meta http-equiv="Content-Script-Type" content="text/javascript">
-			<script type="text/javascript"><!--
-				function kakunin(){
-					if(window.confirm( 'この派遣先情報を削除しますか？')){
-						return true;
-					}else{
-						return false;
-					}
-				}
-			// --></script>
+		<script src="<c:url value="/resources/js/sakujo.js" />" type="text/javascript"></script>
 		<title>ログインユーザー一覧</title>
 	</head>
 	<body>
@@ -28,12 +19,12 @@
 	</div>
 	<br>
 	<!-- 検索-->
-		<form action="User" method="post">
-			検索：<input type="text" maxlength="20" name="usearch">　<input type="submit" value="検索" name="userSearch"/>
+		<form action="userSearch" method="post">
+			検索：<input type="text" maxlength="20" name="usearch">　<input type="submit" value="検索" />
 		</form>
 	<!-- 新規登録 -->
-		<form action="User">
-			<p><input type="submit" name="userInsert" value="新規登録" /></p>
+		<form action="userInsert1">
+			<p><input type="submit" value="新規登録" /></p>
 		</form>
 		<table border=1 width="99%" >
 			<tr><th>ログインユーザー名称</th>
@@ -45,14 +36,14 @@
 			<td rowspan=2><c:out value="${obj.loginUser}"/></td>
 			<td rowspan=2><c:out value="${obj.loginUserPass}" /></td>
 			<td width="40px">
-				<form action="User">
+				<form action="userUpdate1">
 					<input type="hidden" value="${obj.loginUserId}" name="loginuserid">
-					<input type="submit" name="userUpdate" value="編集" />
+					<input type="submit" value="編集" />
 				</form></td></tr>
 			<tr><td width="40px">
-				<form action="User" method="post">
+				<form action="userDelete" method="post">
 					<input type="hidden" value="${obj.loginUserId}" name="loginuserid">
-					<input type="submit" name="userDelete" value="削除" onClick="return kakunin();">
+					<input type="submit" value="削除" onClick="return kakunin();">
 				</form></td></tr>
 		</c:forEach>
 		</table>

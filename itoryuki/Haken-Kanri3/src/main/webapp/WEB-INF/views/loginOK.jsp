@@ -14,8 +14,8 @@
 		<div align="center">
 			<h1>ログイン成功！！！</h1>
 		<!-- 派遣先情報一覧ページへ -->
-			<form action="Menu">
-				<p><input type="submit" name="menu" value="メニューへ" /></p>
+			<form action="menu">
+				<p><input type="submit" value="メニューへ" /></p>
 			</form>
 			<form action="logout">
 				<p><input type="submit" value="ログアウト" /></p>

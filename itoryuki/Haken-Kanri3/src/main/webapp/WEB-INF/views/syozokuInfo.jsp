@@ -9,16 +9,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8)">
-		<meta http-equiv="Content-Script-Type" content="text/javascript">
-			<script type="text/javascript"><!--
-				function kakunin(){
-					if(window.confirm( 'この派遣先情報を削除しますか？')){
-						return true;
-					}else{
-						return false;
-					}
-				}
-			// --></script>
+		<script src="<c:url value="/resources/js/sakujo.js" />" type="text/javascript"></script>
 		<title>所属元情報</title>
 	</head>
 	<body>
@@ -28,12 +19,12 @@
 	</div>
 	<br>
 	<!-- 検索-->
-		<form action="Syozoku" method="post">
-			検索：<input type="text" maxlength="20" name="asearch">　<input type="submit" value="検索" name="syozokuSearch"/>
+		<form action="syozokuSearch" method="post">
+			検索：<input type="text" maxlength="20" name="asearch">　<input type="submit" value="検索"/>
 		</form>
 	<!-- 新規登録 -->
-		<form action="Syozoku">
-			<p><input type="submit" name="syozokuInsert1" value="新規登録" /></P>
+		<form action="syozokuInsert1">
+			<p><input type="submit" value="新規登録" /></P>
 		</form>
 		<table border=1 width="100%">
 			<tr><th>企業名</th>
@@ -45,21 +36,21 @@
 			<th>編集</th></tr>
 		<c:forEach var="obj" items="${data}" >
 			<tr><td rowspan=2>
-						<a href="syozokuUpdate3 ?value='${obj.affiliationId}'" name="affiliationid" target="contents"><c:out value="${obj.affiliationName}"/></a>
+						<a href="syozokuUpdate1 ?value='${obj.affiliationId}'" name="affiliationid" target="contents"><c:out value="${obj.affiliationName}"/></a>
 			<td rowspan=2><c:out value="${obj.affiliationPostCode}"/></td>
 			<td rowspan=2><c:out value="${obj.affiliationAdd}" /></td>
 			<td rowspan=2><c:out value="${obj.affiliationTel}"/></td>
 			<td rowspan=2><c:out value="${obj.affiliationNearestStation}"/></td>
 			<td rowspan=2><c:out value="${obj.affiliationRemarks}"/></td>
 			<td width="40px">
-				<form action="Syozoku">
+				<form action="syozokuUpdate2">
 					<input type="hidden" value="${obj.affiliationId}" name="affiliationid">
-					<input type="submit" name="syozokuUpdate1" value="編集" />
+					<input type="submit" value="編集" />
 				</form></td></tr>
 			<tr><td width="40px">
-				<form action="Syozoku" method="post">
+				<form action="syozokuDelete" method="post">
 					<input type="hidden" value="${obj.affiliationId}" name="affiliationid">
-					<input type="submit" name="syozokuDelete" value="削除" onClick="return kakunin();">
+					<input type="submit" value="削除" onClick="return kakunin();">
 				</form></td></tr>
 		</c:forEach>
 		</table>

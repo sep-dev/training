@@ -19,7 +19,7 @@
 			</div>
 			<br>
 			<div align="center">
-			<form:form modelAttribute="hakenModel"  action="hakenInsert2">
+			<form:form modelAttribute="hakenModel"  action="hakenInSyori">
 				<table border=1>
 					<tr><th colspan=2>派遣社員名称</th>
 							<td colspan=2>
@@ -64,7 +64,6 @@
 	<html>
 		<head>
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-			<link href="<c:url value="/resources/CSS/menuCSS.css" />" rel="stylesheet">
 			<title>派遣先情報編集</title>
 		</head>
 		<body>
@@ -73,7 +72,7 @@
 		</div>
 		<br>
 		<div align="center">
-			<form:form modelAttribute="hakenModel"  action="hakenUpdate2" >
+			<form:form modelAttribute="hakenModel"  action="hakenUpSyori" >
 			<input type="hidden" value="${staffManId}" name="staffmanid">
 			<table border=1>
 				<tr><th colspan=2>派遣社員名称</th>

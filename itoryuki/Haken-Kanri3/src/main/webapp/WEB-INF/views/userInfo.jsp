@@ -23,7 +23,7 @@
 			検索：<input type="text" maxlength="20" name="usearch">　<input type="submit" value="検索" />
 		</form>
 	<!-- 新規登録 -->
-		<form action="userInsert1">
+		<form action="userInGamen">
 			<p><input type="submit" value="新規登録" /></p>
 		</form>
 		<table border=1 width="99%" >
@@ -36,7 +36,7 @@
 			<td rowspan=2><c:out value="${obj.loginUser}"/></td>
 			<td rowspan=2><c:out value="${obj.loginUserPass}" /></td>
 			<td width="40px">
-				<form action="userUpdate1">
+				<form action="userUpGamen">
 					<input type="hidden" value="${obj.loginUserId}" name="loginuserid">
 					<input type="submit" value="編集" />
 				</form></td></tr>

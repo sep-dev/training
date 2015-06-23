@@ -34,14 +34,14 @@ import FormModel.SyukkoModel;
 			}
 
 			//出向先新規登録
-			@RequestMapping(value="/book/syukkoInsert1", method=RequestMethod.GET)
+			@RequestMapping(value="/book/syukkoInGamen", method=RequestMethod.GET)
 			public String SyukkoIn1(Model model){
 				SyukkoModel syukkomodel = new SyukkoModel();
 				model.addAttribute("syukkoModel", syukkomodel);
 				model.addAttribute("List", "null");
 				return "syukkoUpIn";
 			}
-			@RequestMapping(value="/book/syukkoInsert2", method=RequestMethod.POST)
+			@RequestMapping(value="/book/syukkoInSyori", method=RequestMethod.POST)
 			public String SyukkoIn2(@Valid@ModelAttribute SyukkoModel syukkomodel, BindingResult result, Model model){
 				if (result.hasErrors()) {
 					model.addAttribute("message", "空欄があるか入力された数値が不適切です！");
@@ -63,7 +63,7 @@ import FormModel.SyukkoModel;
 			}
 
 			//出向先編集画面へ(企業名を押した場合)
-			@RequestMapping(value="/book/syukkoUpdate1", method=RequestMethod.GET)
+			@RequestMapping(value="/book/syukkoUpLink", method=RequestMethod.GET)
 			public String SyukkoUp1(@ModelAttribute SyukkoModel syukkomodel, Model model, @RequestParam("value") String clientId){
 				System.out.println(clientId);
 				List<Map<String, Object>> list = jdbcTemplate.queryForList("select * from tblClient where clientId = " + clientId +";");
@@ -80,7 +80,7 @@ import FormModel.SyukkoModel;
 			}
 
 			//出向先編集画面へ(編集ボタンを押した場合)
-			@RequestMapping(value="/book/syukkoUpdate2", method=RequestMethod.GET)
+			@RequestMapping(value="/book/syukkoUpButton", method=RequestMethod.GET)
 			public String SyukkoUp2(@ModelAttribute SyukkoModel syukkomodel, Model model){
 				String clientId = syukkomodel.getClientid();
 				System.out.println(clientId);
@@ -98,7 +98,7 @@ import FormModel.SyukkoModel;
 			}
 
 			//DB更新処理
-			@RequestMapping(value="/book/syukkoUpdate3", method=RequestMethod.POST)
+			@RequestMapping(value="/book/syukkoUpSyori", method=RequestMethod.POST)
 			public String SyukkoUp3(@Valid @ModelAttribute SyukkoModel syukkomodel, BindingResult result, Model model){
 				if (result.hasErrors()) {
 					model.addAttribute("message", "空欄があるか入力された数値が不適切です！");

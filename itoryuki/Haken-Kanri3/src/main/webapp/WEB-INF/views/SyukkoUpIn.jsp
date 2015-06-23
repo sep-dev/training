@@ -19,7 +19,7 @@
 		</div>
 		<br>
 		<div align="center">
-			<form:form modelAttribute="syukkoModel" action="syukkoInsert2" >
+			<form:form modelAttribute="syukkoModel" action="syukkoInSyori" >
 			<input type="hidden" value="${clientId}" name="clientid">
 			<table border=1>
 				<tr><th colspan=2>出向先名称</th><td colspan=2><form:input path="clientname"/></td></tr>
@@ -53,7 +53,7 @@
 		</div>
 		<br>
 		<div align="center">
-			<form:form modelAttribute="syukkoModel"  action="syukkoUpdate3">
+			<form:form modelAttribute="syukkoModel"  action="syukkoUpSyori">
 			<input type="hidden" value="${clientId}" name="clientid">
 			<table border=1>
 				<tr><th colspan=2>出向先名称</th><td colspan=2><form:input path="clientname" value="${clientName}"/></td></tr>

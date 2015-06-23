@@ -34,7 +34,7 @@ import FormModel.SyainModel;
 			}
 
 			//派遣社員新規登録画面へ
-			@RequestMapping(value="/book/syainInsert1", method=RequestMethod.GET)
+			@RequestMapping(value="/book/syainInGamen", method=RequestMethod.GET)
 			public String SyainIn(Model model){
 				SyainModel syainmodel = new SyainModel();
 				model.addAttribute("syainModel", syainmodel);
@@ -44,7 +44,7 @@ import FormModel.SyainModel;
 				return "syainUpIn";
 			}
 			//登録処理
-			@RequestMapping(value="/book/syainInsert2", method=RequestMethod.POST)
+			@RequestMapping(value="/book/syainInSyori", method=RequestMethod.POST)
 			public String SyainIn2(@Valid @ModelAttribute SyainModel syainmodel, BindingResult result, Model model){
 				if (result.hasErrors()) {
 					model.addAttribute("message", "空欄があるか入力された数値が不適切です！");
@@ -71,7 +71,7 @@ import FormModel.SyainModel;
 			}
 
 			//派遣社員情報編集(社員名を押した場合)
-			@RequestMapping(value="/book/syainUpdate1", method=RequestMethod.GET)
+			@RequestMapping(value="/book/syainUpLink", method=RequestMethod.GET)
 			public String SyainUp1(@ModelAttribute SyainModel syainmodel, Model model, @RequestParam("value") String staffId){
 				System.out.println(staffId);
 				List<Map<String, Object>> afflist = jdbcTemplate.queryForList("select affiliationId, affiliationName from tblAffiliation ");
@@ -92,7 +92,7 @@ import FormModel.SyainModel;
 			}
 
 			//派遣社員情報編集画面へ(編集ボタンを押した場合)
-			@RequestMapping(value="/book/syainUpdate2", method=RequestMethod.GET)
+			@RequestMapping(value="/book/syainUpButton", method=RequestMethod.GET)
 			public String SyainUp2(@ModelAttribute SyainModel syainmodel, Model model){
 				String staffId = syainmodel.getStaffid();
 				System.out.println(staffId);
@@ -114,7 +114,7 @@ import FormModel.SyainModel;
 			}
 
 			//DB更新処理
-			@RequestMapping(value="/book/syainUpdate3", method=RequestMethod.POST)
+			@RequestMapping(value="/book/syainUpSyori", method=RequestMethod.POST)
 			public String SyainUp3(@Valid  @ModelAttribute SyainModel syainmodel, BindingResult result, Model model){
 				if (result.hasErrors()) {
 					model.addAttribute("message", "空欄があるか入力された数値が不適切です！");

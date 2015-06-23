@@ -23,7 +23,7 @@
 			検索：<input type="text" maxlength="20" name="ssearch">　<input type="submit" value="検索"/>
 		</form>
 	<!-- 新規登録 -->
-		<form action="syainInsert1">
+		<form action="syainInGamen">
 			<p><input type="submit" value="新規登録" /></p>
 		</form>
 		<table border=1 width="100%">
@@ -40,7 +40,7 @@
 		<c:forEach var="obj" items="${data}" >
 			<tr><td rowspan=2>
 						<!-- ※下記の編集ボタンと同じ機能 -->
-						<a href="syainUpdate1 ?value='${obj.staffId}'" name="staffid" target="contents" ><c:out value="${obj.staffName}"/></a></td>
+						<a href="syainUpLink ?value='${obj.staffId}'" name="staffid" target="contents" ><c:out value="${obj.staffName}"/></a></td>
 			<td rowspan=2><c:out value="${obj.staffEMail}"/></td>
 			<td rowspan=2><c:out value="${obj.staffPostCode}"/></td>
 			<td rowspan=2><c:out value="${obj.staffAdd}" /></td>
@@ -50,7 +50,7 @@
 			<td rowspan=2><c:out value="${obj.affiliationName}"/></td>
 			<td rowspan=2><c:out value="${obj.staffRemarks}"/></td>
 			<td width="40px">
-				<form action="syainUpdate2"><!-- 編集画面へ -->
+				<form action="syainUpButton"><!-- 編集画面へ -->
 					<input type="hidden" value="${obj.staffId}" name="staffid">
 					<input type="submit" value="編集" />
 				</form></td></tr>

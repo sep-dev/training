@@ -23,7 +23,7 @@
 			検索：<input type="text" maxlength="20" name="csearch">　<input type="submit" value="検索"/>
 		</form>
 	<!-- 新規登録 -->
-		<form action="syukkoInsert1">
+		<form action="syukkoInGamen">
 			<p><input type="submit" value="新規登録" /></p>
 		</form>
 		<table border=1 width="100%">
@@ -37,14 +37,14 @@
 		<c:forEach var="obj" items="${data}" >
 			<tr><td rowspan=2>
 						<!-- 出向先情報編集へ -->
-						<a href="syukkoUpdate1 ?value='${obj.clientId}'" name="clientid" target="contents"><c:out value="${obj.clientName}"/></a></td>
+						<a href="syukkoUpLink ?value='${obj.clientId}'" name="clientid" target="contents"><c:out value="${obj.clientName}"/></a></td>
 			<td rowspan=2><c:out value="${obj.clientPostCode}"/></td>
 			<td rowspan=2><c:out value="${obj.clientAdd}" /></td>
 			<td rowspan=2><c:out value="${obj.clientTel}"/></td>
 			<td rowspan=2><c:out value="${obj.clientNearestStation}"/></td>
 			<td rowspan=2><c:out value="${obj.clientRemarks}"/></td>
 			<td width="40px">
-				<form action="syukkoUpdate2">
+				<form action="syukkoUpButton">
 					<input type="hidden" value="${obj.clientId}" name="clientid">
 					<input type="submit" value="編集" />
 				</form></td></tr>

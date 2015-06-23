@@ -39,7 +39,7 @@ import FormModel.HakenModel;
 			}
 
 			//派遣先新規登録画面へ
-			@RequestMapping(value="/book/hakenInsert1", method=RequestMethod.GET)
+			@RequestMapping(value="/book/hakenInGamen", method=RequestMethod.GET)
 			public String HakenIn1(Model model){
 				HakenModel hm = new HakenModel();
 				model.addAttribute("hakenModel", hm);
@@ -52,7 +52,7 @@ import FormModel.HakenModel;
 				return "hakenUpIn";
 			}
 			//登録処理
-			@RequestMapping(value="/book/hakenInsert2", method=RequestMethod.POST)
+			@RequestMapping(value="/book/hakenInSyori", method=RequestMethod.POST)
 			public String HakenIn2(@Valid @ModelAttribute HakenModel hm, BindingResult result, Model model){
 				if (result.hasErrors()) {
 					model.addAttribute("message", "空欄があるか入力された数値が不適切です！");
@@ -91,7 +91,7 @@ import FormModel.HakenModel;
 			}
 
 			//派遣先編集画面へ
-			@RequestMapping(value="/book/hakenUpdate1", method=RequestMethod.GET)
+			@RequestMapping(value="/book/hakenUpGamen", method=RequestMethod.GET)
 			public String HakenUp1(@ModelAttribute HakenModel hm, Model model){
 				String smi = hm.getStaffmanid();
 				//セレクトボックスの中身を取得
@@ -118,7 +118,7 @@ import FormModel.HakenModel;
 				return "hakenUpIn";
 			}
 			//DB更新処理
-			@RequestMapping(value="/book/hakenUpdate2", method=RequestMethod.POST)
+			@RequestMapping(value="/book/hakenUpSyori", method=RequestMethod.POST)
 			public String HakenUp2(@Valid @ModelAttribute HakenModel hm, BindingResult result, Model model){
 				if (result.hasErrors()) {
 					model.addAttribute("message", "空欄があるか入力された数値が不適切です！");

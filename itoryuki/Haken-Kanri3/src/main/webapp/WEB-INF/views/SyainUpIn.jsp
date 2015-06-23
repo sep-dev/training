@@ -19,7 +19,7 @@
 		</div>
 		<br>
 		<div align="center">
-			<form:form modelAttribute="syainModel"  action="syainInsert2">
+			<form:form modelAttribute="syainModel"  action="syainInSyori">
 			<table border=1>
 				<tr><th colspan=2>社員名称</th><td colspan=2><form:input path="staffname" /></td></tr>
 				<tr><th colspan=2>メールアドレス</th><td colspan=2><form:input path="staffemail" /></td></tr>
@@ -60,7 +60,7 @@
 		</div>
 		<br>
 		<div align="center">
-			<form:form modelAttribute="syainModel"  action="syainUpdate3">
+			<form:form modelAttribute="syainModel"  action="syainUpSyori">
 			<input type="hidden" value="${staffId}" name="staffid">
 			<table border=1>
 				<tr><th colspan=2>社員名称</th><td colspan=2><form:input path="staffname" value="${staffName}"/></td></tr>

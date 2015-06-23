@@ -23,7 +23,7 @@
 			検索：<input type="text" maxlength="20" name="asearch">　<input type="submit" value="検索"/>
 		</form>
 	<!-- 新規登録 -->
-		<form action="syozokuInsert1">
+		<form action="syozokuInGamen">
 			<p><input type="submit" value="新規登録" /></P>
 		</form>
 		<table border=1 width="100%">
@@ -36,14 +36,14 @@
 			<th>編集</th></tr>
 		<c:forEach var="obj" items="${data}" >
 			<tr><td rowspan=2>
-						<a href="syozokuUpdate1 ?value='${obj.affiliationId}'" name="affiliationid" target="contents"><c:out value="${obj.affiliationName}"/></a>
+						<a href="syozokuUpLink ?value='${obj.affiliationId}'" name="affiliationid" target="contents"><c:out value="${obj.affiliationName}"/></a>
 			<td rowspan=2><c:out value="${obj.affiliationPostCode}"/></td>
 			<td rowspan=2><c:out value="${obj.affiliationAdd}" /></td>
 			<td rowspan=2><c:out value="${obj.affiliationTel}"/></td>
 			<td rowspan=2><c:out value="${obj.affiliationNearestStation}"/></td>
 			<td rowspan=2><c:out value="${obj.affiliationRemarks}"/></td>
 			<td width="40px">
-				<form action="syozokuUpdate2">
+				<form action="syozokuUpButton">
 					<input type="hidden" value="${obj.affiliationId}" name="affiliationid">
 					<input type="submit" value="編集" />
 				</form></td></tr>

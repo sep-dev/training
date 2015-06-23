@@ -19,7 +19,7 @@
 		</div>
 		<div align="center">
 		<p><font size="5" color="red">${message}</font></p>
-			<form:form modelAttribute="userModel"  action="userInsert2">
+			<form:form modelAttribute="userModel"  action="userInSyori">
 			<table border=1>
 				<tr><th colspan=2>ユーザー名称</th>
 						<td><form:input path="loginusername" />(例：あああ太郎)</td></tr>
@@ -54,7 +54,7 @@
 		<br>
 		<div align="center">
 		<p><font size="5" color="red">${message}</font></p>
-			<form:form modelAttribute="userModel" action="userUpdate2" >
+			<form:form modelAttribute="userModel" action="userUpSyori" >
 			<input type="hidden" value="${loginUserId}" name="loginuserid">
 			<table border=1>
 				<tr><th colspan=2>ユーザー名称</th>

@@ -43,7 +43,7 @@
 		</form>
 	<br>
 	<!-- 新規登録 -->
-		<form action="hakenInsert1">
+		<form action="hakenInGamen">
 			<input type="submit" value="新規登録" />
 		</form>
 	<br>
@@ -63,10 +63,10 @@
 		<c:forEach var="obj" items="${data}">
 			<tr><td rowspan=2>
 					<!-- 社員情報編集へ -->
-						<a href="syainUpdate1 ?value='${obj.staffId}'" name="staffid" target="contents" ><c:out value="${obj.staffName}"/></a></td>
+						<a href="syainUpLink ?value='${obj.staffId}'" name="staffid" target="contents" ><c:out value="${obj.staffName}"/></a></td>
 			<td rowspan=2>
 					<!-- 出向先情報編集へ -->
-						<a href="syukkoUpdate1 ?value='${obj.clientId}'" name="clientid" target="contents"><c:out value="${obj.clientName}"/></a></td>
+						<a href="syukkoUpLink ?value='${obj.clientId}'" name="clientid" target="contents"><c:out value="${obj.clientName}"/></a></td>
 			<td rowspan=2><c:out value="${obj.amountMonth}"/>円</td>
 			<td rowspan=2><c:out value="${obj.conditions}" /></td>
 			<td rowspan=2><c:out value="${obj.deductionUnitPrice}"/>円</td>
@@ -76,7 +76,7 @@
 			<td rowspan=2><c:out value="${obj.endDate}"/></td>
 			<td rowspan=2><c:out value="${obj.staffManRemarks}"/></td>
 			<td width="40px">
-				<form action="hakenUpdate1"><!-- 編集画面へ -->
+				<form action="hakenUpGamen"><!-- 編集画面へ -->
 					<input type="hidden" value="${obj.staffManId}" name="staffmanid">
 					<input type="submit"value="編集" />
 				</form></td></tr>

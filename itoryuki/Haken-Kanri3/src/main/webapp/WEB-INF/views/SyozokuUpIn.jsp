@@ -20,7 +20,7 @@
 		</div>
 		<br>
 		<div align="center">
-			<form:form modelAttribute="syozokuModel" action="syozokuInsert2">
+			<form:form modelAttribute="syozokuModel" action="syozokuInSyori">
 			<table border=1>
 				<tr><th colspan=2>所属元名称</th><td colspan=2><form:input path="affiliationname"/></td></tr>
 				<tr><th colspan=2>電話番号</th><td colspan=2><form:input path="affiliationtel" maxlength='14' pattern="^[0-9]+$"/></td></tr>
@@ -54,7 +54,7 @@
 		</div>
 		<br>
 		<div align="center">
-			<form:form modelAttribute="syozokuModel" action="syozokuUpdate3" >
+			<form:form modelAttribute="syozokuModel" action="syozokuUpSyori" >
 			<input type="hidden" value="${affiliationId}" name="affiliationid">
 			<table border=1>
 				<tr><th colspan=2>所属元名称</th><td colspan=2><form:input path="affiliationname" value="${affiliationName}"/></td></tr>

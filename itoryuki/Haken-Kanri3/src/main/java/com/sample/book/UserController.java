@@ -24,7 +24,7 @@ import FormModel.UserModel;
 		private JdbcTemplate jdbcTemplate;
 
 			//ユーザー一覧を表示
-			@RequestMapping(value = "/book/userInfo",  method = RequestMethod.GET)
+			@RequestMapping(value="/book/userInfo",  method = RequestMethod.GET)
 			public String User(Locale locale, Model model) {
 				//2つのテーブル（tblAffiliation,tblStaff）から情報を取得、結合
 				List<Map<String, Object>> list = jdbcTemplate.queryForList("select * from tblLoginUser");
@@ -33,14 +33,14 @@ import FormModel.UserModel;
 			}
 
 			//管理者新規登録
-			@RequestMapping(value="/book/userInsert1", method=RequestMethod.GET)
+			@RequestMapping(value="/book/userInGamen", method=RequestMethod.GET)
 			public String UserIn1(Model model){
 				UserModel usermodel = new UserModel();
 				model.addAttribute("userModel", usermodel);
 				model.addAttribute("List", "null");
 				return "userUpIn";
 			}
-			@RequestMapping(value="/book/userInsert2",method=RequestMethod.POST)
+			@RequestMapping(value="/book/userInSyori",method=RequestMethod.POST)
 			public String UserIn2(@Valid @ModelAttribute UserModel usermodel,  BindingResult result, Model model) {
 				String userName = usermodel.getLoginusername();
 				String loginUser = usermodel.getLoginuser();
@@ -67,7 +67,7 @@ import FormModel.UserModel;
 			}
 
 			//管理者情報編集
-			@RequestMapping(value="/book/userUpdate1", method=RequestMethod.GET)
+			@RequestMapping(value="/book/userUpGamen", method=RequestMethod.GET)
 			public String UserUp(@ModelAttribute UserModel usermodel, Model model){
 				String userId = usermodel.getLoginuserid();
 				System.out.println(userId);
@@ -79,7 +79,7 @@ import FormModel.UserModel;
 				model.addAttribute("List", "edit");
 				return "userUpIn";
 			}
-			@RequestMapping(value="/book/userUpdate2",method=RequestMethod.POST)
+			@RequestMapping(value="/book/userUpSyori",method=RequestMethod.POST)
 				public String UserUp2(@Valid @ModelAttribute UserModel usermodel,  BindingResult result, Model model){
 				String userId = usermodel.getLoginuserid();
 				String userName = usermodel.getLoginusername();

@@ -34,7 +34,7 @@ import FormModel.SyozokuModel;
 			}
 
 			//所属元新規登録
-			@RequestMapping(value="/book/syozokuInsert1", method=RequestMethod.GET)
+			@RequestMapping(value="/book/syozokuInGamen", method=RequestMethod.GET)
 			public String SyozokuIn1(Model model){
 				SyozokuModel syozokumodel = new SyozokuModel();
 				model.addAttribute("syozokuModel", syozokumodel);
@@ -42,7 +42,7 @@ import FormModel.SyozokuModel;
 				return "syozokuUpIn";
 			}
 			//登録処理
-			@RequestMapping(value="/book/syozokuInsert2", method=RequestMethod.POST)
+			@RequestMapping(value="/book/syozokuInSyori", method=RequestMethod.POST)
 			public String SyozokuIn2(@Valid @ModelAttribute SyozokuModel syozokumodel, BindingResult result, Model model){
 				if (result.hasErrors()) {
 					model.addAttribute("message", "空欄があるか入力された数値が不適切です！");
@@ -66,7 +66,7 @@ import FormModel.SyozokuModel;
 			}
 
 			//所属元編集画面へ(企業名を押した場合)
-			@RequestMapping(value="/book/syozokuUpdate1", method=RequestMethod.GET)
+			@RequestMapping(value="/book/syozokuUpLink", method=RequestMethod.GET)
 			public String SyozokuUp1(@ModelAttribute SyozokuModel syozokumodel, Model model, @RequestParam("value") String affId){
 				System.out.println(affId);
 				List<Map<String, Object>> list = jdbcTemplate.queryForList("select * from tblAffiliation where affiliationId = " + affId +";");
@@ -82,7 +82,7 @@ import FormModel.SyozokuModel;
 			}
 
 			//所属元編集画面へ(編集ボタンを押した場合)
-			@RequestMapping(value="/book/syozokuUpdate2", method=RequestMethod.GET)
+			@RequestMapping(value="/book/syozokuUpButton", method=RequestMethod.GET)
 			public String SyozokuUp2(@ModelAttribute SyozokuModel syozokumodel, Model model){
 				String affId = syozokumodel.getAffiliationid();
 				System.out.println(affId);
@@ -99,7 +99,7 @@ import FormModel.SyozokuModel;
 			}
 
 			//DB更新処理
-			@RequestMapping(value="/book/syozokuUpdate3", method=RequestMethod.POST)
+			@RequestMapping(value="/book/syozokuUpSyori", method=RequestMethod.POST)
 			public String SyozokuUp3(@Valid @ModelAttribute SyozokuModel syozokumodel, BindingResult result, Model model){
 				if (result.hasErrors()) {
 					model.addAttribute("message", "空欄があるか入力された数値が不適切です！");

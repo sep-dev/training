@@ -11,20 +11,17 @@
 	th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap-theme.min.css}" />
 </head>
 <body>
-<iframe width="0px" height="0px" frameborder="0"></iframe>
 	<h2>メインメニュー</h2>
-	<a href="http://localhost:8080/customers">派遣先情報</a>
+	<a href="/customers">派遣先情報</a>
 	<br />
-	<a href="http://localhost:8080/tblstaff">派遣社員情報</a>
+	<a href="/tblstaff">派遣社員情報</a>
 	<br />
-	<a href="http://localhost:8080/tblaffiliation">所属元情報</a>
+	<a href="/tblaffiliation">所属元情報</a>
 	<br />
-	<a href="http://localhost:8080/tblclient">出向先情報</a>
+	<a href="/tblclient">出向先情報</a>
 	<br />
-	<a href="http://localhost:8080/TblLoginUser">ユーザー管理</a>
-	<br />
-
-
+	<a href="/tblloginuser">ユーザー管理</a>
+	
 	<div class="container">
 		<p>
 			<a th:href="@{/logout}" class="btn btn-default btn-xs">ログアウト</a>
@@ -34,7 +31,6 @@
 				class="form-horizontal" method="post">
 				<fieldset>
 					<legend>出向先登録</legend>
-
 					<table class="table table-bordered">
 						<tr>
 							<th>出向先名称</th>
@@ -58,9 +54,6 @@
 							<th>備考</th>
 							<td><input type="text" name="clientRemarks" th:field="*{clientRemarks}" /></td>
 						</tr>
-						
-
-
 					</table>
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">

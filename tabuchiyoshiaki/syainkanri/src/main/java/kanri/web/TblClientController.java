@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("tblclient")
+@RequestMapping("TblClient")
 public class TblClientController {
 	@Autowired
 	TblStaffManagementService tblStaffManagementService;
@@ -37,7 +37,7 @@ public class TblClientController {
 	TblAffiliationService tblAffiliationService;
 
 	@Autowired
-	private JdbcTemplate JdbcTemplate;
+	private JdbcTemplate jdbcTemplate;
 
 	@ModelAttribute
 	TblAffiliationForm setUpForm() {
@@ -46,9 +46,9 @@ public class TblClientController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	String list(Model model) {
-		List<Map<String, Object>> tblclient = JdbcTemplate.queryForList("select * from  tblclient");
+		List<Map<String, Object>> tblclient = jdbcTemplate.queryForList("select * from  tblclient");
 
-		model.addAttribute("tblclient", tblclient);
+		model.addAttribute("TblClient", tblclient);
 
 		return "customers/loan-infomation";
 	}
@@ -56,8 +56,8 @@ public class TblClientController {
 	@RequestMapping(value = "/find", method = RequestMethod.GET)
 	public String find(Model model, @RequestParam("str") String str) {
 
-		List<Map<String, Object>> list = JdbcTemplate.queryForList("select * from  tblclient where client_name like  ?",('%' + str + '%'));
-		model.addAttribute("tblclient", list);
+		List<Map<String, Object>> list = jdbcTemplate.queryForList("select * from  tblclient where client_name like  ?",('%' + str + '%'));
+		model.addAttribute("TblClient", list);
 
 		return "customers/loan-infomation";
 	}
@@ -65,8 +65,8 @@ public class TblClientController {
 	@RequestMapping(value = "create", method = RequestMethod.GET)
 	String create(Model model, TblClientForm tblClientForm) {
 		List<TblClient> tblclient = tblClientService.findAll();
-		model.addAttribute("tblclient", tblclient);
-		model.addAttribute("tblClientForm", tblClientForm);
+		model.addAttribute("TblClient", tblclient);
+		model.addAttribute("TblClientForm", tblClientForm);
 		return "customers/loan-success";
 
 	}
@@ -78,8 +78,8 @@ public class TblClientController {
 		TblClient tblClient = new TblClient();
 		BeanUtils.copyProperties(form, tblClient);
 		tblClientService.create(tblClient);
-		model.addAttribute("tblClientForm", form);
-		return "redirect:/tblclient";
+		model.addAttribute("TblClientForm", form);
+		return "redirect:/TblClient";
 	}
 
 	@RequestMapping(value = "edit", params = "form", method = RequestMethod.GET)
@@ -99,17 +99,17 @@ public class TblClientController {
 		tblClient.setClientId(clientId);
 		tblClientService.update(tblClient);
 
-		return "redirect:/tblclient";
+		return "redirect:/TblClient";
 	}
 
 	@RequestMapping(value = "edit", params = "goToTop")
 	String goToTop() {
-		return "redirect:/tblclient";
+		return "redirect:/TblClient";
 	}
 
 	@RequestMapping(value = "delete", method = RequestMethod.POST)
 	String delete(@RequestParam Integer id) {
 		tblClientService.delete(id);
-		return "redirect:/tblclient";
+		return "redirect:/TblClient";
 	}
 }

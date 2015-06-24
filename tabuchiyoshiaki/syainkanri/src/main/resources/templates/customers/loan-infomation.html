@@ -24,23 +24,20 @@
 			return false;
 
 		}
-
 	}
 </script>
 </head>
 <body>
-
-<iframe width="0px" height="0px" frameborder="0"></iframe>
 	<h2>メインメニュー</h2>
-	<a href="http://localhost:8080/customers">派遣先情報</a>
+	<a href="/customers">派遣先情報</a>
 	<br />
-	<a href="http://localhost:8080/tblstaff">派遣社員情報</a>
+	<a href="/tblstaff">派遣社員情報</a>
 	<br />
-	<a href="http://localhost:8080/tblaffiliation">所属元情報</a>
+	<a href="/tblaffiliation">所属元情報</a>
 	<br />
-	<a href="http://localhost:8080/tblclient">出向先情報</a>
+	<a href="/tblclient">出向先情報</a>
 	<br />
-	<a href="http://localhost:8080/TblLoginUser">ユーザー管理</a>
+	<a href="/tblloginuser">ユーザー管理</a>
 	<br />
 	<div class="container">
 		<fieldset>
@@ -48,13 +45,11 @@
 		</fieldset>
 		<br />
 		<p>
-			
 			<a th:href="@{/logout}" class="btn btn-default btn-xs">ログアウト</a>
 		</p>
 		<form th:action="@{/tblclient/find} " action="">
 				検索:<input type="text" name="str" /> <input type="submit" value="検索" />
 			</form>
-
 		<br />
 		<div class="col-sm-12">
 			<form th:action="@{/tblclient/create} " action="">
@@ -62,7 +57,6 @@
 					value="新規登録" />
 			</form>
 			<hr />
-
 			<table class="table table-striped table-bordered table-condensed">
 				<tr>
 					<th>企業名</th>
@@ -80,9 +74,7 @@
 					<td th:text="${tblclient.client_tel}"></td>
 					<td th:text="${tblclient.client_nearest_station}"></td>
 					<td th:text="${tblclient.client_remarks}"></td>
-
 					<td>
-
 						<form th:action="@{/tblclient/edit} ">
 							<input class="btn btn-default" type="submit" name="form"
 								value="編集" /> <input type="hidden" name="clientId"
@@ -106,9 +98,5 @@
 	<script
 		src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"
 		th:src="@{/webjars/bootstrap/3.2.0/js/bootstrap.min.js}"></script>
-
-
-
-
 </body>
 </html>

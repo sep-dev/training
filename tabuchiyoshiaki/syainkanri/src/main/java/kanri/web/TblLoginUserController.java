@@ -25,7 +25,7 @@ public class TblLoginUserController {
 	TblLoginUserService tblLoginUserService;
 
 	@Autowired
-	private JdbcTemplate JdbcTemplate;
+	private JdbcTemplate jdbcTemplate;
 
 	@ModelAttribute
 	TblLoginUserForm setUpForm() {
@@ -34,25 +34,25 @@ public class TblLoginUserController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	String list(Model model) {
-		List<Map<String, Object>> tblloginuser = JdbcTemplate.queryForList("select * from tblloginuser");
-		model.addAttribute("tblloginuser", tblloginuser);
+		List<Map<String, Object>> tblloginUser = jdbcTemplate.queryForList("select * from tblloginuser");
+		model.addAttribute("TblLoginUser", tblloginUser);
 		return "customers/administration-infomation";
 	}
 
 	@RequestMapping(value = "/find", method = RequestMethod.GET)
 	public String find(Model model, @RequestParam("str") String str) {
 
-		List<Map<String, Object>> list = JdbcTemplate.queryForList("select * from tblloginuser where login_user_name like  ?",('%' + str + '%'));
-		model.addAttribute("tblloginuser", list);
+		List<Map<String, Object>> list = jdbcTemplate.queryForList("select * from tblloginuser where login_user_name like  ?",('%' + str + '%'));
+		model.addAttribute("TblLoginUser", list);
 
 		return "customers/administration-infomation";
 	}
 
 	@RequestMapping(value = "create", method = RequestMethod.GET)
 	String loginuser(Model model, TblLoginUserForm tblLoginUserForm) {
-		List<TblLoginUser> tblloginuser = tblLoginUserService.findAll();
-		model.addAttribute("tblloginuser", tblloginuser);
-		model.addAttribute("tblLoginUserForm", tblLoginUserForm);
+		List<TblLoginUser> tblloginUser = tblLoginUserService.findAll();
+		model.addAttribute("TblLoginUser", tblloginUser);
+		model.addAttribute("TblLoginUserForm", tblLoginUserForm);
 		return "customers/administration-success";
 
 	}
@@ -64,14 +64,14 @@ public class TblLoginUserController {
 			TblLoginUser tblLoginUser = new TblLoginUser();
 			BeanUtils.copyProperties(form, tblLoginUser);
 			tblLoginUserService.create(tblLoginUser);
-			model.addAttribute("tblLoginUserForm", form);
+			model.addAttribute("TblLoginUserForm", form);
 			return "redirect:/TblLoginUser";
 		}
 		return "redirect:/TblLoginUser";
 	}
 
 	@RequestMapping(value = "create", params = "goToTop")
-	String goTotop() {
+	String create() {
 		return "redirect:/TblLoginUser";
 	}
 
@@ -99,7 +99,7 @@ public class TblLoginUserController {
 	}
 
 	@RequestMapping(value = "edit", params = "goToTop")
-	String goToTop() {
+	String edit() {
 		return "redirect:/TblLoginUser";
 	}
 

@@ -19,20 +19,20 @@ public class LoginController {
 	}
 
 	@Autowired
-	private JdbcTemplate JdbcTemplate;
+	private JdbcTemplate jdbcTemplate;
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(@ModelAttribute TblLoginUserForm tblLoginUserForm,Model model) {
 
-		int check = JdbcTemplate.queryForInt("SELECT Count(login_user_pass) FROM tblLoginUser where login_user =?",tblLoginUserForm.getLoginUser());
+		int check = jdbcTemplate.queryForInt("SELECT Count(login_user_pass) FROM tblLoginUser where login_user =?",tblLoginUserForm.getLoginUser());
 		if (check == 0) {
 			boolean loginfailureflag = true;
-			model.addAttribute("loginfailureflag", loginfailureflag);
+			model.addAttribute("LoginFailureflag", loginfailureflag);
 
 			return "loginForm";
 		}
 
-		List<Map<String, Object>> loginlist = JdbcTemplate.queryForList("SELECT login_user_pass FROM tblLoginUser where login_user =?",tblLoginUserForm.getLoginUser());
+		List<Map<String, Object>> loginlist = jdbcTemplate.queryForList("SELECT login_user_pass FROM tblLoginUser where login_user =?",tblLoginUserForm.getLoginUser());
 
 		if ((loginlist.get(0).get("login_user_pass")) != (null)
 				&& (loginlist.get(0).get("login_user_pass")
@@ -40,8 +40,7 @@ public class LoginController {
 			return "customers/list";
 		} else {
 			boolean loginfailureflag = true;
-			model.addAttribute("loginfailureflag", loginfailureflag);
-			System.out.println(tblLoginUserForm.getLoginUser());
+			model.addAttribute("LoginFailureflag", loginfailureflag);
 			return "loginForm";
 		}
 

@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("tblstaff")
+@RequestMapping("TblStaff")
 public class TblStaffController {
 
 	@Autowired
@@ -35,7 +35,7 @@ public class TblStaffController {
 	TblClientService tblClientService;
 
 	@Autowired
-	private JdbcTemplate JdbcTemplate;
+	private JdbcTemplate jdbcTemplate;
 
 	@ModelAttribute
 	TblStaffForm setUpForm() {
@@ -45,8 +45,8 @@ public class TblStaffController {
 	@RequestMapping(method = RequestMethod.GET)
 	String list(Model model) {
 
-		List<Map<String, Object>> tblstaff = JdbcTemplate.queryForList("select * from tblstaff left join tblaffiliation  using(affiliation_id)");
-		model.addAttribute("tblstaff", tblstaff);
+		List<Map<String, Object>> tblstaff = jdbcTemplate.queryForList("select * from tblstaff left join tblaffiliation  using(affiliation_id)");
+		model.addAttribute("TblStaff", tblstaff);
 
 		return "customers/member-infomation";
 	}
@@ -54,8 +54,8 @@ public class TblStaffController {
 	@RequestMapping(value = "/find", method = RequestMethod.GET)
 	public String find(Model model, @RequestParam("str") String str) {
 
-		List<Map<String, Object>> tblstaff = JdbcTemplate.queryForList("select * from tblstaff left join tblaffiliation  using(affiliation_id) where staff_name like  ?",('%' + str + '%'));
-		model.addAttribute("tblstaff", tblstaff);
+		List<Map<String, Object>> tblstaff = jdbcTemplate.queryForList("select * from tblstaff left join tblaffiliation  using(affiliation_id) where staff_name like  ?",('%' + str + '%'));
+		model.addAttribute("TblStaff", tblstaff);
 
 		return "customers/member-infomation";
 	}
@@ -64,8 +64,8 @@ public class TblStaffController {
 	String createForm(TblStaffForm form, Model model) {
 
 		List<TblAffiliation> tblaffiliation = tblAffiliationService.findAll();
-		model.addAttribute("tblaffiliation", tblaffiliation);
-		model.addAttribute("tblStaffForm", form);
+		model.addAttribute("TblAffiliation", tblaffiliation);
+		model.addAttribute("TblStaffForm", form);
 
 		return "customers/member-success";
 
@@ -77,7 +77,7 @@ public class TblStaffController {
 		TblStaff tblStaff = new TblStaff();
 		BeanUtils.copyProperties(form, tblStaff);
 		tblStaffService.create(tblStaff);
-		return "redirect:/tblstaff";
+		return "redirect:/TblStaff";
 	}
 
 	@RequestMapping(value = "edit", params = "form", method = RequestMethod.GET)
@@ -86,7 +86,7 @@ public class TblStaffController {
 		BeanUtils.copyProperties(tblStaff, form);
 
 		List<TblAffiliation> tblaffiliation = tblAffiliationService.findAll();
-		model.addAttribute("tblaffiliation", tblaffiliation);
+		model.addAttribute("TblAffiliation", tblaffiliation);
 
 		return "customers/member-edit";
 
@@ -100,18 +100,18 @@ public class TblStaffController {
 		tblStaff.setStaffId(staffId);
 		tblStaffService.update(tblStaff);
 
-		return "redirect:/tblstaff";
+		return "redirect:/TblStaff";
 	}
 
 	@RequestMapping(value = "edit", params = "goToTop")
 	String goToTop() {
-		return "redirect:/tblstaff";
+		return "redirect:/TblStaff";
 	}
 
 	@RequestMapping(value = "delete", method = RequestMethod.POST)
 	String delete(@RequestParam Integer id) {
 		tblStaffService.delete(id);
-		return "redirect:/tblstaff";
+		return "redirect:/TblStaff";
 	}
 
 }

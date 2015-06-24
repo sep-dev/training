@@ -24,22 +24,20 @@
 			return false;
 
 		}
-
 	}
 </script>
 </head>
 <body>
-<iframe width="0px" height="0px" frameborder="0"></iframe>
 	<h2>メインメニュー</h2>
-	<a href="http://localhost:8080/customers">派遣先情報</a>
+	<a href="/customers">派遣先情報</a>
 	<br />
-	<a href="http://localhost:8080/tblstaff">派遣社員情報</a>
+	<a href="/tblstaff">派遣社員情報</a>
 	<br />
-	<a href="http://localhost:8080/tblaffiliation">所属元情報</a>
+	<a href="/tblaffiliation">所属元情報</a>
 	<br />
-	<a href="http://localhost:8080/tblclient">出向先情報</a>
+	<a href="/tblclient">出向先情報</a>
 	<br />
-	<a href="http://localhost:8080/TblLoginUser">ユーザー管理</a>
+	<a href="/tblloginuser">ユーザー管理</a>
 	<br />
 
 	<div class="container">
@@ -48,7 +46,6 @@
 		</fieldset>
 		<br />
 		<p>
-			
 			<a th:href="@{/logout}" class="btn btn-default btn-xs">ログアウト</a>
 		</p>
 		<form th:action="@{/tblaffiliation/find} " action="">
@@ -89,7 +86,6 @@
 					<td th:text="${tblaffiliation.affiliation_remarks}"></td>
 
 					<td>
-
 						<form th:action="@{/tblaffiliation/edit} ">
 							<input class="btn btn-default" type="submit" name="form"
 								value="編集" /> <input type="hidden" name="affiliationId"
@@ -113,9 +109,5 @@
 	<script
 		src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"
 		th:src="@{/webjars/bootstrap/3.2.0/js/bootstrap.min.js}"></script>
-
-
-
-
 </body>
 </html>

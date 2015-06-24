@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("customers")
+@RequestMapping("Customers")
 public class TblStaffManagementController {
 	@Autowired
 	TblStaffManagementService tblStaffManagementService;
@@ -35,7 +35,7 @@ public class TblStaffManagementController {
 	TblClientService tblClientService;
 
 	@Autowired
-	private JdbcTemplate JdbcTemplate;
+	private JdbcTemplate jdbcTemplate;
 
 	@ModelAttribute
 	TblStaffManagementForm setUpForm() {
@@ -45,7 +45,7 @@ public class TblStaffManagementController {
 	@RequestMapping(method = RequestMethod.GET)
 	String list(Model model) {
 
-		List<Map<String, Object>> list = JdbcTemplate.queryForList("select * from tblstaffmanagement left join tblstaff  using(staff_id) left join tblclient using(client_id)");
+		List<Map<String, Object>> list = jdbcTemplate.queryForList("select * from tblstaffmanagement left join tblstaff  using(staff_id) left join tblclient using(client_id)");
 		model.addAttribute("List", list);
 
 		return "customers/list";
@@ -61,7 +61,7 @@ public class TblStaffManagementController {
 		buf.append("-");
 		buf.append(s2);
 		String kikan = buf.toString();
-		List<Map<String, Object>> list = JdbcTemplate.queryForList("select * from tblstaffmanagement left join tblstaff  using(staff_id) left join tblclient using(client_id) where substr(start_date,1,7)<= ? and substr(end_date,1,7)>= ? and staff_name like  ?",
+		List<Map<String, Object>> list = jdbcTemplate.queryForList("select * from tblstaffmanagement left join tblstaff  using(staff_id) left join tblclient using(client_id) where substr(start_date,1,7)<= ? and substr(end_date,1,7)>= ? and staff_name like  ?",
 						kikan, kikan, ('%' + str + '%'));
 		model.addAttribute("List", list);
 
@@ -71,10 +71,10 @@ public class TblStaffManagementController {
 	@RequestMapping(value = "create", params = "form", method = RequestMethod.GET)
 	String createForm(TblStaffForm form, TblClientForm form2, Model model) {
 		List<TblStaff> tblstaff = tblStaffService.findAll();
-		model.addAttribute("tblstaff", tblstaff);
+		model.addAttribute("tblStaff", tblstaff);
 
 		List<TblClient> tblclient = tblClientService.findAll();
-		model.addAttribute("tblclient", tblclient);
+		model.addAttribute("TblClient", tblclient);
 
 		return "customers/create";
 
@@ -87,7 +87,7 @@ public class TblStaffManagementController {
 		TblStaffManagement tblStaffManagement = new TblStaffManagement();
 		BeanUtils.copyProperties(form, tblStaffManagement);
 		tblStaffManagementService.create(tblStaffManagement);
-		return "redirect:/customers";
+		return "redirect:/Customers";
 	}
 
 	@RequestMapping(value = "edit", params = "form", method = RequestMethod.GET)
@@ -96,10 +96,10 @@ public class TblStaffManagementController {
 		TblStaffManagement tblstaffmanagement = tblStaffManagementService.findOne(staffManId);
 		BeanUtils.copyProperties(tblstaffmanagement, form);
 		List<TblStaff> tblstaff = tblStaffService.findAll();
-		model.addAttribute("tblstaff", tblstaff);
+		model.addAttribute("TblStaff", tblstaff);
 
 		List<TblClient> tblclient = tblClientService.findAll();
-		model.addAttribute("tblclient", tblclient);
+		model.addAttribute("TblClient", tblclient);
 		return "customers/edit";
 
 	}
@@ -115,17 +115,17 @@ public class TblStaffManagementController {
 		tblStaffManagement.setStaffManId(staffManId);
 		tblStaffManagementService.update(tblStaffManagement);
 
-		return "redirect:/customers";
+		return "redirect:/Customers";
 	}
 
 	@RequestMapping(value = "edit", params = "goToTop")
 	String goToTop() {
-		return "redirect:/customers";
+		return "redirect:/Customers";
 	}
 
 	@RequestMapping(value = "delete", method = RequestMethod.POST)
 	String delete(@RequestParam Integer id) {
 		tblStaffManagementService.delete(id);
-		return "redirect:/customers";
+		return "redirect:/Customers";
 	}
 }

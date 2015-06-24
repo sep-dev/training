@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("tblaffiliation")
+@RequestMapping("TblAffiliation")
 public class TblAffiliationController {
 	@Autowired
 	TblStaffManagementService tblStaffManagementService;
@@ -37,7 +37,7 @@ public class TblAffiliationController {
 	TblAffiliationService tblAffiliationService;
 
 	@Autowired
-	private JdbcTemplate JdbcTemplate;
+	private JdbcTemplate jdbcTemplate;
 
 	@ModelAttribute
 	TblAffiliationForm setUpForm() {
@@ -46,8 +46,8 @@ public class TblAffiliationController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	String list(Model model) {
-		List<Map<String, Object>> tblaffiliation = JdbcTemplate.queryForList("select * from tblaffiliation");
-		model.addAttribute("tblaffiliation", tblaffiliation);
+		List<Map<String, Object>> tblaffiliation = jdbcTemplate.queryForList("select * from tblaffiliation");
+		model.addAttribute("TblAffiliation", tblaffiliation);
 
 		return "customers/affiliation-infomation";
 	}
@@ -55,8 +55,8 @@ public class TblAffiliationController {
 	@RequestMapping(value = "/find", method = RequestMethod.GET)
 	public String find(Model model, @RequestParam("str") String str) {
 
-		List<Map<String, Object>> list = JdbcTemplate.queryForList("select * from tblaffiliation where affiliation_name like  ?",('%' + str + '%'));
-		model.addAttribute("tblaffiliation", list);
+		List<Map<String, Object>> list = jdbcTemplate.queryForList("select * from tblaffiliation where affiliation_name like  ?",('%' + str + '%'));
+		model.addAttribute("TblAffiliation", list);
 
 		return "customers/affiliation-infomation";
 	}
@@ -64,8 +64,8 @@ public class TblAffiliationController {
 	@RequestMapping(value = "create", method = RequestMethod.GET)
 	String affiliation(Model model, TblAffiliationForm form) {
 		List<TblAffiliation> tblaffiliation = tblAffiliationService.findAll();
-		model.addAttribute("tblaffiliation", tblaffiliation);
-		model.addAttribute("tblAffiliationForm", form);
+		model.addAttribute("TblAffiliation", tblaffiliation);
+		model.addAttribute("TblAffiliationForm", form);
 		return "customers/affiliation-success";
 
 	}
@@ -76,8 +76,8 @@ public class TblAffiliationController {
 		TblAffiliation tblAffiliation = new TblAffiliation();
 		BeanUtils.copyProperties(form, tblAffiliation);
 		tblAffiliationService.create(tblAffiliation);
-		model.addAttribute("tblAffiliationForm", form);
-		return "redirect:/tblaffiliation";
+		model.addAttribute("TblAffiliationForm", form);
+		return "redirect:/TblAffiliation";
 	}
 
 	@RequestMapping(value = "edit", params = "form", method = RequestMethod.GET)
@@ -97,17 +97,17 @@ public class TblAffiliationController {
 		tblAffiliation.setAffiliationId(affiliationId);
 		tblAffiliationService.update(tblAffiliation);
 
-		return "redirect:/tblaffiliation";
+		return "redirect:/TblAffiliation";
 	}
 
 	@RequestMapping(value = "edit", params = "goToTop")
 	String goToTop() {
-		return "redirect:/tblaffiliation";
+		return "redirect:/TblAffiliation";
 	}
 
 	@RequestMapping(value = "delete", method = RequestMethod.POST)
 	String delete(@RequestParam Integer id) {
 		tblAffiliationService.delete(id);
-		return "redirect:/tblaffiliation";
+		return "redirect:/TblAffiliation";
 	}
 }

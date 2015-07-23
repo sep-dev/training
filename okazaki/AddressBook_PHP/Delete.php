@@ -1,23 +1,22 @@
+<html>
+	<head>
+		<title>削除画面</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" href="newfile.css" type="text/css">
+	</head>
 
-<HTML>
-	<HEAD>
-		<TITLE>削除画面</TITLE>
-		<META http-equiv="Content-Type" content="text/html;charset=utf-8">
-		<link rel="stylesheet" href="NewFile.css" type="text/css">
-	</HEAD>
-
-	<BODY bgcolor="#FFFFFF" text="#000000">
-		<FONT size="20">削除画面</FONT>
+	<body bgcolor="#FFFFFF" text="#000000">
+		<font size="20">削除画面</font>
 		<hr width="50%">
 		<br>
 
 		<?php
-			require_once ("DB.php");
+			require_once ("db.php");
 			$pdo = db_connect();
-			$data=$_POST["data"];
-			$sql = "SELECT * FROM tbaddress where id=$data";
+			$data = $_POST["data"];
+			$sql = "select * from tbaddress where id=$data";
 			$stmt = $pdo->prepare($sql);
-			$stmt->execute();
+			$stmt -> execute();
 
 			echo "<table border=1>";
 
@@ -27,18 +26,20 @@
 				echo "<tr><th>電話番号</th><td>".$pso['tel'] ."</td></tr>" ;
 			}
 			echo "</table>";
+
 			echo "<br>";
 			echo"<hr width=50%>";
 			echo "本当に削除してもよろしいですか？";
-		echo "<form action=D_success.php method=post>";
-		echo "<input type=hidden name=data value=$data>";
-		echo "<input type=submit value= 削除 >";
-		echo "</form>";
+
+			echo "<form action=d_success.php method=post>";
+				echo "<input type=hidden name=data value=$data>";
+				echo "<input type=submit value=削除 >";
+			echo "</form>";
 
 		?>
 
-		<FORM>
-			<INPUT type="button" value="戻る" onClick="history.back()">
-		</FORM>
-	</BODY>
-</HTML>
+		<form>
+			<input type="button" value="戻る" onclick="history.back()">
+		</form>
+	</body>
+</html>

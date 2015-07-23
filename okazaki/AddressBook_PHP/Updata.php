@@ -1,25 +1,24 @@
-
-<HTML>
-	<HEAD>
-		<TITLE>更新画面</TITLE>
+<html>
+	<head>
+		<title>更新画面</title>
 		<script src="ajaxzip2/prototype.js"></script>
-		<script src="ajaxzip2/ajaxzip2.js" charset="UTF-8"></script>
-		<META http-equiv="Content-Type" content="text/html;charset=utf-8">
-		<link rel="stylesheet" href="NewFile.css" type="text/css">
-	</HEAD>
+		<script src="ajaxzip2/ajaxzip2.js" charset="utf-8"></script>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<link rel="stylesheet" href="newfile.css" type="text/css">
+	</head>
 
-	<BODY>
-		<FONT size="20">更新画面</FONT>
-		<HR width="50%">
+	<body>
+		<font size="20">更新画面</font>
+		<hr width="50%">
 		<br>
 
 		<?php
-			require_once ("DB.php");
+			require_once ("db.php");
 			$pdo = db_connect();
-			$data=$_POST["data"];
-			$sql = "SELECT * FROM tbaddress where id=$data";
+			$data = $_POST["data"];
+			$sql = "select * from tbaddress where id=$data";
 			$stmt = $pdo->prepare($sql);
-			$stmt->execute();
+			$stmt -> execute();
 
 			echo "<table  border='1' cellpadding='10' >";
 
@@ -32,46 +31,47 @@
 		?>
 
 		<br>
-		<HR width="50%">
+		<hr width="50%">
 		<br>
 
 		<form id="form" onsubmit="return false;">
 			<table>
 				<tr><td width="72">郵便番号：</td><td width="160">
-				<input type="text" name="zip" maxlength="7" size="7" onKeyUp="AjaxZip2.zip2addr(this,'address','address');"></td><td width="48"></td></tr>
+				<input type="text" name="zip" maxlength="7" size="7"
+					onkeyup="AjaxZip2.zip2addr(this,'address','address');"></td><td width="48"></td></tr>
 			</table>
-		</FORM>
+		</form>
 
-		<FORM name = "form" method = "post" action = "U_success.php">
+		<form name = "form" method = "post" action = "u_success.php">
 			<table>
-				<tr><td>氏名：</td><td><INPUT type = "text" name = "name"></td><th><font color="#FF0000">※必須</font><th></tr>
-				<tr><td>住所：</td><td><INPUT type = "text" name = "address"></td><th><font color="#FF0000">※必須</font><th></tr>
-				<tr><td>電話番号：</td><td><INPUT type = "text" name = "tel"></td><th><font color="#FF0000">※必須</font><th></tr>
+				<tr><td>氏名：</td><td><input type="text" name="name"></td><th><font color="#FF0000">※必須</font><th></tr>
+				<tr><td>住所：</td><td><input type="text" name="address"></td><th><font color="#FF0000">※必須</font><th></tr>
+				<tr><td>電話番号：</td><td><input type="text" name="tel"></td><th><font color="#FF0000">※必須</font><th></tr>
 			</table>
 			<br>
 			<?php
 			echo "<input type=hidden name=data value=$data>";
 			?>
-			<INPUT type = "submit" value = "更新">
-		</FORM>
+			<input type="submit" value="更新">
+		</form>
 
 		<?php
-		echo "<form action=Updata.php style=display:inline; method=post>";
+		echo "<form action=updata.php style=display:inline; method=post>";
 			echo "<input type=hidden name=data value=$data>";
 			echo "<input type=submit value=リセット>";
 		echo "</form>";
 		?>
 
-		<form action="Ichiran.php" style="display:inline;" method="post">
+		<form action="ichiran.php" style="display:inline;" method="post">
 			<input type="submit" value="一覧">
 		</form>
-		<HR width="10%">
+		<hr width="10%">
 
 		<?php
-		echo "<form action=Delete.php method=post>";
+		echo "<form action=delete.php method=post>";
 			echo "<input type=hidden name=data value=$data>";
 			echo "<input type=submit value= 削除 >";
 		echo "</form>";
 		?>
-	</BODY>
-</HTML>
+	</body>
+</html>

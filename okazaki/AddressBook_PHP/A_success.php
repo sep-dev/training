@@ -1,14 +1,13 @@
+<html>
+	<head>
+		<title>登録結果画面</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" href="newfile.css" type="text/css">
+	</head>
 
-<HTML>
-	<HEAD>
-		<TITLE>登録結果画面</TITLE>
-		<META http-equiv="Content-Type" content="text/html;charset=utf-8">
-		<link rel="stylesheet" href="NewFile.css" type="text/css">
-	</HEAD>
-
-	<BODY>
+	<body>
 		<?php
-			require_once ("DB.php");
+			require_once ("db.php");
 			$pdo = db_connect();
 			$name = $_POST['name'];
 			$name = trim($name);			//半角スペースを削除
@@ -26,9 +25,9 @@
 		?>
 
 		<h3>空欄を埋めてください</h3>
-		<HR width="30%">
+		<hr width="30%">
 		<form action="Add.php" method="post">
-			<input type = "submit"value="新規登録">
+			<input type="submit" value="新規登録">
 		</form>
 
 		<?php
@@ -37,29 +36,29 @@
 
 			}else{
 				try{
-					$pdo -> beginTransaction();
-					$sql = "INSERT INTO tbaddress (name,address,tel) VALUES (:name, :address, :tel)";
+					$pdo -> begintransaction();
+					$sql = "insert into tbaddress (name,address,tel) values (:name, :address, :tel)";
 					$stmh = $pdo -> prepare($sql);
-					$stmh -> bindValue('name', $_POST['name'], PDO::PARAM_STR);
-					$stmh -> bindValue('address', $_POST['address'], PDO::PARAM_STR);
-					$stmh -> bindValue('tel', $_POST['tel'], PDO::PARAM_INT);
+					$stmh -> bindvalue('name', $_POST['name'], pdo::PARAM_STR);
+					$stmh -> bindvalue('address', $_POST['address'], pdo::PARAM_STR);
+					$stmh -> bindvalue('tel', $_POST['tel'], pdo::PARAM_INT);
 					$stmh -> execute();
 					$pdo -> commit();
 		?>
 
 				<h3>登録が完了しました。</h3>
-				<HR width="30%">
+				<hr width="30%">
 				<form action="Ichiran.php" method="post">
-					<input type = "submit"value="一覧">
+					<input type="submit" value="一覧">
 				</form>
 
 		<?php
 
-				} catch (PDOException $Exception) {
-					$pdo -> rollBack();
-					print"エラー：".$Exception -> getMessage();
+				} catch (pdoexception $exception) {
+					$pdo -> rollback();
+					print"エラー：".$exception -> getmessage();
 				}
 			}
 		?>
-	</BODY>
-</HTML>
+	</body>
+</html>

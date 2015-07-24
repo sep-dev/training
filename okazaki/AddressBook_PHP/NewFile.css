@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+
+body{
+	margin: 2em;
+
+	background-image: url("C:/Users/okazakinaritoshi/Downloads/oldpaper.jpg");
+	text-align: center;
+}
+
+table{
+ margin-right : auto;
+ margin-left : auto
+}

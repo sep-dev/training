@@ -1,9 +1,9 @@
-@CHARSET "UTF-8";
+@charset "utf-8";
 
 body{
 	margin: 2em;
 
-	background-image: url("C:/Users/okazakinaritoshi/Downloads/oldpaper.jpg");
+	background-image: url("c:/users/okazakinaritoshi/downloads/oldpaper.jpg");
 	text-align: center;
 }
 

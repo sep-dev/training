@@ -1,38 +1,37 @@
+<html>
+	<head>
+		<title>登録結果画面</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" href="newfile.css" type="text/css">
+	</head>
 
-<HTML>
-	<HEAD>
-		<TITLE>登録結果画面</TITLE>
-		<META http-equiv="Content-Type" content="text/html;charset=utf-8">
-		<link rel="stylesheet" href="NewFile.css" type="text/css">
-	</HEAD>
-
-	<BODY>
+	<body>
 		<?php
-			require_once ("DB.php");
+			require_once ("db.php");
 			$pdo = db_connect();
 
 			try{
-				$pdo -> beginTransaction();
-				$data=$_POST['data'];
-				$sql =  "delete from tbaddress where id=:id";
+				$pdo -> begintransaction();
+				$data = $_POST['data'];
+				$sql = "delete from tbaddress where id=:id";
 				$stmh = $pdo -> prepare($sql);
-				$stmh -> bindValue(':id',$data,PDO::PARAM_INT);
+				$stmh -> bindvalue(':id',$data,pdo::PARAM_INT);
 				$stmh -> execute();
 				$pdo -> commit();
 
 		?>
 				<h3>削除いたしました。</h3>
-				<HR width="30%">
+				<hr width="30%">
 				<form action="Ichiran.php" method="post">
-					<input type = "submit"value="一覧">
+					<input type="submit" value="一覧">
 				</form>
 
 		<?php
 
-			} catch (PDOException $Exception) {
-				$pdo -> rollBack();
-				print"エラー：".$Exception -> getMessage();
+			} catch (pdoexception $exception) {
+				$pdo -> rollback();
+				print"エラー：".$exception -> getmessage();
 			}
 		?>
-	</BODY>
-</HTML>
+	</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+<meta charset="UTF-8" />
+<title>出向先登録</title>
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap.min.css}" />
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"
+	th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap-theme.min.css}" />
+</head>
+<body>
+	<h2>メインメニュー</h2>
+	<a href="/customers">派遣先情報</a>
+	<br />
+	<a href="/tblstaff">派遣社員情報</a>
+	<br />
+	<a href="/tblaffiliation">所属元情報</a>
+	<br />
+	<a href="/tblclient">出向先情報</a>
+	<br />
+	<a href="/tblloginuser">ユーザー管理</a>
+	<br />
+	
+	<div class="container">
+		<p>
+			<a th:href="@{/logout}" class="btn btn-default btn-xs">ログアウト</a>
+		</p>
+		<div class="col-sm-12">
+			<form th:action="@{/TblLoginUser/create}"
+				th:object="${tblLoginUserForm}" class="form-horizontal"
+				method="post" action="">
+				<fieldset>
+					<legend>管理者登録</legend>
+
+					<table class="table table-bordered">
+						<tr>
+							<th>ユーザー名称</th>
+							<td><input type="text" th:field="*{loginUserName}" /></td>
+						</tr>
+						<tr>
+							<th>ユーザーID</th>
+							<td><input type="text" th:field="*{loginUser}" /></td>
+						</tr>
+						<tr>
+							<th>パスワード</th>
+							<td><input type="text" th:field="*{loginUserPass}" /></td>
+						</tr>
+						<tr>
+							<th>パスワード確認</th>
+							<td><input type="text" name="loginUserPass1" th:field="*{loginUserPass1}" /></td>
+						</tr>
+						
+					</table>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<input type="submit" class="btn btn-default" name="goToTop"
+								value="戻る" /> <input type="submit" class="btn btn-primary"
+								value="登録" />
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"
+		th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"
+		type="text/javascript"></script>
+	<script
+		src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"
+		th:src="@{/webjars/bootstrap/3.2.0/js/bootstrap.min.js}"
+		type="text/javascript"></script>
+</body>
+</html>
